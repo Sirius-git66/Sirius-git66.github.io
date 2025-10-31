@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE ARC - Digital Signature</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Satisfy&family=Great+Vibes&family=Alex+Brush&family=Tangerine:wght@400;700&family=Pinyon+Script&family=Mr+Dafoe&family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .title p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .signatures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .signature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .signature-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .signature-name {
+            font-size: 4rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Enhanced Fountain Pen Styles with artistic effects */
+        .fountain-pen-1 {
+            font-family: 'Allura', cursive;
+            font-weight: 400;
+            filter: drop-shadow(0px 0px 0.5px rgba(30, 41, 59, 0.3));
+        }
+
+        .fountain-pen-2 {
+            font-family: 'Herr Von Muellerhoff', cursive;
+            font-weight: 400;
+            filter: drop-shadow(0px 0px 0.8px rgba(30, 41, 59, 0.4));
+        }
+
+        .fountain-pen-3 {
+            font-family: 'Pinyon Script', cursive;
+            font-weight: 400;
+            filter: drop-shadow(0px 0px 0.6px rgba(30, 41, 59, 0.35));
+        }
+
+        .fountain-pen-4 {
+            font-family: 'Tangerine', cursive;
+            font-weight: 700;
+            font-size: 5rem;
+            filter: drop-shadow(0px 0px 0.7px rgba(30, 41, 59, 0.4));
+        }
+
+        .fountain-pen-5 {
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+            filter: drop-shadow(0px 0px 0.5px rgba(30, 41, 59, 0.3));
+        }
+
+        .fountain-pen-6 {
+            font-family: 'Mr Dafoe', cursive;
+            font-weight: 400;
+            filter: drop-shadow(0px 0px 0.6px rgba(30, 41, 59, 0.35));
+        }
+
+        .signature-underline {
+            width: 80%;
+            height: 2px;
+            background: #64748b;
+            margin-top: 1rem;
+        }
+
+        .signature-title {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Full Signature Block */
+        .full-signature-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .logo-lockup-sig {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .the-text-sig {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.5rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: #94a3b8;
+            margin-right: 0.4rem;
+            opacity: 0.7;
+        }
+
+        .rc-text-sig {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #2c3e50;
+        }
+
+        .sig-details {
+            font-size: 0.75rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Initials */
+        .initials {
+            font-size: 5rem;
+            font-family: 'Allura', cursive;
+            color: #1e293b;
+        }
+
+        .download-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #0077b6 0%, #023e8a 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s;
+            font-size: 0.95rem;
+            margin: 0.5rem;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .instructions h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .instructions p {
+            line-height: 1.8;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .instructions ul {
+            margin-left: 2rem;
+            line-height: 2;
+        }
+
+        @media (max-width: 768px) {
+            .signatures-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .signature-name {
+                font-size: 3rem;
+            }
+
+            .initials {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>✍️ Digital Signature Collection</h1>
+            <p>Elegant Fountain Pen Style Signatures</p>
+        </div>
+
+        <div class="instructions">
+            <h3>📥 How to Use Your Digital Signatures</h3>
+            <p><strong>To save as PNG (for Adobe Sign, DocuSign, etc.):</strong></p>
+            <ul>
+                <li>Right-click on the signature you like</li>
+                <li>Select "Save Image As..." or take a screenshot of just the signature area</li>
+                <li>Save as PNG with transparent background</li>
+                <li>Upload to Adobe Sign, DocuSign, or any e-signature platform</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong>💡 Tip:</strong> Use Windows Snipping Tool (Win + Shift + S) to capture just the signature for cleanest results!</p>
+        </div>
+
+        <div class="signatures-grid">
+            <!-- Custom Artistic Signature 1: Dramatic Executive -->
+            <div class="signature-card">
+                <div class="card-title">Dramatic Executive (Custom)</div>
+                <div class="signature-display" id="sig1" style="background: white;">
+                    <svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Bold diagonal underscore flourish (like the reference) -->
+                        <path d="M 20 140 Q 150 100, 280 120 Q 350 130, 400 110" 
+                              stroke="#8B4513" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.85"/>
+                        
+                        <!-- C in Cheryl - Bold opening loop -->
+                        <path d="M 70 85 Q 55 60, 65 45 Q 80 35, 95 48 Q 102 58, 95 72 Q 85 82, 72 78" 
+                              stroke="#2c1810" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- h - tall ascender with fountain pen pressure -->
+                        <path d="M 95 48 Q 102 25, 108 20 Q 110 18, 112 22 L 118 75 Q 119 82, 114 80" 
+                              stroke="#2c1810" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 108 55 Q 118 48, 128 52 Q 135 58, 132 68 L 128 80 Q 127 84, 122 82" 
+                              stroke="#2c1810" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- e - flowing curve -->
+                        <path d="M 132 62 Q 142 56, 152 60 Q 160 66, 154 76 L 148 84 Q 145 87, 140 85" 
+                              stroke="#2c1810" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 142 68 L 156 68" stroke="#2c1810" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- r - quick flick -->
+                        <path d="M 154 76 Q 158 60, 162 58 L 166 82 Q 167 86, 163 85" 
+                              stroke="#2c1810" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 162 62 Q 168 58, 174 62" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- y - dramatic descender like the reference -->
+                        <path d="M 174 62 Q 182 54, 190 58 L 194 78 Q 195 84, 191 83" 
+                              stroke="#2c1810" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 190 58 Q 198 52, 206 58 L 208 75" 
+                              stroke="#2c1810" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 194 78 Q 198 95, 185 108 Q 175 115, 168 108" 
+                              stroke="#2c1810" stroke-width="3.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- l - tall elegant stroke -->
+                        <path d="M 206 58 Q 210 28, 216 24 Q 218 23, 220 26 L 224 82 Q 225 87, 220 85" 
+                              stroke="#2c1810" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Space before C. -->
+                        
+                        <!-- C. - Bold, confident final initial with flourish -->
+                        <path d="M 260 78 Q 245 55, 260 42 Q 282 35, 300 50 Q 308 65, 295 80 Q 278 90, 262 82" 
+                              stroke="#2c1810" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Dramatic tail from C extending to underline -->
+                        <path d="M 262 82 Q 255 92, 250 98 Q 245 102, 242 105" 
+                              stroke="#2c1810" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Period with personality -->
+                        <ellipse cx="320" cy="82" rx="3.5" ry="4" fill="#2c1810"/>
+                        
+                        <!-- Bold sweeping underline flourish (signature element like reference) -->
+                        <path d="M 245 105 Q 280 95, 320 100 Q 360 105, 390 95" 
+                              stroke="#2c1810" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.9"/>
+                        
+                        <!-- Secondary diagonal accent stroke (adds drama) -->
+                        <path d="M 300 50 Q 340 30, 380 45" 
+                              stroke="#8B4513" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                </div>
+                <div class="download-section">
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Bold, dramatic signature with sweeping flourishes - executive presence</p>
+                    <button class="download-btn" onclick="downloadSignature('sig1', 'signature-cherylc-dramatic.png')">💾 Download PNG</button>
+                </div>
+            </div>
+
+            <!-- Custom Artistic Signature 2: Refined Bold -->
+            <div class="signature-card">
+                <div class="card-title">Refined Bold (Custom)</div>
+                <div class="signature-display" id="sig2" style="background: white;">
+                    <svg width="450" height="180" viewBox="0 0 450 180" xmlns="http://www.w3.org/2000/svg">
+                        <!-- C - elegant opening -->
+                        <path d="M 65 75 Q 52 58, 62 45 Q 78 38, 92 50 Q 98 62, 88 74 Q 76 82, 65 76" 
+                              stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- h -->
+                        <path d="M 92 50 Q 98 30, 104 26 L 110 78 Q 111 84, 106 82" 
+                              stroke="#1a1a1a" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 104 58 Q 114 52, 124 56 Q 130 62, 127 72 L 123 82 Q 122 86, 117 84" 
+                              stroke="#1a1a1a" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- e -->
+                        <path d="M 127 65 Q 136 60, 146 64 Q 153 70, 147 78 L 142 85 Q 139 88, 135 86" 
+                              stroke="#1a1a1a" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 138 70 L 150 70" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- r -->
+                        <path d="M 147 78 Q 152 64, 156 62 L 160 84 Q 161 88, 157 86" 
+                              stroke="#1a1a1a" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 156 66 Q 162 62, 168 66" stroke="#1a1a1a" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- y with elegant descender -->
+                        <path d="M 168 66 Q 176 58, 184 62 L 188 80 Q 189 85, 185 84" 
+                              stroke="#1a1a1a" stroke-width="3.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 184 62 Q 192 56, 200 62 L 202 78" 
+                              stroke="#1a1a1a" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 188 80 Q 192 100, 178 112 Q 168 118, 162 110 Q 160 106, 162 102" 
+                              stroke="#1a1a1a" stroke-width="4.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- l -->
+                        <path d="M 200 62 Q 204 32, 210 28 L 215 84 Q 216 88, 211 86" 
+                              stroke="#1a1a1a" stroke-width="3.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- C. - Grand finale -->
+                        <path d="M 250 72 Q 238 52, 252 40 Q 275 33, 294 48 Q 302 62, 288 78 Q 270 88, 252 80" 
+                              stroke="#1a1a1a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 252 80 Q 245 88, 238 95" stroke="#1a1a1a" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                        <circle cx="312" cy="80" r="4" fill="#1a1a1a"/>
+                        
+                        <!-- Sweeping underline -->
+                        <path d="M 60 105 Q 150 92, 240 98 Q 310 102, 370 90 Q 390 87, 395 92" 
+                              stroke="#1a1a1a" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.85"/>
+                        
+                        <!-- Accent flourish -->
+                        <path d="M 235 95 Q 260 85, 285 90" 
+                              stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+                    </svg>
+                </div>
+                <div class="download-section">
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Sophisticated bold script with refined flourishes</p>
+                    <button class="download-btn" onclick="downloadSignature('sig2', 'signature-cherylc-refined-bold.png')">💾 Download PNG</button>
+                </div>
+            </div>
+
+            <!-- Keep the font one that looked good -->
+            <div class="signature-card">
+                <div class="card-title">Executive Authority (Font)</div>
+                <div class="signature-display" id="sig3">
+                    <div class="signature-name fountain-pen-3">Cheryl C.</div>
+                    <div class="signature-underline"></div>
+                </div>
+                <div class="download-section">
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Your preferred - bold, confident Pinyon Script</p>
+                    <button class="download-btn" onclick="downloadSignature('sig3', 'signature-cherylc-executive.png')">💾 Download PNG</button>
+                </div>
+            </div>
+
+            <!-- Full Signature Block -->
+            <div class="signature-card">
+                <div class="card-title">Complete Signature Block</div>
+                <div class="signature-display" id="sig7" style="align-items: flex-start;">
+                    <div class="signature-name fountain-pen-1">Cheryl C.</div>
+                    <div class="signature-underline" style="margin-bottom: 1rem;"></div>
+                    <div class="full-signature-block">
+                        <div class="logo-lockup-sig">
+                            <span class="the-text-sig">THE</span>
+                            <svg width="18" height="18" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" style="margin: 0 -0.05rem; vertical-align: baseline; transform: translateY(0.1rem);">
+                                <defs>
+                                    <linearGradient id="peak-sig" x1="0%" y1="100%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#023e8a;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#0077b6;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 8 43 L 25 7 L 42 43" stroke="url(#peak-sig)" stroke-width="7" fill="none" stroke-linecap="square" stroke-linejoin="miter"/>
+                            </svg>
+                            <span class="rc-text-sig">RC</span>
+                        </div>
+                        <div class="sig-details">
+                            Treasury Transformation • AI Innovation<br>
+                            cheryl@thearc.cloud
+                        </div>
+                    </div>
+                </div>
+                <div class="download-section">
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Full signature with branding for formal contracts</p>
+                    <button class="download-btn" onclick="downloadSignature('sig7', 'signature-cherylc-full-block.png')">💾 Download PNG</button>
+                </div>
+            </div>
+
+            <!-- Initials Only -->
+            <div class="signature-card">
+                <div class="card-title">Initials (for multi-page documents)</div>
+                <div class="signature-display" id="sig8">
+                    <div class="initials fountain-pen-1">CC</div>
+                </div>
+                <div class="download-section">
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">Quick initials for page-by-page signing</p>
+                    <button class="download-btn" onclick="downloadSignature('sig8', 'initials-cc.png')">💾 Download PNG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        async function downloadSignature(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            try {
+                const canvas = await html2canvas(element, {
+                    backgroundColor: null,
+                    scale: 3,
+                    logging: false,
+                    useCORS: true
+                });
+                
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                alert('✅ Signature downloaded! You can now upload it to Adobe Sign, DocuSign, or any e-signature platform.');
+            } catch (error) {
+                alert('To save: Right-click on the signature and select "Save Image As..." or use Windows Snipping Tool (Win + Shift + S) to capture the signature.');
+            }
+        }
+    </script>
+</body>
+</html>
