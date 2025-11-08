@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasury Icons - Redesigned</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 60px 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            font-size: 2em;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .icons-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .icon-showcase {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .icon-wrapper {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1e7f0 100%);
+            border-radius: 4px;
+        }
+        
+        .icon-title {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .icon-note {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+        
+        .download-note {
+            max-width: 800px;
+            margin: 50px auto 0;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .download-note h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
+        .download-note p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Redesigned Treasury Icons</h1>
+        <div class="subtitle">Clean SVG icons ready for your webpage</div>
+    </div>
+    
+    <div class="icons-container">
+        <!-- ICON 1: Treasury Optimization -->
+        <div class="icon-showcase">
+            <div class="icon-wrapper">
+                <svg width="140" height="140" viewBox="0 0 200 200">
+                    <!-- Outer refined diamond -->
+                    <path d="M 100 25 L 175 100 L 100 175 L 25 100 Z" 
+                          stroke="white" 
+                          stroke-width="2.5" 
+                          fill="none"
+                          opacity="0.6"/>
+                    
+                    <!-- Inner diamond - optimization precision -->
+                    <path d="M 100 55 L 145 100 L 100 145 L 55 100 Z" 
+                          stroke="white" 
+                          stroke-width="3" 
+                          fill="none"/>
+                    
+                    <!-- Center point - optimization target -->
+                    <circle cx="100" cy="100" r="4.5" 
+                            fill="white"/>
+                    
+                    <!-- Connecting lines showing optimization paths -->
+                    <line x1="100" y1="55" x2="100" y2="145" 
+                          stroke="white" 
+                          stroke-width="1.2" 
+                          opacity="0.4"/>
+                    <line x1="55" y1="100" x2="145" y2="100" 
+                          stroke="white" 
+                          stroke-width="1.2" 
+                          opacity="0.4"/>
+                    
+                    <!-- Elegant "T" watermark for Treasury -->
+                    <text x="100" y="120" 
+                          font-family="Georgia, serif" 
+                          font-size="70" 
+                          fill="rgba(255, 255, 255, 0.15)" 
+                          text-anchor="middle"
+                          font-weight="300">T</text>
+                </svg>
+            </div>
+            <div class="icon-title">Treasury Optimization</div>
+            <div class="icon-note">Multi-layered precision targeting with strategic optimization paths</div>
+        </div>
+        
+        <!-- ICON 2: ESG-Linked Financing -->
+        <div class="icon-showcase">
+            <div class="icon-wrapper">
+                <svg width="140" height="140" viewBox="0 0 200 200">
+                    <!-- Outer circle - environmental boundary -->
+                    <circle cx="100" cy="100" r="70" 
+                            stroke="white" 
+                            stroke-width="2.5" 
+                            fill="none"
+                            opacity="0.5"/>
+                    
+                    <!-- Middle circle - social impact -->
+                    <circle cx="100" cy="100" r="50" 
+                            stroke="white" 
+                            stroke-width="2.8" 
+                            fill="none"
+                            opacity="0.7"/>
+                    
+                    <!-- Inner circle - governance core -->
+                    <circle cx="100" cy="100" r="30" 
+                            stroke="white" 
+                            stroke-width="3" 
+                            fill="none"/>
+                    
+                    <!-- Growth indicators - subtle leaves/sprouts -->
+                    <path d="M 100 30 Q 105 20 110 25" 
+                          stroke="white" 
+                          stroke-width="2" 
+                          fill="none"
+                          opacity="0.6"/>
+                    <path d="M 100 30 Q 95 20 90 25" 
+                          stroke="white" 
+                          stroke-width="2" 
+                          fill="none"
+                          opacity="0.6"/>
+                    
+                    <!-- Center point - sustainable core -->
+                    <circle cx="100" cy="100" r="5" 
+                            fill="white"
+                            opacity="0.8"/>
+                    
+                    <!-- Elegant "E" watermark for ESG -->
+                    <text x="100" y="118" 
+                          font-family="Georgia, serif" 
+                          font-size="70" 
+                          fill="rgba(255, 255, 255, 0.15)" 
+                          text-anchor="middle"
+                          font-weight="300">E</text>
+                </svg>
+            </div>
+            <div class="icon-title">ESG-Linked Financing</div>
+            <div class="icon-note">Concentric impact circles representing Environmental, Social, Governance pillars</div>
+        </div>
+        
+        <!-- ICON 3: Digital Treasury Systems -->
+        <div class="icon-showcase">
+            <div class="icon-wrapper">
+                <svg width="140" height="140" viewBox="0 0 200 200">
+                    <!-- Outer triangle - system architecture -->
+                    <path d="M 100 30 L 170 155 L 30 155 Z" 
+                          stroke="white" 
+                          stroke-width="2.5" 
+                          fill="none"
+                          opacity="0.5"/>
+                    
+                    <!-- Inner triangle - core platform -->
+                    <path d="M 100 60 L 145 135 L 55 135 Z" 
+                          stroke="white" 
+                          stroke-width="3" 
+                          fill="none"/>
+                    
+                    <!-- Network nodes - digital connectivity -->
+                    <circle cx="100" cy="60" r="4" fill="white"/>
+                    <circle cx="145" cy="135" r="4" fill="white"/>
+                    <circle cx="55" cy="135" r="4" fill="white"/>
+                    <circle cx="100" cy="97.5" r="3.5" fill="white" opacity="0.7"/>
+                    <circle cx="122.5" cy="116.25" r="3.5" fill="white" opacity="0.7"/>
+                    <circle cx="77.5" cy="116.25" r="3.5" fill="white" opacity="0.7"/>
+                    
+                    <!-- Connection lines - digital infrastructure -->
+                    <line x1="100" y1="60" x2="100" y2="97.5" 
+                          stroke="white" 
+                          stroke-width="1.2" 
+                          opacity="0.5"/>
+                    <line x1="100" y1="97.5" x2="77.5" y2="116.25" 
+                          stroke="white" 
+                          stroke-width="1.2" 
+                          opacity="0.5"/>
+                    <line x1="100" y1="97.5" x2="122.5" y2="116.25" 
+                          stroke="white" 
+                          stroke-width="1.2" 
+                          opacity="0.5"/>
+                    
+                    <!-- Elegant "D" watermark for Digital -->
+                    <text x="100" y="120" 
+                          font-family="Georgia, serif" 
+                          font-size="70" 
+                          fill="rgba(255, 255, 255, 0.15)" 
+                          text-anchor="middle"
+                          font-weight="300">D</text>
+                </svg>
+            </div>
+            <div class="icon-title">Digital Treasury Systems</div>
+            <div class="icon-note">Network architecture with connected nodes representing integrated platforms</div>
+        </div>
+    </div>
+    
+    <div class="download-note">
+        <h3>Ready to Use</h3>
+        <p>These icons are designed with white strokes to show on your blue gradient backgrounds. Simply copy the SVG code and replace your current diamond, circle, and triangle icons in your webpage. The designs maintain sophisticated minimalism while adding meaningful visual metaphors for each service.</p>
+    </div>
+</body>
+</html>
