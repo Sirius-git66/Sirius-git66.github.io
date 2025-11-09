@@ -14,7 +14,7 @@
             resultDiv.innerHTML = '<p>Testing Cloudflare Workers endpoint...</p>';
             
             try {
-                const response = await fetch('https://solitary-snowflake-grok.yourname.workers.dev/api/grok', {
+                const response = await fetch('https://solitary-snowflake-grok.sirius-git66.workers.dev/api/grok', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -24,7 +24,7 @@
                         messages: [
                             {
                                 role: 'user',
-                                content: 'Hello, world!'
+                                content: 'Say hi from the future on Nov 9 2025'
                             }
                         ]
                     })
