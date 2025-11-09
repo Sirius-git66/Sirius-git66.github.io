@@ -4,8 +4,8 @@ import os
 
 app = Flask(__name__)
 
-# Your GROK API key - using the new valid key
-GROK_API_KEY = 'xai-Uk1WRHgRrxXdNGCYgxsY5rOVT3rdlN7gob9NYhUwVLK4k0u25JijLLV4ZbYRKGm8zaEwQEoicugH1ikS'
+# Your GROK API key - using environment variable for security
+GROK_API_KEY = os.environ.get('GROK_API_KEY', 'YOUR_API_KEY_HERE')
 
 @app.route('/api/grok-proxy', methods=['POST'])
 def grok_proxy():

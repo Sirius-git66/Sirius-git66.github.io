@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Cloudflare Workers</title>
+</head>
+<body>
+    <h1>Test Cloudflare Workers Endpoint</h1>
+    <button onclick="testCloudflareWorkers()">Test Cloudflare Workers</button>
+    <div id="result"></div>
+
+    <script>
+        async function testCloudflareWorkers() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Testing Cloudflare Workers endpoint...</p>';
+            
+            try {
+                const response = await fetch('https://solitary-snowflake-grok.yourname.workers.dev/api/grok', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'grok-4',
+                        messages: [
+                            {
+                                role: 'user',
+                                content: 'Hello, world!'
+                            }
+                        ]
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = '<p style="color: green;">Success! Cloudflare Workers is responding.</p><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                } else {
+                    resultDiv.innerHTML = '<p style="color: red;">Error: Cloudflare Workers returned status ' + response.status + '</p>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>
