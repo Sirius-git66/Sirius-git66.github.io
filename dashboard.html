@@ -200,34 +200,146 @@
             color: #888888;
         }
         
+        /* Arc Floating Chat Orb Styles - Single Icon for Market News Section */
+        .arc-news-orb {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #1d9bf0, #0d6efd);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(29,155,240,.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .2s;
+            z-index: 100;
+        }
+        
+        .arc-news-orb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(29,155,240,.5);
+        }
+        
+        .arc-v-symbol-small {
+            position: relative;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .arc-v-symbol-small::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 20%; /* Shift even further to the left to avoid bubble overlap */
+            transform: translate(-50%, -50%) rotate(180deg);
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #1d9bf0, #0d6efd);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            z-index: 1;
+        }
+        
+        .arc-i-symbol-small {
+            position: absolute;
+            top: 50%;
+            left: 20%; /* Shift even further to the left to avoid bubble overlap */
+            transform: translate(-50%, -55%);
+            color: white;
+            font-size: 9px; /* Increased from 8px to 9px */
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .speech-bubble-small {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-30deg);
+            box-shadow: 0 1px 4px rgba(0,0,0,.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .6em;
+            color: #1d9bf0;
+            font-weight: bold;
+            z-index: 3; /* Move bubble to top */
+        }
+        
+        .tooltip-small {
+            position: absolute;
+            left: -120px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,.85);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: .7em;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,.3);
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        
+        .arc-news-orb:hover .tooltip-small {
+            opacity: 1;
+        }
+        
+        .tooltip-small:after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            width: 6px;
+            height: 6px;
+            background: rgba(0,0,0,.85);
+        }
+        
+        /* Make the chatbot follow scroll position */
+        .news-section {
+            position: relative;
+        }
+        
         /* Forward Curves Section */
         .curves-section {
             background: #111111;
             border-radius: 4px;
             padding: 16px;
             border: 1px solid #1a1a1a;
-            margin-bottom: 12px;
+            margin-top: 12px;
         }
         
         .curves-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
-            margin-top: 16px;
         }
         
         .curve-table-container {
-            background: #0a0a0a;
+            background: #1a1a1a;
             border-radius: 4px;
             padding: 12px;
-            border: 1px solid #1a1a1a;
         }
         
         .curve-header {
             font-size: 0.85em;
             font-weight: 600;
-            color: #00d4ff;
+            color: #888888;
             margin-bottom: 10px;
+            text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -235,75 +347,42 @@
         .curve-table {
             width: 100%;
             border-collapse: collapse;
-        }
-        
-        .curve-table thead th {
-            font-size: 0.7em;
-            font-weight: 600;
-            color: #666666;
-            text-align: left;
-            padding: 6px 8px;
-            border-bottom: 1px solid #1a1a1a;
-            text-transform: uppercase;
-        }
-        
-        .curve-table thead th:nth-child(2),
-        .curve-table thead th:nth-child(3) {
-            text-align: right;
-        }
-        
-        .curve-table tbody td {
             font-size: 0.75em;
-            padding: 6px 8px;
-            border-bottom: 1px solid #1a1a1a;
         }
         
-        .curve-table tbody tr:last-child td {
-            border-bottom: none;
+        .curve-table th {
+            color: #666666;
+            font-weight: 600;
+            text-align: left;
+            padding: 6px 4px;
+            border-bottom: 1px solid #222222;
+        }
+        
+        .curve-table td {
+            padding: 5px 4px;
+            color: #cccccc;
         }
         
         .curve-period {
-            color: #cccccc;
-            font-weight: 600;
+            color: #ffffff;
         }
         
         .curve-price {
-            text-align: right;
-            color: #ffffff;
+            color: #00d4ff;
             font-weight: 600;
         }
         
-        .curve-dod {
-            text-align: right;
-            font-weight: 600;
+        .curve-dod.positive {
+            color: #00ff88;
         }
         
-        @media (max-width: 1100px) {
-            .dashboard-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .curves-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .curves-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 1.3em;
-            }
+        .curve-dod.negative {
+            color: #ff3366;
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <div class="container">
         <header>
             <h1>COMMODITIES DASHBOARD</h1>
@@ -671,6 +750,13 @@
         <!-- News Section -->
         <div class="news-section">
             <div class="card-title">Market News</div>
+            <div class="arc-news-orb" onclick="askAI('Market News Intel')" role="button" tabindex="0" aria-label="Ask The Arc AI for Market News Intel">
+                <div class="arc-v-symbol-small">
+                    <div class="arc-i-symbol-small">i</div>
+                    <div class="speech-bubble-small">...</div>
+                </div>
+                <div class="tooltip-small">Ask The Arc AI</div>
+            </div>
             
                 <div class="news-item">
                     <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxOcE9nTGJZeGxmY1k5QTZBaXpCOS1wdW9rWnJQX2RNNjFLbl9pZmZMOFhBOHFhRzk2YUNxLWFROGRGUzJRN1lGWHZ5Y0IzclZtODdPU0hjRWlCdUt5cU9sX0MwZlBkd25xZ3NXaU9aT3F1cmVkOFVXZ0poV1g2R0FUYkVUWGZaUHQtMDZKUWR0SjF6MXVmVFpaSHF3?oc=5" target="_blank" class="news-title">2026 Oil and Gas Industry Outlook - Deloitte</a>
@@ -713,14 +799,6 @@
                 </div>
                 
                 <div class="news-item">
-                    <a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTFB0a2N3Mnp4SzlSbjgtUU5xRWQ2cnBfZUxUYjFTMHlLdy1IdEFVM0w4ZUhHbnJsSmdWdUczaGRDS0NqSnZ4UFNLUEMtOHU0SFRodWdLQXRyWU82VEotR0ZOZnA1WQ?oc=5" target="_blank" class="news-title">Eastern U.S. natural gas increasingly meets LNG-fueled demand growth in AEO2025 - U.S. Energy Information Administration (EIA) (.gov)</a>
-                    <div class="news-meta">
-                        <span class="news-source">Google News - Oil & Gas</span>
-                        <span class="news-date">Tue, 29 Jul 2025 07:00:00 GMT</span>
-                    </div>
-                </div>
-                
-                <div class="news-item">
                     <a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE9DZGlTdGl4ck9ubWZJNlZ3czhvVThXNi1DaGVIUmtpYjhFMlhhdGVzNmQ2V21lR1pCbTY4enY3UThxNEl1UG55V1ROQjJ4Tm5PTzBqb1lMOXJfU3BjTFhnR214UQ?oc=5" target="_blank" class="news-title">It’s a ‘Golden Age’ for U.S. LNG Industry, But Climate Risks Loom - Yale E360</a>
                     <div class="news-meta">
                         <span class="news-source">Google News - Oil & Gas</span>
@@ -754,5 +832,217 @@
                 
         </div>
     </div>
+    
+    <!-- AI Chatbot Response Container -->
+    <div id="ai-response-container" style="position: fixed; bottom: 20px; right: 20px; width: 400px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 15px; display: none; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="color: #1d9bf0; margin: 0; font-size: 1.1em;">The Arc AI Intel</h3>
+            <button onclick="closeAIResponse()" style="background: none; border: none; color: #888; cursor: pointer; font-size: 1.2em;">×</button>
+        </div>
+        <div id="ai-response-content" style="color: #e0e0e0; font-size: 0.9em; line-height: 1.5;"></div>
+    </div>
+
+    <script>
+        const MY_IP = "YOUR_HOME_IP"; // ← put your real IP here (e.g. 203.0.113.42)
+        const GROK_KEY = "xai-YOUR-KEY"; // ← get free at https://x.ai/api
+        
+        // Store selected headline
+        let selectedHeadline = null;
+        
+        // Function to make chatbot follow scroll position
+        function positionChatbot() {
+            const newsSection = document.querySelector('.news-section');
+            const chatbot = document.querySelector('.arc-news-orb');
+            
+            if (newsSection && chatbot) {
+                const rect = newsSection.getBoundingClientRect();
+                const isVisible = (rect.top < window.innerHeight && rect.bottom >= 0);
+                
+                if (isVisible) {
+                    // Position chatbot relative to the news section when it's visible
+                    chatbot.style.position = 'fixed';
+                    chatbot.style.top = Math.max(20, rect.top + 10) + 'px';
+                    chatbot.style.right = '30px';
+                } else if (rect.top < 0) {
+                    // Keep chatbot at the top when scrolling past the section
+                    chatbot.style.position = 'fixed';
+                    chatbot.style.top = '20px';
+                    chatbot.style.right = '30px';
+                } else {
+                    // Reset to default position within the section
+                    chatbot.style.position = 'absolute';
+                    chatbot.style.top = '10px';
+                    chatbot.style.right = '10px';
+                }
+            }
+        }
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', positionChatbot);
+        window.addEventListener('resize', positionChatbot);
+        
+        // Initial positioning
+        document.addEventListener('DOMContentLoaded', positionChatbot);
+        
+        // Function to get all headlines
+        function getHeadlines() {
+            const headlines = [];
+            const newsItems = document.querySelectorAll('.news-item');
+            
+            newsItems.forEach((item, index) => {
+                const titleElement = item.querySelector('.news-title');
+                if (titleElement) {
+                    headlines.push({
+                        id: index,
+                        text: titleElement.textContent,
+                        element: titleElement
+                    });
+                }
+            });
+            
+            return headlines;
+        }
+        
+        // Function to show headline selection
+        function showHeadlineSelection() {
+            const headlines = getHeadlines();
+            let headlineList = '<h4 style="color: #0d6efd; margin-top: 0;">Which headline would you like intel on?</h4><ul style="padding-left: 20px; max-height: 300px; overflow-y: auto;">';
+            
+            headlines.forEach(headline => {
+                headlineList += `<li style="margin-bottom: 10px;"><a href="#" onclick="selectHeadline(${headline.id}); return false;" style="color: #1d9bf0; text-decoration: none;">${headline.text}</a></li>`;
+            });
+            
+            headlineList += '</ul>';
+            
+            document.getElementById('ai-response-content').innerHTML = headlineList;
+        }
+        
+        // Function to select headline
+        function selectHeadline(headlineId) {
+            const headlines = getHeadlines();
+            const headline = headlines.find(h => h.id === headlineId);
+            
+            if (headline) {
+                selectedHeadline = headline;
+                fetchIntel(headline.text);
+            }
+        }
+        
+        // GROK-LIVE-PAGE-INTEL v8 implementation with proxy API call
+        async function fetchIntel(headline) {
+            // Show the response container
+            document.getElementById('ai-response-container').style.display = 'block';
+            document.getElementById('ai-response-content').innerHTML = '<p style="color: #1d9bf0;">Arc AI is analyzing: ' + headline + '</p><p>Connecting to Grok API...</p>';
+            
+            try {
+                // Get the URL of the selected headline
+                let url = 'https://example.com';
+                if (selectedHeadline && selectedHeadline.element) {
+                    url = selectedHeadline.element.href;
+                } else {
+                    // Fallback to first headline if no specific one is selected
+                    const firstHeadline = document.querySelector('.news-item .news-title');
+                    if (firstHeadline) {
+                        url = firstHeadline.href;
+                    }
+                }
+                
+                // Build the API request payload
+                const payload = {
+                    "model": "grok-beta",
+                    "messages": [
+                        {
+                            "role": "system",
+                            "content": "You are Grok-4. NEVER summarise. NEVER say 'analysis', 'intelligence', 'outlook'. EXTRACT raw numbers, dates, banks, volumes, rates. Render every fact with <grok:render_inline_citation><argument name=\"citation_id\">ID</argument></grok>. No bullets. No titles. Just dense paragraphs."
+                        },
+                        {
+                            "role": "user",
+                            "content": `LIVE-PAGE INTEL\nURL: ${url}\n\nCRAWL THE PAGE AND EXTRACT EVERY NUMBER, DATE, DOLLAR, BANK, CARGO, RATE, CEO QUOTE. FUSE WITH 6 TOOLS. RETURN 800-WORD RAW INTEL.`
+                        }
+                    ],
+                    "temperature": 0.2,
+                    "max_tokens": 1600
+                };
+                
+                console.log('Sending request to proxy with URL:', url);
+                
+                // For GitHub Pages deployment, use Cloudflare Workers endpoint
+                // For local development, use the localhost proxy
+                const isGitHubPages = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+                
+                if (isGitHubPages) {
+                    // Use Cloudflare Workers endpoint for GitHub Pages
+                    const response = await fetch('https://solitary-snowflake-grok.yourname.workers.dev/api/grok', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            model: 'grok-4',
+                            messages: [
+                                {
+                                    role: 'system',
+                                    content: "You are Grok-4. NEVER summarise. NEVER say 'analysis', 'intelligence', 'outlook'. EXTRACT raw numbers, dates, banks, volumes, rates. Render every fact with <grok:render_inline_citation><argument name=\"citation_id\">ID</argument></grok>. No bullets. No titles. Just dense paragraphs."
+                                },
+                                {
+                                    role: 'user',
+                                    content: `LIVE-PAGE INTEL\nURL: ${url}\n\nCRAWL THE PAGE AND EXTRACT EVERY NUMBER, DATE, DOLLAR, BANK, CARGO, RATE, CEO QUOTE. FUSE WITH 6 TOOLS. RETURN 800-WORD RAW INTEL.`
+                                }
+                            ],
+                            temperature: 0.2,
+                            max_tokens: 1600
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Cloudflare Workers request failed with status ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    document.getElementById('ai-response-content').innerHTML = data.choices[0].message.content;
+                } else {
+                    // Use localhost proxy for local development
+                    const response = await fetch('http://localhost:5000/api/grok-proxy', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    console.log('Proxy response status:', response.status);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Proxy request failed with status ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    document.getElementById('ai-response-content').innerHTML = data.choices[0].message.content;
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('ai-response-content').innerHTML = '<p style="color: #ff3366;">Error connecting to Arc AI. Please try again later.</p>';
+            }
+        }
+        
+        async function askAI(topic) {
+            // Show the response container
+            document.getElementById('ai-response-container').style.display = 'block';
+            
+            // If we have a selected headline, proceed with Grok API call
+            if (selectedHeadline) {
+                fetchIntel(selectedHeadline.text);
+            } else {
+                // Show headline selection if no headline is selected
+                showHeadlineSelection();
+            }
+        }
+        
+        function closeAIResponse() {
+            document.getElementById('ai-response-container').style.display = 'none';
+            selectedHeadline = null; // Reset selection when closing
+        }
+    </script>
 </body>
 </html>

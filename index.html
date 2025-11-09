@@ -1147,6 +1147,7 @@
             <p>This is <span class="highlight">my first AI testament</span>—building practical tools for the industry I know.</p>
             <p>A free resource demonstrating AI leadership capability in action, not just theory.</p>
         </div>
+        
         <div class="market-intel-container">
             <div class="dashboard-preview fade-in">
                 <div class="dashboard-header">
@@ -1332,46 +1333,6 @@
                     <li>Cross-border liquidity optimization</li>
                     <li>Digital payment solutions and AI-driven tools</li>
                 </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Credentials Banner -->
-    <div class="credentials-banner">
-        <div class="credentials-content">
-            <div class="credential-item">
-                <div class="credential-icon">◆</div>
-                <div class="credential-text">
-                    <div class="credential-title">CGMA</div>
-                    <div class="credential-subtitle">Chartered Global Management Accountant</div>
-                </div>
-            </div>
-            <div class="credential-item">
-                <div class="credential-icon">●</div>
-                <div class="credential-text">
-                    <div class="credential-title">Chartered Accountant</div>
-                    <div class="credential-subtitle">Professional Qualification</div>
-                </div>
-            </div>
-            <div class="credential-item">
-                <div class="credential-icon">▲</div>
-                <div class="credential-text">
-                    <div class="credential-title">Multi-Lingual</div>
-                    <div class="credential-subtitle">English • Mandarin • Cantonese</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="contact-content">
-            <p>Exploring the intersection of treasury, technology, and AI-driven transformation.</p>
-            <p style="font-size: 1.1rem; opacity: 0.95; margin: 2rem 0;">Ready to connect, collaborate, and shape the future of treasury together.</p>
-            <div class="contact-buttons">
-                <a href="mailto:cheryl@thearc.cloud" class="contact-button">Get in Touch</a>
-                <a href="https://www.linkedin.com/in/cheong-cheryl/" target="_blank" class="contact-button secondary">Connect on LinkedIn</a>
             </div>
         </div>
     </section>
@@ -1619,6 +1580,126 @@
                 }
             });
         });
+    </script>
+    
+    <!-- Chatbot Script -->
+    <script>
+        const MY_IP = "YOUR_HOME_IP"; // ← put your real IP here (e.g. 203.0.113.42)
+        const GROK_KEY = "xai-YOUR-KEY"; // ← get free at https://x.ai/api
+
+        async function askArc(id, headline) {
+            const box = document.getElementById('arc-response-'+id);
+            if (box) { box.style.display = 'block'; return; } // already shown
+
+            const ip = await fetch('https://api.ipify.org').then(r => r.text());
+            if (ip !== MY_IP) {
+                const used = localStorage.getItem('arc_used_' + new Date().toISOString().slice(0,10));
+                if (used) {
+                    alert("1 free Arc intel per day. Back tomorrow! (Pro: $9/mo)");
+                    return;
+                }
+            }
+
+            const respDiv = document.createElement('div');
+            respDiv.id = 'arc-response-'+id;
+            respDiv.innerHTML = '<i>Arc AI loading…</i>';
+            document.querySelector(`[data-id="${id}"]`).appendChild(respDiv);
+
+            try {
+                // Connect to Grok API through Cloudflare Workers
+                const prompt = `LIVE-PAGE INTEL
+URL: https://example.com
+
+CRAWL THE PAGE AND EXTRACT EVERY NUMBER, DATE, DOLLAR, BANK, CARGO, RATE, CEO QUOTE. FUSE WITH 6 TOOLS. RETURN 800-WORD RAW INTEL.`;
+                
+                const response = await fetch('https://solitary-snowflake-grok.yourname.workers.dev/api/grok', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'grok-4',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: "You are Grok-4. NEVER summarise. NEVER say 'analysis', 'intelligence', 'outlook'. EXTRACT raw numbers, dates, banks, volumes, rates. Render every fact with <grok:render_inline_citation><argument name=\"citation_id\">ID</argument></grok>. No bullets. No titles. Just dense paragraphs."
+                            },
+                            {
+                                role: 'user',
+                                content: prompt
+                            }
+                        ],
+                        temperature: 0.2,
+                        max_tokens: 1600
+                    })
+                });
+
+                const data = await response.json();
+                respDiv.innerHTML = data.choices[0].message.content;
+
+                if (ip !== MY_IP) localStorage.setItem('arc_used_' + new Date().toISOString().slice(0,10), '1');
+            } catch (e) {
+                respDiv.innerHTML = '<span style="color:#f55">Arc offline. Try again in 1 min.</span>';
+            }
+        }
+        
+        // Grok-4 Live Integration Function
+        async function askGrok() {
+          const input = document.getElementById('grokInput').value.trim();
+          if (!input) return;
+          document.getElementById('grokOutput').textContent = 'Grok-4 is thinking...';
+          
+          try {
+            const res = await fetch('https://solitary-snowflake-grok.yourname.workers.dev/api/grok', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ model: 'grok-4', messages: [{ role: 'user', content: input }] })
+            });
+            const data = await res.json();
+            document.getElementById('grokOutput').textContent = data.choices[0].message.content;
+          } catch (e) {
+            document.getElementById('grokOutput').textContent = 'Error: ' + e.message;
+          }
+        }
+        
+        // Chatbot functions
+        function openChatbot() {
+            document.getElementById('chatbot-modal').style.display = 'block';
+        }
+
+        function closeChatbot() {
+            document.getElementById('chatbot-modal').style.display = 'none';
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            const messagesContainer = document.getElementById('chatbot-messages');
+            const userMessage = document.createElement('div');
+            userMessage.style.marginBottom = '15px';
+            userMessage.style.padding = '10px';
+            userMessage.style.background = '#0d6efd';
+            userMessage.style.borderRadius = '8px';
+            userMessage.style.textAlign = 'right';
+            userMessage.innerHTML = `<p style="margin: 0;">${message}</p>`;
+            messagesContainer.appendChild(userMessage);
+
+            // Clear input
+            input.value = '';
+
+            // Add bot response (simulated)
+            const botMessage = document.createElement('div');
+            botMessage.style.marginBottom = '15px';
+            botMessage.style.padding = '10px';
+            botMessage.style.background = '#2c3e50';
+            botMessage.style.borderRadius = '8px';
+            botMessage.innerHTML = '<p style="margin: 0;">Thanks for your message! This is a demo chatbot. In a full implementation, this would connect to an AI service.</p>';
+            messagesContainer.appendChild(botMessage);
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
     </script>
 </body>
 </html>
