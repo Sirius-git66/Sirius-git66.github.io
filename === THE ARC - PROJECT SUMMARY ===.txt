@@ -1,0 +1,65 @@
+=== THE ARC - PROJECT SUMMARY ===
+
+BRAND:
+- Name: The Arc
+- Domain: thearc.cloud
+- Email: cheryl@thearc.cloud
+- Tagline: Treasury Transformation • AI Innovation
+
+INFRASTRUCTURE:
+- Google Workspace: Active (cheryl@thearc.cloud)
+- Hosting: Netlify (connected to thearc.cloud)
+- Website: LIVE at https://thearc.cloud
+- File location: C:\Users\being\OneDrive\Documents\AI Courses\Personal Website\index.html
+
+WEBSITE FEATURES:
+- Bokeh particle background (interactive, mouse-responsive)
+- Company logos: Daimler, LVMH, Nissan, Trafigura, Gunvor, Vitol, JERA
+- Logo layout: 2 rows (automotive/luxury top, commodities bottom)
+- Section order: Hero → Companies → About → Skills → Impact → Connect
+- Typography: THE ARC (all caps, Plus Jakarta Sans, bold, letter-spacing 0.15em)
+- Areas of Expertise: Roman numerals (I, II, III, IV) in serif
+- Email: cheryl@thearc.cloud (updated from cheryl.c@outlook.com)
+
+CURRENT STATUS:
+- Website: 8.3/10 (Michelin-level foundation)
+- Still employed at JERA (conservative positioning)
+- NUS Emeritus AI course: In progress
+- Ready for: Business card, invoice template, AI agents
+
+NEXT PROJECTS:
+A) Virtual business card (digital + print)
+B) Invoice template (PDF, automated)
+C) AI Agent #1: Booking manager
+D) AI Agent #2: Auto-invoicing system
+
+PREFERENCES:
+- Humble, authentic language (no boastful terms)
+- Concept-driven branding (not personal name)
+- Conservative while employed
+- Future: Multi-dimensional (consultant, coach, DJ, content)
+
+EXPERTISE AREAS (ON WEBSITE):
+Core Strength:
+- Credit facility structuring and syndication
+- ESG-linked financing and sustainability integration
+- Funding strategies and cash management
+
+Strategic Focus:
+- Treasury systems implementation (TMS, ERP, SWIFT)
+- Cross-border liquidity optimization
+- Digital payment solutions and AI-driven tools
+
+TRACK RECORD (ON WEBSITE):
+- USD 2M annual cost savings
+- USD 3B in credit facilities raised
+- First-to-market carbon credits financing
+- 20+ years experience
+- CGMA, Chartered Accountant, Multi-lingual (English, Mandarin, Cantonese)
+
+AVOIDED TOPICS:
+- No carbon credit financing frameworks detail
+- No FX hedging frameworks
+- No regulatory compliance details
+- Protect commodities/banking network relationships
+

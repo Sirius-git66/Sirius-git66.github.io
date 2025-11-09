@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GROK API Test</title>
+</head>
+<body>
+    <h1>GROK API Test</h1>
+    <button onclick="testGrok()">CLICK TO TEST GROK</button>
+    <pre id="out" style="background: #f0f0f0; padding: 10px; margin-top: 10px;"></pre>
+    
+    <script>
+        async function testGrok() {
+            const key = "xai-Uk1WRHgRrxXdNGCYgxsY5rOVT3rdlN7gob9NYhUwVLK4k0u25JijLLV4ZbYRKGm8zaEwQEoicugH1ikS";
+            const out = document.getElementById('out');
+            
+            try {
+                out.textContent = "Testing GROK API connection...\n";
+                
+                const r = await fetch("https://api.x.ai/v1/models", {
+                    headers: { 
+                        "Authorization": "Bearer " + key,
+                        "Content-Type": "application/json"
+                    }
+                });
+                
+                const statusText = r.status + " " + r.statusText;
+                const responseText = await r.text();
+                
+                out.textContent = statusText + "\n\n" + responseText.slice(0, 1000);
+                
+                if (!r.ok) {
+                    out.textContent += "\n\nError: " + responseText;
+                }
+            } catch (error) {
+                out.textContent = "Error: " + error.message;
+                console.error("GROK API Test Error:", error);
+            }
+        }
+    </script>
+</body>
+</html>

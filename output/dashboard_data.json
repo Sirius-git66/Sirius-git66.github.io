@@ -1,0 +1,337 @@
+{
+  "timestamp": "2025-11-03T10:53:59.720209",
+  "forex": {
+    "timestamp": "2025-11-03T10:53:58.022502",
+    "rates": {
+      "USDEUR": {
+        "rate": 0.867,
+        "change_pct": 0.12,
+        "source": "ExchangeRate-API"
+      },
+      "USDJPY": {
+        "rate": 154.18,
+        "change_pct": -0.45,
+        "source": "ExchangeRate-API"
+      },
+      "USDSGD": {
+        "rate": 1.3,
+        "change_pct": 0.08,
+        "source": "ExchangeRate-API"
+      },
+      "USDCNY": {
+        "rate": 7.12,
+        "change_pct": -0.15,
+        "source": "ExchangeRate-API"
+      }
+    },
+    "base": "USD"
+  },
+  "commodities": {
+    "timestamp": "2025-11-03T10:53:56.936754",
+    "commodities": {
+      "oil": {
+        "brent": {
+          "price": 85.5,
+          "currency": "USD/BBL",
+          "change_dod": -0.3,
+          "change_pct": -0.35,
+          "source": "ICE",
+          "note": "Mock data - implement EIA scraping"
+        },
+        "wti": {
+          "price": 81.2,
+          "currency": "USD/BBL",
+          "change_dod": -0.25,
+          "change_pct": -0.31,
+          "source": "NYMEX",
+          "note": "Mock data - implement EIA scraping"
+        },
+        "jcc": {
+          "price": 83.1,
+          "currency": "USD/BBL",
+          "change_dod": -0.2,
+          "change_pct": -0.24,
+          "source": "METI",
+          "note": "Mock data - implement METI scraping"
+        }
+      },
+      "gas": {
+        "ttf": {
+          "price": 31.5,
+          "currency": "EUR/MWh",
+          "change_dod": 0.2,
+          "change_pct": 0.64,
+          "source": "ICE",
+          "note": "Mock data - implement ICE scraping"
+        },
+        "jkm": {
+          "price": 10.8,
+          "currency": "USD/MMBtu",
+          "change_dod": 0.05,
+          "change_pct": 0.47,
+          "source": "S&P Global",
+          "note": "Mock data - implement S&P scraping"
+        },
+        "henry_hub": {
+          "price": 2.85,
+          "currency": "USD/MMBtu",
+          "change_dod": -0.03,
+          "change_pct": -1.04,
+          "source": "NYMEX",
+          "note": "Mock data - implement EIA scraping"
+        }
+      },
+      "power": {
+        "tokyo": {
+          "price": 13.5,
+          "currency": "JPY/kWh",
+          "change_dod": 0.15,
+          "change_pct": 1.12,
+          "source": "JEPX",
+          "note": "Mock data - implement JEPX scraping"
+        },
+        "kansai": {
+          "price": 11.2,
+          "currency": "JPY/kWh",
+          "change_dod": 0.08,
+          "change_pct": 0.72,
+          "source": "JEPX",
+          "note": "Mock data - implement JEPX scraping"
+        }
+      }
+    }
+  },
+  "forward_curves": {
+    "timestamp": "2025-11-03T10:53:56.937188",
+    "curves": {
+      "ttf": {
+        "name": "TTF",
+        "unit": "EUR/MWh",
+        "data": [
+          {
+            "period": "26Q1",
+            "price": 10.76,
+            "dod": -0.27
+          },
+          {
+            "period": "26Q2",
+            "price": 10.24,
+            "dod": -0.2
+          },
+          {
+            "period": "26Q3",
+            "price": 10.3,
+            "dod": -0.19
+          },
+          {
+            "period": "26Win",
+            "price": 10.75,
+            "dod": -0.18
+          },
+          {
+            "period": "27Sum",
+            "price": 9.54,
+            "dod": -0.13
+          },
+          {
+            "period": "27Win",
+            "price": 10.0,
+            "dod": -0.12
+          },
+          {
+            "period": "28Sum",
+            "price": 8.62,
+            "dod": -0.12
+          },
+          {
+            "period": "28Win",
+            "price": 9.07,
+            "dod": -0.12
+          },
+          {
+            "period": "29Sum",
+            "price": 8.19,
+            "dod": -0.1
+          }
+        ],
+        "note": "Mock data - implement ICE/Investing.com scraping"
+      },
+      "jkm": {
+        "name": "JKM",
+        "unit": "USD/MMBtu",
+        "data": [
+          {
+            "period": "26Q1",
+            "price": 11.25,
+            "dod": 0.15
+          },
+          {
+            "period": "26Q2",
+            "price": 10.8,
+            "dod": 0.1
+          },
+          {
+            "period": "26Q3",
+            "price": 11.05,
+            "dod": 0.08
+          },
+          {
+            "period": "26Win",
+            "price": 11.5,
+            "dod": 0.12
+          },
+          {
+            "period": "27Sum",
+            "price": 10.35,
+            "dod": 0.05
+          },
+          {
+            "period": "27Win",
+            "price": 10.95,
+            "dod": 0.07
+          },
+          {
+            "period": "28Sum",
+            "price": 9.85,
+            "dod": 0.03
+          },
+          {
+            "period": "28Win",
+            "price": 10.2,
+            "dod": 0.04
+          },
+          {
+            "period": "29Sum",
+            "price": 9.5,
+            "dod": 0.02
+          }
+        ],
+        "note": "Mock data - implement Platts/EIA scraping"
+      },
+      "brent": {
+        "name": "Brent",
+        "unit": "USD/BBL",
+        "data": [
+          {
+            "period": "26Q1",
+            "price": 85.5,
+            "dod": -0.45
+          },
+          {
+            "period": "26Q2",
+            "price": 84.2,
+            "dod": -0.38
+          },
+          {
+            "period": "26Q3",
+            "price": 83.75,
+            "dod": -0.35
+          },
+          {
+            "period": "26Win",
+            "price": 85.0,
+            "dod": -0.4
+          },
+          {
+            "period": "27Sum",
+            "price": 82.5,
+            "dod": -0.3
+          },
+          {
+            "period": "27Win",
+            "price": 84.25,
+            "dod": -0.32
+          },
+          {
+            "period": "28Sum",
+            "price": 81.75,
+            "dod": -0.28
+          },
+          {
+            "period": "28Win",
+            "price": 83.5,
+            "dod": -0.3
+          },
+          {
+            "period": "29Sum",
+            "price": 80.9,
+            "dod": -0.25
+          }
+        ],
+        "note": "Mock data - implement EIA/Investing.com scraping"
+      }
+    }
+  },
+  "news": [
+    {
+      "title": "2026 Oil and Gas Industry Outlook - Deloitte",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOcE9nTGJZeGxmY1k5QTZBaXpCOS1wdW9rWnJQX2RNNjFLbl9pZmZMOFhBOHFhRzk2YUNxLWFROGRGUzJRN1lGWHZ5Y0IzclZtODdPU0hjRWlCdUt5cU9sX0MwZlBkd25xZ3NXaU9aT3F1cmVkOFVXZ0poV1g2R0FUYkVUWGZaUHQtMDZKUWR0SjF6MXVmVFpaSHF3?oc=5",
+      "published": "Wed, 29 Oct 2025 17:03:45 GMT",
+      "source": "Google News - Oil & Gas",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMimgFBVV95cUxOcE9nTGJZeGxmY1k5QTZBaXpCOS1wdW9rWnJQX2RNNjFLbl9pZmZMOFhBOHFhRzk2YUNxLWFROGRGUzJRN1lGWHZ5Y0IzclZtODdPU0hjRWlCdUt5cU9sX0MwZlBkd25xZ3NXaU9aT3..."
+    },
+    {
+      "title": "LNG Projects Are a Bad Deal for Germans and Americans - Center for American Progress",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPbk5HUElfNzByT1BiTmNPaVBzeU9ZRzRJUEhrd3h2aW4tQ1ZyQ0lYS09iLXVZcGFhMjFmTU1jMFJyMUdIVnJmOXJjYWtocnVUWmJSeE5qZ19zbDRXLXZPeU9lTU9OR2tIRV9VMWVIOHRNUlpuLXpfXy1FNDRKZTVLM0VJdGQ1OGhONThwYWRTSEw2d29iZW1DeGlXRQ?oc=5",
+      "published": "Wed, 04 Jun 2025 07:00:00 GMT",
+      "source": "Google News - Oil & Gas",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMimwFBVV95cUxPbk5HUElfNzByT1BiTmNPaVBzeU9ZRzRJUEhrd3h2aW4tQ1ZyQ0lYS09iLXVZcGFhMjFmTU1jMFJyMUdIVnJmOXJjYWtocnVUWmJSeE5qZ19zbDRXLXZPeU9lTU9OR2tIRV9VMWVIOH..."
+    },
+    {
+      "title": "Eastern U.S. natural gas increasingly meets LNG-fueled demand growth in AEO2025 - U.S. Energy Information Administration (EIA) (.gov)",
+      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFB0a2N3Mnp4SzlSbjgtUU5xRWQ2cnBfZUxUYjFTMHlLdy1IdEFVM0w4ZUhHbnJsSmdWdUczaGRDS0NqSnZ4UFNLUEMtOHU0SFRodWdLQXRyWU82VEotR0ZOZnA1WQ?oc=5",
+      "published": "Tue, 29 Jul 2025 07:00:00 GMT",
+      "source": "Google News - Oil & Gas",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiY0FVX3lxTFB0a2N3Mnp4SzlSbjgtUU5xRWQ2cnBfZUxUYjFTMHlLdy1IdEFVM0w4ZUhHbnJsSmdWdUczaGRDS0NqSnZ4UFNLUEMtOHU0SFRodWdLQXRyWU82VEotR0ZOZnA1WQ?oc=5\" target=\"_..."
+    },
+    {
+      "title": "It’s a ‘Golden Age’ for U.S. LNG Industry, But Climate Risks Loom - Yale E360",
+      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9DZGlTdGl4ck9ubWZJNlZ3czhvVThXNi1DaGVIUmtpYjhFMlhhdGVzNmQ2V21lR1pCbTY4enY3UThxNEl1UG55V1ROQjJ4Tm5PTzBqb1lMOXJfU3BjTFhnR214UQ?oc=5",
+      "published": "Tue, 23 Sep 2025 07:00:00 GMT",
+      "source": "Google News - Oil & Gas",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiY0FVX3lxTE9DZGlTdGl4ck9ubWZJNlZ3czhvVThXNi1DaGVIUmtpYjhFMlhhdGVzNmQ2V21lR1pCbTY4enY3UThxNEl1UG55V1ROQjJ4Tm5PTzBqb1lMOXJfU3BjTFhnR214UQ?oc=5\" target=\"_..."
+    },
+    {
+      "title": "The hidden costs of the LNG boom - Institute for Energy Economics and Financial Analysis (IEEFA)",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4zOVhwckxMTHFWVkhNY1FsN2ZuLWh6Y1R6cmlFc0FKcGJzS1QtUUE5eDhPMlhmLUQxUGx1dXBjODBScFVOUFpqQ3JqOG5GUDdzMWZMbnd3S3d5cV9abWc?oc=5",
+      "published": "Tue, 21 Oct 2025 13:54:36 GMT",
+      "source": "Google News - Oil & Gas",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiXkFVX3lxTE4zOVhwckxMTHFWVkhNY1FsN2ZuLWh6Y1R6cmlFc0FKcGJzS1QtUUE5eDhPMlhmLUQxUGx1dXBjODBScFVOUFpqQ3JqOG5GUDdzMWZMbnd3S3d5cV9abWc?oc=5\" target=\"_blank\">..."
+    },
+    {
+      "title": "Indian Oil and Vitol Set to Launch Global Trading Joint Venture - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE10bldBU19vQ2JTaDQtMWRCclRpVzQ5eDctclIxUnFNbVFoVGVNeXFTeHByU1hDczBIUWtRUk1DU0dCQmlqb1I2Y2tpSUMxcG5ER2JIMDdxVUZuWlFiYXZzVXVUR016Tm9qOG1HYlpnZEFGVUU5ZnAwNmJpOGhoUQ?oc=5",
+      "published": "Thu, 30 Oct 2025 16:57:24 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTE10bldBU19vQ2JTaDQtMWRCclRpVzQ5eDctclIxUnFNbVFoVGVNeXFTeHByU1hDczBIUWtRUk1DU0dCQmlqb1I2Y2tpSUMxcG5ER2JIMDdxVUZuWlFiYXZzVXVUR016Tm9qOG1HYlpnZE..."
+    },
+    {
+      "title": "Oil trader Gunvor set to take over Lukoil’s refineries, fuel chains in Southeast Europe - Balkan Green Energy News",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOV0dpQkxTcWg3SkF2MlJTbUlPaWNvQ3F1dm8zZ0hvZWF4LS1sYUdjbUpWR0RmYUNkc3QwQTduUFJmTDJpZzRWZUdublpwRW9JM01YUmhJNkhuMjBlQTc2ZUlWWk51ZEhWdVBxT2w3UEh5UFJhZnJPQUtwQWxTWFpKeHQ1XzFDbXMyMzd2QkRzdFdzNUV3MHMta0g4YW5wb04wV3VaUm5CVlJNWGtVV2hNWS1yR0FkVTcxNlloaA?oc=5",
+      "published": "Thu, 30 Oct 2025 16:02:33 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMivAFBVV95cUxOV0dpQkxTcWg3SkF2MlJTbUlPaWNvQ3F1dm8zZ0hvZWF4LS1sYUdjbUpWR0RmYUNkc3QwQTduUFJmTDJpZzRWZUdublpwRW9JM01YUmhJNkhuMjBlQTc2ZUlWWk51ZEhWdVBxT2w3UE..."
+    },
+    {
+      "title": "Lukoil sells foreign assets to Swiss-based firm after punishing US sanctions - politico.eu",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPc29faHZibmJpVmZLaWlxMFRwcENmWHNUUkJZYXpsT1B0b0ZnbmlVZFR5RmpUZ2FycFdKUE9LZzJ0ci1uU2c3aUxzSnBWNGQ5aVlLRmoxTERNTm8yR1BfSDhJVVhweGVGRE9DcmQya3FRQzBPaF9CdEo4dWt1bWc5YWJWZDdTbWpzdWgzeHNVZHk1ckFBbU5xUg?oc=5",
+      "published": "Thu, 30 Oct 2025 11:34:00 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMimAFBVV95cUxPc29faHZibmJpVmZLaWlxMFRwcENmWHNUUkJZYXpsT1B0b0ZnbmlVZFR5RmpUZ2FycFdKUE9LZzJ0ci1uU2c3aUxzSnBWNGQ5aVlLRmoxTERNTm8yR1BfSDhJVVhweGVGRE9DcmQya3..."
+    },
+    {
+      "title": "Shell Profit Beats Estimates as Oil and Gas Trading Recovers - Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQaUlmOHFiUEJDSFJnN1lSOWE4aWYxaS1vbFhTN0FTWGozN2RQWFhKN1RqejNxV1pEUS13ZTdadU1VY19yaXdJWHlCOF9HRTFGZkw4YVRlaUFyMmdPQXAyckxfMmNzRHpieTdZQzJaeGR3VExXZUlkRmxtbXV2WXFsZk9CS1V2cmNxYllDdDVnaVBWR1JsMEtPT2k5eVZDWlZGYUFPeFBUci1sVlhxWmZxSg?oc=5",
+      "published": "Thu, 30 Oct 2025 11:09:06 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMisAFBVV95cUxQaUlmOHFiUEJDSFJnN1lSOWE4aWYxaS1vbFhTN0FTWGozN2RQWFhKN1RqejNxV1pEUS13ZTdadU1VY19yaXdJWHlCOF9HRTFGZkw4YVRlaUFyMmdPQXAyckxfMmNzRHpieTdZQzJaeG..."
+    },
+    {
+      "title": "Lukoil Accepts Oil Trader Gunvor’s Offer to Buy International Assets After U.S. Sanctions - The Moscow Times",
+      "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNUjEtXy1iZzRfU2dzdUJaQl9sNEtCYXN4YjNXQWNHME9VNEVGSEdQbHhfWmlkTXk2bU9JVzR0YXliVzE1SzFEVmJoZXdMbG91U0RVcV9uVmMtaUt3eF9zQVNqOTE5WXc3US0xWkx5OEVxZ3lIamJTaVRjMXBmRkIwQkZKOGFBNWw0dHVCVXIxR0g1N3ZnbHh5STV0Y0NTd3J6c2tZcGpxYi1iYWVuclhhamw2TVAzM2VPRGZOZWdfOUdWb3dJSDdXQjNFZm9aaHR4?oc=5",
+      "published": "Thu, 30 Oct 2025 09:43:56 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi0AFBVV95cUxNUjEtXy1iZzRfU2dzdUJaQl9sNEtCYXN4YjNXQWNHME9VNEVGSEdQbHhfWmlkTXk2bU9JVzR0YXliVzE1SzFEVmJoZXdMbG91U0RVcV9uVmMtaUt3eF9zQVNqOTE5WXc3US0xWkx5OE..."
+    }
+  ]
+}
