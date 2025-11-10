@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-11-10T10:44:31.644827",
+  "timestamp": "2025-11-10T11:41:03.199145",
   "forex": {
-    "timestamp": "2025-11-10T10:44:30.363644",
+    "timestamp": "2025-11-10T11:41:01.569782",
     "rates": {
       "USDEUR": {
         "rate": 0.866,
@@ -27,7 +27,7 @@
     "base": "USD"
   },
   "commodities": {
-    "timestamp": "2025-11-10T10:44:29.312022",
+    "timestamp": "2025-11-10T11:41:00.455648",
     "commodities": {
       "oil": {
         "brent": {
@@ -102,7 +102,7 @@
     }
   },
   "forward_curves": {
-    "timestamp": "2025-11-10T10:44:29.312022",
+    "timestamp": "2025-11-10T11:41:00.456659",
     "curves": {
       "ttf": {
         "name": "TTF",
@@ -299,13 +299,6 @@
       "summary": "<a href=\"https://news.google.com/rss/articles/CBMiY0FVX3lxTE9DZGlTdGl4ck9ubWZJNlZ3czhvVThXNi1DaGVIUmtpYjhFMlhhdGVzNmQ2V21lR1pCbTY4enY3UThxNEl1UG55V1ROQjJ4Tm5PTzBqb1lMOXJfU3BjTFhnR214UQ?oc=5\" target=\"_..."
     },
     {
-      "title": "Gunvor CEO Says Deal for Lukoil Assets Is a 'Clean Break' - Rigzone",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNTlY4TUVjVGFXRVExbjB5Rld1ODJ1Nm5oa051a3RPaEFwUmdKNVExYnFwTmlGcF9TNDE2MGFIU2Q2MG9FRFBQR1RhX0FLcW16SlpBa3lYbllEcnZBZlpMODRVczVYV3BHNm4xSXhkMkNwLWs2VnNPV1ZxUmxQZ1RxelVmc1R5TVBHY1RrLXl5Q005NWJlYlU0QXItX0JMaUxmQTNYdnBSUnVDRmJzRWhCRDNNVzhEd0Na?oc=5",
-      "published": "Tue, 04 Nov 2025 20:00:00 GMT",
-      "source": "Google News - Energy Traders",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxNTlY4TUVjVGFXRVExbjB5Rld1ODJ1Nm5oa051a3RPaEFwUmdKNVExYnFwTmlGcF9TNDE2MGFIU2Q2MG9FRFBQR1RhX0FLcW16SlpBa3lYbllEcnZBZlpMODRVczVYV3BHNm4xSXhkMk..."
-    },
-    {
       "title": "Gunvor Scraps Lukoil Deal After US Calls It Kremlin ‘Puppet’ - Bloomberg.com",
       "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPYzJhX1F6dzVhaWJHa2FaWTZfQ0hzOEFCU3drVDlpelgtcGtobXNtSzNMaE1HUEJQYm9pbTE2aWxuT3BiTFdVNWkxYkV6MHFNNFpUYVdBMWtSeGdEV3hYV29NV3VVeUp3SVNIcm1hQXp5N3ltQ052XzRGUjZJd25XOEg1cWEyd1Q2MTAwcG02ZHlEal9iNkFsS2hSMHh2N05yY21oVGFaYXgzWEdn?oc=5",
       "published": "Thu, 06 Nov 2025 23:52:54 GMT",
@@ -332,6 +325,13 @@
       "published": "Thu, 06 Nov 2025 22:16:00 GMT",
       "source": "Google News - Energy Traders",
       "summary": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxOUElBRUh5QVc2UkY2aVFVMXRrWlFjSFpYNml3c2txamEybEkxbmRnbnREempLZUdUX0pQR3ctUkJkSFN4RElBNE1TMU10MUlCYjBQeTNjVWFQUG9hZEd3QXd1bjAxLXpzVjJ3bElUWG..."
+    },
+    {
+      "title": "Exclusive: Egypt in talks to buy 40-60 LNG cargoes amid energy crunch, sources say - Reuters",
+      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPZkptTDVFRXNUSk5RalQwcDZlVE1xUGgxbXgwS3dyZkx1dlg4Ym1SeU0wcktEeTh5RC1DQk9MeWY2U2NkR1dxdXNPYmRMeVpScnpIUlNqUER1XzZ0U09CNzRCWjBMWjRGY0hVY1JsLTVMU1YtMjhGakVfRGtQVjBYM3FyZG13M3owUXRrYVlkMEFCaEhyc1NpNHN5VDNrNWNfVi04aHlkOG9sTmc3M0RkS2RkajJhQnUtVk5LcEZLOU9TRm9XWlpzWVltOGhnYUVHZVA3dlowMA?oc=5",
+      "published": "Sun, 25 May 2025 07:00:00 GMT",
+      "source": "Google News - Oil & Gas",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi1wFBVV95cUxPZkptTDVFRXNUSk5RalQwcDZlVE1xUGgxbXgwS3dyZkx1dlg4Ym1SeU0wcktEeTh5RC1DQk9MeWY2U2NkR1dxdXNPYmRMeVpScnpIUlNqUER1XzZ0U09CNzRCWjBMWjRGY0hVY1JsLT..."
     }
   ]
 }
