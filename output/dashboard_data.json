@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-11-10T10:18:08.159667",
+  "timestamp": "2025-11-10T10:44:31.644827",
   "forex": {
-    "timestamp": "2025-11-10T10:18:06.144409",
+    "timestamp": "2025-11-10T10:44:30.363644",
     "rates": {
       "USDEUR": {
         "rate": 0.866,
@@ -27,7 +27,7 @@
     "base": "USD"
   },
   "commodities": {
-    "timestamp": "2025-11-10T10:18:04.929097",
+    "timestamp": "2025-11-10T10:44:29.312022",
     "commodities": {
       "oil": {
         "brent": {
@@ -102,7 +102,7 @@
     }
   },
   "forward_curves": {
-    "timestamp": "2025-11-10T10:18:04.929097",
+    "timestamp": "2025-11-10T10:44:29.312022",
     "curves": {
       "ttf": {
         "name": "TTF",
