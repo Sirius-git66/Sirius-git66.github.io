@@ -12,11 +12,17 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
 OUTPUT_JSON = Path("commodities_news.json")
 CACHE_FILE = Path("news_cache.json")
+
+# Auto-delete old cache files to ensure fresh headlines every run
+if CACHE_FILE.exists():
+    CACHE_FILE.unlink()  # delete old cache every run
+if OUTPUT_JSON.exists():
+    OUTPUT_JSON.unlink()  # force fresh JSON
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 MAX_ITEMS = 20  # More buffer
 
 # EXPANDED 100% FREE SOURCES (all full-text, no login, Nov 2025 verified)
