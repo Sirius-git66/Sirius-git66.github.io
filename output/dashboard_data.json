@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-11-03T10:53:59.720209",
+  "timestamp": "2025-11-10T10:18:08.159667",
   "forex": {
-    "timestamp": "2025-11-03T10:53:58.022502",
+    "timestamp": "2025-11-10T10:18:06.144409",
     "rates": {
       "USDEUR": {
-        "rate": 0.867,
+        "rate": 0.866,
         "change_pct": 0.12,
         "source": "ExchangeRate-API"
       },
       "USDJPY": {
-        "rate": 154.18,
+        "rate": 153.62,
         "change_pct": -0.45,
         "source": "ExchangeRate-API"
       },
@@ -19,7 +19,7 @@
         "source": "ExchangeRate-API"
       },
       "USDCNY": {
-        "rate": 7.12,
+        "rate": 7.13,
         "change_pct": -0.15,
         "source": "ExchangeRate-API"
       }
@@ -27,7 +27,7 @@
     "base": "USD"
   },
   "commodities": {
-    "timestamp": "2025-11-03T10:53:56.936754",
+    "timestamp": "2025-11-10T10:18:04.929097",
     "commodities": {
       "oil": {
         "brent": {
@@ -102,7 +102,7 @@
     }
   },
   "forward_curves": {
-    "timestamp": "2025-11-03T10:53:56.937188",
+    "timestamp": "2025-11-10T10:18:04.929097",
     "curves": {
       "ttf": {
         "name": "TTF",
@@ -266,23 +266,30 @@
     {
       "title": "2026 Oil and Gas Industry Outlook - Deloitte",
       "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOcE9nTGJZeGxmY1k5QTZBaXpCOS1wdW9rWnJQX2RNNjFLbl9pZmZMOFhBOHFhRzk2YUNxLWFROGRGUzJRN1lGWHZ5Y0IzclZtODdPU0hjRWlCdUt5cU9sX0MwZlBkd25xZ3NXaU9aT3F1cmVkOFVXZ0poV1g2R0FUYkVUWGZaUHQtMDZKUWR0SjF6MXVmVFpaSHF3?oc=5",
-      "published": "Wed, 29 Oct 2025 17:03:45 GMT",
+      "published": "Wed, 29 Oct 2025 07:00:00 GMT",
       "source": "Google News - Oil & Gas",
       "summary": "<a href=\"https://news.google.com/rss/articles/CBMimgFBVV95cUxOcE9nTGJZeGxmY1k5QTZBaXpCOS1wdW9rWnJQX2RNNjFLbl9pZmZMOFhBOHFhRzk2YUNxLWFROGRGUzJRN1lGWHZ5Y0IzclZtODdPU0hjRWlCdUt5cU9sX0MwZlBkd25xZ3NXaU9aT3..."
     },
     {
-      "title": "LNG Projects Are a Bad Deal for Germans and Americans - Center for American Progress",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPbk5HUElfNzByT1BiTmNPaVBzeU9ZRzRJUEhrd3h2aW4tQ1ZyQ0lYS09iLXVZcGFhMjFmTU1jMFJyMUdIVnJmOXJjYWtocnVUWmJSeE5qZ19zbDRXLXZPeU9lTU9OR2tIRV9VMWVIOHRNUlpuLXpfXy1FNDRKZTVLM0VJdGQ1OGhONThwYWRTSEw2d29iZW1DeGlXRQ?oc=5",
-      "published": "Wed, 04 Jun 2025 07:00:00 GMT",
+      "title": "The hidden costs of the LNG boom - IEEFA | Institute for Energy Economics and Financial Analysis",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4zOVhwckxMTHFWVkhNY1FsN2ZuLWh6Y1R6cmlFc0FKcGJzS1QtUUE5eDhPMlhmLUQxUGx1dXBjODBScFVOUFpqQ3JqOG5GUDdzMWZMbnd3S3d5cV9abWc?oc=5",
+      "published": "Wed, 22 Oct 2025 07:00:00 GMT",
       "source": "Google News - Oil & Gas",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMimwFBVV95cUxPbk5HUElfNzByT1BiTmNPaVBzeU9ZRzRJUEhrd3h2aW4tQ1ZyQ0lYS09iLXVZcGFhMjFmTU1jMFJyMUdIVnJmOXJjYWtocnVUWmJSeE5qZ19zbDRXLXZPeU9lTU9OR2tIRV9VMWVIOH..."
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiXkFVX3lxTE4zOVhwckxMTHFWVkhNY1FsN2ZuLWh6Y1R6cmlFc0FKcGJzS1QtUUE5eDhPMlhmLUQxUGx1dXBjODBScFVOUFpqQ3JqOG5GUDdzMWZMbnd3S3d5cV9abWc?oc=5\" target=\"_blank\">..."
     },
     {
-      "title": "Eastern U.S. natural gas increasingly meets LNG-fueled demand growth in AEO2025 - U.S. Energy Information Administration (EIA) (.gov)",
-      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFB0a2N3Mnp4SzlSbjgtUU5xRWQ2cnBfZUxUYjFTMHlLdy1IdEFVM0w4ZUhHbnJsSmdWdUczaGRDS0NqSnZ4UFNLUEMtOHU0SFRodWdLQXRyWU82VEotR0ZOZnA1WQ?oc=5",
-      "published": "Tue, 29 Jul 2025 07:00:00 GMT",
+      "title": "U.S. Natural Gas Futures Skyrocket on Record LNG Export Demand - Crude Oil Prices Today | OilPrice.com",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxONEpFc1VwWWVyRXQydVI4R3J2Y1ZaTEV5QU1Pa19oY2U2bGRRcDcwRGQ3dkxuZzYtYUpucFFNUVRLUTQwSTJXaEROdS1GdnQ5UUVBOU9GVncwVXhxcFlBNWI5QWY1cFV6RnVseC15LVp2QkhRTW1uWGVGRlRTNTgtcHJqTVZSbmNCbXgydXY0UXRWM1RrQWRwaXZhZlUxWEI1Q0JPNkZ1R1DSAa4BQVVfeXFMTlNmdHZEa0NEUlhGS3BIOWxHbHRobThLa2M4R0dnNnZSbktFMnRna0VSTjRObjVOT0Z6b3hrOXE2Y2hKREdhcHR5ZlhpdDZhbG1pUzl4eF9Tb2phR0JzRDF3QlU2OFBZYWl0M1JZTDlZZk5DSHZ3cGlZeU5DdWZWY2hfcm5xbEE2LVFiSUlUY0ExYUFPNmNKX1puY25BVW1IRTZqOVVxRUo0RWRuZjRB?oc=5",
+      "published": "Wed, 05 Nov 2025 22:00:00 GMT",
       "source": "Google News - Oil & Gas",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiY0FVX3lxTFB0a2N3Mnp4SzlSbjgtUU5xRWQ2cnBfZUxUYjFTMHlLdy1IdEFVM0w4ZUhHbnJsSmdWdUczaGRDS0NqSnZ4UFNLUEMtOHU0SFRodWdLQXRyWU82VEotR0ZOZnA1WQ?oc=5\" target=\"_..."
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiqAFBVV95cUxONEpFc1VwWWVyRXQydVI4R3J2Y1ZaTEV5QU1Pa19oY2U2bGRRcDcwRGQ3dkxuZzYtYUpucFFNUVRLUTQwSTJXaEROdS1GdnQ5UUVBOU9GVncwVXhxcFlBNWI5QWY1cFV6RnVseC15LV..."
+    },
+    {
+      "title": "No buyback clause in potential Lukoil deal, Gunvor CEO says - Reuters",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNbURfVktpSGhiWmROdGdzRHVqRjd2MXh0SGJEWTk3T3hvV3pmY0JxTHZmYUU1eW1zSmtFcWlodVdEZGx1TDF0Unc5MVBJYXo2Vms4R0p5LXZNMGY4MkJwVUNOUjB5X2dOTHBYWkZnUDFkVElqYmFGeGFQd0l0SWR3Y0ViaTFUdUdsXzlCZjJ4bHB4M0JUdDFkM2k2TUZLOWNtWk8zTF9KWDlxbFU?oc=5",
+      "published": "Wed, 05 Nov 2025 07:57:00 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxNbURfVktpSGhiWmROdGdzRHVqRjd2MXh0SGJEWTk3T3hvV3pmY0JxTHZmYUU1eW1zSmtFcWlodVdEZGx1TDF0Unc5MVBJYXo2Vms4R0p5LXZNMGY4MkJwVUNOUjB5X2dOTHBYWkZnUD..."
     },
     {
       "title": "It’s a ‘Golden Age’ for U.S. LNG Industry, But Climate Risks Loom - Yale E360",
@@ -292,46 +299,39 @@
       "summary": "<a href=\"https://news.google.com/rss/articles/CBMiY0FVX3lxTE9DZGlTdGl4ck9ubWZJNlZ3czhvVThXNi1DaGVIUmtpYjhFMlhhdGVzNmQ2V21lR1pCbTY4enY3UThxNEl1UG55V1ROQjJ4Tm5PTzBqb1lMOXJfU3BjTFhnR214UQ?oc=5\" target=\"_..."
     },
     {
-      "title": "The hidden costs of the LNG boom - Institute for Energy Economics and Financial Analysis (IEEFA)",
-      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4zOVhwckxMTHFWVkhNY1FsN2ZuLWh6Y1R6cmlFc0FKcGJzS1QtUUE5eDhPMlhmLUQxUGx1dXBjODBScFVOUFpqQ3JqOG5GUDdzMWZMbnd3S3d5cV9abWc?oc=5",
-      "published": "Tue, 21 Oct 2025 13:54:36 GMT",
+      "title": "Gunvor CEO Says Deal for Lukoil Assets Is a 'Clean Break' - Rigzone",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNTlY4TUVjVGFXRVExbjB5Rld1ODJ1Nm5oa051a3RPaEFwUmdKNVExYnFwTmlGcF9TNDE2MGFIU2Q2MG9FRFBQR1RhX0FLcW16SlpBa3lYbllEcnZBZlpMODRVczVYV3BHNm4xSXhkMkNwLWs2VnNPV1ZxUmxQZ1RxelVmc1R5TVBHY1RrLXl5Q005NWJlYlU0QXItX0JMaUxmQTNYdnBSUnVDRmJzRWhCRDNNVzhEd0Na?oc=5",
+      "published": "Tue, 04 Nov 2025 20:00:00 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxNTlY4TUVjVGFXRVExbjB5Rld1ODJ1Nm5oa051a3RPaEFwUmdKNVExYnFwTmlGcF9TNDE2MGFIU2Q2MG9FRFBQR1RhX0FLcW16SlpBa3lYbllEcnZBZlpMODRVczVYV3BHNm4xSXhkMk..."
+    },
+    {
+      "title": "Gunvor Scraps Lukoil Deal After US Calls It Kremlin ‘Puppet’ - Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPYzJhX1F6dzVhaWJHa2FaWTZfQ0hzOEFCU3drVDlpelgtcGtobXNtSzNMaE1HUEJQYm9pbTE2aWxuT3BiTFdVNWkxYkV6MHFNNFpUYVdBMWtSeGdEV3hYV29NV3VVeUp3SVNIcm1hQXp5N3ltQ052XzRGUjZJd25XOEg1cWEyd1Q2MTAwcG02ZHlEal9iNkFsS2hSMHh2N05yY21oVGFaYXgzWEdn?oc=5",
+      "published": "Thu, 06 Nov 2025 23:52:54 GMT",
+      "source": "Google News - Energy Traders",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMirAFBVV95cUxPYzJhX1F6dzVhaWJHa2FaWTZfQ0hzOEFCU3drVDlpelgtcGtobXNtSzNMaE1HUEJQYm9pbTE2aWxuT3BiTFdVNWkxYkV6MHFNNFpUYVdBMWtSeGdEV3hYV29NV3VVeUp3SVNIcm1hQX..."
+    },
+    {
+      "title": "Natural Gas Weekly Update - U.S. Energy Information Administration (EIA) (.gov)",
+      "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBRWFJZMllOeUZGVExQa0JZLWVrUWgzbFhVcDk1OHg4YVB3d2ZUYjJ3Y0VaaUJleVo2Z3hNWkV5SDJXUTFzRnNRU1Z1ZzNoVzA?oc=5",
+      "published": "Thu, 06 Nov 2025 23:15:00 GMT",
       "source": "Google News - Oil & Gas",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiXkFVX3lxTE4zOVhwckxMTHFWVkhNY1FsN2ZuLWh6Y1R6cmlFc0FKcGJzS1QtUUE5eDhPMlhmLUQxUGx1dXBjODBScFVOUFpqQ3JqOG5GUDdzMWZMbnd3S3d5cV9abWc?oc=5\" target=\"_blank\">..."
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiT0FVX3lxTFBRWFJZMllOeUZGVExQa0JZLWVrUWgzbFhVcDk1OHg4YVB3d2ZUYjJ3Y0VaaUJleVo2Z3hNWkV5SDJXUTFzRnNRU1Z1ZzNoVzA?oc=5\" target=\"_blank\">Natural Gas Weekly U..."
     },
     {
-      "title": "Indian Oil and Vitol Set to Launch Global Trading Joint Venture - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE10bldBU19vQ2JTaDQtMWRCclRpVzQ5eDctclIxUnFNbVFoVGVNeXFTeHByU1hDczBIUWtRUk1DU0dCQmlqb1I2Y2tpSUMxcG5ER2JIMDdxVUZuWlFiYXZzVXVUR016Tm9qOG1HYlpnZEFGVUU5ZnAwNmJpOGhoUQ?oc=5",
-      "published": "Thu, 30 Oct 2025 16:57:24 GMT",
+      "title": "Gunvor drops bid for $22bn of Lukoil assets after US moves to block deal - Financial Times",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5ISERtUjEtZ3Rya0xwQTFGd2g2X1dUZ0s2SXFGTW1UbVpNTFF4ZHZWSzZiTG1tMjA4MXEtQnRTUnI3OXZlV2RaRmRfMFpqbHhvNGhKZFN2OXpoZ0ZId2Nfa1FlSXNSNE42c1pPQVQwZHc?oc=5",
+      "published": "Thu, 06 Nov 2025 22:51:58 GMT",
       "source": "Google News - Energy Traders",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTE10bldBU19vQ2JTaDQtMWRCclRpVzQ5eDctclIxUnFNbVFoVGVNeXFTeHByU1hDczBIUWtRUk1DU0dCQmlqb1I2Y2tpSUMxcG5ER2JIMDdxVUZuWlFiYXZzVXVUR016Tm9qOG1HYlpnZE..."
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMicEFVX3lxTE5ISERtUjEtZ3Rya0xwQTFGd2g2X1dUZ0s2SXFGTW1UbVpNTFF4ZHZWSzZiTG1tMjA4MXEtQnRTUnI3OXZlV2RaRmRfMFpqbHhvNGhKZFN2OXpoZ0ZId2Nfa1FlSXNSNE42c1pPQVQwZH..."
     },
     {
-      "title": "Oil trader Gunvor set to take over Lukoil’s refineries, fuel chains in Southeast Europe - Balkan Green Energy News",
-      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOV0dpQkxTcWg3SkF2MlJTbUlPaWNvQ3F1dm8zZ0hvZWF4LS1sYUdjbUpWR0RmYUNkc3QwQTduUFJmTDJpZzRWZUdublpwRW9JM01YUmhJNkhuMjBlQTc2ZUlWWk51ZEhWdVBxT2w3UEh5UFJhZnJPQUtwQWxTWFpKeHQ1XzFDbXMyMzd2QkRzdFdzNUV3MHMta0g4YW5wb04wV3VaUm5CVlJNWGtVV2hNWS1yR0FkVTcxNlloaA?oc=5",
-      "published": "Thu, 30 Oct 2025 16:02:33 GMT",
+      "title": "Gunvor pulls offer for Russia’s Lukoil as US brands firm ‘Kremlin puppet’ - politico.eu",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOUElBRUh5QVc2UkY2aVFVMXRrWlFjSFpYNml3c2txamEybEkxbmRnbnREempLZUdUX0pQR3ctUkJkSFN4RElBNE1TMU10MUlCYjBQeTNjVWFQUG9hZEd3QXd1bjAxLXpzVjJ3bElUWGcxRElOZEVxRm5NaG9yQk5JUDBtTFAtSlZ6bWhLUDlR?oc=5",
+      "published": "Thu, 06 Nov 2025 22:16:00 GMT",
       "source": "Google News - Energy Traders",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMivAFBVV95cUxOV0dpQkxTcWg3SkF2MlJTbUlPaWNvQ3F1dm8zZ0hvZWF4LS1sYUdjbUpWR0RmYUNkc3QwQTduUFJmTDJpZzRWZUdublpwRW9JM01YUmhJNkhuMjBlQTc2ZUlWWk51ZEhWdVBxT2w3UE..."
-    },
-    {
-      "title": "Lukoil sells foreign assets to Swiss-based firm after punishing US sanctions - politico.eu",
-      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPc29faHZibmJpVmZLaWlxMFRwcENmWHNUUkJZYXpsT1B0b0ZnbmlVZFR5RmpUZ2FycFdKUE9LZzJ0ci1uU2c3aUxzSnBWNGQ5aVlLRmoxTERNTm8yR1BfSDhJVVhweGVGRE9DcmQya3FRQzBPaF9CdEo4dWt1bWc5YWJWZDdTbWpzdWgzeHNVZHk1ckFBbU5xUg?oc=5",
-      "published": "Thu, 30 Oct 2025 11:34:00 GMT",
-      "source": "Google News - Energy Traders",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMimAFBVV95cUxPc29faHZibmJpVmZLaWlxMFRwcENmWHNUUkJZYXpsT1B0b0ZnbmlVZFR5RmpUZ2FycFdKUE9LZzJ0ci1uU2c3aUxzSnBWNGQ5aVlLRmoxTERNTm8yR1BfSDhJVVhweGVGRE9DcmQya3..."
-    },
-    {
-      "title": "Shell Profit Beats Estimates as Oil and Gas Trading Recovers - Bloomberg.com",
-      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQaUlmOHFiUEJDSFJnN1lSOWE4aWYxaS1vbFhTN0FTWGozN2RQWFhKN1RqejNxV1pEUS13ZTdadU1VY19yaXdJWHlCOF9HRTFGZkw4YVRlaUFyMmdPQXAyckxfMmNzRHpieTdZQzJaeGR3VExXZUlkRmxtbXV2WXFsZk9CS1V2cmNxYllDdDVnaVBWR1JsMEtPT2k5eVZDWlZGYUFPeFBUci1sVlhxWmZxSg?oc=5",
-      "published": "Thu, 30 Oct 2025 11:09:06 GMT",
-      "source": "Google News - Energy Traders",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMisAFBVV95cUxQaUlmOHFiUEJDSFJnN1lSOWE4aWYxaS1vbFhTN0FTWGozN2RQWFhKN1RqejNxV1pEUS13ZTdadU1VY19yaXdJWHlCOF9HRTFGZkw4YVRlaUFyMmdPQXAyckxfMmNzRHpieTdZQzJaeG..."
-    },
-    {
-      "title": "Lukoil Accepts Oil Trader Gunvor’s Offer to Buy International Assets After U.S. Sanctions - The Moscow Times",
-      "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNUjEtXy1iZzRfU2dzdUJaQl9sNEtCYXN4YjNXQWNHME9VNEVGSEdQbHhfWmlkTXk2bU9JVzR0YXliVzE1SzFEVmJoZXdMbG91U0RVcV9uVmMtaUt3eF9zQVNqOTE5WXc3US0xWkx5OEVxZ3lIamJTaVRjMXBmRkIwQkZKOGFBNWw0dHVCVXIxR0g1N3ZnbHh5STV0Y0NTd3J6c2tZcGpxYi1iYWVuclhhamw2TVAzM2VPRGZOZWdfOUdWb3dJSDdXQjNFZm9aaHR4?oc=5",
-      "published": "Thu, 30 Oct 2025 09:43:56 GMT",
-      "source": "Google News - Energy Traders",
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi0AFBVV95cUxNUjEtXy1iZzRfU2dzdUJaQl9sNEtCYXN4YjNXQWNHME9VNEVGSEdQbHhfWmlkTXk2bU9JVzR0YXliVzE1SzFEVmJoZXdMbG91U0RVcV9uVmMtaUt3eF9zQVNqOTE5WXc3US0xWkx5OE..."
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxOUElBRUh5QVc2UkY2aVFVMXRrWlFjSFpYNml3c2txamEybEkxbmRnbnREempLZUdUX0pQR3ctUkJkSFN4RElBNE1TMU10MUlCYjBQeTNjVWFQUG9hZEd3QXd1bjAxLXpzVjJ3bElUWG..."
     }
   ]
 }
