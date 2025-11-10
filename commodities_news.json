@@ -1,75 +1,145 @@
 {
-  "last_updated": "2025-11-10 11:47",
+  "last_updated": "2025-11-10 11:53",
   "items": [
+    {
+      "title": "Oil Prices Edge Higher on Optimism Over Senate Funding Deal to Reopen Government",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Edge-Higher-on-Optimism-Over-Senate-Funding-Deal-to-Reopen-Government.html",
+      "summary": "as markets opened in asia on monday, crude oil prices were showing modest gains amid growing optimism that the united states senate is set to advance a funding agreement that could end the federal government shutdown. at the time of writing, wti had climbed to $60.08 while brent ...",
+      "source": "OilPrice.com",
+      "published": "Nov 09 20:46"
+    },
+    {
+      "title": "Six FIDs, $72 Billion: U.S. LNG\u2019s Record-Breaking Year",
+      "link": "https://oilprice.com/Energy/Energy-General/Six-FIDs-72-Billion-US-LNGs-Record-Breaking-Year.html",
+      "summary": "europe\u2019s rush to shake off russian gas dependence and asia\u2019s push to buy higher volumes of american energy while negotiating trade deals have created a booming export deal market for u.s. lng exporters and developers, even at increased liquefaction fees.\u00a0\u00a0\u00a0 year to date, american...",
+      "source": "OilPrice.com",
+      "published": "Nov 09 18:00"
+    },
+    {
+      "title": "Brazil, Guyana, and Argentina Lead Next Wave of Non-OPEC Oil Production",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Brazil-Guyana-and-Argentina-Lead-Next-Wave-of-Non-OPEC-Oil-Production.html",
+      "summary": "oil from offshore brazil, guyana, suriname, and argentina\u2019s vaca muerta shale play will be key sources of cost-competitive non-opec oil supply through 2030, rystad energy has predicted. rystad has predicted that global liquids demand will peak in the 2030s at around 107 million b...",
+      "source": "OilPrice.com",
+      "published": "Nov 09 16:00"
+    },
+    {
+      "title": "How Britain\u2019s Wind Boom Has Slashed Energy Bills",
+      "link": "https://oilprice.com/Alternative-Energy/Wind-Power/How-Britains-Wind-Boom-Has-Slashed-Energy-Bills.html",
+      "summary": "the united kingdom has rapidly developed its wind energy sector over the last two decades to become one of the biggest wind power producers worldwide. as the government aims to accelerate the green transition through greater investment in renewable energies and upgrading the nati...",
+      "source": "OilPrice.com",
+      "published": "Nov 09 10:00"
+    },
+    {
+      "title": "Europe's LNG Demand Surge Flips Global Gas Market",
+      "link": "https://oilprice.com/Energy/Energy-General/Europes-LNG-Demand-Surge-Flips-Global-Gas-Market.html",
+      "summary": "asia has been the driver of global demand for liquefied natural gas for years now, with its fast-growing economies guzzling energy at elevated rates. this year, however, has seen this change. asian demand for lng is weakening\u2014but europe\u2019s is on a substantial rise, more than offse...",
+      "source": "OilPrice.com",
+      "published": "Nov 08 18:00"
+    },
+    {
+      "title": "Tory Leader Declares Oil and Gas Emergency in Scotland",
+      "link": "https://oilprice.com/Energy/Energy-General/Tory-Leader-Declares-Oil-and-Gas-Emergency-in-Scotland.html",
+      "summary": "tory leader kemi badenoch has declared an oil and gas \u201cemergency\u201d in the north east of scotland as she pushes the labour government to overturn its ban on new oil and gas licenses.\u00a0 badenoch has pledged to \u201cget britain drilling again\u201d in a new campaign in partnership with the sco...",
+      "source": "OilPrice.com",
+      "published": "Nov 08 16:00"
+    },
+    {
+      "title": "Slovakia\u2019s Auto Empire Is Facing Its Biggest Test Yet",
+      "link": "https://oilprice.com/Energy/Energy-General/Slovakias-Auto-Empire-Is-Facing-Its-Biggest-Test-Yet.html",
+      "summary": "one of europe\u2019s automotive manufacturing powerhouses, slovakia, has been hit hard by tariffs and increased competition, which are threatening its role in the global auto market. since the creation of the bratislava automobile works (baz) in the 1970s, slovakia has gradually devel...",
+      "source": "OilPrice.com",
+      "published": "Nov 08 14:00"
+    },
+    {
+      "title": "Can North America Unite Against China\u2019s Energy Dominance?",
+      "link": "https://oilprice.com/Energy/Energy-General/Can-North-America-Unite-Against-Chinas-Energy-Dominance.html",
+      "summary": "the united states-mexico-canada agreement (usmca) is up for review in 2026, and the resulting policy outcome could have transformational importance for global energy markets and value chains. even though it would seem that the united states, mexico, and canada are in an era of in...",
+      "source": "OilPrice.com",
+      "published": "Nov 08 10:00"
+    },
+    {
+      "title": "Flying Taxis Edge Closer to Reality",
+      "link": "https://oilprice.com/Energy/Energy-General/Flying-Taxis-Edge-Closer-to-Reality.html",
+      "summary": "advanced air mobility (aam) may no longer be a pipedream, as several cities around the globe are conducting pilot projects in the hope of launching commercial operations over the next decade. innovations in aam could lead to the launch of air taxi services in several spots worldw...",
+      "source": "OilPrice.com",
+      "published": "Nov 08 10:00"
+    },
+    {
+      "title": "Traders Take Breather as Demand-driven Natural Gas Price Rally Reaches \u2018Exhaustion\u2019",
+      "link": "https://naturalgasintel.com/news/traders-take-breather-as-demand-driven-natural-gas-price-rally-reaches-exhaustion/",
+      "summary": "natural gas futures lost momentum during friday\u2019s session, but the prompt month advanced for the week amid forecasts for wintry cold shots, robust export activity and diminishing concerns about oversupply.",
+      "source": "Natural Gas Intel",
+      "published": "Nov 07 23:11"
+    },
+    {
+      "title": "Natural Gas Futures Drift as Traders Adjust Ahead of Weekend Weather Turn \u2014 MidDay Market Snapshot",
+      "link": "https://naturalgasintel.com/news/natural-gas-futures-drift-as-traders-adjust-ahead-of-weekend-weather-turn-midday-market-snapshot/",
+      "summary": "december futures rebounded from a $4.268/mmbtu low friday afternoon as traders adjusted positions ahead of shifting weekend weather.",
+      "source": "Natural Gas Intel",
+      "published": "Nov 07 19:55"
+    },
+    {
+      "title": "Second Train at LNG Canada Comes Online, Boosting Global Supplies Heading Into Winter",
+      "link": "https://naturalgasintel.com/news/second-train-at-lng-canada-comes-online-boosting-global-supplies-heading-into-winter/",
+      "summary": "lng canada has started producing the super-chilled fuel from its second liquefaction train months after the first unit came online and started sending additional cargoes into a loosening global market.",
+      "source": "Natural Gas Intel",
+      "published": "Nov 07 18:52"
+    },
+    {
+      "title": "South America to Anchor Non-OPEC+ Oil Supply Through 2030",
+      "link": "https://oilprice.com/Energy/Energy-General/South-America-to-Anchor-Non-OPEC-Oil-Supply-Through-2030.html",
+      "summary": "oil production from offshore brazil, guyana and suriname, as well as argentina\u2019s vaca muerta shale is well-positioned to supply cost-competitive barrels until 2030. global oil demand is expected to remain robust throughout the 2030s, putting pressure on currently producing assets...",
+      "source": "OilPrice.com",
+      "published": "Nov 07 18:00"
+    },
+    {
+      "title": "Pipelines Over Politics: Mexico\u2019s U.S. Gas Appetite Reaches New Heights",
+      "link": "https://naturalgasintel.com/news/pipelines-over-politics-mexicos-us-gas-appetite-reaches-new-heights/",
+      "summary": "mexico\u2019s imports of u.s. natural gas have grown significantly over the past half-decade, according to research from the u.s. energy information administration (eia).",
+      "source": "Natural Gas Intel",
+      "published": "Nov 07 17:01"
+    },
+    {
+      "title": "Europe Edges Toward Caspian Clean Power Connection",
+      "link": "https://oilprice.com/Energy/Energy-General/Europe-Edges-Toward-Caspian-Clean-Power-Connection.html",
+      "summary": "a joint green-energy project involving azerbaijan and georgia has cleared an initial european hurdle, and its blueprint for exporting electricity from the caspian basin to the eu will now undergo a cost-benefit analysis. the european network of transmission system operators for e...",
+      "source": "OilPrice.com",
+      "published": "Nov 07 16:00"
+    },
+    {
+      "title": "Natural Gas Forward Curve Strengthens on Winter Enthusiasm, Record LNG",
+      "link": "https://naturalgasintel.com/news/natural-gas-forward-curve-strengthens-on-winter-enthusiasm-record-lng/",
+      "summary": "with the peak heating season approaching and lng exports continuing to break records, natural gas forward prices soared during the oct. 29\u2013nov. 5 trading period.",
+      "source": "Natural Gas Intel",
+      "published": "Nov 07 14:17"
+    },
+    {
+      "title": "Cedar LNG Deal Marks Next Step for Petronas in North America",
+      "link": "https://naturalgasintel.com/news/cedar-lng-deal-marks-next-step-for-petronas-in-north-america/",
+      "summary": "malaysia\u2019s petronas is increasing its investment in north american natural gas with offtake from an additional canadian export project.",
+      "source": "Natural Gas Intel",
+      "published": "Nov 07 14:12"
+    },
+    {
+      "title": "Trump Weighs Exempting Hungary From Russian Oil Sanctions",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Trump-Weighs-Exempting-Hungary-From-Russian-Oil-Sanctions.html",
+      "summary": "president donald trump told hungarian prime minister viktor orb\u00e1n on friday that the u.s. is \u201clooking at\u201d exempting hungary from sanctions targeting russian oil a move that chips away at one of the few symbolic levers the u.s. still maintains over russia\u2019s energy exports while si...",
+      "source": "OilPrice.com",
+      "published": "Nov 07 14:00"
+    },
+    {
+      "title": "Electrifying U.S. Power Growth Forecast to Need 100 GW Annually through 2030s",
+      "link": "https://naturalgasintel.com/news/electrifying-us-power-growth-forecast-to-need-100-gw-annually-through-2030s/",
+      "summary": "the nation needs to take immediate action to expand the u.s. electric grid to keep up with consumption and sustain innovation \u2014 or risk falling behind, according to a top artificial intelligence (ai) executive.",
+      "source": "Natural Gas Intel",
+      "published": "Nov 07 13:57"
+    },
     {
       "title": "Natural Gas Rally Falters Near Key Technical Ceiling; Winter Chill Still Looms",
       "link": "https://naturalgasintel.com/news/natural-gas-rally-falters-near-key-technical-ceiling-winter-chill-still-looms/",
       "summary": "a weather-fueled rally in december natural gas futures faded early friday as prices, up more than 12 cents after a small storage build, met stiff resistance.",
       "source": "Natural Gas Intel",
       "published": "Nov 07 13:57"
-    },
-    {
-      "title": "Petrobras Readies Next Buzios Platform After Record Output",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Petrobras-Readies-Next-Buzios-Platform-After-Record-Output.html",
-      "summary": "petrobras is closing out 2025 on a high note, preparing to launch yet another floating production unit at the massive b\u00fazios oil field after setting multiple output records and raising shareholder payouts. the company has confirmed that the p-78 fpso will begin producing in decem...",
-      "source": "OilPrice.com",
-      "published": "Nov 07 13:00"
-    },
-    {
-      "title": "Venture Global boosting Greece\u2019s energy security with long-term LNG supply",
-      "link": "https://www.offshore-energy.biz/venture-global-boosting-greeces-energy-security-with-long-term-lng-supply/",
-      "summary": "venture global, a u.s. producer of liquefied natural gas (lng) sourced from north american basins, has executed a liquefied natural gas (lng) sales and purchase agreement (spa) with atlantic-see lng, a newly formed joint venture between greek companies aktor and depa.\nthe post ve...",
-      "source": "Offshore Energy",
-      "published": "Nov 07 12:21"
-    },
-    {
-      "title": "Oil and Gas Rig Count Ticks Up in the U.S. As Production Hits New High",
-      "link": "https://oilprice.com/Energy/Energy-General/Oil-and-Gas-Rig-Count-Ticks-Up-in-the-US-As-Production-Hits-New-High.html",
-      "summary": "the total number of active drilling rigs for oil and gas in the united states rose this week, according to new data that baker hughes published on friday. the total rig count in the us rose to 548 this week, according to baker hughes, down 37 from this same time last year.\u00a0 the n...",
-      "source": "OilPrice.com",
-      "published": "Nov 07 12:17"
-    },
-    {
-      "title": "AET orders LNG dual-fuel Suezmax duo",
-      "link": "https://www.offshore-energy.biz/aet-orders-lng-dual-fuel-suezmax-duo/",
-      "summary": "aet has awarded shipbuilding contracts to south korea's samsung heavy industries (shi) for two lng dual-fuel suezmax tankers.\nthe post aet orders lng dual-fuel suezmax duo appeared first on offshore energy.",
-      "source": "Offshore Energy",
-      "published": "Nov 07 11:14"
-    },
-    {
-      "title": "Canada\u2019s first large-scale LNG export project firing on all cylinders as it ignites second train",
-      "link": "https://www.offshore-energy.biz/canadas-first-large-scale-lng-export-project-firing-on-all-cylinders-as-it-ignites-second-train/",
-      "summary": "lng canada, a joint venture company encompassing shell, petronas, petrochina, kogas, and mitsubishi, has put into operation mode the second train at its liquefied natural gas (lng) export terminal in kitimat, canada\u2019s british columbia.\nthe post canada\u2019s first large-scale lng expo...",
-      "source": "Offshore Energy",
-      "published": "Nov 07 10:26"
-    },
-    {
-      "title": "No luck for Aker BP in North Sea prospect",
-      "link": "https://www.offshore-energy.biz/no-luck-for-aker-bp-in-north-sea-prospect/",
-      "summary": "norway's aker bp and its partners have drilled a dry well in the north sea.\nthe post no luck for aker bp in north sea prospect appeared first on offshore energy.",
-      "source": "Offshore Energy",
-      "published": "Nov 07 10:06"
-    },
-    {
-      "title": "Wattlab to equip world\u2019s largest battery-powered bulker with solar energy system",
-      "link": "https://www.offshore-energy.biz/wattlab-to-equip-worlds-largest-battery-powered-bulker-with-solar-energy-system/",
-      "summary": "dutch maritime solar innovator wattlab has secured a contract with norwegian shipping company berge rederi to install its onboard solar energy system on what is expected to be the world's largest battery-powered bulk carrier.\nthe post wattlab to equip world&#8217;s largest batter...",
-      "source": "Offshore Energy",
-      "published": "Nov 07 09:27"
-    },
-    {
-      "title": "Natural Gas Futures Rebound in Choppy Session as Traders Weigh In-line Storage, Mixed Forecasts",
-      "link": "https://naturalgasintel.com/news/natural-gas-futures-rebound-in-choppy-session-as-traders-weigh-in-line-storage-mixed-forecasts/",
-      "summary": "natural gas futures rebounded thursday after the federal storage report showed a modest build for the traditional end of the injection season, while shifting weather forecasts kept traders on watch for early december cold risks.",
-      "source": "Natural Gas Intel",
-      "published": "Nov 06 22:16"
-    },
-    {
-      "title": "Record LNG Exports, Cold Winter Bets Propel Natural Gas Forwards",
-      "link": "https://naturalgasintel.com/news/record-lng-exports-cold-winter-bets-propel-natural-gas-forwards/",
-      "summary": "with the peak heating season approaching and lng exports continuing to break records, natural gas forward prices soared during the oct. 29\u2013nov. 5 trading period.",
-      "source": "Natural Gas Intel",
-      "published": "Nov 06 21:57"
     }
   ]
 }
