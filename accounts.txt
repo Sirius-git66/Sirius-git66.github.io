@@ -1,7 +1,0 @@
-# TWSCRAPE ACCOUNTS FILE
-# Your Twitter account for fetching commodities news
-# Format: username password email email_password
-TheArcCloud Loveholic!66 thearccloud@example.com password123
-#
-# Note: For better reliability, consider adding 3-4 more secondary accounts
-# You can use dummy email and email_password values if you don't have them

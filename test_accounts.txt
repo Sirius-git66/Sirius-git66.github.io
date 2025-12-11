@@ -1,3 +1,0 @@
-# Test account - replace with your real accounts
-testuser1 testpass1
-testuser2 testpass2
