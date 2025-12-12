@@ -200,6 +200,84 @@
             color: #888888;
         }
         
+        /* Educational Guide Section */
+        .guide-section {
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+            text-align: center;
+        }
+        
+        .guide-section:hover {
+            /* Removed hover effect from entire section */
+        }
+        
+        .guide-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .guide-icon-container {
+            margin: 10px auto 0 auto;
+            display: inline-block;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            transition: all 0.5s ease-out;
+            animation: gentle-pulse 3s ease-in-out infinite;
+            position: relative;
+            transform-origin: center center;
+        }
+        
+        @keyframes gentle-pulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(0, 212, 255, 0); }
+            50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+        }
+        
+        .guide-icon-container:hover {
+            border-color: #00d4ff;
+            transform: scale(4.5);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+            z-index: 100;
+        }
+        
+        .guide-icon {
+            max-width: 70px;
+            height: auto;
+            display: block;
+        }
+        
+        .guide-text {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            transition: color 0.3s ease;
+        }
+        
+        .guide-section:hover .guide-text {
+            color: #00d4ff;
+        }
+        
+        /* News and Guide Grid */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+        }
+        
+        @media (max-width: 1100px) {
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         /* Forward Curves Section */
         .curves-section {
             background: #111111;
@@ -668,9 +746,11 @@
             </div>
         </div>
         
-        <!-- News Section -->
-        <div class="news-section">
-            <div class="card-title">Market News</div>
+        <!-- News and Guide Grid -->
+        <div class="bottom-grid">
+            <!-- News Section -->
+            <div class="news-section">
+                <div class="card-title">Market News</div>
                 <div class="news-item">
                     <a href="https://naturalgasintel.com/news/big-storage-withdrawal-fails-to-halt-natural-gas-futures-selloff/" target="_blank" class="news-title">Big Storage Withdrawal Fails to Halt Natural Gas Futures Selloff</a>
                     <div class="news-meta">
@@ -777,6 +857,17 @@
                     </div>
                 </div>
                 
+            </div>
+            
+            <!-- Educational Guide Section -->
+            <div class="guide-section">
+                <a href="commodity-trading-guide.html" target="_blank" class="guide-link">
+                    <div class="guide-text">Free Educational Guide</div>
+                    <div class="guide-icon-container">
+                        <img src="Guide_Logo.png" alt="Educational Guide" class="guide-icon">
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </body>
