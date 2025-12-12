@@ -198,7 +198,83 @@
         .news-source {
             font-weight: 600;
             color: #888888;
-        }`n        `n        /* Educational Guide Section */`n        .guide-section {`n            background: #111111;`n            border-radius: 4px;`n            padding: 16px;`n            border: 1px solid #1a1a1a;`n            text-align: center;`n        }`n        `n        .guide-link {`n            display: block;`n            text-decoration: none;`n            color: inherit;`n        }`n        `n        .guide-icon-container {`n            margin: 10px auto 0 auto;`n            display: inline-block;`n            padding: 12px;`n            border-radius: 4px;`n            border: 1px solid transparent;`n            transition: all 0.5s ease-out;`n            animation: gentle-pulse 3s ease-in-out infinite;`n            position: relative;`n            transform-origin: center center;`n        }`n        `n        @keyframes gentle-pulse {`n            0%, 100% { box-shadow: 0 0 0 rgba(0, 212, 255, 0); }`n            50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }`n        }`n        `n        .guide-icon-container:hover {`n            border-color: #00d4ff;`n            transform: scale(4.5);`n            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);`n            z-index: 100;`n        }`n        `n        .guide-icon {`n            max-width: 70px;`n            height: auto;`n            display: block;`n        }`n        `n        .guide-text {`n            font-size: 0.85em;`n            font-weight: 600;`n            color: #888888;`n            text-transform: uppercase;`n            letter-spacing: 0.5px;`n            margin-bottom: 14px;`n            padding-bottom: 8px;`n            border-bottom: 1px solid #1a1a1a;`n            transition: color 0.3s ease;`n        }`n        `n        .guide-section:hover .guide-text {`n            color: #00d4ff;`n        }`n        `n        /* News and Guide Grid */`n        .bottom-grid {`n            display: grid;`n            grid-template-columns: 2fr 1fr;`n            gap: 12px;`n        }`n        `n        @media (max-width: 1100px) {`n            .bottom-grid {`n                grid-template-columns: 1fr;`n            }`n        }`n        `n        /* Forward Curves Section */
+        }
+        
+        /* Educational Guide Section */
+        .guide-section {
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+            text-align: center;
+        }
+        
+        .guide-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .guide-icon-container {
+            margin: 10px auto 0 auto;
+            display: inline-block;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            transition: all 0.5s ease-out;
+            animation: gentle-pulse 3s ease-in-out infinite;
+            position: relative;
+            transform-origin: center center;
+        }
+        
+        @keyframes gentle-pulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(0, 212, 255, 0); }
+            50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+        }
+        
+        .guide-icon-container:hover {
+            border-color: #00d4ff;
+            transform: scale(4.5);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+            z-index: 100;
+        }
+        
+        .guide-icon {
+            max-width: 70px;
+            height: auto;
+            display: block;
+        }
+        
+        .guide-text {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            transition: color 0.3s ease;
+        }
+        
+        .guide-section:hover .guide-text {
+            color: #00d4ff;
+        }
+        
+        /* News and Guide Grid */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+        }
+        
+        @media (max-width: 1100px) {
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Forward Curves Section */
         .curves-section {
             background: #111111;
             border-radius: 4px;
