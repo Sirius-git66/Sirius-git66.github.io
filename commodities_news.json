@@ -1,31 +1,108 @@
 {
-  "last_updated": "2025-12-16 10:08",
+  "last_updated": "2025-12-19 03:01",
   "items": [
     {
-      "title": "Natural Gas Futures Slip, but Hold Above $4 as Warm Christmas Forecasts Weigh",
-      "link": "https://naturalgasintel.com/news/natural-gas-futures-slip-but-hold-above-4-as-warm-christmas-forecasts-weigh/",
-      "summary": "Nymex natural gas futures opened the week under pressure Monday as a colder shift in late December forecasts proved insufficient to counter concerns that early winter heating demand was moderating.",
+      "title": "Woodside Secures DOE Extension as Louisiana LNG Construction Advances",
+      "link": "https://naturalgasintel.com/news/woodside-secures-doe-extension-as-louisiana-lng-construction-advances/",
+      "summary": "The U.S. Department of Energy (DOE) has granted an export permit extension for Woodside Energy Group Ltd.’s Louisiana LNG, pushing its deadline for commencement of operations to the end of the decade.",
       "source": "Natural Gas Intel",
       "published": "Recent"
     },
     {
-      "title": "Iran Hikes Gasoline Prices For The First Time Since 2019",
-      "link": "https://oilprice.com/Energy/Energy-General/Iran-Hikes-Gasoline-Prices-For-The-First-Time-Since-2019.html",
-      "summary": "The Islamic Republic of Iran has announced a fuel price hike for the first time since 2019, with the increase coming at a time when the authorities are struggling with economic pressures and environmental disasters. The new pricing system, which took",
+      "title": "ExxonMobil Eyeing More Natural Gas Growth, CCS Deals and Push for Data Centers",
+      "link": "https://naturalgasintel.com/news/exxonmobil-eyeing-more-natural-gas-growth-ccs-deals-and-push-for-data-centers/",
+      "summary": "Top ExxonMobil executives this month outlined a more expansive growth strategy through 2030, highlighting larger opportunities in natural gas, LNG and carbon capture while accelerating development in the Permian Basin.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Oversold Natural Gas Futures Find Support Ahead of Storage Report",
+      "link": "https://naturalgasintel.com/news/oversold-natural-gas-futures-find-support-ahead-of-storage-report/",
+      "summary": "January natural gas futures extended a corrective rebound overnight as traders positioned ahead of an expected sizable storage withdrawal in U.S. Energy Information Administration (EIA) data due later today, reflecting frigid weather during the week ",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas Futures Rebound Above $4 as Oversold Signals Ease Selling Pressure",
+      "link": "https://naturalgasintel.com/news/natural-gas-futures-rebound-above-4-as-oversold-signals-ease-selling-pressure/",
+      "summary": "Nymex natural gas futures rebounded Wednesday, climbing back above $4.00/MMBtu as technicals and positioning ahead of an anticipated large storage withdrawal helped slow a weeklong sell-off.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "European Gas Prices Find Footing as Winter Outlook Moderates",
+      "link": "https://naturalgasintel.com/news/european-gas-prices-find-footing-as-winter-outlook-moderates/",
+      "summary": "The prompt Title Transfer Facility (TTF) could be reaching a floor as mild weather and abundant LNG supplies mix with Europe’s energy security requirements.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Market Bulls Probe the Upside as Natural Gas Futures Correct",
+      "link": "https://naturalgasintel.com/news/market-bulls-probe-the-upside-as-natural-gas-futures-correct/",
+      "summary": "Participants bid up the price of natural gas Wednesday as the market was attempting to stabilize after sinking well below the $4.00/MMBtu mark.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Energy Execs See Brighter Outlook, Rising Natural Gas Prices Despite Uncertainty",
+      "link": "https://naturalgasintel.com/news/energy-execs-see-brighter-outlook-rising-natural-gas-prices-despite-uncertainty/",
+      "summary": "A cautious optimism is pervading the heart of the nation’s oil and natural gas sector as the year comes to a close, with executives expressing both uncertainty and improving sentiment over government policies and firming energy demand.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "PNGTS Natural Gas Prices Whipsaw as Canada Imports, LNG Shore Up New England",
+      "link": "https://naturalgasintel.com/news/pngts-natural-gas-prices-whipsaw-as-canada-imports-lng-shore-up-new-england/",
+      "summary": "Cash prices along the Portland Natural Gas Transmission System (PNGTS) in New England tumbled by $9.200 to average $8.095/MMBtu on Tuesday with mild temperatures seen through the remainder of the week.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Maintenance, Natural Gas Price Volatility Underscore Lack of Alternative Flow Routes Near Canadian Border",
+      "link": "https://naturalgasintel.com/news/maintenance-natural-gas-price-volatility-underscore-lack-of-alternative-flow-routes-near-canadian-border/",
+      "summary": "Natural gas prices near the border of western Canada are starting to retreat after popping earlier in the week amid a scheduled pipeline inspection along the Westcoast Energy LP T-South system.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas Futures Trim Gains After EIA Posts Smaller-Than-Expected Storage Draw",
+      "link": "https://naturalgasintel.com/news/natural-gas-futures-trim-gains-after-eia-posts-smaller-than-expected-storage-draw/",
+      "summary": "Natural gas futures pared early gains after the U.S. Energy Information Administration (EIA) on Thursday reported a sizable but lighter-than-expected withdrawal of 167 Bcf from working storage for the week ended Dec. 12.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "West Africa Oil Faces Crisis as Global Surplus Builds",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/West-Africa-Oil-Faces-Crisis-as-Global-Surplus-Builds.html",
+      "summary": "Millions of barrels of Nigerian and Angolan crude remain unsold in the December and January loading programs, as they struggle to compete with ample supply and cheaper cargoes, traders and analysts have told Reuters.  Nigeria alone had about 20 milli",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "U.S. Shale Turns From Drilling Faster to Recovering More Oil",
-      "link": "https://oilprice.com/Energy/Energy-General/US-Shale-Turns-From-Drilling-Faster-to-Recovering-More-Oil.html",
-      "summary": "It has been an eventful year for U.S. shale oil and gas. Low prices—at least in oil—a double down on capital discipline, and drilling efficiency gains that pushed the U.S. total to a record high again were the hallmarks of 2025. The next frontier? Re",
+      "title": "Falklands Oil Megaproject Breaks Free After 15 Years",
+      "link": "https://oilprice.com/Energy/Energy-General/Falklands-Oil-Megaproject-Breaks-Free-After-15-Years.html",
+      "summary": "After 15 years of delay, redesign, and skepticism, the Sea Lion oil project has finally crossed the line from ambition to execution. On December 10, partners Navitas Petroleum (Israel) and Rockhopper Exploration (UK) took a long-awaited final investm",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Tanker Seizure Forces Chevron to Slash Prices on Venezuelan Crude",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Tanker-Seizure-Forces-Chevron-to-Slash-Prices-on-Venezuelan-Crude.html",
-      "summary": "Chevron has quietly cut the price of Venezuelan crude sold to U.S. refiners after American forces seized a tanker off the country’s coast, tightening an already-fragile export channel and adding fresh volatility to Gulf Coast markets. Traders familia",
+      "title": "Russia's Oil Exports Face Delays as Tankers Take 70% Longer Route",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Russias-Oil-Exports-Face-Delays-as-Tankers-Take-70-Longer-Route.html",
+      "summary": "Oil tankers carrying Russian oil appear to be avoiding the fastest Black Sea route to the Turkish straits and travel along the Georgian and Turkish coasts to avoid drone attacks from Ukraine, according to ship-tracking data compiled by Bloomberg.  In",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Top Exporters Boosted Natural Gas Supply in October",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Top-Exporters-Boosted-Natural-Gas-Supply-in-October.html",
+      "summary": "Norway ramped up its pipeline gas exports, Qatar raised its LNG supply, and the United States saw LNG exports hit a record high in October, just as demand in the northern hemisphere started to grow with the fall in temperatures.  Global gas demand ju",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Global Oil Demand Surges Driven by Indian Market Rebound",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Global-Oil-Demand-Surges-Driven-by-Indian-Market-Rebound.html",
+      "summary": "Global oil demand jumped in October from the previous month and from October last year amid a rebound in India’s product demand, the latest data by the Joint Organizations Data Initiative (JODI) showed on Thursday. Oil demand increased by 677,000 bar",
       "source": "OilPrice.com",
       "published": "Recent"
     }
