@@ -1,31 +1,108 @@
 {
-  "last_updated": "2026-01-26 09:19",
+  "last_updated": "2026-01-28 09:09",
   "items": [
     {
-      "title": "Low Prices, Strong Demand, and the Cracks in the Oil Glut Story",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Low-Prices-Strong-Demand-and-the-Cracks-in-the-Oil-Glut-Story.html",
-      "summary": "Almost 100% of oil market analysts see the market as oversupplied this year, just as it was oversupplied last year. The size of the supply overhang, however, matters. Led by the International Energy Agency, a lot of analysts predicted that the overha",
+      "title": "Spot Prices Wrap: As Forecasts Tease More Cold Ahead, Natural Gas Cash Backs off Record Highs",
+      "link": "https://naturalgasintel.com/news/spot-prices-wrap-as-forecasts-tease-more-cold-ahead-natural-gas-cash-backs-off-record-highs/",
+      "summary": "After surging over the past several sessions as bone-chilling cold canvassed much of the country, U.S. natural gas spot prices gave back a chunk of the gains Tuesday but remained elevated versus pre-Winter Storm Fern levels.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Futures Settle: Natural Gas Rally Slows, Though Cold Snap Far From Over",
+      "link": "https://naturalgasintel.com/news/futures-settle-natural-gas-rally-slows-though-cold-snap-far-from-over/",
+      "summary": "Despite stout heating demand and with substantial volumes of production still offline, the most heavily traded natural gas futures contract fell modestly on Tuesday as traders took profits amid the wreckage of Winter Storm Fern.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "U.S. LNG Export Fluctuations, Severe Winter Weather Propping up Global Natural Gas Prices",
+      "link": "https://naturalgasintel.com/news/us-lng-export-fluctuations-severe-winter-weather-propping-up-global-natural-gas-prices/",
+      "summary": "European natural gas traders are still eyeing further cold weather and U.S. LNG supply, adding a bullish upside to an otherwise stable global natural gas market.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Snapshot: Freeze-Offs, Deliverability Issues Keep Spot Gas Prices Elevated Despite Declines",
+      "link": "https://naturalgasintel.com/news/midday-snapshot-freeze-offs-deliverability-issues-keep-spot-gas-prices-elevated-despite-declines/",
+      "summary": "Spot gas prices retreated for Wednesday delivery at most major hubs, yet prices remained elevated as bitter cold gripping the eastern half of the country fueled demand and strained deliverability.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Golden Triangle Storage Offline as Piercing Cold Tests Nation’s Natural Gas Pipeline Grid",
+      "link": "https://naturalgasintel.com/news/golden-triangle-storage-offline-as-piercing-cold-tests-nations-natural-gas-pipeline-grid/",
+      "summary": "At least a dozen forces majeures have been declared across the country over the past week, along with operational flow orders and severe weather alerts that have impacted flows on natural gas pipelines, compressor stations and at storage facilities.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Futures: Traders Pull February Natural Gas Lower as Expiration Looms",
+      "link": "https://naturalgasintel.com/news/midday-futures-traders-pull-february-natural-gas-lower-as-expiration-looms/",
+      "summary": "Traders pulled February Nymex natural gas prices lower Tuesday afternoon, with just one day left before the prompt month contract expires at the close of trading Wednesday.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Mexico’s Natural Gas System Weathers Polar Vortex, but Strategic Fragility Remains",
+      "link": "https://naturalgasintel.com/news/mexicos-natural-gas-system-weathers-polar-vortex-but-strategic-fragility-remains/",
+      "summary": "Mexico’s natural gas and electricity grid has so far withstood the pressure of the punishing cold blast north of the border, but market participants once again underscored that winter storms magnify a basic fragility.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Midmorning Markets: Canadian Natural Gas Cash Prices Mixed Amid Robust U.S. Demand",
+      "link": "https://naturalgasintel.com/news/midmorning-markets-canadian-natural-gas-cash-prices-mixed-amid-robust-us-demand/",
+      "summary": "Canadian natural gas spot prices at key hubs jumped alongside those in the Lower 48 to start the trading week, supported by a surge in heating demand on both sides of the U.S. border. Some western hubs, however, retreated.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Freeze-Offs Near Record, Setting Stage for Natural Gas ‘Deliverability’ Issues and Upside Volatility",
+      "link": "https://naturalgasintel.com/news/freeze-offs-near-record-setting-stage-for-natural-gas-deliverability-issues-and-upside-volatility/",
+      "summary": "U.S. natural gas production freeze-offs hit a single-day high of 17 Bcf on Sunday (Jan. 25), according to Wood Mackenzie, with the worst to come in the Appalachian Basin as temperatures are forecast to fall well below zero in the Northeast this week.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas ‘Supersized Rally to the Moon’ Risks ‘Stampede’ to Exit if Forecasts Shift",
+      "link": "https://naturalgasintel.com/news/natural-gas-supersized-rally-to-the-moon-risks-stampede-to-exit-if-forecasts-shift/",
+      "summary": "After getting caught flat-footed by January’s late-winter cold snap, natural gas traders are giving more respect to weather forecasts, with the widening widow maker spread signaling more anxiety about tighter balances.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Eastern Mediterranean Gas Balance Shifts as Israel Ramps Up Production",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Eastern-Mediterranean-Gas-Balance-Shifts-as-Israel-Ramps-Up-Production.html",
+      "summary": "Israel is set to achieve record natural gas production in 2026, with expansion projects in the Leviathan and Tamar fields expected to push total output above 3 billion cubic feet per day (cfd) for the first time ever. According to the experts, the Ch",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "The Looming LNG Glut and What It Means for Global Energy Prices",
-      "link": "https://oilprice.com/Energy/Natural-Gas/The-Looming-LNG-Glut-and-What-It-Means-for-Global-Energy-Prices.html",
-      "summary": "As several countries invest in expanding their liquid natural gas (LNG) production and export capacity, and significant quantities of the gas are expected to come online in 2026 after a record 2025, supply could soon outpace demand. This begs the que",
+      "title": "Oil Supertanker Markets Stay Red-Hot as Sanctions and Rerouting Bite",
+      "link": "https://oilprice.com/Energy/Energy-General/Oil-Supertanker-Markets-Stay-Red-Hot-as-Sanctions-and-Rerouting-Bite.html",
+      "summary": "Oil tanker rates are soaring this year, picking up where they left off 2025—multi-year highs amid growing supply, longer routes, and disruptions due to sanctions and altered shipping lanes.    At the end of 2025, the global supertanker market tighten",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Trump Slashes Clean Energy Loans, Bets Big on Gas and Nuclear",
-      "link": "https://oilprice.com/Energy/Energy-General/Trump-Slashes-Clean-Energy-Loans-Bets-Big-on-Gas-and-Nuclear.html",
-      "summary": "The Trump Administration continues to revise, restructure, and cancel billions of U.S. dollars of Biden-era loans and funding commitments to clean energy projects as the United States shifted its policy to supporting fossil fuels and nuclear power as",
+      "title": "Global Oil Discoveries Are Badly Lagging Consumption",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Global-Oil-Discoveries-Are-Badly-Lagging-Consumption.html",
+      "summary": "The world’s oil production is running flat out, with consumption far outstripping new discoveries. According to Norwegian energy consultancy Rystad Energy, annual conventional discovered volumes averaged more than 20 billion barrels of oil equivalent",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Mexico Weighs Cuba Oil Cut as Trump Pressure Mounts",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Mexico-Weighs-Cuba-Oil-Cut-as-Trump-Pressure-Mounts.html",
-      "summary": "Mexico is weighing whether to halt or scale back oil shipments to Cuba as concerns grow within President Claudia Sheinbaum’s government that continuing the policy could trigger retaliation from the United States, according to sources familiar with in",
+      "title": "Iraq’s Most Strategic Gas Field Just Sent a Signal Washington Has Been Waiting F",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Iraqs-Most-Strategic-Gas-Field-Just-Sent-a-Signal-Washington-Has-Been-Waiting-F.html",
+      "summary": "The start of full drilling operations just over a week ago at Iraq’s Akkas gas field -- led by U.S. oilfield services giant Schlumberger along with the state?owned Midland Oil -- could signal far more than an overdue upstream milestone. Given the eno",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Sanctions Squeeze Iran’s Oil Revenues Despite Higher Output",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Sanctions-Squeeze-Irans-Oil-Revenues-Despite-Higher-Output.html",
+      "summary": "Iran’s oil industry has been under sanctions since Donald Trump’s first term. Since then, Iran has seen its pool of buyers shrink to leave only China—but China has been a big enough buyer to not only keep Iran’s oil industry afloat, but help it grow,",
       "source": "OilPrice.com",
       "published": "Recent"
     }
