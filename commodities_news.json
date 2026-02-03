@@ -1,17 +1,94 @@
 {
-  "last_updated": "2026-02-02 09:09",
+  "last_updated": "2026-02-03 09:09",
   "items": [
     {
-      "title": "Texas Just Approved the Largest Gas Power Project in U.S. History",
-      "link": "https://oilprice.com/Energy/Energy-General/Texas-Just-Approved-the-Largest-Gas-Power-Project-in-US-History.html",
-      "summary": "Texas’ environmental regulator this week issued the largest air pollution permit in the country to an enormous planned complex of gas power plants and data centers near the oilfields of the Permian Basin, according to an announcement from the project",
+      "title": "Spot Prices Wrap: Natural Gas Cash Slips Further on Mild Forecasts, Recovering Supply",
+      "link": "https://naturalgasintel.com/news/spot-prices-wrap-natural-gas-cash-slips-further-on-mild-forecasts-recovering-supply/",
+      "summary": "Physical natural gas prices lost ground for a fifth straight session on Monday as supply/demand balances loosened and two-week weather models shed heating demand.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Futures Settle: March Natural Gas Sinks Whopping 26% as Forecasts Shed Heating Demand",
+      "link": "https://naturalgasintel.com/news/futures-settle-march-natural-gas-sinks-whopping-26-as-forecasts-shed-heating-demand/",
+      "summary": "Decisively warmer forecast trends sent natural gas futures tumbling on Monday as traders took profits and reassessed their seasonal inventory outlooks.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Snapshot: Permian Natural Gas Prices Turn Positive as East Hubs Collapse",
+      "link": "https://naturalgasintel.com/news/midday-snapshot-permian-natural-gas-prices-turn-positive-as-east-hubs-collapse/",
+      "summary": "Spot natural gas prices were extending their post-winter storm slide at midday Monday, sending NGI’s Spot Gas National Avg. down nearly $3.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Devon, Coterra Merger Creates Natural Gas Titan With 4.3 Bcf/d Output",
+      "link": "https://naturalgasintel.com/news/devon-coterra-merger-creates-natural-gas-titan-with-43-bcfd-output/",
+      "summary": "Devon Energy Corp.’s $58 billion all-stock merger with multi-basin producer Coterra Energy Inc. is set to create a diversified energy giant and one of the nation’s largest natural gas producers.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Global Natural Gas Prices Slide as Iran Scraps Live-Fire Drills in Strait of Hormuz",
+      "link": "https://naturalgasintel.com/news/global-natural-gas-prices-slide-as-iran-scraps-live-fire-drills-in-strait-of-hormuz/",
+      "summary": "Global energy prices fell Monday as brutal cold waned and tensions between the United States and Iran eased.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Futures: Natural Gas Prices Drop Nearly $1",
+      "link": "https://naturalgasintel.com/news/midday-futures-natural-gas-prices-drop-nearly-1/",
+      "summary": "March natural gas futures extended declines into midday Monday across the curve as traders reassessed winter’s remaining cold risks, disregarding the groundhog seeing his shadow this morning.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "U.S. Natural Gas Production Nears Pre-Storm Levels After Record Freeze-Offs",
+      "link": "https://naturalgasintel.com/news/us-natural-gas-production-nears-pre-storm-levels-after-record-freeze-offs/",
+      "summary": "Lower 48 natural gas production has recovered after a historic storm slammed most of the country late last month that set a new record for freeze-offs.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Midmorning Markets: Technical Factors Loom as Natural Gas Futures Falter",
+      "link": "https://naturalgasintel.com/news/midmorning-markets-technical-factors-loom-as-natural-gas-futures-falter/",
+      "summary": "Natural gas futures snapped a winter winning streak early Monday, and technical barriers could stand in the way of a new rally as the trading week wears on.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Northeast Price Spike Draws LNG Flows Through Saint John Import Terminal",
+      "link": "https://naturalgasintel.com/news/northeast-price-spike-draws-lng-flows-through-saint-john-import-terminal/",
+      "summary": "As cold weather continues to impact supply and prices in the pipeline-constrainted in the Northeast, Canada’s Saint John LNG import terminal has seen a spike in volumes to help meet U.S. demand.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Kurdistan’s New Gas Play Just Exposed the Real Battle for Iraq",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Kurdistans-New-Gas-Play-Just-Exposed-the-Real-Battle-for-Iraq.html",
+      "summary": "The semi-autonomous Kurdistan Region of Iraq, centred in Erbil, has a significance way beyond its size, oil and gas output, and military capabilities. It is at the heart of the superpower battle for Iraq, which itself is seen by Washington, London, B",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "The Slow and Steady Revival of Libya's Oil and Gas Sector",
-      "link": "https://oilprice.com/Energy/Energy-General/The-Slow-and-Steady-Revival-of-Libyas-Oil-and-Gas-Sector.html",
-      "summary": "Over a decade since the Arab Spring and the civil war that followed, Libya has opened its doors back up to oil and gas exploration. Despite the ongoing political uncertainty, with Libya divided between two leaderships, the North African country has e",
+      "title": "U.S.-India Trade Deal Puts Oil and Russian Crude at the Core",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/US-India-Trade-Deal-Puts-Oil-and-Russian-Crude-at-the-Core.html",
+      "summary": "President Donald Trump said on Monday that the United States and India have reached an agreement on a trade framework that cuts U.S. tariffs on Indian goods and commits New Delhi to expand purchases of U.S. oil and gas, pushing energy supply to the c",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Qatar’s Al-Kaabi Warns AI Power Demand Could Spark LNG Shortage by 2030",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Qatars-Al-Kaabi-Warns-AI-Power-Demand-Could-Spark-LNG-Shortage-by-2030.html",
+      "summary": "Qatari Energy Minister Saad al-Kaabi on Monday warned that rising power demand from artificial intelligence could wipe out the global LNG surplus and push markets into deficit by around 2030, despite more than 100 million tonnes per year of new LNG c",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Shell Sees LNG Sector Growing by 3% Per Year",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Shell-Sees-LNG-Sector-Growing-by-3-Per-Year.html",
+      "summary": "The global LNG market is expanding by 3% every year, growing at a faster pace than the overall natural gas market, Wael Sawan, chief executive officer of the world’s top LNG trader, Shell, said at an LNG conference in Doha, Qatar. Both supply and dem",
       "source": "OilPrice.com",
       "published": "Recent"
     }
