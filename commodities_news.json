@@ -1,59 +1,108 @@
 {
-  "last_updated": "2026-02-17 11:02",
+  "last_updated": "2026-02-18 10:17",
   "items": [
     {
-      "title": "Oil Bears Are Dangerously Underestimating Geopolitical Risk",
-      "link": "https://oilprice.com/Energy/Energy-General/Oil-Bears-Are-Dangerously-Underestimating-Geopolitical-Risk.html",
-      "summary": "For decades, oil prices could swing wildly on even the distant prospect of war in the Middle East. With U.S. shale, that changed, leading many to assume that anything short of an oil blockade in the Strait of Hormuz will leave oil markets cold—and su",
+      "title": "Energy Transfer Launches Natural Gas Deliveries to Oracle Data Center",
+      "link": "https://naturalgasintel.com/news/energy-transfer-launches-natural-gas-deliveries-to-oracle-data-center/",
+      "summary": "Energy Transfer LP (ET) has begun deliveries of natural gas to Oracle Corp.’s massive Texas data center, marking the start of what the firm bets could be a rippling wave of demand for Permian Basin and Haynesville Shale natural gas.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Futures Settle: Springlike Pattern Reshapes Natural Gas Market Outlook, Pressures Prices",
+      "link": "https://naturalgasintel.com/news/futures-settle-springlike-pattern-reshapes-natural-gas-market-outlook-pressures-prices/",
+      "summary": "Record weekend warmth across major demand hubs sent natural gas prices lower as traders anticipated ample supply heading into the spring shoulder season.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Weekly Natural Gas Storage Report Likely to Show a Partial Reversal of Fern’s Impact",
+      "link": "https://naturalgasintel.com/news/weekly-natural-gas-storage-report-likely-to-show-a-partial-reversal-of-ferns-impact/",
+      "summary": "NGI is projecting the latest Lower 48 U.S. Energy Information Administration (EIA) storage report for the week ended Feb. 13 to show a withdrawal of 144 Bcf.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Snapshot: Western Weather Demand Props Up Natural Gas Cash Prices",
+      "link": "https://naturalgasintel.com/news/midday-snapshot-western-weather-demand-props-up-natural-gas-cash-prices/",
+      "summary": "Next-day natural gas spot prices rallied in the West and bolstered the national average as of Tuesday’s midday data run.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Enbridge Eyes 50 Data Center Projects as Natural Gas Demand Surges",
+      "link": "https://naturalgasintel.com/news/enbridge-eyes-50-data-center-projects-as-natural-gas-demand-surges/",
+      "summary": "Canadian midstreamer Enbridge Inc. sees a massive data center opportunity in North America that could require up to 10 Bcf/d of incremental gas capacity.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "LNG Floods Europe, Keeping Lid on TTF Prices Despite Storage Deficit",
+      "link": "https://naturalgasintel.com/news/lng-floods-europe-keeping-lid-on-ttf-prices-despite-storage-deficit/",
+      "summary": "A steady influx of LNG to Europe, combined with exceptionally weak Asian demand are keeping global natural gas prices low as the winter draws to a close.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Futures: Natural Gas Prices Stumble as Old Man Winter Whimpers",
+      "link": "https://naturalgasintel.com/news/midday-futures-natural-gas-prices-stumble-as-old-man-winter-whimpers/",
+      "summary": "Natural gas futures slumped early Tuesday and floundered into midday as rising production and lighter weather demand overshadowed strengthening LNG activity.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Midmorning Markets: Technical Support Keeping Natural Gas Futures Above $3 as Forecasts Fail to Impress",
+      "link": "https://naturalgasintel.com/news/midmorning-markets-technical-support-keeping-natural-gas-futures-above-3-as-forecasts-fail-to-impress/",
+      "summary": "Technically oversold conditions could provide a lifeline for struggling March natural gas futures, which have struggled to find momentum amid bearish supply and demand data.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Why Coal May Outlast Natural Gas in the Electricity Market",
+      "link": "https://oilprice.com/Energy/Energy-General/Why-Coal-May-Outlast-Natural-Gas-in-the-Electricity-Market.html",
+      "summary": "Here is the question: what happens when renewables are acknowledged as the superior technology for electric power generation? Basically,  we see a process of displacement (one commodity producer, renewables, displacing another, fossil fuels), and tha",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Suriname's Oil Boom Faces Economic Headwinds Despite Major Discovery",
-      "link": "https://oilprice.com/Energy/Energy-General/Surinames-Oil-Boom-Faces-Economic-Headwinds-Despite-Major-Discovery.html",
-      "summary": "A slew of high-quality oil discoveries in offshore Block 58 by TotalEnergies and its 50% partner, APA Corporation, has seen the tiny South American country of Suriname touted as the next Guyana. While Suriname’s offshore waters hold considerable petr",
+      "title": "Guyana Fast-Tracks Gas Expansion as Oil Cash Piles Up",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Guyana-Fast-Tracks-Gas-Expansion-as-Oil-Cash-Piles-Up.html",
+      "summary": "Guyana’s sights are set much higher than just being the new oil darling of the Western hemisphere. It wants to be the gas darling too.  That’s the frame coming out of Georgetown as Guyana lines up a second gas pipeline project, even before the first ",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Germany’s Mukran LNG Terminal Reopens After Frozen Baltic Is Cleared",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Germanys-Mukran-LNG-Terminal-Reopens-After-Frozen-Baltic-Is-Cleared.html",
-      "summary": "Operations at the Mukran LNG terminal in Germany’s Baltic Sea have resumed following successful icebreaking operations to clear a navigable channel. The facility had been temporarily disrupted by heavy sea ice, preventing cargo ships from departing.S",
+      "title": "Oil Slips: Iran Talks, Ukraine Blockade, and VLCC Crunch Drive Price Movement",
+      "link": "https://oilprice.com/Energy/Energy-General/Oil-Slips-Iran-Talks-Ukraine-Blockade-and-VLCC-Crunch-Drive-Price-Movement.html",
+      "summary": "This week's energy newsletter reviews oil and gas price shifts, U.S. rig count figures, key corporate acquisitions and discoveries, and analyzes major geopolitical events impacting global oil trade, including shipping market manipulation and rising C",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Hungary Seeks Croatian Help As Russian Oil Flows Via Ukraine Halted",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Hungary-Seeks-Croatian-Help-As-Russian-Oil-Flows-Via-Ukraine-Halted.html",
-      "summary": "Hungary and Slovakia have formally requested that Croatia authorize the transit of Russian crude oil via the Adriatic pipeline, following the complete suspension of oil flows through the Ukrainian section of the Druzhba pipeline, which has been out o",
+      "title": "Drone Strikes Force Russia to Reroute Massive Crude Oil Exports",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Drone-Strikes-Force-Russia-to-Reroute-Massive-Crude-Oil-Exports.html",
+      "summary": "As Ukrainian strikes on Russia’s refineries and the halt of Ukrainian shipments of Russian oil to central EU member states limit outlets of Russian crude, Moscow is boosting shipments via ports.   Russia’s seaborne crude oil exports averaged 3.39 mil",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Why Chevron Is Betting Big on Venezuela’s Heavy Crude",
-      "link": "https://oilprice.com/Energy/Energy-General/Why-Chevron-Is-Betting-Big-on-Venezuelas-Heavy-Crude.html",
-      "summary": "The headlines in early 2026 have been dominated by political upheaval in Caracas. Following the dramatic events of early January and the overhaul of Venezuela’s Hydrocarbons Law on January 29, analysts have rushed to debate the morality of renewed Am",
+      "title": "Oil Prices Fall as Iran and U.S. Conclude Second Round of Nuclear Talks",
+      "link": "https://oilprice.com/Geopolitics/Middle-East/US-and-Iran-Resume-Nuclear-Talks-as-Military-Pressure-Mounts.html",
+      "summary": "A second round of indirect talks between Iran and the United States over Tehran's nuclear program concluded on February 17, according to Iran's state broadcaster. The outcome remains unclear, as neither side has issued a statement or spoken to the me",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Eni Makes Major Gas Discovery Offshore Ivory Coast",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Eni-Makes-Major-Gas-Discovery-Offshore-Ivory-Coast.html",
-      "summary": "Eni has made a major natural gas and condensate discovery offshore the Ivory Coast in Africa, in part of what is estimated to be the second largest discovery in the country after Baleine, the Italian energy major said on Monday.  Eni has focused on e",
+      "title": "Can Big Oil Succeed Where Diplomacy Has Failed in Libya?",
+      "link": "https://oilprice.com/Energy/Energy-General/Can-Big-Oil-Succeed-Where-Diplomacy-Has-Failed-in-Libya.html",
+      "summary": "Libya’s first oil field licensing round since the removal of Muammar Gaddafi as leader in 2011 has seen a slew of major Western international oil companies (IOCs) choose to either re-enter the country after a long absence or bolster their existing op",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Chevron-Led Joint Venture Signs Major Gas Exploration Deal Offshore Greece",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Chevron-Led-Joint-Venture-Signs-Major-Gas-Exploration-Deal-Offshore-Greece.html",
-      "summary": "A Chevron-led consortium on Monday signed the lease contracts for oil and gas exploration offshore Greece as the southern European country aims to become a major gas supplier in the Mediterranean.   Chevron, in partnership with Helleniq Energy, signe",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "China Secures Record Russian Oil Imports as India Reduces Purchases",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/China-Secures-Record-Russian-Oil-Imports-as-India-Reduces-Purchases.html",
-      "summary": "China’s oil imports from Russia are on track for all-time high of over 2 million barrels per day in February as India is withdrawing from Russian spot purchases and supply is now heavily discounted for Chinese independent refiners.    China is set to",
+      "title": "Turkey Begins Ultra-Deepwater Oil Drilling in Horn of Africa",
+      "link": "https://oilprice.com/Energy/Energy-General/Turkey-Begins-Ultra-Deepwater-Oil-Drilling-in-Horn-of-Africa.html",
+      "summary": "Back in March 2024, the Federal Government of Somalia and the Republic of Türkiye signed a major offshore hydrocarbon exploration and production agreement in Istanbul. This strategic partnership allowed Turkey’s state-owned energy company, Turkish Pe",
       "source": "OilPrice.com",
       "published": "Recent"
     }
