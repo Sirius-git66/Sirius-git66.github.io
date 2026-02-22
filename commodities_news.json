@@ -1,108 +1,17 @@
 {
-  "last_updated": "2026-02-21 11:32",
+  "last_updated": "2026-02-23 05:55",
   "items": [
     {
-      "title": "Mexico U.S. Natural Gas Imports Climb as Waha Prices Stay Negative",
-      "link": "https://naturalgasintel.com/news/mexico-us-natural-gas-imports-climb-as-waha-prices-stay-negative/",
-      "summary": "Mexico’s imports of U.S. gas are gaining strength at the end of winter as U.S. natural gas prices soften.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "MidDay Futures: Natural Gas Prices Break Out of Purgatory",
-      "link": "https://naturalgasintel.com/news/midday-futures-natural-gas-prices-break-out-of-purgatory/",
-      "summary": "Natural gas futures hovered in limbo early Friday — and much of the week — before bounding higher at midday as traders weighed near-term demand strength against forecasts for milder late February weather and elevated production. Prices fluttered in a",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "DT Midstream Raises Natural Gas Pipeline Backlog 50% on ‘Generational’ Midwest Demand Wave",
-      "link": "https://naturalgasintel.com/news/dt-midstream-raises-natural-gas-pipeline-backlog-50-on-generational-midwest-demand-wave/",
-      "summary": "Surging Upper Midwest natural gas demand has led DT Midstream Inc. (DTM) to boost its five-year organic project backlog by 50% to $3.4 billion and sanction two expansion projects, with more capacity in the works aimed at easing supply constraints aro",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Midmorning Markets: Robust LNG, Scattered Cold Keeping Natural Gas Market Afloat",
-      "link": "https://naturalgasintel.com/news/midmorning-markets-robust-lng-scattered-cold-keeping-natural-gas-market-afloat/",
-      "summary": "With outsized weekly storage withdrawals in the rearview mirror for now, the natural gas market was looking for bullish catalysts heading into the weekend.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Futures Settle: Forecast Swings Trigger Hectic Natural Gas Trading Ahead of Weekend",
-      "link": "https://naturalgasintel.com/news/futures-settle-forecast-swings-trigger-hectic-natural-gas-trading-ahead-of-weekend/",
-      "summary": "March Nymex natural gas futures jumped late Friday after trading in a tight range, as colder U.S. weather model revisions sparked buying. The contract still finished the week down 19.6 cents from last Friday but settled back above the key $3.00/MMBtu",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "MidDay Snapshot: Winter Revival Fails to Boost Overall Natural Gas Cash Prices",
-      "link": "https://naturalgasintel.com/news/midday-snapshot-winter-revival-fails-to-boost-overall-natural-gas-cash-prices/",
-      "summary": "Natural gas spot prices advanced in the East and Midwest as of early afternoon on Friday, supported by a fresh bout of cold. But price retreats in the West and portions of Texas weighed on the national average.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Vessel Traffic Limited at Sabine Pass LNG by Heavy Fog Forecast Through Weekend",
-      "link": "https://naturalgasintel.com/news/vessel-traffic-limited-at-sabine-pass-lng-by-heavy-fog-forecast-through-weekend/",
-      "summary": "Heavy fog continued to stop vessel traffic on the Sabine-Neches waterway Friday and again limited LNG exports.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Permian Plunge Pressures Natural Gas Forward Curve as Northeast Premiums Fade",
-      "link": "https://naturalgasintel.com/news/permian-plunge-pressures-natural-gas-forward-curve-as-northeast-premiums-fade/",
-      "summary": "A sharp breakdown in West Texas pricing and a moderating Northeast is testing the forward curve, exposing a widening divide between supply-heavy basins and more balanced markets in the west.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Spot Prices Wrap: Cash Gas Slides as Western Selloff Offsets Cold-Driven Gains",
-      "link": "https://naturalgasintel.com/news/spot-prices-wrap-cash-gas-slides-as-western-selloff-offsets-cold-driven-gains/",
-      "summary": "Cold forecasts for the weekend lifted natural gas prices for Saturday–Monday delivery across major consuming regions, but warming in the West and Texas triggered steep losses that pulled the national average lower.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "US Oil Drilling Activity Still Going Nowhere",
-      "link": "https://oilprice.com/Energy/Crude-Oil/US-Oil-Drilling-Activity-Still-Going-Nowhere.html",
-      "summary": "The total number of active drilling rigs for oil and gas in the United States stayed the same this week, according to new data that Baker Hughes published on Friday, keeping the total rig count in the US  at 551 this week, down 41 from this same time",
+      "title": "Big Tech Is Raiding the Energy Sector to Power the AI Boom",
+      "link": "https://oilprice.com/Energy/Energy-General/Big-Tech-Is-Raiding-the-Energy-Sector-to-Power-the-AI-Boom.html",
+      "summary": "As the tech sector expands, in line with the growing global demand for advanced technologies, it appears that many companies may be poaching workers from the energy sector. Hiring skilled employees from the energy industry could help tech companies t",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Wood Mackenzie Says Big Oil’s Strategy Has Snapped Back to Upstream",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Wood-Mackenzie-Says-Big-Oils-Strategy-Has-Snapped-Back-to-Upstream.html",
-      "summary": "If there was any lingering doubt about what’s keeping Big Oil executives up at night, the fourth-quarter results cleared it up. It’s not slogans. It’s not transition optics. It’s whether they have enough high-quality barrels to avoid production decli",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "FT Uncovers $90 Billion Russian Oil Smuggling Operation",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/FT-Uncovers-90-Billion-Russian-Oil-Smuggling-Operation.html",
-      "summary": "Nearly fifty seemingly separate companies have been involved in coordinating to mask the origin of Russian oil, moving crude worth at least $90 billion, an investigation of the Financial Times has found.  FT uncovered the network due to an IT blunder",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "U.S.-Iran Tensions Threaten to Send Oil Tanker Rates Soaring",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/US-Iran-Tensions-Threaten-to-Send-Oil-Tanker-Rates-Soaring.html",
-      "summary": "The ratcheting up of tensions between the United States and Iran could push an already red-hot supertanker market even higher with rates soaring to the highest level since 2019, analysts say.  The daily rate for hiring a supertanker on the key Middle",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Oil Bulls Regain Control as Middle East Risks Escalate",
-      "link": "https://oilprice.com/Energy/Energy-General/Oil-Bulls-Regain-Control-as-Middle-East-Risks-Escalate.html",
-      "summary": "Light crude oil futures are extending their gains this week, up 5.70% and threatening to break out to the upside as U.S.-Iran tensions continue to escalate. The market has rallied more than 20% from its December lows, and the big question now is how ",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "China Hikes Russian Crude Imports as India Retreats",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/China-Hikes-Russian-Crude-Imports-as-India-Retreats.html",
-      "summary": "A jump in China’s crude oil imports from Russia is more than compensating the withdrawal of the Indian refiners from spot Russian purchases, according to tanker-tracking data compiled by Bloomberg.  So far in February, deliveries of Russia-origin car",
+      "title": "Petro's Policies Are Decimating Colombia's Natural Gas Industry",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Petros-Policies-Are-Decimating-Colombias-Natural-Gas-Industry.html",
+      "summary": "Strife-torn Colombia is facing an energy crisis of gargantuan proportions. Decades of mismanagement and insecurity, coupled with radical changes to energy policy by Gustavo Petro, Colombia’s first-ever leftist president, are wreaking havoc with the c",
       "source": "OilPrice.com",
       "published": "Recent"
     }
