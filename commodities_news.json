@@ -1,31 +1,108 @@
 {
-  "last_updated": "2026-02-24 09:11",
+  "last_updated": "2026-02-25 09:09",
   "items": [
     {
-      "title": "Spot Prices Wrap: Natural Gas Cash Cruises as Near-Term Fundamentals ‘Tighten Materially’",
-      "link": "https://naturalgasintel.com/news/spot-prices-wrap-natural-gas-cash-cruises-as-near-term-fundamentals-tighten-materially/",
-      "summary": "Spot gas prices varied by region but pushed substantially higher overall on Monday as buyers fixated on a burst of near-term demand.",
+      "title": "Spot Prices Wrap: Physical Natural Gas Steps Back as Winter Loses Its Bite",
+      "link": "https://naturalgasintel.com/news/spot-prices-wrap-physical-natural-gas-steps-back-as-winter-loses-its-bite/",
+      "summary": "Day-ahead natural gas prices retreated on Tuesday as weather threats receded.",
       "source": "Natural Gas Intel",
       "published": "Recent"
     },
     {
-      "title": "March Bidweek Natural Gas Prices Slide as Winter Loosens Grip",
-      "link": "https://naturalgasintel.com/news/march-bidweek-natural-gas-prices-slide-as-winter-loosens-grip/",
-      "summary": "Baseload prices moved lower on the first day of March bidweek trading Monday, with sharp month/month reversals across key hubs as winter demand fades and production holds near record highs.",
+      "title": "Futures Settle: Natural Gas Price Bulls Unable to Muster Momentum as Heating Demand Dwindles",
+      "link": "https://naturalgasintel.com/news/futures-settle-natural-gas-price-bulls-unable-to-muster-momentum-as-heating-demand-dwindles/",
+      "summary": "Natural gas futures floundered for a second day this week as traders braced for spring weather and rapidly receding storage withdrawals.",
       "source": "Natural Gas Intel",
       "published": "Recent"
     },
     {
-      "title": "Renewables Top 25% of U.S. Power as Coal’s Grip Collapses",
-      "link": "https://oilprice.com/Alternative-Energy/Renewable-Energy/Renewables-Top-25-of-US-Power-as-Coals-Grip-Collapses.html",
-      "summary": "In 2025, the share of renewables in U.S. electricity generation has surpassed 25 percent. Over the course of the past 20 years, their share has continuously risen from just 8.6 percent in 2007. At the same time, as Statista's Kathraina Buchholz detai",
+      "title": "MidDay Snapshot: Natural Gas Spot Prices Slip on Easing Demand",
+      "link": "https://naturalgasintel.com/news/midday-snapshot-natural-gas-spot-prices-slip-on-easing-demand/",
+      "summary": "Physical natural gas pricing in the day-ahead market weakened on Tuesday with seasonally mild weather on tap for most of the country over the next few days.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "U.S. LNG Exports Continue to Surge 10 Years After Lower 48’s First Cargo Set Sail",
+      "link": "https://naturalgasintel.com/news/us-lng-exports-continue-to-surge-10-years-after-lower-48s-first-cargo-set-sail/",
+      "summary": "Wednesday marked 10 years since the first LNG was exported from the Lower 48, a stretch of time that has realigned global energy flows and transformed the United States into the world’s leading producer of the super-chilled fuel.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Vaca Muerta Drives Argentina Natural Gas Surge as FLNG Plans Accelerate",
+      "link": "https://naturalgasintel.com/news/vaca-muerta-drives-argentina-natural-gas-surge-as-flng-plans-accelerate/",
+      "summary": "Argentina is on pace to reach production highs this year and is set to “reshape natural gas markets in the region,” according to analysts at Fitch Ratings.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Latest Storage Week Sees Natural Gas Power Burns Fall to Eight-Week Low on ‘Blowtorch’ Weather",
+      "link": "https://naturalgasintel.com/news/latest-storage-week-sees-natural-gas-power-burns-fall-to-nine-week-low-on-blowtorch-weather/",
+      "summary": "Natural gas demand tumbled during the latest storage week as unseasonably mild weather slashed power and heating loads, setting the stage for a light withdrawal in Thursday’s U.S. Energy Information Administration (EIA) report.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Futures: Bullish Natural Gas Catalysts Proving Elusive as March Expiration Nears",
+      "link": "https://naturalgasintel.com/news/midday-futures-bullish-natural-gas-catalysts-proving-elusive-as-march-expiration-nears/",
+      "summary": "With a day to go before the March Nymex contract’s final settlement, natural gas futures struggled to find their footing through midday Tuesday amid mostly bearish demand and supply indicators.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Midmorning Markets: Natural Gas Cash Eases as East Warms Up",
+      "link": "https://naturalgasintel.com/news/midmorning-markets-natural-gas-cash-eases-as-east-warms-up/",
+      "summary": "Natural gas physical markets were trading lower early Tuesday, with Henry Hub next-day spot hovering around $3.000/MMBtu as near-record LNG exports offset milder weather forecasts.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "BP Pushes Trinidad Gas Projects as U.S. Licenses Open Door to Venezuela",
+      "link": "https://naturalgasintel.com/news/bp-pushes-trinidad-gas-projects-as-us-licenses-open-door-to-venezuela/",
+      "summary": "BP plc. executives highlighted advances at their Trinidad gas assets in a recent earnings conference call, citing Cypre among the seven major projects brought online in 2025.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Canada’s Oil Patch Swept Up in Record $38B Consolidation Wave",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Canadas-Oil-Patch-Swept-Up-in-Record-38B-Consolidation-Wave.html",
+      "summary": "Previously, we reported that the U.S. Shale Patch has witnessed a big slump in corporate buyouts in recent years as premium acreage depletes and volatile energy prices keep buyers on the sidelines. Following a record $192 billion in mergers and acqui",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Indian Refiners' January Crude Processing Fell In January",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Indian-Refiners-January-Crude-Processing-Fell-In-January.html",
-      "summary": "Indian refiners' crude processing (throughput) fell by 0.2% month-on-month in January 2026, reaching 5.63 million barrels per day (bpd) or 23.81 million metric tons, marking a slight decrease after December throughput clocked in at 5.64 million bpd. ",
+      "title": "Carbon Credits Helped Power the “100% Clean” Olympic Winter Games",
+      "link": "https://oilprice.com/Alternative-Energy/Renewable-Energy/Carbon-Credits-Helped-Power-the-100-Clean-Olympic-Winter-Games.html",
+      "summary": "The Winter Olympics are over, but their energy supplier, Enel, is rightly proud of the feat it pulled off: 100% low-carbon electricity supply for the games. But there is a twist. That 100% was only possible thanks to one thing: carbon credits. The en",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "How the EU Could Unlock 22 Trillion Cubic Feet of Barents Gas",
+      "link": "https://oilprice.com/Energy/Natural-Gas/How-the-EU-Could-Unlock-22-Trillion-Cubic-Feet-of-Barents-Gas.html",
+      "summary": "A rethink of the European Union’s (EU) Arctic policy could keep Norway’s Barents Sea gas in play in the 2030s, offering Europe a nearby, low-emission supply option as its reliance on the global liquefied natural gas market grows, according to new Rys",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Pipeline Disruption Adds Risk Premium to Russian Crude",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Pipeline-Disruption-Adds-Risk-Premium-to-Russian-Crude.html",
+      "summary": "Russia’s pipeline operator Transneft has cut crude intake into its system by roughly 250,000 barrels per day after damage at the Kaleykino pumping station in Tatarstan, according to Reuters sources. Kaleykino is a key blending and dispatch hub that c",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Nigeria to Launch Exports of New Crude Grade as It Boosts Output",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Nigeria-to-Launch-Exports-of-New-Crude-Grade-as-It-Boosts-Output.html",
+      "summary": "Nigeria will launch exports of a new crude grade in March as OPEC’s biggest African oil producer looks to boost output and exports and seek a higher baseline in the OPEC+ agreements. The national oil company of Nigeria will start shipping the Cawthor",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "The AI Boom Is Powering a Nuclear Renaissance",
+      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/The-AI-Boom-Is-Powering-a-Nuclear-Renaissance.html",
+      "summary": "For years, Silicon Valley took electricity for granted. The cloud sounded intangible, almost detached from the physical world. But now, artificial intelligence is ending that illusion. Behind every large language model and AI assistant sits a growing",
       "source": "OilPrice.com",
       "published": "Recent"
     }
