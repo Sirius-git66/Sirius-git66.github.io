@@ -486,7 +486,7 @@
   // Desktop click
   if (!isTouch) {
     card1.addEventListener('click', () => fireCard(card1, 'course.html'));
-    card2.addEventListener('click', () => fireCard(card2, 'JEPX AI BIDDING PROTOTYPE.html'));
+    card2.addEventListener('click', () => fireCard(card2, 'JEPXprototype.html'));
   }
 
   // Mobile: first tap = light up, second tap = fire
@@ -509,7 +509,7 @@
   }
 
   card1.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card1, 'course.html'); },    { passive: false });
-  card2.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card2, 'JEPX AI BIDDING PROTOTYPE.html'); }, { passive: false });
+  card2.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card2, 'JEPXprototype.html'); }, { passive: false });
 
   // ── DESKTOP HOVER ────────────────────────────────────────────────────────
   document.addEventListener('mousemove', e => {
