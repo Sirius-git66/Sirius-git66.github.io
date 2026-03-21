@@ -1,0 +1,903 @@
+#!/usr/bin/env python3
+"""
+Commodities Dashboard Scraper Agent
+Fetches oil, gas, power prices, FX rates, and news headlines
+"""
+
+import json
+import logging
+import asyncio
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional, Any
+import aiohttp
+import feedparser
+import xml.etree.ElementTree as ET
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+
+class DataFetcher:
+    """Base class for data fetching"""
+    
+    def __init__(self, session: aiohttp.ClientSession):
+        self.session = session
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+    
+    async def fetch_url(self, url: str, timeout: int = 30) -> Optional[str]:
+        """Fetch URL content with error handling"""
+        try:
+            async with self.session.get(url, headers=self.headers, timeout=timeout) as response:
+                if response.status == 200:
+                    return await response.text()
+                else:
+                    logger.error(f"Failed to fetch {url}: Status {response.status}")
+                    return None
+        except Exception as e:
+            logger.error(f"Error fetching {url}: {str(e)}")
+            return None
+
+
+class ForexFetcher(DataFetcher):
+    """Fetch FX rates from free sources"""
+    
+    async def fetch_rates(self, base_currencies: List[str]) -> Dict[str, Any]:
+        """Fetch current FX rates"""
+        rates = {}
+        
+        # Method 1: ECB for EUR base rates
+        ecb_data = await self._fetch_ecb_rates()
+        if ecb_data:
+            rates.update(ecb_data)
+        
+        # Method 2: Free ExchangeRate API for USD base
+        api_data = await self._fetch_exchangerate_api()
+        if api_data:
+            rates.update(api_data)
+        
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "rates": rates,
+            "base": "USD"
+        }
+    
+    async def _fetch_ecb_rates(self) -> Optional[Dict]:
+        """Fetch from European Central Bank"""
+        url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+        content = await self.fetch_url(url)
+        
+        if not content:
+            return None
+        
+        try:
+            root = ET.fromstring(content)
+            namespaces = {'ns': 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref'}
+            
+            rates = {}
+            for cube in root.findall('.//ns:Cube[@currency]', namespaces):
+                currency = cube.get('currency')
+                rate = float(cube.get('rate'))
+                rates[f"EUR{currency}"] = {
+                    "rate": rate,
+                    "source": "ECB"
+                }
+            
+            return rates
+        except Exception as e:
+            logger.error(f"Error parsing ECB data: {str(e)}")
+            return None
+    
+    async def _fetch_exchangerate_api(self) -> Optional[Dict]:
+        """Fetch from free ExchangeRate API"""
+        url = "https://api.exchangerate-api.com/v4/latest/USD"
+        content = await self.fetch_url(url)
+        
+        if not content:
+            return None
+        
+        try:
+            data = json.loads(content)
+            rates = {}
+            
+            # Mock daily changes for demo (in production, fetch historical data)
+            mock_changes = {
+                'EUR': 0.12,
+                'JPY': -0.45,
+                'SGD': 0.08,
+                'CNY': -0.15
+            }
+            
+            for currency in ['EUR', 'JPY', 'SGD', 'CNY']:
+                if currency in data['rates']:
+                    rates[f"USD{currency}"] = {
+                        "rate": data['rates'][currency],
+                        "change_pct": mock_changes.get(currency, 0),
+                        "source": "ExchangeRate-API"
+                    }
+            
+            return rates
+        except Exception as e:
+            logger.error(f"Error parsing ExchangeRate API: {str(e)}")
+            return None
+
+
+class CommoditiesFetcher(DataFetcher):
+    """Fetch commodities prices from free sources"""
+    
+    async def fetch_prices(self) -> Dict[str, Any]:
+        """Fetch all commodity prices"""
+        commodities = {
+            "oil": await self._fetch_oil_prices(),
+            "gas": await self._fetch_gas_prices(),
+            "power": await self._fetch_power_prices()
+        }
+        
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "commodities": commodities
+        }
+    
+    async def _fetch_oil_prices(self) -> Dict[str, Any]:
+        """Fetch oil prices - Brent, WTI, JCC"""
+        prices = {}
+        
+        # Note: Using mock data - implement real scraping here
+        prices["brent"] = {
+            "price": 85.50,
+            "currency": "USD/BBL",
+            "change_dod": -0.30,
+            "change_pct": -0.35,
+            "source": "ICE",
+            "note": "Mock data - implement EIA scraping"
+        }
+        
+        prices["wti"] = {
+            "price": 81.20,
+            "currency": "USD/BBL",
+            "change_dod": -0.25,
+            "change_pct": -0.31,
+            "source": "NYMEX",
+            "note": "Mock data - implement EIA scraping"
+        }
+        
+        prices["jcc"] = {
+            "price": 83.10,
+            "currency": "USD/BBL",
+            "change_dod": -0.20,
+            "change_pct": -0.24,
+            "source": "METI",
+            "note": "Mock data - implement METI scraping"
+        }
+        
+        return prices
+    
+    async def _fetch_gas_prices(self) -> Dict[str, Any]:
+        """Fetch gas prices - TTF, JKM, Henry Hub"""
+        prices = {}
+        
+        prices["ttf"] = {
+            "price": 31.50,
+            "currency": "EUR/MWh",
+            "change_dod": 0.20,
+            "change_pct": 0.64,
+            "source": "ICE",
+            "note": "Mock data - implement ICE scraping"
+        }
+        
+        prices["jkm"] = {
+            "price": 10.80,
+            "currency": "USD/MMBtu",
+            "change_dod": 0.05,
+            "change_pct": 0.47,
+            "source": "S&P Global",
+            "note": "Mock data - implement S&P scraping"
+        }
+        
+        prices["henry_hub"] = {
+            "price": 2.85,
+            "currency": "USD/MMBtu",
+            "change_dod": -0.03,
+            "change_pct": -1.04,
+            "source": "NYMEX",
+            "note": "Mock data - implement EIA scraping"
+        }
+        
+        return prices
+    
+    async def _fetch_power_prices(self) -> Dict[str, Any]:
+        """Fetch power prices - Tokyo, Kansai"""
+        prices = {}
+        
+        prices["tokyo"] = {
+            "price": 13.50,
+            "currency": "JPY/kWh",
+            "change_dod": 0.15,
+            "change_pct": 1.12,
+            "source": "JEPX",
+            "note": "Mock data - implement JEPX scraping"
+        }
+        
+        prices["kansai"] = {
+            "price": 11.20,
+            "currency": "JPY/kWh",
+            "change_dod": 0.08,
+            "change_pct": 0.72,
+            "source": "JEPX",
+            "note": "Mock data - implement JEPX scraping"
+        }
+        
+        return prices
+
+
+class NewsFetcher(DataFetcher):
+    """Fetch news from RSS feeds"""
+    
+    async def fetch_news(self, max_items: int = 10) -> List[Dict[str, Any]]:
+        """Fetch news from multiple sources"""
+        news_sources = [
+            ("Google News - Oil & Gas", "https://news.google.com/rss/search?q=oil+gas+LNG+energy+prices&hl=en-US&gl=US&ceid=US:en"),
+            ("Google News - Energy Traders", "https://news.google.com/rss/search?q=Trafigura+OR+Vitol+OR+Gunvor+OR+JERA+OR+Glencore+OR+Shell+Trading&hl=en-US&gl=US&ceid=US:en"),
+            ("OilPrice.com", "https://oilprice.com/rss/main"),
+        ]
+        
+        all_news = []
+        
+        # Keywords to filter for relevant news only
+        relevant_keywords = ['oil', 'gas', 'lng', 'power', 'brent', 'wti', 'crude', 'natural gas', 'electricity', 'ttf', 'jkm']
+        
+        # Target companies to always include
+        priority_companies = ['trafigura', 'vitol', 'gunvor', 'jera', 'glencore', 'shell trading', 'total', 'bp trading', 'mercuria', 'cargill']
+        
+        for source_name, url in news_sources:
+            try:
+                content = await self.fetch_url(url)
+                if content:
+                    feed = feedparser.parse(content)
+                    
+                    for entry in feed.entries[:10]:  # Get more items to filter from
+                        title = entry.get('title', 'No title').lower()
+                        summary = entry.get('summary', '').lower()
+                        
+                        # Include if: contains relevant keywords OR mentions priority companies
+                        is_relevant = any(keyword in title or keyword in summary for keyword in relevant_keywords)
+                        is_company_news = any(company in title or company in summary for company in priority_companies)
+                        
+                        if is_relevant or is_company_news:
+                            # Skip if it's about ethanol, biofuel, renewable diesel, etc.
+                            if not any(skip in title or skip in summary for skip in ['ethanol', 'biofuel', 'biodiesel', 'renewable diesel', 'corn']):
+                                news_item = {
+                                    "title": entry.get('title', 'No title'),
+                                    "link": entry.get('link', ''),
+                                    "published": entry.get('published', ''),
+                                    "source": source_name,
+                                    "summary": entry.get('summary', '')[:200] + '...' if entry.get('summary') else ''
+                                }
+                                all_news.append(news_item)
+            except Exception as e:
+                logger.error(f"Error fetching news from {source_name}: {str(e)}")
+        
+        # Sort by published date and return top items
+        all_news.sort(key=lambda x: x.get('published', ''), reverse=True)
+        return all_news[:max_items]
+
+
+class ForwardCurvesFetcher(DataFetcher):
+    """Fetch forward curves for energy commodities"""
+    
+    async def fetch_curves(self) -> Dict[str, Any]:
+        """Fetch forward curves for TTF, JKM, Brent"""
+        curves = {
+            "ttf": await self._fetch_ttf_curve(),
+            "jkm": await self._fetch_jkm_curve(),
+            "brent": await self._fetch_brent_curve()
+        }
+        
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "curves": curves
+        }
+    
+    async def _fetch_ttf_curve(self) -> Dict[str, Any]:
+        """Fetch TTF (European gas) forward curve"""
+        # Mock data - implement Investing.com or ICE scraping for real data
+        return {
+            "name": "TTF",
+            "unit": "EUR/MWh",
+            "data": [
+                {"period": "26Q1", "price": 10.76, "dod": -0.27},
+                {"period": "26Q2", "price": 10.24, "dod": -0.20},
+                {"period": "26Q3", "price": 10.30, "dod": -0.19},
+                {"period": "26Win", "price": 10.75, "dod": -0.18},
+                {"period": "27Sum", "price": 9.54, "dod": -0.13},
+                {"period": "27Win", "price": 10.00, "dod": -0.12},
+                {"period": "28Sum", "price": 8.62, "dod": -0.12},
+                {"period": "28Win", "price": 9.07, "dod": -0.12},
+                {"period": "29Sum", "price": 8.19, "dod": -0.10}
+            ],
+            "note": "Mock data - implement ICE/Investing.com scraping"
+        }
+    
+    async def _fetch_jkm_curve(self) -> Dict[str, Any]:
+        """Fetch JKM (Asian LNG) forward curve"""
+        # Mock data - implement S&P Global Platts or free source scraping
+        return {
+            "name": "JKM",
+            "unit": "USD/MMBtu",
+            "data": [
+                {"period": "26Q1", "price": 11.25, "dod": 0.15},
+                {"period": "26Q2", "price": 10.80, "dod": 0.10},
+                {"period": "26Q3", "price": 11.05, "dod": 0.08},
+                {"period": "26Win", "price": 11.50, "dod": 0.12},
+                {"period": "27Sum", "price": 10.35, "dod": 0.05},
+                {"period": "27Win", "price": 10.95, "dod": 0.07},
+                {"period": "28Sum", "price": 9.85, "dod": 0.03},
+                {"period": "28Win", "price": 10.20, "dod": 0.04},
+                {"period": "29Sum", "price": 9.50, "dod": 0.02}
+            ],
+            "note": "Mock data - implement Platts/EIA scraping"
+        }
+    
+    async def _fetch_brent_curve(self) -> Dict[str, Any]:
+        """Fetch Brent crude forward curve"""
+        # Mock data - implement EIA or Investing.com scraping
+        return {
+            "name": "Brent",
+            "unit": "USD/BBL",
+            "data": [
+                {"period": "26Q1", "price": 85.50, "dod": -0.45},
+                {"period": "26Q2", "price": 84.20, "dod": -0.38},
+                {"period": "26Q3", "price": 83.75, "dod": -0.35},
+                {"period": "26Win", "price": 85.00, "dod": -0.40},
+                {"period": "27Sum", "price": 82.50, "dod": -0.30},
+                {"period": "27Win", "price": 84.25, "dod": -0.32},
+                {"period": "28Sum", "price": 81.75, "dod": -0.28},
+                {"period": "28Win", "price": 83.50, "dod": -0.30},
+                {"period": "29Sum", "price": 80.90, "dod": -0.25}
+            ],
+            "note": "Mock data - implement EIA/Investing.com scraping"
+        }
+
+
+class DashboardGenerator:
+    """Generate JSON output and HTML dashboard"""
+    
+    def __init__(self, output_dir: str = "."):
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+    
+    def save_json(self, data: Dict[str, Any], filename: str) -> Path:
+        """Save data as JSON"""
+        filepath = self.output_dir / filename
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(data, indent=2, ensure_ascii=False, fp=f)
+        
+        logger.info(f"JSON saved to {filepath}")
+        return filepath
+    
+    def generate_html(self, data: Dict[str, Any], filename: str) -> Path:
+        """Generate HTML dashboard"""
+        filepath = self.output_dir / filename
+        
+        html_content = self._create_html_template(data)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        
+        logger.info(f"HTML dashboard saved to {filepath}")
+        return filepath
+    
+    def _create_html_template(self, data: Dict[str, Any]) -> str:
+        """Create HTML dashboard template"""
+        
+        # Helper functions for rendering
+        def render_commodity(commodities: Dict) -> str:
+            html = ""
+            for name, details in commodities.items():
+                change_class = "positive" if details.get('change_dod', 0) >= 0 else "negative"
+                change_symbol = "+" if details.get('change_dod', 0) >= 0 else ""
+                
+                html += f"""
+                <div class="price-item">
+                    <div class="price-label">{name.upper()}</div>
+                    <div class="price-details">
+                        <div class="price-value">{details.get('price', 'N/A')} <span class="currency">{details.get('currency', '')}</span></div>
+                        <div class="price-change {change_class}">
+                            {change_symbol}{details.get('change_dod', 0):.2f} ({change_symbol}{details.get('change_pct', 0):.2f}%)
+                        </div>
+                    </div>
+                </div>
+                """
+            return html
+        
+        def render_fx_rates(rates: Dict) -> str:
+            html = ""
+            for pair, details in sorted(rates.items())[:8]:  # Limit to 8 pairs for clean display
+                change_pct = details.get('change_pct', 0)
+                change_class = "positive" if change_pct >= 0 else "negative"
+                arrow = "▲" if change_pct >= 0 else "▼"
+                change_symbol = "+" if change_pct >= 0 else ""
+                
+                html += f"""
+                <div class="fx-item">
+                    <div class="fx-pair">{pair}</div>
+                    <div class="fx-details">
+                        <div class="fx-rate">{details.get('rate', 'N/A'):.4f}</div>
+                        <div class="fx-change {change_class}">{arrow} {change_symbol}{change_pct:.2f}%</div>
+                    </div>
+                </div>
+                """
+            return html
+        
+        def render_news(news_items: List[Dict]) -> str:
+            html = ""
+            for item in news_items:
+                html += f"""
+                <div class="news-item">
+                    <a href="{item.get('link', '#')}" target="_blank" class="news-title">{item.get('title', 'No title')}</a>
+                    <div class="news-meta">
+                        <span class="news-source">{item.get('source', 'Unknown')}</span>
+                        <span class="news-date">{item.get('published', '')}</span>
+                    </div>
+                </div>
+                """
+            return html
+        
+        def render_forward_curve(curve_data: Dict) -> str:
+            """Render a single forward curve table"""
+            name = curve_data.get('name', 'N/A')
+            unit = curve_data.get('unit', '')
+            data = curve_data.get('data', [])
+            
+            rows_html = ""
+            for item in data:
+                period = item.get('period', '')
+                price = item.get('price', 0)
+                dod = item.get('dod', 0)
+                dod_class = "positive" if dod >= 0 else "negative"
+                dod_symbol = "+" if dod >= 0 else ""
+                
+                rows_html += f"""
+                <tr>
+                    <td class="curve-period">{period}</td>
+                    <td class="curve-price">{price:.2f}</td>
+                    <td class="curve-dod {dod_class}">{dod_symbol}{dod:.2f}</td>
+                </tr>
+                """
+            
+            return f"""
+            <div class="curve-table-container">
+                <div class="curve-header">{name} ({unit})</div>
+                <table class="curve-table">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Price</th>
+                            <th>DoD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows_html}
+                    </tbody>
+                </table>
+            </div>
+            """
+        
+        # Get data sections
+        commodities_data = data.get('commodities', {})
+        forex_data = data.get('forex', {})
+        news_data = data.get('news', [])
+        curves_data = data.get('forward_curves', {})
+        
+        # Build HTML
+        html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodities Dashboard</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 12px;
+            color: #e0e0e0;
+        }}
+        
+        .container {{
+            max-width: 1600px;
+            margin: 0 auto;
+        }}
+        
+        header {{
+            background: #111111;
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            border-left: 3px solid #00ff88;
+        }}
+        
+        h1 {{
+            color: #ffffff;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }}
+        
+        .last-updated {{
+            color: #888888;
+            font-size: 0.75em;
+            font-weight: 500;
+        }}
+        
+        .dashboard-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 12px;
+        }}
+        
+        .card {{
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+        }}
+        
+        .card-title {{
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #888888;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        
+        .price-item {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }}
+        
+        .price-item:last-child {{
+            border-bottom: none;
+        }}
+        
+        .price-label {{
+            font-weight: 600;
+            color: #cccccc;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }}
+        
+        .price-details {{
+            text-align: right;
+        }}
+        
+        .price-value {{
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }}
+        
+        .currency {{
+            font-size: 0.7em;
+            color: #666666;
+            font-weight: 500;
+            margin-left: 4px;
+        }}
+        
+        .price-change {{
+            font-size: 0.75em;
+            font-weight: 600;
+        }}
+        
+        .positive {{
+            color: #00ff88;
+        }}
+        
+        .negative {{
+            color: #ff3366;
+        }}
+        
+        .fx-item {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }}
+        
+        .fx-item:last-child {{
+            border-bottom: none;
+        }}
+        
+        .fx-pair {{
+            font-weight: 600;
+            color: #cccccc;
+            font-size: 0.8em;
+            letter-spacing: 0.3px;
+        }}
+        
+        .fx-details {{
+            text-align: right;
+        }}
+        
+        .fx-rate {{
+            font-size: 0.95em;
+            font-weight: 700;
+            color: #00d4ff;
+        }}
+        
+        .fx-change {{
+            font-size: 0.65em;
+            font-weight: 600;
+            margin-top: 2px;
+        }}
+        
+        .news-section {{
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+        }}
+        
+        .news-item {{
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }}
+        
+        .news-item:last-child {{
+            border-bottom: none;
+        }}
+        
+        .news-title {{
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85em;
+            margin-bottom: 6px;
+            line-height: 1.35;
+            transition: color 0.2s;
+        }}
+        
+        .news-title:hover {{
+            color: #ff6b00;
+        }}
+        
+        .news-meta {{
+            display: flex;
+            gap: 12px;
+            font-size: 0.7em;
+            color: #666666;
+        }}
+        
+        .news-source {{
+            font-weight: 600;
+            color: #888888;
+        }}
+        
+        /* Forward Curves Section */
+        .curves-section {{
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+            margin-bottom: 12px;
+        }}
+        
+        .curves-grid {{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }}
+        
+        .curve-table-container {{
+            background: #0a0a0a;
+            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid #1a1a1a;
+        }}
+        
+        .curve-header {{
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        
+        .curve-table {{
+            width: 100%;
+            border-collapse: collapse;
+        }}
+        
+        .curve-table thead th {{
+            font-size: 0.7em;
+            font-weight: 600;
+            color: #666666;
+            text-align: left;
+            padding: 6px 8px;
+            border-bottom: 1px solid #1a1a1a;
+            text-transform: uppercase;
+        }}
+        
+        .curve-table thead th:nth-child(2),
+        .curve-table thead th:nth-child(3) {{
+            text-align: right;
+        }}
+        
+        .curve-table tbody td {{
+            font-size: 0.75em;
+            padding: 6px 8px;
+            border-bottom: 1px solid #1a1a1a;
+        }}
+        
+        .curve-table tbody tr:last-child td {{
+            border-bottom: none;
+        }}
+        
+        .curve-period {{
+            color: #cccccc;
+            font-weight: 600;
+        }}
+        
+        .curve-price {{
+            text-align: right;
+            color: #ffffff;
+            font-weight: 600;
+        }}
+        
+        .curve-dod {{
+            text-align: right;
+            font-weight: 600;
+        }}
+        
+        @media (max-width: 1100px) {{
+            .dashboard-grid {{
+                grid-template-columns: repeat(2, 1fr);
+            }}
+            
+            .curves-grid {{
+                grid-template-columns: repeat(2, 1fr);
+            }}
+        }}
+        
+        @media (max-width: 768px) {{
+            .dashboard-grid {{
+                grid-template-columns: 1fr;
+            }}
+            
+            .curves-grid {{
+                grid-template-columns: 1fr;
+            }}
+            
+            h1 {{
+                font-size: 1.3em;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>COMMODITIES DASHBOARD</h1>
+            <div class="last-updated">LAST UPDATE: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</div>
+        </header>
+        
+        <div class="dashboard-grid">
+            <!-- Oil Prices -->
+            <div class="card">
+                <div class="card-title">Oil Prices</div>
+                {render_commodity(commodities_data.get('commodities', {}).get('oil', {}))}
+            </div>
+            
+            <!-- Gas Prices -->
+            <div class="card">
+                <div class="card-title">Gas Prices</div>
+                {render_commodity(commodities_data.get('commodities', {}).get('gas', {}))}
+            </div>
+            
+            <!-- Power Prices -->
+            <div class="card">
+                <div class="card-title">Power Prices</div>
+                {render_commodity(commodities_data.get('commodities', {}).get('power', {}))}
+            </div>
+            
+            <!-- FX Rates -->
+            <div class="card">
+                <div class="card-title">Foreign Exchange</div>
+                {render_fx_rates(forex_data.get('rates', {}))}
+            </div>
+        </div>
+        
+        <!-- Forward Curves Section -->
+        <div class="curves-section">
+            <div class="card-title">Forward Curves</div>
+            <div class="curves-grid">
+                {render_forward_curve(curves_data.get('curves', {}).get('ttf', {}))}
+                {render_forward_curve(curves_data.get('curves', {}).get('jkm', {}))}
+                {render_forward_curve(curves_data.get('curves', {}).get('brent', {}))}
+            </div>
+        </div>
+        
+        <!-- News Section -->
+        <div class="news-section">
+            <div class="card-title">Market News</div>
+            {render_news(news_data)}
+        </div>
+    </div>
+</body>
+</html>"""
+        
+        return html
+
+
+async def main():
+    """Main execution function"""
+    logger.info("Starting Commodities Dashboard Scraper...")
+    
+    # Initialize output directory
+    generator = DashboardGenerator(output_dir="output")
+    
+    async with aiohttp.ClientSession() as session:
+        # Initialize fetchers
+        forex_fetcher = ForexFetcher(session)
+        commodities_fetcher = CommoditiesFetcher(session)
+        news_fetcher = NewsFetcher(session)
+        curves_fetcher = ForwardCurvesFetcher(session)
+        
+        # Fetch all data concurrently
+        logger.info("Fetching data from sources...")
+        forex_data, commodities_data, news_data, curves_data = await asyncio.gather(
+            forex_fetcher.fetch_rates(['USD', 'EUR']),
+            commodities_fetcher.fetch_prices(),
+            news_fetcher.fetch_news(max_items=10),
+            curves_fetcher.fetch_curves()
+        )
+        
+        # Compile all data
+        dashboard_data = {
+            "timestamp": datetime.now().isoformat(),
+            "forex": forex_data,
+            "commodities": commodities_data,
+            "forward_curves": curves_data,
+            "news": news_data
+        }
+        
+        # Save JSON
+        generator.save_json(dashboard_data, "dashboard_data.json")
+        
+        # Generate HTML dashboard
+        generator.generate_html(dashboard_data, "dashboard.html")
+        
+        logger.info("Dashboard generation complete!")
+        logger.info(f"Open 'output/dashboard.html' in your browser to view the dashboard")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodities Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 12px;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: #111111;
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            border-left: 3px solid #00ff88;
+        }
+        
+        h1 {
+            color: #ffffff;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+        
+        .last-updated {
+            color: #888888;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .card {
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+        }
+        
+        .card-title {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #888888;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+        }
+        
+        .price-label {
+            font-weight: 600;
+            color: #cccccc;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .price-details {
+            text-align: right;
+        }
+        
+        .price-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+        
+        .currency {
+            font-size: 0.7em;
+            color: #666666;
+            font-weight: 500;
+            margin-left: 4px;
+        }
+        
+        .price-change {
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        
+        .positive {
+            color: #00ff88;
+        }
+        
+        .negative {
+            color: #ff3366;
+        }
+        
+        .fx-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .fx-item:last-child {
+            border-bottom: none;
+        }
+        
+        .fx-pair {
+            font-weight: 600;
+            color: #cccccc;
+            font-size: 0.8em;
+            letter-spacing: 0.3px;
+        }
+        
+        .fx-details {
+            text-align: right;
+        }
+        
+        .fx-rate {
+            font-size: 0.95em;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        
+        .fx-change {
+            font-size: 0.65em;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        
+        .news-section {
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+        }
+        
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        
+        .news-title {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85em;
+            margin-bottom: 6px;
+            line-height: 1.35;
+            transition: color 0.2s;
+        }
+        
+        .news-title:hover {
+            color: #ff6b00;
+        }
+        
+        .news-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.7em;
+            color: #666666;
+        }
+        
+        .news-source {
+            font-weight: 600;
+            color: #888888;
+        }
+        
+        /* Forward Curves Section */
+        .curves-section {
+            background: #111111;
+            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid #1a1a1a;
+            margin-bottom: 12px;
+        }
+        
+        .curves-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .curve-table-container {
+            background: #0a0a0a;
+            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid #1a1a1a;
+        }
+        
+        .curve-header {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .curve-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .curve-table thead th {
+            font-size: 0.7em;
+            font-weight: 600;
+            color: #666666;
+            text-align: left;
+            padding: 6px 8px;
+            border-bottom: 1px solid #1a1a1a;
+            text-transform: uppercase;
+        }
+        
+        .curve-table thead th:nth-child(2),
+        .curve-table thead th:nth-child(3) {
+            text-align: right;
+        }
+        
+        .curve-table tbody td {
+            font-size: 0.75em;
+            padding: 6px 8px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .curve-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .curve-period {
+            color: #cccccc;
+            font-weight: 600;
+        }
+        
+        .curve-price {
+            text-align: right;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .curve-dod {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 1100px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .curves-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .curves-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>COMMODITIES DASHBOARD</h1>
+            <div class="last-updated">LAST UPDATE: 2025-12-12 09:11:40</div>
+        </header>
+        
+        <div class="dashboard-grid">
+            <!-- Oil Prices -->
+            <div class="card">
+                <div class="card-title">Oil Prices</div>
+                
+                <div class="price-item">
+                    <div class="price-label">BRENT</div>
+                    <div class="price-details">
+                        <div class="price-value">85.5 <span class="currency">USD/BBL</span></div>
+                        <div class="price-change negative">
+                            -0.30 (-0.35%)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="price-item">
+                    <div class="price-label">WTI</div>
+                    <div class="price-details">
+                        <div class="price-value">81.2 <span class="currency">USD/BBL</span></div>
+                        <div class="price-change negative">
+                            -0.25 (-0.31%)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="price-item">
+                    <div class="price-label">JCC</div>
+                    <div class="price-details">
+                        <div class="price-value">83.1 <span class="currency">USD/BBL</span></div>
+                        <div class="price-change negative">
+                            -0.20 (-0.24%)
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Gas Prices -->
+            <div class="card">
+                <div class="card-title">Gas Prices</div>
+                
+                <div class="price-item">
+                    <div class="price-label">TTF</div>
+                    <div class="price-details">
+                        <div class="price-value">31.5 <span class="currency">EUR/MWh</span></div>
+                        <div class="price-change positive">
+                            +0.20 (+0.64%)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="price-item">
+                    <div class="price-label">JKM</div>
+                    <div class="price-details">
+                        <div class="price-value">10.8 <span class="currency">USD/MMBtu</span></div>
+                        <div class="price-change positive">
+                            +0.05 (+0.47%)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="price-item">
+                    <div class="price-label">HENRY_HUB</div>
+                    <div class="price-details">
+                        <div class="price-value">2.85 <span class="currency">USD/MMBtu</span></div>
+                        <div class="price-change negative">
+                            -0.03 (-1.04%)
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Power Prices -->
+            <div class="card">
+                <div class="card-title">Power Prices</div>
+                
+                <div class="price-item">
+                    <div class="price-label">TOKYO</div>
+                    <div class="price-details">
+                        <div class="price-value">13.5 <span class="currency">JPY/kWh</span></div>
+                        <div class="price-change positive">
+                            +0.15 (+1.12%)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="price-item">
+                    <div class="price-label">KANSAI</div>
+                    <div class="price-details">
+                        <div class="price-value">11.2 <span class="currency">JPY/kWh</span></div>
+                        <div class="price-change positive">
+                            +0.08 (+0.72%)
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- FX Rates -->
+            <div class="card">
+                <div class="card-title">Foreign Exchange</div>
+                
+                <div class="fx-item">
+                    <div class="fx-pair">USDCNY</div>
+                    <div class="fx-details">
+                        <div class="fx-rate">7.0700</div>
+                        <div class="fx-change negative">▼ -0.15%</div>
+                    </div>
+                </div>
+                
+                <div class="fx-item">
+                    <div class="fx-pair">USDEUR</div>
+                    <div class="fx-details">
+                        <div class="fx-rate">0.8520</div>
+                        <div class="fx-change positive">▲ +0.12%</div>
+                    </div>
+                </div>
+                
+                <div class="fx-item">
+                    <div class="fx-pair">USDJPY</div>
+                    <div class="fx-details">
+                        <div class="fx-rate">155.5300</div>
+                        <div class="fx-change negative">▼ -0.45%</div>
+                    </div>
+                </div>
+                
+                <div class="fx-item">
+                    <div class="fx-pair">USDSGD</div>
+                    <div class="fx-details">
+                        <div class="fx-rate">1.2900</div>
+                        <div class="fx-change positive">▲ +0.08%</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Forward Curves Section -->
+        <div class="curves-section">
+            <div class="card-title">Forward Curves</div>
+            <div class="curves-grid">
+                
+            <div class="curve-table-container">
+                <div class="curve-header">TTF (EUR/MWh)</div>
+                <table class="curve-table">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Price</th>
+                            <th>DoD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="curve-period">26Q1</td>
+                    <td class="curve-price">10.76</td>
+                    <td class="curve-dod negative">-0.27</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Q2</td>
+                    <td class="curve-price">10.24</td>
+                    <td class="curve-dod negative">-0.20</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Q3</td>
+                    <td class="curve-price">10.30</td>
+                    <td class="curve-dod negative">-0.19</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Win</td>
+                    <td class="curve-price">10.75</td>
+                    <td class="curve-dod negative">-0.18</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">27Sum</td>
+                    <td class="curve-price">9.54</td>
+                    <td class="curve-dod negative">-0.13</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">27Win</td>
+                    <td class="curve-price">10.00</td>
+                    <td class="curve-dod negative">-0.12</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">28Sum</td>
+                    <td class="curve-price">8.62</td>
+                    <td class="curve-dod negative">-0.12</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">28Win</td>
+                    <td class="curve-price">9.07</td>
+                    <td class="curve-dod negative">-0.12</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">29Sum</td>
+                    <td class="curve-price">8.19</td>
+                    <td class="curve-dod negative">-0.10</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+                
+            <div class="curve-table-container">
+                <div class="curve-header">JKM (USD/MMBtu)</div>
+                <table class="curve-table">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Price</th>
+                            <th>DoD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="curve-period">26Q1</td>
+                    <td class="curve-price">11.25</td>
+                    <td class="curve-dod positive">+0.15</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Q2</td>
+                    <td class="curve-price">10.80</td>
+                    <td class="curve-dod positive">+0.10</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Q3</td>
+                    <td class="curve-price">11.05</td>
+                    <td class="curve-dod positive">+0.08</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Win</td>
+                    <td class="curve-price">11.50</td>
+                    <td class="curve-dod positive">+0.12</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">27Sum</td>
+                    <td class="curve-price">10.35</td>
+                    <td class="curve-dod positive">+0.05</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">27Win</td>
+                    <td class="curve-price">10.95</td>
+                    <td class="curve-dod positive">+0.07</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">28Sum</td>
+                    <td class="curve-price">9.85</td>
+                    <td class="curve-dod positive">+0.03</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">28Win</td>
+                    <td class="curve-price">10.20</td>
+                    <td class="curve-dod positive">+0.04</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">29Sum</td>
+                    <td class="curve-price">9.50</td>
+                    <td class="curve-dod positive">+0.02</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+                
+            <div class="curve-table-container">
+                <div class="curve-header">Brent (USD/BBL)</div>
+                <table class="curve-table">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Price</th>
+                            <th>DoD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="curve-period">26Q1</td>
+                    <td class="curve-price">85.50</td>
+                    <td class="curve-dod negative">-0.45</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Q2</td>
+                    <td class="curve-price">84.20</td>
+                    <td class="curve-dod negative">-0.38</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Q3</td>
+                    <td class="curve-price">83.75</td>
+                    <td class="curve-dod negative">-0.35</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">26Win</td>
+                    <td class="curve-price">85.00</td>
+                    <td class="curve-dod negative">-0.40</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">27Sum</td>
+                    <td class="curve-price">82.50</td>
+                    <td class="curve-dod negative">-0.30</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">27Win</td>
+                    <td class="curve-price">84.25</td>
+                    <td class="curve-dod negative">-0.32</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">28Sum</td>
+                    <td class="curve-price">81.75</td>
+                    <td class="curve-dod negative">-0.28</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">28Win</td>
+                    <td class="curve-price">83.50</td>
+                    <td class="curve-dod negative">-0.30</td>
+                </tr>
+                
+                <tr>
+                    <td class="curve-period">29Sum</td>
+                    <td class="curve-price">80.90</td>
+                    <td class="curve-dod negative">-0.25</td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            </div>
+        </div>
+        
+        <!-- News Section -->
+        <div class="news-section">
+            <div class="card-title">Market News</div>
+                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/big-storage-withdrawal-fails-to-halt-natural-gas-futures-selloff/" target="_blank" class="news-title">Big Storage Withdrawal Fails to Halt Natural Gas Futures Selloff</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/weak-forecasts-outweigh-inventory-decline-as-natural-gas-futures-plummet-waha-hits-negative-6/" target="_blank" class="news-title">Weak Forecasts Outweigh Inventory Decline as Natural Gas Futures Plummet, Waha Hits Negative $6</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/mexican-natural-gas-imports-trend-toward-record-as-prices-slide/" target="_blank" class="news-title">Mexican Natural Gas Imports Trend Toward Record as Prices Slide</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/nationwide-natural-gas-prices-spike-but-pipeline-bottleneck-helps-send-permian-to-negative-4/" target="_blank" class="news-title">Nationwide Natural Gas Prices Spike, but Pipeline Bottleneck Helps Send Permian to Negative $4</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/weather-shift-weighs-on-natural-gas-futures-after-bullish-storage-draw/" target="_blank" class="news-title">Weather Shift Weighs on Natural Gas Futures After Bullish Storage Draw</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/lake-charles-lng-moves-toward-26-green-light-early-site-prep-targeted/" target="_blank" class="news-title">Lake Charles LNG Moves Toward 26 Green Light; Early Site Prep Targeted</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/trinity-gas-storage-launches-13-bcf-expansion-as-power-lng-loads-accelerate/" target="_blank" class="news-title">Trinity Gas Storage Launches 13 Bcf Expansion as Power, LNG Loads Accelerate</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/natural-gas-futures-resume-plunge-as-forecasts-unsupportive/" target="_blank" class="news-title">Natural Gas Futures Resume Plunge as Forecasts Unsupportive</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://naturalgasintel.com/news/volatility-seen-resuming-after-break-in-action-as-natural-gas-futures-edge-higher/" target="_blank" class="news-title">Volatility Seen Resuming After Break in Action as Natural Gas Futures Edge Higher</a>
+                    <div class="news-meta">
+                        <span class="news-source">Natural Gas Intel</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://www.lngworldnews.com/european-commission-approves-german-lng-terminal-joint-venture/" target="_blank" class="news-title">European Commission approves German LNG terminal joint venture</a>
+                    <div class="news-meta">
+                        <span class="news-source">LNG World News</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://www.lngworldnews.com/wheatstone-lngs-second-train-90-pct-done/" target="_blank" class="news-title">Wheatstone LNGs second train 90 pct done</a>
+                    <div class="news-meta">
+                        <span class="news-source">LNG World News</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://www.lngworldnews.com/volvo-trucks-north-america-to-launch-lng-engine/" target="_blank" class="news-title">Volvo Trucks North America to Launch LNG Engine</a>
+                    <div class="news-meta">
+                        <span class="news-source">LNG World News</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://www.lngworldnews.com/video-saipems-work-on-ichthys-lng-pipeline/" target="_blank" class="news-title">Video: Saipems work on Ichthys LNG pipeline</a>
+                    <div class="news-meta">
+                        <span class="news-source">LNG World News</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://www.lngworldnews.com/shells-prelude-flng-to-start-production-in-2017/" target="_blank" class="news-title">Shells prelude flng to start production in 2017</a>
+                    <div class="news-meta">
+                        <span class="news-source">LNG World News</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                                <div class="news-item">
+                    <a href="https://www.lngworldnews.com/nobles-colorado-lng-facility-moving-forward/" target="_blank" class="news-title">Nobles Colorado LNG facility moving forward</a>
+                    <div class="news-meta">
+                        <span class="news-source">LNG World News</span>
+                        <span class="news-date">Recent</span>
+                    </div>
+                </div>
+                
+        </div>
+    </div>
+</body>
+</html>

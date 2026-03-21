@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header {
+            background: #111;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 3px solid #00ff88;
+        }
+        h1 { color: #fff; font-size: 1.8em; margin-bottom: 5px; }
+        .last-updated { color: #888; font-size: 0.8em; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .section {
+            background: #111;
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #1a1a1a;
+        }
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .news-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-item a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+            line-height: 1.4;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .news-item a:hover { color: #ff6b00; }
+        .meta {
+            color: #666;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NEWS DASHBOARD</h1>
+            <div class="last-updated">LAST UPDATE: 2025-12-11 10:13</div>
+        </header>
+        
+        <div class="grid">
+            <div class="section">
+                <div class="section-title">WORLD NEWS</div>
+                
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/c0q5p43qgl1o?at_medium=RSS&at_campaign=rss" target="_blank">Venezuelan opposition leader makes first public appearance after months in hiding</a>
+            <div class="meta">BBC World | Thu, 11 Dec 2025 02:00:19 GMT</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/c1w9lg11jw0o?at_medium=RSS&at_campaign=rss" target="_blank">US seizes oil tanker off the coast of Venezuela, Trump says</a>
+            <div class="meta">BBC World | Thu, 11 Dec 2025 01:46:54 GMT</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/cjwy9n786n0o?at_medium=RSS&at_campaign=rss" target="_blank">Iceland becomes fifth country to boycott Eurovision</a>
+            <div class="meta">BBC World | Wed, 10 Dec 2025 19:02:13 GMT</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/ckgkykywp58o?at_medium=RSS&at_campaign=rss" target="_blank">Indigenous deaths in custody in Australia hit highest level since 1980</a>
+            <div class="meta">BBC World | Thu, 11 Dec 2025 01:28:01 GMT</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/cj4q1lddj8go?at_medium=RSS&at_campaign=rss" target="_blank">Trump launches $1m 'gold card' immigration visas</a>
+            <div class="meta">BBC World | Thu, 11 Dec 2025 01:10:45 GMT</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/cdxwrvl1734o?at_medium=RSS&at_campaign=rss" target="_blank">Portugal braced for mass disruption in first general strike for 12 years</a>
+            <div class="meta">BBC World | Thu, 11 Dec 2025 00:24:49 GMT</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/c989e9xxn5po?at_medium=RSS&at_campaign=rss" target="_blank">String of celebrity scandals renews debate on South Korea's 'cancel culture'</a>
+            <div class="meta">BBC World | Thu, 11 Dec 2025 00:05:47 GMT</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://www.bbc.com/news/articles/c80x3p331lxo?at_medium=RSS&at_campaign=rss" target="_blank">Italian cooking awarded Unesco cultural heritage status</a>
+            <div class="meta">BBC World | Wed, 10 Dec 2025 19:54:04 GMT</div>
+        </div>
+        
+            </div>
+            
+            <div class="section">
+                <div class="section-title">SINGAPORE NEWS</div>
+                
+        <div class="news-item">
+            <a href="https://sg.news.yahoo.com/australia-leader-defends-social-media-002949500.html" target="_blank">Australia leader defends social media ban as teens brag about staying online</a>
+            <div class="meta">Yahoo SG | 2025-12-11T01:48:20Z</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://sg.news.yahoo.com/venezuela-far-trump-012447858.html" target="_blank">On Venezuela, how far will Trump go?</a>
+            <div class="meta">Yahoo SG | 2025-12-11T01:24:47Z</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://sg.news.yahoo.com/witnesses-describe-final-interactions-ana-005840829.html" target="_blank">Witnesses describe their final interactions with Ana Walshe – including her last ‘festive’ night – at husband’s murder trial</a>
+            <div class="meta">Yahoo SG | 2025-12-11T00:58:40Z</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://sg.news.yahoo.com/us-seized-oil-tanker-off-213409597.html" target="_blank">US seized oil tanker off Venezuelan coast, Trump says</a>
+            <div class="meta">Yahoo SG | 2025-12-11T00:38:23Z</div>
+        </div>
+        
+        <div class="news-item">
+            <a href="https://sg.news.yahoo.com/us-seized-very-large-tanker-213146368.html" target="_blank">US seized 'very large' tanker near Venezuela, Trump says</a>
+            <div class="meta">Yahoo SG | 2025-12-11T00:33:52Z</div>
+        </div>
+        
+            </div>
+        </div>
+    </div>
+</body>
+</html>

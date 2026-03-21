@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Newspaper Intro Animation */
+        .newspaper-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            perspective: 2000px;
+        }
+        
+        .newspaper-page {
+            position: relative;
+            width: 420px;
+            height: 560px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.03);
+            border-radius: 4px;
+            border: 1px solid #2a2a2a;
+            transform-origin: left center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .newspaper-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255,255,255,0.01) 2px,
+                    rgba(255,255,255,0.01) 4px
+                );
+            pointer-events: none;
+            border-radius: 4px;
+        }
+        
+        /* Page edge shadow */
+        .newspaper-page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(
+                to left,
+                rgba(0,212,255,0.08),
+                rgba(0,0,0,0)
+            );
+            pointer-events: none;
+        }
+        
+        .newspaper-intro.flipping .newspaper-page {
+            transform: rotateY(-90deg);
+        }
+        
+        .newspaper-intro.hidden {
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+        
+        .newspaper-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+        }
+        
+        .newspaper-masthead {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3em;
+            font-weight: 700;
+            color: #e0e0e0;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            border-top: 2px solid #00d4ff;
+            border-bottom: 2px solid #00d4ff;
+            padding: 16px 0;
+        }
+        
+        .newspaper-date {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1em;
+            color: #888888;
+            margin-top: 12px;
+            font-style: italic;
+        }
+        
+        .newspaper-tagline {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.85em;
+            color: #00d4ff;
+            margin-top: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 20px;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+        }
+        
+        .container.visible {
+            opacity: 1;
+        }
+        
+        /* Pause animations until container is visible */
+        .container header,
+        .container .section,
+        .container .narrative-driver-grid {
+            animation-play-state: paused;
+        }
+        
+        .container.visible header,
+        .container.visible .section,
+        .container.visible .narrative-driver-grid {
+            animation-play-state: running;
+        }
+        
+        header {
+            background: #111111;
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            border-left: 3px solid #00d4ff;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        h1 {
+            color: #ffffff;
+            font-size: 1.4em;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        
+        .date-time {
+            color: #888888;
+            font-size: 0.75em;
+            font-weight: 400;
+        }
+        
+        /* Market Pulse Section */
+        .section {
+            background: #111111;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #1a1a1a;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Staggered animation delays */
+        header {
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: 0s;
+        }
+        
+        .section:nth-of-type(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .section:nth-of-type(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .narrative-driver-grid {
+            animation: fadeInUp 0.6s ease-out forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .section:nth-of-type(4) {
+            animation-delay: 0.4s;
+        }
+        
+        .section:nth-of-type(5) {
+            animation-delay: 0.5s;
+        }
+        
+        .section:nth-of-type(6) {
+            animation-delay: 0.6s;
+        }
+        
+        .section:nth-of-type(7) {
+            animation-delay: 0.7s;
+        }
+        
+        .section-title {
+            font-size: 0.85em;
+            font-weight: 500;
+            color: #e0e0e0;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .pulse-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .pulse-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .pulse-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .pulse-label {
+            font-size: 0.75em;
+            color: #cccccc;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        .pulse-value {
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .heatmap-bar {
+            width: 100%;
+            height: 4px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .heatmap-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .heatmap-fill.positive {
+            background: linear-gradient(90deg, #1a1a1a 0%, #00C896 100%);
+        }
+        
+        .heatmap-fill.negative {
+            background: linear-gradient(90deg, #FF6B6B 0%, #1a1a1a 100%);
+            float: right;
+        }
+        
+        .positive {
+            color: #00C896;
+        }
+        
+        .negative {
+            color: #FF6B6B;
+        }
+        
+        .neutral {
+            color: #e0e0e0;
+        }
+        
+        .curve-note {
+            background: #0a0a0a;
+            padding: 14px;
+            border-radius: 4px;
+            border-left: 2px solid #00d4ff;
+            margin-top: 12px;
+        }
+        
+        .curve-note-label {
+            font-size: 0.7em;
+            color: #888888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .curve-note-text {
+            font-size: 0.8em;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+        
+        .curve-note-text .curve-line {
+            display: block;
+            margin-bottom: 6px;
+        }
+        
+        .curve-note-text .curve-line:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Daily Narrative + Driver Split */
+        .narrative-driver-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .narrative-box {
+            background: #0a0a0a;
+            padding: 14px;
+            border-radius: 4px;
+            border: 1px solid #1a1a1a;
+        }
+        
+        .narrative-text {
+            font-size: 0.85em;
+            color: #cccccc;
+            line-height: 1.7;
+        }
+        
+        /* Editable Sections */
+        .input-label {
+            font-size: 0.7em;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 4px;
+            padding: 12px;
+            color: #e0e0e0;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.85em;
+            line-height: 1.6;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        
+        .input-group {
+            margin-bottom: 16px;
+        }
+        
+        /* Concept in Action - Checkbox Grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .concept-checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .concept-checkbox-item:hover {
+            border-color: #2a2a2a;
+            background: #111111;
+        }
+        
+        .concept-checkbox-item.selected {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        .checkbox-mark {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #2a2a2a;
+            border-radius: 3px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        
+        .concept-checkbox-item.selected .checkbox-mark {
+            background: #00C896;
+            border-color: #00C896;
+        }
+        
+        .checkbox-mark::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #0a0a0a;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .concept-checkbox-item.selected .checkbox-mark::after {
+            opacity: 1;
+        }
+        
+        .checkbox-label {
+            font-size: 0.8em;
+            color: #cccccc;
+            line-height: 1.3;
+        }
+        
+        /* Week Tracker */
+        .week-tracker {
+            background: #0a0a0a;
+            padding: 16px;
+            border-radius: 4px;
+            border: 1px solid #1a1a1a;
+        }
+        
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .tracker-title {
+            font-size: 0.85em;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tracker-toggle {
+            font-size: 1.2em;
+            color: #888888;
+            transition: transform 0.3s;
+        }
+        
+        .tracker-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .tracker-content.expanded {
+            max-height: 400px;
+            margin-top: 16px;
+        }
+        
+        .concept-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+            cursor: pointer;
+            transition: padding-left 0.2s;
+        }
+        
+        .concept-item:hover {
+            padding-left: 8px;
+        }
+        
+        .concept-item:last-child {
+            border-bottom: none;
+        }
+        
+        .concept-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #2a2a2a;
+            border-radius: 3px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .concept-item.active .concept-check {
+            background: #00C896;
+            border-color: #00C896;
+        }
+        
+        .concept-check::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #0a0a0a;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .concept-item.active .concept-check::after {
+            opacity: 1;
+        }
+        
+        .concept-label {
+            font-size: 0.8em;
+            color: #cccccc;
+        }
+        
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        button {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #e0e0e0;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.8em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        button:hover {
+            background: #2a2a2a;
+            border-color: #00d4ff;
+        }
+        
+        button.primary {
+            background: #00d4ff;
+            color: #0a0a0a;
+            border-color: #00d4ff;
+        }
+        
+        button.primary:hover {
+            background: #00b8e6;
+        }
+        
+        .save-indicator {
+            font-size: 0.7em;
+            color: #888888;
+            margin-left: auto;
+            align-self: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pulse-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .narrative-driver-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Newspaper Intro -->
+    <div class="newspaper-intro" id="newspaperIntro">
+        <div class="newspaper-page">
+            <div class="newspaper-content">
+                <div class="newspaper-masthead">Daily Market Journal</div>
+                <div class="newspaper-date" id="introDate">Saturday, December 14, 2025</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" id="mainContent">
+        <header>
+            <h1>MARKET JOURNAL</h1>
+            <div class="date-time" id="currentDateTime">Saturday, December 14, 2025 • 12:05 SGT</div>
+        </header>
+        
+        <!-- Market Pulse -->
+        <div class="section">
+            <div class="section-title">Market Pulse</div>
+            
+            <div class="pulse-grid">
+                <div class="pulse-item">
+                    <div class="pulse-header">
+                        <span class="pulse-label">Brent</span>
+                        <span class="pulse-value negative">-0.35%</span>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill negative" style="width: 35%;"></div>
+                    </div>
+                </div>
+                <div class="pulse-item">
+                    <div class="pulse-header">
+                        <span class="pulse-label">WTI</span>
+                        <span class="pulse-value negative">-0.31%</span>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill negative" style="width: 31%;"></div>
+                    </div>
+                </div>
+                <div class="pulse-item">
+                    <div class="pulse-header">
+                        <span class="pulse-label">JKM</span>
+                        <span class="pulse-value positive">+0.47%</span>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill positive" style="width: 47%;"></div>
+                    </div>
+                </div>
+                <div class="pulse-item">
+                    <div class="pulse-header">
+                        <span class="pulse-label">TTF</span>
+                        <span class="pulse-value positive">+0.64%</span>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill positive" style="width: 64%;"></div>
+                    </div>
+                </div>
+                <div class="pulse-item">
+                    <div class="pulse-header">
+                        <span class="pulse-label">Tokyo Power</span>
+                        <span class="pulse-value positive">+1.12%</span>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill positive" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="pulse-item">
+                    <div class="pulse-header">
+                        <span class="pulse-label">USD/JPY</span>
+                        <span class="pulse-value negative">-0.45%</span>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill negative" style="width: 45%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="curve-note">
+                <div class="curve-note-label">Curve Note</div>
+                <div class="curve-note-text">
+                    <span class="curve-line">TTF front-quarter spread (26Q1-26Q2) at +0.52 EUR/MWh</span>
+                    <span class="curve-line">Brent curve in contango with 26Q1-26Q2 spread at -1.30 USD/BBL</span>
+                    <span class="curve-line">JKM backwardation weakening (26Q1-26Q2 at -0.45)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Daily Narrative + Driver Side-by-Side -->
+        <div class="narrative-driver-grid">
+            <!-- Daily Narrative -->
+            <div class="section">
+                <div class="section-title">Daily Narrative</div>
+                <div class="narrative-box">
+                    <div class="narrative-text">
+                        Crude markets weak across benchmarks (Brent/WTI down ~0.3%). Asian LNG (JKM) edged higher despite limited buying. European gas (TTF) firmed on weather-driven demand. Japanese power strengthened (Tokyo +1.1%). USD/JPY weakness (-0.45%) provided tailwind to yen-denominated assets.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Driver of the Day -->
+            <div class="section">
+                <div class="section-title">Driver of the Day</div>
+                <div class="input-group">
+                    <textarea rows="5" placeholder="Link price moves to news, geopolitical events, or macro indicators...">Key driver: Venezuela political tensions (OilPrice headline on regime shift and U.S. relations). Oil weakness likely tied to ongoing China demand concerns offsetting geopolitical risk premium. European battery storage expansion signals energy transition momentum (potential long-term LNG demand headwind).</textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Concept in Action -->
+        <div class="section">
+            <div class="section-title">Concept in Action</div>
+            <div class="concept-grid">
+                <div class="concept-checkbox-item" onclick="toggleCheckbox(this)">
+                    <div class="checkbox-mark"></div>
+                    <div class="checkbox-label">Contango / Backwardation</div>
+                </div>
+                <div class="concept-checkbox-item" onclick="toggleCheckbox(this)">
+                    <div class="checkbox-mark"></div>
+                    <div class="checkbox-label">Space Arbitrage</div>
+                </div>
+                <div class="concept-checkbox-item" onclick="toggleCheckbox(this)">
+                    <div class="checkbox-mark"></div>
+                    <div class="checkbox-label">Asia Marginal Buyer</div>
+                </div>
+                <div class="concept-checkbox-item" onclick="toggleCheckbox(this)">
+                    <div class="checkbox-mark"></div>
+                    <div class="checkbox-label">Geopolitical Risk Premium</div>
+                </div>
+                <div class="concept-checkbox-item" onclick="toggleCheckbox(this)">
+                    <div class="checkbox-mark"></div>
+                    <div class="checkbox-label">FX Transmission</div>
+                </div>
+                <div class="concept-checkbox-item" onclick="toggleCheckbox(this)">
+                    <div class="checkbox-mark"></div>
+                    <div class="checkbox-label">Supply Chain Shifts</div>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-label">How does this concept apply to today's market?</div>
+                <textarea rows="4" placeholder="Explain how today's observable data reflects this concept..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Personal Reflection -->
+        <div class="section">
+            <div class="section-title">Personal Reflection</div>
+            <div class="input-group">
+                <div class="input-label">What surprised you? What patterns repeated or broke?</div>
+                <textarea rows="4" placeholder="Free-form reflection on today's market patterns..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Week Concept Tracker -->
+        <div class="section">
+            <div class="week-tracker">
+                <div class="tracker-header" onclick="toggleTracker()">
+                    <div class="tracker-title">Concept Tracker — Week 50</div>
+                    <div class="tracker-toggle" id="trackerToggle">▼</div>
+                </div>
+                <div class="tracker-content" id="trackerContent">
+                    <div class="concept-item active" onclick="toggleConcept(this)">
+                        <div class="concept-check"></div>
+                        <div class="concept-label">Contango / Backwardation</div>
+                    </div>
+                    <div class="concept-item" onclick="toggleConcept(this)">
+                        <div class="concept-check"></div>
+                        <div class="concept-label">Space Arbitrage</div>
+                    </div>
+                    <div class="concept-item active" onclick="toggleConcept(this)">
+                        <div class="concept-check"></div>
+                        <div class="concept-label">Asia Marginal Buyer</div>
+                    </div>
+                    <div class="concept-item" onclick="toggleConcept(this)">
+                        <div class="concept-check"></div>
+                        <div class="concept-label">Geopolitical Risk Premium</div>
+                    </div>
+                    <div class="concept-item active" onclick="toggleConcept(this)">
+                        <div class="concept-check"></div>
+                        <div class="concept-label">FX Transmission</div>
+                    </div>
+                    <div class="concept-item" onclick="toggleConcept(this)">
+                        <div class="concept-check"></div>
+                        <div class="concept-label">Supply Chain Shifts</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="section">
+            <div class="actions">
+                <button class="primary" onclick="saveEntry()">Save Entry</button>
+                <button onclick="exportAsText()">Export as Text</button>
+                <span class="save-indicator" id="saveIndicator"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Newspaper intro animation
+        window.addEventListener('load', function() {
+            const intro = document.getElementById('newspaperIntro');
+            const mainContent = document.getElementById('mainContent');
+            const introDate = document.getElementById('introDate');
+            
+            // Set current date in intro
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric'
+            };
+            introDate.textContent = now.toLocaleDateString('en-US', options);
+            
+            // Flip page right-to-left (0.5s delay)
+            setTimeout(() => {
+                intro.classList.add('flipping');
+            }, 500);
+            
+            // Hide intro and show content at halfway point (1.0s delay)
+            setTimeout(() => {
+                intro.classList.add('hidden');
+                mainContent.classList.add('visible');
+            }, 1000);
+            
+            // Remove intro from DOM (1.4s delay)
+            setTimeout(() => {
+                intro.remove();
+            }, 1400);
+        });
+        
+        // Update current date/time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'Asia/Singapore'
+            };
+            const formatted = now.toLocaleString('en-SG', options);
+            document.getElementById('currentDateTime').textContent = formatted + ' SGT';
+        }
+        
+        // Toggle checkbox
+        function toggleCheckbox(item) {
+            item.classList.toggle('selected');
+        }
+        
+        // Toggle concept tracker
+        function toggleTracker() {
+            const content = document.getElementById('trackerContent');
+            const toggle = document.getElementById('trackerToggle');
+            content.classList.toggle('expanded');
+            toggle.textContent = content.classList.contains('expanded') ? '▲' : '▼';
+        }
+        
+        // Toggle concept item
+        function toggleConcept(item) {
+            item.classList.toggle('active');
+        }
+        
+        // Save entry
+        function saveEntry() {
+            const indicator = document.getElementById('saveIndicator');
+            indicator.textContent = 'Saving...';
+            
+            // Simulate save
+            setTimeout(() => {
+                const now = new Date();
+                const time = now.toLocaleTimeString('en-SG', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    timeZone: 'Asia/Singapore'
+                });
+                indicator.textContent = `Saved at ${time} SGT`;
+            }, 500);
+        }
+        
+        // Export as text
+        function exportAsText() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-SG', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            
+            let content = `MARKET JOURNAL — ${dateStr}\n\n`;
+            content += `MARKET PULSE\n`;
+            content += `Brent: -0.35% | WTI: -0.31% | TTF: +0.64% | JKM: +0.47%\n`;
+            content += `Power: +1.12% | DXY: -0.15%\n\n`;
+            content += `Curve Note: TTF 26Q1-26Q2 spread narrowed 0.07 EUR/MWh\n\n`;
+            content += `DAILY NARRATIVE\n`;
+            content += `Oil markets softened on China demand concerns...\n\n`;
+            content += `DRIVER OF THE DAY\n`;
+            content += `[Your notes here]\n\n`;
+            content += `CONCEPT IN ACTION\n`;
+            content += `[Your analysis here]\n\n`;
+            content += `PERSONAL REFLECTION\n`;
+            content += `[Your reflections here]\n`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `market-journal-${dateStr}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize
+        updateDateTime();
+        setInterval(updateDateTime, 60000); // Update every minute
+    </script>
+</body>
+</html>
