@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Working with AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:   #c9a84c;
+      --gold-l: #e8c97a;
+      --gold-a: rgba(201,168,76,0.22);
+      --cream:  #f0e8d6;
+      --bg:     #06060b;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: 'Josefin Sans', sans-serif;
+      cursor: none;
+    }
+
+    /* ── TOP ACCENT ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 1px; z-index: 100;
+      background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold-l) 50%, var(--gold) 70%, transparent);
+    }
+
+    /* ── BOKEH CANVAS ───────────────────────────────────── */
+    #cv { position: fixed; inset: 0; z-index: 1; }
+
+    /* ── CUSTOM CURSOR (desktop only) ───────────────────── */
+    #cur {
+      position: fixed; z-index: 9999; pointer-events: none;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gold);
+      transform: translate(-50%,-50%);
+      transition: width 0.22s ease, height 0.22s ease, background 0.22s ease;
+      mix-blend-mode: screen;
+      left: -99px; top: -99px;
+    }
+    #cur.big {
+      width: 38px; height: 38px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.5);
+    }
+    #cglow {
+      position: fixed; width: 380px; height: 380px;
+      border-radius: 50%; pointer-events: none; z-index: 8;
+      background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 68%);
+      transform: translate(-50%,-50%);
+      left: 50%; top: 50%;
+    }
+
+    /* ── FADE OVERLAY ───────────────────────────────────── */
+    #fade {
+      position: fixed; inset: 0; z-index: 9990;
+      background: #06060b;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+    #fade.out { opacity: 1; pointer-events: all; }
+
+    /* ── SCENE ──────────────────────────────────────────── */
+    #scene {
+      position: relative; z-index: 10;
+      width: 100%; height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+
+    /* ── TITLE ──────────────────────────────────────────── */
+    #tw { text-align: center; margin-bottom: 72px; padding: 0 20px; }
+
+    #title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.9rem, 6.2vw, 5.8rem);
+      letter-spacing: 0.15em;
+      color: var(--cream);
+      display: flex; flex-wrap: nowrap; justify-content: center;
+      perspective: 600px;
+    }
+
+    .ch {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px) rotateX(32deg);
+      transform-origin: bottom center;
+      transition: opacity 0.52s ease, transform 0.52s ease;
+    }
+    .ch.on { opacity: 1; transform: translateY(0) rotateX(0deg); }
+
+    #tline {
+      display: block; height: 1px; width: 0;
+      margin: 16px auto 0;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-l), var(--gold), transparent);
+      transition: width 1.5s cubic-bezier(0.2, 0, 0.1, 1);
+    }
+
+    #sub {
+      margin-top: 13px;
+      font-size: 0.58rem; letter-spacing: 0.46em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.42);
+      opacity: 0; transition: opacity 1.1s ease;
+    }
+    #sub.on { opacity: 1; }
+
+    /* ── OPTIONS ────────────────────────────────────────── */
+    #opts {
+      display: flex; flex-direction: row;
+      align-items: center; gap: 0;
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 1.1s ease, transform 1.1s cubic-bezier(0.2,0,0.1,1);
+    }
+    #opts.on { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 639px) {
+      #opts { flex-direction: column; }
+      #tw   { margin-bottom: 36px; }
+    }
+
+    /* ── STICKMAN ZONE ──────────────────────────────────── */
+    #smz {
+      width: 116px; height: 260px;
+      position: relative; flex-shrink: 0; overflow: visible;
+    }
+    #smw {
+      position: absolute; bottom: 14px; left: 50%;
+      pointer-events: none; will-change: transform;
+    }
+    #sm { overflow: visible; display: block; }
+
+    /* Mobile: horizontal strip between stacked cards */
+    @media (max-width: 639px) {
+      #smz { width: 260px; height: 68px; }
+      #smw {
+        bottom: auto;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) !important;
+      }
+    }
+
+    /* ── CARDS ──────────────────────────────────────────── */
+    .cw { perspective: 950px; }
+
+    .card {
+      width: 212px; height: 260px;
+      background: rgba(11,10,20,0.72);
+      border: 1px solid var(--gold-a);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: none; position: relative;
+      backdrop-filter: blur(20px) saturate(1.2);
+      transform-style: preserve-3d;
+      will-change: transform, box-shadow;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      overflow: hidden;
+    }
+
+    @media (max-width: 639px) {
+      .card { width: 260px; height: 120px; flex-direction: row; gap: 16px; cursor: pointer; }
+    }
+
+    /* Corner brackets */
+    .c {
+      position: absolute; width: 13px; height: 13px;
+      border-color: var(--gold); border-style: solid; opacity: 0.28;
+      transition: opacity 0.4s ease, width 0.4s ease, height 0.4s ease;
+    }
+    .c.tl { top: 12px;    left: 12px;  border-width: 1px 0 0 1px; }
+    .c.tr { top: 12px;    right: 12px; border-width: 1px 1px 0 0; }
+    .c.bl { bottom: 12px; left: 12px;  border-width: 0 0 1px 1px; }
+    .c.br { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+    .card.lit .c { opacity: 1; width: 18px; height: 18px; }
+
+    /* Ghost numeral */
+    .num {
+      position: absolute; top: 10px; right: 15px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem; font-weight: 300;
+      color: rgba(201,168,76,0.065); line-height: 1;
+      user-select: none; pointer-events: none;
+    }
+    @media (max-width: 639px) { .num { display: none; } }
+
+    /* Icon */
+    .ico {
+      font-size: 1.55rem; color: rgba(201,168,76,0.42);
+      margin-bottom: 14px;
+      transition: color 0.4s ease, transform 0.4s ease;
+    }
+    @media (max-width: 639px) { .ico { margin-bottom: 0; } }
+    .card.lit .ico { color: var(--gold); transform: scale(1.12); }
+
+    /* Divider */
+    .dvd {
+      width: 28px; height: 1px;
+      background: var(--gold-a); margin-bottom: 14px;
+      transition: width 0.4s ease, background 0.4s ease;
+    }
+    @media (max-width: 639px) { .dvd { display: none; } }
+    .card.lit .dvd { width: 46px; background: var(--gold); }
+
+    /* Label */
+    .lbl {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300; font-size: 0.74rem;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(240,232,214,0.6);
+      transition: color 0.4s ease, letter-spacing 0.4s ease;
+    }
+    .card.lit .lbl { color: var(--gold-l); letter-spacing: 0.36em; }
+
+    /* Mobile tap hint */
+    .hint {
+      display: none;
+      position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      font-size: 0.44rem; letter-spacing: 0.36em; text-transform: uppercase;
+      color: rgba(201,168,76,0); white-space: nowrap;
+      transition: color 0.4s ease;
+    }
+    @media (max-width: 639px) { .hint { display: block; } }
+    .card.lit .hint { color: rgba(201,168,76,0.5); }
+
+    /* Shimmer */
+    .card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(201,168,76,0) 0%, rgba(201,168,76,0.055) 50%, rgba(201,168,76,0) 100%);
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .card.lit::after { opacity: 1; }
+
+    /* ── DOOR ANIMATIONS — DESKTOP ──────────────────────── */
+    @keyframes dL {
+      0%   { transform: rotateY(0deg);   opacity: 1; }
+      100% { transform: rotateY(-90deg); opacity: 0; }
+    }
+    @keyframes dR {
+      0%   { transform: rotateY(0deg);  opacity: 1; }
+      100% { transform: rotateY(90deg); opacity: 0; }
+    }
+    .card.dL { transform-origin: left center;  animation: dL 0.78s cubic-bezier(0.55,0,1,0.45) forwards; }
+    .card.dR { transform-origin: right center; animation: dR 0.78s cubic-bezier(0.55,0,1,0.45) forwards; }
+
+    /* ── DOOR ANIMATIONS — MOBILE (trapdoors) ───────────── */
+    @keyframes dUp {
+      0%   { transform: rotateX(0deg);   opacity: 1; }
+      100% { transform: rotateX(-90deg); opacity: 0; }
+    }
+    @keyframes dDn {
+      0%   { transform: rotateX(0deg);  opacity: 1; }
+      100% { transform: rotateX(90deg); opacity: 0; }
+    }
+    .card.dUp { transform-origin: top center;    animation: dUp 0.78s cubic-bezier(0.55,0,1,0.45) forwards; }
+    .card.dDn { transform-origin: bottom center; animation: dDn 0.78s cubic-bezier(0.55,0,1,0.45) forwards; }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    #ft {
+      position: fixed; bottom: 22px; left: 50%;
+      transform: translateX(-50%); z-index: 20;
+      font-weight: 100; font-size: 0.52rem;
+      letter-spacing: 0.5em; text-transform: uppercase;
+      color: rgba(201,168,76,0.16);
+      white-space: nowrap; pointer-events: none;
+    }
+
+    /* ── REDUCED MOTION ─────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .ch { transition: none !important; opacity: 1 !important; transform: none !important; }
+      #tline, #sub, #opts { transition: none !important; }
+      #opts { opacity: 1 !important; transform: none !important; }
+      .card, .ico, .dvd, .lbl, .c, .card::after, #fade { transition: none !important; animation-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+<div id="cglow"></div>
+<div id="cur"></div>
+<div id="fade"></div>
+
+<div id="scene">
+  <div id="tw">
+    <h1 id="title"></h1>
+    <span id="tline"></span>
+    <p id="sub">Select the journey</p>
+  </div>
+
+  <div id="opts">
+
+    <div class="cw">
+      <div class="card" id="c1">
+        <span class="c tl"></span><span class="c tr"></span>
+        <span class="c bl"></span><span class="c br"></span>
+        <span class="num">01</span>
+        <div class="ico">◎</div>
+        <div class="dvd"></div>
+        <span class="lbl">Online Course</span>
+        <span class="hint">tap again to enter</span>
+      </div>
+    </div>
+
+    <div id="smz">
+      <div id="smw">
+        <svg id="sm" width="44" height="100" viewBox="0 0 44 100">
+          <!-- floating Zzz — grouped so counter-flip works on all three at once -->
+          <g id="zzz" style="pointer-events:none; user-select:none;">
+            <text id="z1" x="28" y="22" font-family="Josefin Sans,sans-serif"
+              font-size="9" font-weight="200" fill="#c9a84c" opacity="0">z</text>
+            <text id="z2" x="33" y="13" font-family="Josefin Sans,sans-serif"
+              font-size="13" font-weight="200" fill="#c9a84c" opacity="0">z</text>
+            <text id="z3" x="38" y="3"  font-family="Josefin Sans,sans-serif"
+              font-size="18" font-weight="200" fill="#c9a84c" opacity="0">Z</text>
+          </g>
+          <circle id="hd" cx="22" cy="18" r="8"
+            stroke="#c9a84c" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+          <line id="bd" x1="22" y1="26" x2="22" y2="59"
+            stroke="#c9a84c" stroke-width="1.9" stroke-linecap="round"/>
+          <line id="al" x1="22" y1="36" x2="9"  y2="48"
+            stroke="#c9a84c" stroke-width="1.9" stroke-linecap="round"/>
+          <line id="ar" x1="22" y1="36" x2="35" y2="48"
+            stroke="#c9a84c" stroke-width="1.9" stroke-linecap="round"/>
+          <line id="ll" x1="22" y1="59" x2="12" y2="79"
+            stroke="#c9a84c" stroke-width="1.9" stroke-linecap="round"/>
+          <line id="lr" x1="22" y1="59" x2="32" y2="79"
+            stroke="#c9a84c" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cw">
+      <div class="card" id="c2">
+        <span class="c tl"></span><span class="c tr"></span>
+        <span class="c bl"></span><span class="c br"></span>
+        <span class="num">02</span>
+        <div class="ico">◈</div>
+        <div class="dvd"></div>
+        <span class="lbl">Bid Prototype</span>
+        <span class="hint">tap again to enter</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="ft">Working with AI &nbsp;·&nbsp; Choose the path</div>
+
+<script>
+(function () {
+  'use strict';
+
+  const isMob  = () => window.innerWidth < 640;
+  const isTouch = 'ontouchstart' in window;
+
+  // ── CURSOR ───────────────────────────────────────────────────────────────
+  const cur   = document.getElementById('cur');
+  const cglow = document.getElementById('cglow');
+
+  if (isTouch) {
+    cur.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  } else {
+    document.addEventListener('mousemove', e => {
+      cur.style.left   = e.clientX + 'px';
+      cur.style.top    = e.clientY + 'px';
+      cglow.style.left = e.clientX + 'px';
+      cglow.style.top  = e.clientY + 'px';
+    });
+  }
+
+  // ── BOKEH ────────────────────────────────────────────────────────────────
+  const canvas = document.getElementById('cv');
+  const ctx    = canvas.getContext('2d');
+  function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+  resize(); addEventListener('resize', resize);
+
+  const PAL = [
+    [210,175,78],[185,145,52],[240,215,130],[160,130,45],
+    [65,90,205],[45,60,175],[90,115,230],[225,210,165],
+  ];
+  const pts = Array.from({ length: 74 }, () => {
+    const [r,g,b] = PAL[Math.floor(Math.random() * PAL.length)];
+    return {
+      x: Math.random(), y: Math.random(),
+      rad: 5 + Math.pow(Math.random(), 1.4) * 36,
+      op:  0.012 + Math.random() * 0.09,
+      vx:  (Math.random() - 0.5) * 0.005,
+      vy: -(0.002 + Math.random() * 0.007),
+      ph:  Math.random() * Math.PI * 2,
+      fr:  0.1 + Math.random() * 0.45,
+      r, g, b,
+    };
+  });
+
+  function drawBokeh(t, dt) {
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    for (const p of pts) {
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      if (p.y < -0.12) p.y =  1.12;
+      if (p.x < -0.12) p.x =  1.12;
+      if (p.x >  1.12) p.x = -0.12;
+      const op  = Math.max(0, p.op + Math.sin(t * p.fr + p.ph) * 0.016);
+      const px  = p.x * W, py = p.y * H;
+      const grd = ctx.createRadialGradient(px, py, 0, px, py, p.rad);
+      grd.addColorStop(0,    `rgba(${p.r},${p.g},${p.b},${op})`);
+      grd.addColorStop(0.42, `rgba(${p.r},${p.g},${p.b},${op * 0.28})`);
+      grd.addColorStop(1,    `rgba(${p.r},${p.g},${p.b},0)`);
+      ctx.beginPath(); ctx.arc(px, py, p.rad, 0, Math.PI * 2);
+      ctx.fillStyle = grd; ctx.fill();
+    }
+    const vg = ctx.createRadialGradient(W/2,H/2,0, W/2,H/2, Math.hypot(W,H)*0.53);
+    vg.addColorStop(0,    'rgba(4,3,10,0)');
+    vg.addColorStop(0.52, 'rgba(4,3,10,0)');
+    vg.addColorStop(1,    'rgba(4,3,10,0.9)');
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  }
+
+  // ── TITLE REVEAL ─────────────────────────────────────────────────────────
+  const titleEl = document.getElementById('title');
+  const tLine   = document.getElementById('tline');
+  const subEl   = document.getElementById('sub');
+
+  'Working with AI'.split('').forEach(ch => {
+    const s = document.createElement('span');
+    s.className   = 'ch';
+    s.textContent = ch === ' ' ? '\u00a0' : ch;
+    if (ch === ' ') s.style.minWidth = '0.28em';
+    titleEl.appendChild(s);
+  });
+
+  const chars  = [...titleEl.querySelectorAll('.ch')];
+  const optsEl = document.getElementById('opts');
+  const APPEAR = 1500 + 100 + chars.length * 70;
+
+  setTimeout(() => {
+    chars.forEach((c, i) => setTimeout(() => c.classList.add('on'), 100 + i * 70));
+    const after = 100 + chars.length * 70 + 200;
+    setTimeout(() => { tLine.style.width = '100%'; }, after);
+    setTimeout(() => { subEl.classList.add('on'); },  after + 650);
+  }, 300);
+
+  setTimeout(() => { optsEl.classList.add('on'); sm.state = 'walking'; }, APPEAR);
+
+  // ── NAVIGATE WITH FADE ───────────────────────────────────────────────────
+  const fadeEl = document.getElementById('fade');
+  function navigateTo(href) {
+    fadeEl.classList.add('out');
+    setTimeout(() => { location.href = href; }, 780);
+  }
+
+  // ── CARDS ────────────────────────────────────────────────────────────────
+  const card1 = document.getElementById('c1');
+  const card2 = document.getElementById('c2');
+  let locked  = false;
+  let tapped  = null;
+
+  function fireCard(card, href) {
+    if (locked) return;
+    locked = true;
+    sm.state   = 'pushing';
+    sm.pushDir = card === card1 ? -1 : 1;
+    sm.t       = 0;
+    if (!isMob()) sm.setDir(card === card1 ? -1 : 1);
+    setTimeout(() => {
+      if (isMob()) {
+        card.classList.add(card === card1 ? 'dUp' : 'dDn');
+      } else {
+        card.classList.add(card === card1 ? 'dL' : 'dR');
+      }
+      setTimeout(() => navigateTo(href), 820);
+    }, 480);
+  }
+
+  // Desktop click
+  if (!isTouch) {
+    card1.addEventListener('click', () => fireCard(card1, 'course.html'));
+    card2.addEventListener('click', () => fireCard(card2, 'JEPX AI BIDDING PROTOTYPE.html'));
+  }
+
+  // Mobile: first tap = light up, second tap = fire
+  function handleTap(card, href) {
+    if (locked) return;
+    if (tapped === card) {
+      fireCard(card, href);
+    } else {
+      if (tapped) { tapped.classList.remove('lit'); tapped.style.cssText = ''; }
+      tapped = card;
+      card.classList.add('lit');
+      card.style.borderColor = 'rgba(201,168,76,0.75)';
+      card.style.boxShadow   = '0 0 42px rgba(201,168,76,0.2), inset 0 0 18px rgba(201,168,76,0.06)';
+      setTimeout(() => {
+        if (tapped === card && !locked) {
+          card.classList.remove('lit'); card.style.cssText = ''; tapped = null;
+        }
+      }, 3200);
+    }
+  }
+
+  card1.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card1, 'course.html'); },    { passive: false });
+  card2.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card2, 'JEPX AI BIDDING PROTOTYPE.html'); }, { passive: false });
+
+  // ── DESKTOP HOVER ────────────────────────────────────────────────────────
+  document.addEventListener('mousemove', e => {
+    if (locked || isMob()) return;
+
+    [card1, card2].forEach(card => {
+      const r    = card.getBoundingClientRect();
+      const ccx  = r.left + r.width  / 2;
+      const ccy  = r.top  + r.height / 2;
+      const dist = Math.hypot(e.clientX - ccx, e.clientY - ccy);
+      const intn = Math.max(0, 1 - dist / 265);
+
+      if (intn > 0.04) {
+        card.classList.add('lit');
+        cur.classList.add('big');
+        const dx = (e.clientX - ccx) / (r.width  / 2);
+        const dy = (e.clientY - ccy) / (r.height / 2);
+        const ti = 7.5 * intn;
+        card.style.transform   = `perspective(850px) rotateY(${dx*ti}deg) rotateX(${-dy*ti}deg) translateZ(${intn*11}px)`;
+        card.style.boxShadow   = `0 0 ${intn*58}px rgba(201,168,76,${intn*0.22}),0 0 ${intn*22}px rgba(201,168,76,${intn*0.12}),inset 0 0 24px rgba(201,168,76,${intn*0.055})`;
+        card.style.borderColor = `rgba(201,168,76,${0.2 + intn*0.55})`;
+      } else {
+        card.classList.remove('lit');
+        cur.classList.remove('big');
+        card.style.cssText = '';
+      }
+    });
+
+    // Stickman attraction
+    const s = sm.state;
+    if (s === 'walking' || s === 'approaching' || s === 'arrived' || s === 'idle_anim') {
+      const r1  = card1.getBoundingClientRect();
+      const r2  = card2.getBoundingClientRect();
+      const d1  = Math.abs(e.clientX - (r1.left + r1.width / 2));
+      const d2  = Math.abs(e.clientX - (r2.left + r2.width / 2));
+      if (d1 < 200 && d1 < d2)      { sm.targetX = -46; sm.state = 'approaching'; sm.idleTimer = 0; }
+      else if (d2 < 200 && d2 < d1) { sm.targetX =  46; sm.state = 'approaching'; sm.idleTimer = 0; }
+      else if (s !== 'walking')      { sm.state = 'walking'; sm.idleTimer = 0; }
+    }
+  });
+
+  // ── STICKMAN ─────────────────────────────────────────────────────────────
+  const smWrap = document.getElementById('smw');
+  const smEl   = document.getElementById('sm');
+  const zzz = document.getElementById('zzz');
+  const z1  = document.getElementById('z1');
+  const z2  = document.getElementById('z2');
+  const z3  = document.getElementById('z3');
+  const hd = document.getElementById('hd');
+  const bd = document.getElementById('bd');
+  const al = document.getElementById('al');
+  const ar = document.getElementById('ar');
+  const ll = document.getElementById('ll');
+  const lr = document.getElementById('lr');
+
+  const sm = {
+    x: 0, dir: 1, t: 0,
+    state: 'idle', flipped: false, pushDir: 1,
+    targetX: 0, idleTimer: 0, idlePhase: 0,
+
+    setDir(d) {
+      this.dir = d;
+      const f  = d < 0;
+      if (f !== this.flipped) {
+        this.flipped = f;
+        smEl.style.transform = f ? 'scaleX(-1)' : 'scaleX(1)';
+        // Counter-flip the Zzz so letters always read correctly
+        zzz.setAttribute('transform', f ? 'translate(44 0) scale(-1 1)' : '');
+      }
+    },
+
+    applyPos() {
+      if (isMob()) {
+        // On mobile smw has CSS transform — just update x for side to side
+        smWrap.style.left = `calc(50% + ${this.x}px)`;
+      } else {
+        smWrap.style.transform = `translateX(calc(-50% + ${this.x}px))`;
+      }
+    },
+
+    update(dt) {
+      if (this.state === 'idle') return;
+
+      if (this.state === 'walking') {
+        this.t += dt * 5;
+        const range = isMob() ? 58 : 44;
+        const speed = isMob() ? 38 : 46;
+        this.x += this.dir * dt * speed;
+        if (this.x >  range) { this.x =  range; this.setDir(-1); }
+        if (this.x < -range) { this.x = -range; this.setDir( 1); }
+        this.applyPos(); this.drawWalk();
+        this.idleTimer += dt;
+        if (this.idleTimer > 8) { this.idleTimer = 0; this.idlePhase = 0; this.state = 'idle_anim'; }
+
+      } else if (this.state === 'approaching') {
+        this.t += dt * 5;
+        const dx = this.targetX - this.x;
+        if (Math.abs(dx) < 2) {
+          this.x = this.targetX; this.state = 'arrived'; this.drawStand();
+        } else {
+          this.x += Math.min(Math.abs(dx), dt * 70) * Math.sign(dx);
+          this.setDir(Math.sign(dx)); this.drawWalk();
+        }
+        this.applyPos();
+
+      } else if (this.state === 'arrived') {
+        this.idleTimer += dt;
+        if (this.idleTimer > 4) { this.idleTimer = 0; this.idlePhase = 0; this.state = 'idle_anim'; }
+        this.drawStand();
+
+      } else if (this.state === 'idle_anim') {
+        this.idlePhase += dt;
+        this.drawIdle();
+        if (this.idlePhase > 3.4) { this.state = 'walking'; this.idleTimer = 0; }
+
+      } else if (this.state === 'pushing') {
+        this.t += dt * 2.6;
+        this.drawPush();
+      }
+    },
+
+    drawWalk() {
+      const s = Math.sin(this.t), a = Math.abs(s);
+      zzz.setAttribute('opacity', '0');
+      hd.setAttribute('cy', (18 - a * 1.3).toString());
+      bd.setAttribute('x1', '22'); bd.setAttribute('y1', '26');
+      bd.setAttribute('x2', '22'); bd.setAttribute('y2', '59');
+      al.setAttribute('x1', '22'); al.setAttribute('y1', '36');
+      al.setAttribute('x2', (22 + 12 * s).toString()); al.setAttribute('y2', (47 - a * 2).toString());
+      ar.setAttribute('x1', '22'); ar.setAttribute('y1', '36');
+      ar.setAttribute('x2', (22 - 12 * s).toString()); ar.setAttribute('y2', (47 + a * 2).toString());
+      ll.setAttribute('x1', '22'); ll.setAttribute('y1', '59');
+      ll.setAttribute('x2', (22 -  9 * s).toString()); ll.setAttribute('y2', (77 + a * 1.5).toString());
+      lr.setAttribute('x1', '22'); lr.setAttribute('y1', '59');
+      lr.setAttribute('x2', (22 +  9 * s).toString()); lr.setAttribute('y2', (77 - a * 1.5).toString());
+    },
+
+    drawStand() {
+      zzz.setAttribute('opacity', '0');
+      hd.setAttribute('cy', '18');
+      bd.setAttribute('x1', '22'); bd.setAttribute('y1', '26');
+      bd.setAttribute('x2', '22'); bd.setAttribute('y2', '59');
+      al.setAttribute('x1', '22'); al.setAttribute('y1', '36');
+      al.setAttribute('x2', '9');  al.setAttribute('y2', '48');
+      ar.setAttribute('x1', '22'); ar.setAttribute('y1', '36');
+      ar.setAttribute('x2', '35'); ar.setAttribute('y2', '48');
+      ll.setAttribute('x1', '22'); ll.setAttribute('y1', '59');
+      ll.setAttribute('x2', '12'); ll.setAttribute('y2', '78');
+      lr.setAttribute('x1', '22'); lr.setAttribute('y1', '59');
+      lr.setAttribute('x2', '32'); lr.setAttribute('y2', '78');
+    },
+
+    drawIdle() {
+      // 3 clean phases:
+      //  0.0–0.6s  sit down (knees fold up, arms drape on knees)
+      //  0.6–2.8s  sit still, ? floats and bobs above head
+      //  2.8–3.4s  stand back up
+      const p = this.idlePhase;
+
+      if (p < 0.6) {
+        // ── Sit down ──────────────────────────────────────────
+        const f = p / 0.6;
+        zzz.setAttribute('opacity', '0');
+
+        hd.setAttribute('cy', (18 + f * 14).toString());
+        bd.setAttribute('x1', '22'); bd.setAttribute('y1', '26');
+        bd.setAttribute('x2', '22'); bd.setAttribute('y2', (59 - f * 14).toString());
+        al.setAttribute('x1', '22'); al.setAttribute('y1', '36');
+        al.setAttribute('x2', (22 - f * 10).toString()); al.setAttribute('y2', (48 + f * 7).toString());
+        ar.setAttribute('x1', '22'); ar.setAttribute('y1', '36');
+        ar.setAttribute('x2', (22 + f * 10).toString()); ar.setAttribute('y2', (48 + f * 7).toString());
+        ll.setAttribute('x1', '22'); ll.setAttribute('y1', '59');
+        ll.setAttribute('x2', (22 - f * 12).toString()); ll.setAttribute('y2', (78 - f * 16).toString());
+        lr.setAttribute('x1', '22'); lr.setAttribute('y1', '59');
+        lr.setAttribute('x2', (22 + f * 12).toString()); lr.setAttribute('y2', (78 - f * 16).toString());
+
+      } else if (p < 2.8) {
+        // ── Sitting, Zzz cascade upward ───────────────────────
+        const elapsed = p - 0.6;
+        zzz.setAttribute('opacity', '1');
+
+        // Settled sitting pose
+        hd.setAttribute('cy', '32');
+        bd.setAttribute('x1', '22'); bd.setAttribute('y1', '26');
+        bd.setAttribute('x2', '22'); bd.setAttribute('y2', '45');
+        al.setAttribute('x1', '22'); al.setAttribute('y1', '36');
+        al.setAttribute('x2', '12'); al.setAttribute('y2', '55');
+        ar.setAttribute('x1', '22'); ar.setAttribute('y1', '36');
+        ar.setAttribute('x2', '32'); ar.setAttribute('y2', '55');
+        ll.setAttribute('x1', '22'); ll.setAttribute('y1', '59');
+        ll.setAttribute('x2', '10'); ll.setAttribute('y2', '62');
+        lr.setAttribute('x1', '22'); lr.setAttribute('y1', '59');
+        lr.setAttribute('x2', '34'); lr.setAttribute('y2', '62');
+
+        // Each Z pulses with staggered phase — small z first, big Z last
+        const period = 1.6;
+        function zPulse(offset, baseY, drift) {
+          const phase = ((elapsed - offset) % period + period) % period;
+          const norm  = phase / period; // 0→1
+          const op    = Math.max(0, Math.sin(norm * Math.PI));
+          const y     = baseY - norm * drift;
+          return { op: op.toFixed(2), y: y.toFixed(1) };
+        }
+        const a1 = zPulse(0.0,  22, 10);
+        const a2 = zPulse(0.45, 13, 10);
+        const a3 = zPulse(0.9,   3, 10);
+        z1.setAttribute('opacity', a1.op); z1.setAttribute('y', a1.y);
+        z2.setAttribute('opacity', a2.op); z2.setAttribute('y', a2.y);
+        z3.setAttribute('opacity', a3.op); z3.setAttribute('y', a3.y);
+
+      } else {
+        // ── Stand back up ─────────────────────────────────────
+        const f = Math.min((p - 2.8) / 0.55, 1);
+        zzz.setAttribute('opacity', (1 - f).toFixed(2));
+
+        hd.setAttribute('cy', (32 - f * 14).toString());
+        bd.setAttribute('x1', '22'); bd.setAttribute('y1', '26');
+        bd.setAttribute('x2', '22'); bd.setAttribute('y2', (45 + f * 14).toString());
+        al.setAttribute('x1', '22'); al.setAttribute('y1', '36');
+        al.setAttribute('x2', (12 - f * 3).toString()); al.setAttribute('y2', (55 - f * 7).toString());
+        ar.setAttribute('x1', '22'); ar.setAttribute('y1', '36');
+        ar.setAttribute('x2', (32 + f * 3).toString()); ar.setAttribute('y2', (55 - f * 7).toString());
+        ll.setAttribute('x1', '22'); ll.setAttribute('y1', '59');
+        ll.setAttribute('x2', (10 + f * 2).toString()); ll.setAttribute('y2', (62 + f * 16).toString());
+        lr.setAttribute('x1', '22'); lr.setAttribute('y1', '59');
+        lr.setAttribute('x2', (34 - f * 2).toString()); lr.setAttribute('y2', (62 + f * 16).toString());
+      }
+    },
+
+    drawPush() {
+      zzz.setAttribute('opacity', '0');
+      const push = Math.sin(Math.min(this.t, 1.3) * Math.PI * 0.5);
+      hd.setAttribute('cy', (18 + push * 2.5).toString());
+      bd.setAttribute('x1', '22'); bd.setAttribute('y1', '26');
+      bd.setAttribute('x2', (22 + push * 3.5).toString()); bd.setAttribute('y2', '59');
+      al.setAttribute('x1', '22'); al.setAttribute('y1', '36');
+      al.setAttribute('x2', (22 + push * 9).toString());      al.setAttribute('y2', (41 + push * 5).toString());
+      ar.setAttribute('x1', '22'); ar.setAttribute('y1', '36');
+      ar.setAttribute('x2', (35 + push * 7).toString());      ar.setAttribute('y2', (38 + push * 3).toString());
+      ll.setAttribute('x1', '22'); ll.setAttribute('y1', '59');
+      ll.setAttribute('x2', '11'); ll.setAttribute('y2', '80');
+      lr.setAttribute('x1', '22'); lr.setAttribute('y1', '59');
+      lr.setAttribute('x2', '30'); lr.setAttribute('y2', '82');
+    },
+  };
+
+  // ── MAIN LOOP ─────────────────────────────────────────────────────────────
+  let lastTs = 0;
+  (function loop(ts) {
+    const t  = ts / 1000;
+    const dt = Math.min(t - lastTs, 0.05);
+    lastTs   = t;
+    drawBokeh(t, dt);
+    sm.update(dt);
+    requestAnimationFrame(loop);
+  })(0);
+
+})();
+</script>
+</body>
+</html>

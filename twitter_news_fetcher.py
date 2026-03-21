@@ -39,8 +39,22 @@ RELEVANT_KEYWORDS = ['oil', 'gas', 'lng', 'jkm', 'ttf', 'henry hub', 'natural ga
 TRASH_KEYWORDS = ['crypto', 'bitcoin', 'stock', 'dow', 'nba', 'nfl', 'solar panels', 'ev battery',
                   'ethanol', 'biofuel', 'celebrity', 'entertainment']
 
-def load_cache(): 
-    return set(json.loads(CACHE_FILE.read_text())) if CACHE_FILE.exists() else set()
+def load_cache():
+    """Load cache, auto-clear if older than 7 days"""
+    if not CACHE_FILE.exists():
+        return set()
+    
+    # Check if cache is older than 7 days
+    cache_age = datetime.now().timestamp() - CACHE_FILE.stat().st_mtime
+    if cache_age > (7 * 24 * 60 * 60):  # 7 days in seconds
+        logger.info("Cache is older than 7 days, clearing...")
+        return set()
+    
+    try:
+        return set(json.loads(CACHE_FILE.read_text()))
+    except (json.JSONDecodeError, Exception):
+        logger.warning("Cache file corrupted, starting fresh...")
+        return set()
 
 def save_cache(seen): 
     CACHE_FILE.write_text(json.dumps(list(seen)))

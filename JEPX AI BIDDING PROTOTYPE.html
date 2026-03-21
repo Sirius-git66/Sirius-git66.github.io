@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEPX AI — Probability-Calibrated Bid Optimisation System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #080F1E;
+    --navy2:   #0D1A2D;
+    --navy3:   #122038;
+    --teal:    #1A8C9E;
+    --teal2:   #22A8BE;
+    --gold:    #C9A84C;
+    --gold2:   #E8C96A;
+    --cream:   #F2EDE4;
+    --white:   #FFFFFF;
+    --gray:    #8A9BB5;
+    --gray2:   #B8C4D4;
+    --border:  rgba(200,168,76,0.18);
+    --border2: rgba(26,140,158,0.22);
+    --glass:   rgba(13,26,45,0.72);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── Grain overlay ───────────────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── Typography ──────────────────────────────────────────────────── */
+  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+  code, .mono { font-family: 'DM Mono', monospace; }
+
+  /* ── Scroll animation base ───────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+                transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── Navigation ──────────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(8,15,30,0.98), transparent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(8,15,30,0.96);
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    color: var(--gray2); font-size: 0.78rem; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 9px 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+  /* ── Sections ────────────────────────────────────────────────────── */
+  section { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+  .section-full { max-width: 100%; padding-left: 0; padding-right: 0; }
+
+  .label {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .label::before {
+    content: ''; display: block; width: 28px; height: 1px; background: var(--teal);
+  }
+
+  /* ── HERO ────────────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 60px 80px;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,140,158,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(201,168,76,0.05) 0%, transparent 50%),
+      linear-gradient(165deg, #080F1E 0%, #0D1A2D 50%, #080F1E 100%);
+  }
+
+  /* Animated grid lines */
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(26,140,158,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,140,158,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(60px,60px); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
+
+  .hero-deadline {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 8px 18px;
+    font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 40px;
+  }
+  .hero-deadline .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero h1 .line2 { color: var(--teal2); }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--gray2);
+    font-weight: 300;
+    max-width: 860px;
+    margin: 28px 0 52px;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .hero-kpis {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 860px;
+  }
+  .kpi-cell {
+    background: rgba(13,26,45,0.9);
+    padding: 28px 24px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .kpi-cell:hover { background: rgba(26,140,158,0.08); }
+  .kpi-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-val span { color: var(--gold); }
+  .kpi-label {
+    font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal);
+    font-weight: 500; margin-bottom: 4px;
+  }
+  .kpi-sub { font-size: 0.72rem; color: var(--gray); }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 0.14em;
+    text-transform: uppercase; animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+  .scroll-line {
+    width: 1px; height: 44px;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+  }
+
+  /* ── Challenge section ───────────────────────────────────────────── */
+  .challenge-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: start; margin-top: 56px;
+  }
+  .challenge-text h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .challenge-text h2 em { font-style: italic; color: var(--gold); }
+  .challenge-text p { color: var(--gray2); margin-bottom: 16px; font-weight: 300; }
+
+  .comparison-card {
+    border: 1px solid var(--border2);
+    overflow: hidden;
+  }
+  .comp-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .comp-col-label {
+    padding: 14px 20px;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 600; text-align: center;
+  }
+  .comp-col-label.old { background: rgba(138,155,181,0.1); color: var(--gray); }
+  .comp-col-label.new { background: rgba(26,140,158,0.15); color: var(--teal2); }
+  .comp-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border2);
+  }
+  .comp-cell {
+    padding: 16px 20px; font-size: 0.88rem; line-height: 1.5;
+  }
+  .comp-cell.old { color: var(--gray); background: rgba(138,155,181,0.04); }
+  .comp-cell.new { color: var(--cream); background: rgba(26,140,158,0.06); }
+  .comp-cell.new::before {
+    content: '✦ '; color: var(--teal); font-size: 0.7rem;
+  }
+
+  /* ── Validation section ──────────────────────────────────────────── */
+  .validation-section { background: var(--navy2); padding: 120px 0; }
+  .validation-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
+  .results-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1px; background: var(--border); margin-top: 48px;
+    border: 1px solid var(--border);
+  }
+  .result-cell {
+    background: var(--navy2);
+    padding: 28px 20px;
+    transition: background 0.25s;
+  }
+  .result-cell:hover { background: rgba(26,140,158,0.08); }
+  .result-window {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 12px; font-weight: 500;
+  }
+  .result-hit {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 600; color: var(--white);
+    line-height: 1; margin-bottom: 4px;
+  }
+  .result-regime {
+    font-size: 0.75rem; color: var(--gray); margin-bottom: 16px;
+  }
+  .result-stats {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .result-stat {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem;
+  }
+  .result-stat .key { color: var(--gray); }
+  .result-stat .val { color: var(--gray2); font-weight: 500; }
+
+  .methodology-note {
+    margin-top: 32px;
+    padding: 20px 28px;
+    border-left: 2px solid var(--teal);
+    background: rgba(26,140,158,0.05);
+    font-size: 0.85rem; color: var(--gray2); font-style: italic;
+  }
+
+  /* ── Edge value section ──────────────────────────────────────────── */
+  .edge-intro {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px;
+    align-items: start; margin-top: 56px;
+  }
+  .edge-math {
+    padding: 32px;
+    border: 1px solid var(--border);
+    background: rgba(13,26,45,0.6);
+  }
+  .edge-math h3 {
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--gold); margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .math-line {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .math-line:last-child { border-bottom: none; }
+  .math-key { color: var(--gray); }
+  .math-val { color: var(--cream); font-weight: 500; font-family: 'DM Mono', monospace; font-size: 0.82rem; }
+  .math-val.highlight { color: var(--gold); }
+
+  .edge-table-wrap { margin-top: 0; }
+  .edge-table {
+    width: 100%; border-collapse: collapse;
+    border: 1px solid var(--border);
+  }
+  .edge-table th {
+    padding: 12px 16px; text-align: left;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    background: rgba(26,140,158,0.06);
+  }
+  .edge-table th:not(:first-child) { text-align: right; }
+  .edge-table td {
+    padding: 14px 16px; font-size: 0.85rem;
+    border-bottom: 1px solid rgba(200,168,76,0.08);
+    color: var(--gray2);
+  }
+  .edge-table td:not(:first-child) { text-align: right; }
+  .edge-table td:first-child { color: var(--cream); font-weight: 500; }
+  .edge-table tr:hover td { background: rgba(26,140,158,0.04); }
+  .edge-table .you-row td {
+    color: var(--gold) !important;
+    border-top: 1px solid var(--border);
+    font-style: italic;
+  }
+  .edge-table .gold { color: var(--gold2) !important; font-weight: 600; }
+  .caveat {
+    margin-top: 16px; padding: 14px 18px;
+    border-left: 2px solid var(--gold);
+    background: rgba(201,168,76,0.05);
+    font-size: 0.78rem; color: var(--gray); font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ── Architecture section ────────────────────────────────────────── */
+  .arch-section { background: var(--navy3); padding: 120px 0; }
+  .arch-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
+  .arch-pipeline {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0; margin-top: 0; max-width: 680px; margin-left: auto; margin-right: auto;
+  }
+  .arch-node {
+    width: 100%;
+    border: 1px solid var(--border2);
+    background: rgba(13,26,45,0.8);
+    padding: 24px 32px;
+    display: flex; align-items: center; gap: 20px;
+    transition: border-color 0.25s, background 0.25s;
+    cursor: default;
+  }
+  .arch-node:hover {
+    border-color: var(--teal);
+    background: rgba(26,140,158,0.08);
+  }
+  .arch-node-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600;
+    color: var(--gold); opacity: 0.85;
+    min-width: 32px; text-align: center;
+    text-shadow: 0 0 12px rgba(201, 168, 76, 0.4);
+  }
+  .arch-node-content { flex: 1; }
+  .arch-node-title {
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 4px; letter-spacing: 0.02em;
+  }
+  .arch-node-desc { font-size: 0.8rem; color: var(--gray); }
+  .arch-arrow {
+    width: 1px; height: 36px;
+    background: linear-gradient(to bottom, var(--teal2), transparent);
+    margin: 0 auto;
+    opacity: 0.5;
+  }
+  .arch-split {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; width: 100%;
+  }
+  .arch-merge { width: 1px; height: 36px; background: linear-gradient(to bottom, transparent, var(--teal2)); margin: 0 auto; opacity: 0.5; }
+
+  .arch-features {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 64px;
+    align-items: start;
+  }
+  .arch-features-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .arch-feature {
+    background: var(--navy3);
+    padding: 28px 24px;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+  }
+  .arch-feature:hover { background: rgba(201,168,76,0.05); }
+  .arch-feature-icon {
+    font-size: 1.4rem; margin-bottom: 14px;
+  }
+  .feature-icon-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.3));
+    transition: filter 0.3s ease;
+  }
+  .arch-feature:hover .feature-icon-img {
+    filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.5));
+  }
+  .arch-feature-title {
+    font-size: 0.85rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 8px;
+  }
+  .arch-feature-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── Six checks ──────────────────────────────────────────────────── */
+  .checks-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: var(--border);
+    border: 1px solid var(--border); margin-top: 48px;
+  }
+  .check-card {
+    background: var(--navy);
+    padding: 32px 28px;
+    transition: background 0.2s;
+  }
+  .check-card:hover { background: rgba(26,140,158,0.06); }
+  .check-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 600;
+    color: var(--gold); opacity: 1;
+    line-height: 1; margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  .check-title {
+    font-size: 1rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 8px;
+  }
+  .check-q {
+    font-size: 0.82rem; color: var(--teal2);
+    font-style: italic; margin-bottom: 10px;
+  }
+  .check-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── Dashboard section ───────────────────────────────────────────── */
+  .dashboard-section { background: var(--navy2); padding: 120px 0; }
+  .dashboard-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
+  .demo-frame {
+    margin-top: 48px;
+    border: 1px solid var(--border2);
+    background: rgba(8,15,30,0.9);
+    overflow: hidden;
+  }
+  .demo-frame-bar {
+    padding: 12px 20px;
+    background: rgba(26,140,158,0.08);
+    border-bottom: 1px solid var(--border2);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dot-r { width:10px;height:10px;border-radius:50%;background:#FF5F57; }
+  .dot-y { width:10px;height:10px;border-radius:50%;background:#FFBD2E; }
+  .dot-g { width:10px;height:10px;border-radius:50%;background:#28C840; }
+  .demo-label {
+    margin-left: 12px; font-size: 0.75rem;
+    color: var(--gray); letter-spacing: 0.08em;
+    font-family: 'DM Mono', monospace;
+  }
+  .demo-placeholder {
+    height: 380px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px; color: var(--gray);
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(26,140,158,0.02) 20px,
+      rgba(26,140,158,0.02) 40px
+    );
+  }
+  .demo-placeholder .icon { font-size: 2.5rem; opacity: 0.3; }
+  .demo-placeholder p { font-size: 0.85rem; letter-spacing: 0.06em; opacity: 0.5; }
+  .demo-placeholder small { font-size: 0.72rem; opacity: 0.35; }
+
+  .panels-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: var(--border);
+    border: 1px solid var(--border); margin-top: 32px;
+  }
+  .panel-card {
+    background: var(--navy2);
+    padding: 24px 22px;
+    transition: background 0.2s;
+  }
+  .panel-card:hover { background: rgba(26,140,158,0.06); }
+  .panel-num {
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; margin-bottom: 8px;
+  }
+  .panel-title {
+    font-size: 0.92rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 6px;
+  }
+  .panel-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── Data sovereignty ────────────────────────────────────────────── */
+  .sovereignty-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    background: var(--border); border: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .sov-col {
+    background: var(--navy); padding: 40px 36px;
+  }
+  .sov-col-label {
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+  }
+  .sov-col-label.stays { color: #4CAF7A; }
+  .sov-col-label.never { color: var(--gray); }
+  .sov-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .sov-item:last-child { border-bottom: none; }
+  .sov-item .mark { font-size: 1rem; margin-top: 1px; }
+  .sov-item.stays .mark { color: #4CAF7A; }
+  .sov-item.never .mark { color: rgba(138,155,181,0.4); }
+  .sov-item .text { color: var(--gray2); }
+
+  /* ── CTA section ─────────────────────────────────────────────────── */
+  .cta-section {
+    padding: 140px 60px;
+    background: linear-gradient(165deg, var(--navy) 0%, var(--navy3) 100%);
+    position: relative; overflow: hidden; max-width: 100%;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .cta-content {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start;
+  }
+  .cta-content h2 {
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 300; line-height: 1.15; margin-bottom: 24px;
+  }
+  .cta-content h2 em { font-style: italic; color: var(--gold); }
+  .cta-content p { color: var(--gray2); font-weight: 300; margin-bottom: 40px; }
+
+  .cta-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold); color: var(--navy);
+    padding: 14px 32px; font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; border: none; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid var(--gray);
+    color: var(--gray2); background: transparent;
+    padding: 14px 32px; font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal2); }
+
+  .what-available {
+    padding: 32px;
+    border: 1px solid var(--border);
+    background: rgba(13,26,45,0.5);
+  }
+  .what-available h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; margin-bottom: 20px;
+  }
+  .avail-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.82rem; color: var(--gray2);
+  }
+  .avail-item:last-of-type { border-bottom: none; margin-bottom: 20px; }
+  .avail-item::before { content: '→'; color: var(--teal); margin-top: 1px; }
+  .avail-note {
+    font-size: 0.73rem; color: var(--gray); font-style: italic;
+    padding-top: 16px; border-top: 1px solid var(--border);
+    line-height: 1.6;
+  }
+
+  /* ── Glossary ────────────────────────────────────────────────────── */
+  .glossary-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 2px; background: var(--border);
+    border: 1px solid var(--border); margin-top: 48px;
+  }
+  .gloss-item {
+    background: var(--navy2); padding: 24px 28px;
+    transition: background 0.2s;
+  }
+  .gloss-item:hover { background: rgba(26,140,158,0.05); }
+  .gloss-term {
+    font-size: 0.82rem; font-weight: 600;
+    color: var(--gold); margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .gloss-def { font-size: 0.8rem; color: var(--gray); line-height: 1.65; }
+
+  /* ── Footer ──────────────────────────────────────────────────────── */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--gray);
+  }
+  footer .logo-f {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--cream);
+  }
+  footer .logo-f span { color: var(--gold); }
+
+  /* ── Responsive ──────────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero { padding: 120px 24px 60px; }
+    .hero-kpis { grid-template-columns: repeat(2, 1fr); }
+    .challenge-grid, .edge-intro, .cta-content,
+    .sovereignty-grid, .glossary-grid { grid-template-columns: 1fr; }
+    .results-grid, .arch-features, .checks-grid,
+    .panels-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .validation-section, .arch-section, .dashboard-section,
+    .cta-section { padding: 80px 0; }
+    .validation-inner, .arch-inner, .dashboard-inner { padding: 0 24px; }
+  }
+
+/* ── Active Navigation State ───────────────────────────────────────── */
+.nav-links a.active {
+  color: var(--gold);
+  position: relative;
+}
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold);
+}
+
+
+/* ── Footer ────────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy2);
+  border-top: 1px solid var(--border);
+  padding: 80px 60px 40px;
+  margin-top: 0;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 60px;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+.footer-brand span { color: var(--gold); }
+.footer-tagline {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.6;
+  max-width: 280px;
+}
+.footer-heading {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  color: var(--gray2);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--gray);
+}
+@media (max-width: 900px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+
+/* ── Section Label Enhancement ────────────────────────────────────── */
+.section-label {
+  color: rgba(201, 168, 76, 0.85) !important;
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+  letter-spacing: 0.2em;
+}
+
+
+/* ── Validation Number Enhancement ─────────────────────────────────── */
+.validation-number {
+  color: var(--gold) !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+  opacity: 1;
+}
+.step-number {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+  color: var(--navy) !important;
+  box-shadow: 0 0 20px rgba(26, 140, 158, 0.4);
+}
+
+
+/* ── Demo Carousel ─────────────────────────────────────────────────── */
+.demo-section {
+  padding: 100px 60px;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
+}
+.demo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.demo-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.demo-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+.demo-subtitle {
+  font-size: 1rem;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--navy3);
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.carousel-label {
+  position: absolute;
+  right: 15%;
+  top: 45%;
+  transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--gold);
+  font-style: italic;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+}
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(8, 15, 30, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  z-index: 10;
+}
+.carousel-nav:hover {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+}
+.carousel-prev { left: 16px; }
+.carousel-next { right: 16px; }
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gray);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.carousel-dot.active {
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+  transform: scale(1.2);
+}
+.carousel-dot:hover {
+  background: var(--teal);
+}
+.slide-caption {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+.slide-caption strong {
+  color: var(--teal);
+}
+
+/* ── MOBILE PERFORMANCE OPTIMIZATIONS ─────────────────────────────── */
+@media (max-width: 768px) {
+  /* Disable grain overlay for performance */
+  body::before { display: none; }
+  
+  /* Disable scroll-reveal animations */
+  .reveal { 
+    opacity: 1 !important; 
+    transform: none !important; 
+    transition: none !important;
+  }
+  
+  /* Remove nav blur effect */
+  nav.scrolled { 
+    backdrop-filter: none; 
+  }
+  
+  /* Make images responsive */
+  img { 
+    max-width: 100%; 
+    height: auto; 
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-logo">JEPX <span>AI</span></div>
+  <div class="nav-links">
+    <a href="#challenge">The Problem</a>
+    <a href="#validation">Validation</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#glossary">Glossary</a>
+  </div>
+  <a href="#contact" class="nav-cta">Request Briefing</a>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-deadline reveal">
+      <span class="dot"></span>
+      April 2026 — JEPX manual trading screens eliminated
+    </div>
+    <h1 class="reveal reveal-delay-1">
+      Probability-<em>Calibrated</em><br>
+      <span class="line2">Bid Intelligence</span><br>
+      for JEPX
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      A working prototype that replaces single-price forecasts with complete probability distributions — validated on 52,608 real JEPX observations across three market regimes and five independent out-of-sample windows.
+    </p>
+    <div class="hero-kpis reveal reveal-delay-3">
+      <div class="kpi-cell">
+        <div class="kpi-val">57–<span>74</span>%</div>
+        <div class="kpi-label">Directional Hit Rate</div>
+        <div class="kpi-sub">All tested seasons</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val"><span>3</span> yrs</div>
+        <div class="kpi-label">Real JEPX Data</div>
+        <div class="kpi-sub">2022 spike → 2024 solar era</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val"><span>5</span></div>
+        <div class="kpi-label">Independent OOS Windows</div>
+        <div class="kpi-sub">No regime-specific tuning</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val"><span>100</span>%</div>
+        <div class="kpi-label">Data Sovereignty</div>
+        <div class="kpi-sub">Your infrastructure only</div>
+      </div>
+    </div>
+  </div>
+  
+    Scroll
+  </div>
+</div>
+
+<!-- ── CHALLENGE ───────────────────────────────────────────────────────── -->
+<section id="challenge" style="padding-top: 60px;">
+  <div class="label">The Problem</div>
+  <div class="challenge-grid">
+    <div class="challenge-text reveal">
+      <h2>Point forecasts <em>lag behind</em> in blind auctions</h2>
+      <p>JEPX operates a blind single-price auction. You must commit quantities before the market clears, without seeing competitors' bids. A single predicted price tells you nothing about how much capital to risk or how to spread exposure.</p>
+      <p>The correct response to an uncertainty range of ¥11,000 ± ¥200 is fundamentally different from ¥11,000 ± ¥3,000. A point forecast cannot express this distinction — and with solar penetration creating bimodal intraday regimes, it never will.</p>
+      <p style="color:var(--gray2); margin-top:24px; font-size:0.85rem; border-left:2px solid var(--teal); padding-left:16px;">
+        This system maintains a full probability distribution over all possible clearing prices for each delivery period — updated continuously as market data arrives.
+      </p>
+    </div>
+    <div class="comparison-card reveal reveal-delay-2">
+      <div class="comp-header">
+        <div class="comp-col-label old">Conventional Approach</div>
+        <div class="comp-col-label new">This System</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell old">"Tomorrow's price will be ¥12,000"</div>
+        <div class="comp-cell new">70% probability of ¥10,500–¥14,000, with upside tail risk to ¥18,000</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell old">Fixed bids based on point estimates</div>
+        <div class="comp-cell new">Dynamic bid curves that adapt to uncertainty</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell old">Opaque, black-box recommendations</div>
+        <div class="comp-cell new">Every bid traceable from raw data to final quantity</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell old">Lags behind during bimodal intraday regimes</div>
+        <div class="comp-cell new">Multimodal distributions captured naturally</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VALIDATION ──────────────────────────────────────────────────────── -->
+<div class="validation-section" id="validation">
+  <div class="validation-inner">
+    <div class="label reveal">Empirical Validation</div>
+    <h2 class="reveal reveal-delay-1" style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;max-width:640px;">
+      Tested across every regime Japan's power market has seen since 2022
+    </h2>
+
+    <div class="results-grid">
+      <div class="result-cell reveal reveal-delay-1">
+        <div class="result-window">2022 — Ukraine Spike</div>
+        <div class="result-hit">74.3%</div>
+        <div class="result-regime">¥100,000/MWh peaks</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="key">Sharpe</span><span class="val">0.318</span></div>
+          <div class="result-stat"><span class="key">Max DD</span><span class="val">−7.9%</span></div>
+          <div class="result-stat"><span class="key">Trades/day</span><span class="val">3.4</span></div>
+        </div>
+      </div>
+      <div class="result-cell reveal reveal-delay-2">
+        <div class="result-window">2023 — Normalising</div>
+        <div class="result-hit">66.0%</div>
+        <div class="result-regime">Post-crisis stabilisation</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="key">Sharpe</span><span class="val">0.413</span></div>
+          <div class="result-stat"><span class="key">Max DD</span><span class="val">−41.0%</span></div>
+          <div class="result-stat"><span class="key">Trades/day</span><span class="val">12.9</span></div>
+        </div>
+      </div>
+      <div class="result-cell reveal reveal-delay-3">
+        <div class="result-window">2024 — Low Vol Baseline</div>
+        <div class="result-hit">62.3%</div>
+        <div class="result-regime">Solar-dominated era</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="key">Sharpe</span><span class="val">0.173</span></div>
+          <div class="result-stat"><span class="key">Max DD</span><span class="val">−46.5%</span></div>
+          <div class="result-stat"><span class="key">Trades/day</span><span class="val">8.1</span></div>
+        </div>
+      </div>
+      <div class="result-cell reveal reveal-delay-4">
+        <div class="result-window">Q1 2024 — Winter Peak</div>
+        <div class="result-hit">73.0%</div>
+        <div class="result-regime">~1,170 executed trades</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="key">Sharpe</span><span class="val">0.224</span></div>
+          <div class="result-stat"><span class="key">Max DD</span><span class="val">−3.6%</span></div>
+          <div class="result-stat"><span class="key">Trades/day</span><span class="val">12.7</span></div>
+        </div>
+      </div>
+      <div class="result-cell reveal reveal-delay-5">
+        <div class="result-window">Q2 2024 — High Solar</div>
+        <div class="result-hit">57.2%</div>
+        <div class="result-regime">~1,530 trades — largest sample</div>
+        <div class="result-stats">
+          <div class="result-stat"><span class="key">Sharpe</span><span class="val">0.288</span></div>
+          <div class="result-stat"><span class="key">Max DD</span><span class="val">−6.9%</span></div>
+          <div class="result-stat"><span class="key">Trades/day</span><span class="val">16.8</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="methodology-note reveal">
+      All results are from strict out-of-sample evaluation — the model was calibrated on data preceding each test window and never shown test data during training. Simulated PnL is pre-cost and directional only. Real-world net results will reflect your organisation's transaction costs, execution infrastructure, and market impact.
+    </div>
+  </div>
+</div>
+
+<!-- ── COMMERCIAL EDGE ──────────────────────────────────────────────────── -->
+<section id="edge">
+  <div class="label reveal">Commercial Value</div>
+  <h2 class="reveal reveal-delay-1" style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;max-width:640px;">
+    What a 5% edge is actually <em>worth</em>
+  </h2>
+  <div class="edge-intro">
+    <div class="reveal reveal-delay-1">
+      <p style="color:var(--gray2);margin-bottom:24px;font-weight:300;">
+        Moving from 50% to 55% directional accuracy adds 5 extra wins <em>and</em> removes 5 losses per 100 trades — a net swing of 10 outcomes. At institutional position sizes, this compounds materially over a trading year.
+      </p>
+      <div class="edge-math">
+        <h3>Illustration: Conservative Assumptions</h3>
+        <div class="math-line">
+          <span class="math-key">Price captured per trade</span>
+          <span class="math-val">¥500/MWh (conservative)</span>
+        </div>
+        <div class="math-line">
+          <span class="math-key">Net swing per 100 trades</span>
+          <span class="math-val">10 outcomes (5% edge × 2)</span>
+        </div>
+        <div class="math-line">
+          <span class="math-key">Active trading days per year</span>
+          <span class="math-val">~250 days</span>
+        </div>
+        <div class="math-line">
+          <span class="math-key">Incremental edge outcomes/year</span>
+          <span class="math-val highlight">200 additional wins</span>
+        </div>
+      </div>
+      <div class="caveat" style="margin-top:16px;">
+        ¥500/MWh is a conservative capture assumption. Actual edge value depends on your position sizes, execution costs, and market impact. This represents incremental value above a random 50% baseline — not gross revenue.
+      </div>
+    </div>
+    <div class="edge-table-wrap reveal reveal-delay-2">
+      <table class="edge-table">
+        <thead>
+          <tr>
+            <th>Participant Profile</th>
+            <th>Typical Daily Volume</th>
+            <th>Illustrative Annual Impact (¥)</th>
+            <th>Approx. USD Equivalent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Independent power producer</td>
+            <td>~20 MWh</td>
+            <td class="gold">¥1M range</td>
+            <td>~$7K</td>
+          </tr>
+          <tr>
+            <td>Regional trading desk</td>
+            <td>~100 MWh</td>
+            <td class="gold">¥5M range</td>
+            <td>~$35K</td>
+          </tr>
+          <tr>
+            <td>Utility portfolio</td>
+            <td>~500 MWh</td>
+            <td class="gold">¥25M range</td>
+            <td>~$170K</td>
+          </tr>
+          <tr>
+            <td>Institutional trader</td>
+            <td>~2,000 MWh</td>
+            <td class="gold">¥100M range</td>
+            <td>~$670K</td>
+          </tr>
+          <tr class="you-row">
+            <td>Your Organisation</td>
+            <td colspan="3" style="text-align: left; font-style: italic; color: var(--gray); padding-left: 20px;">Let's explore what this could mean for your operations</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size: 0.75rem; color: var(--gray); margin-top: 16px; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Figures are illustrative only, based on a conservative ¥500/MWh capture assumption. Actual outcomes depend on position sizing, execution costs, market conditions, and organisational constraints.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── ARCHITECTURE ─────────────────────────────────────────────────────── -->
+<div class="arch-section" id="architecture">
+  <div class="arch-inner">
+    <div class="label reveal">System Design</div>
+    <h2 class="reveal reveal-delay-1" style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;max-width:640px;">
+      Built for institutional <em>governance</em>
+    </h2>
+    <p class="reveal reveal-delay-2" style="color:var(--gray2);max-width:580px;margin-top:16px;font-weight:300;">
+      Five specialised components in strict unidirectional flow. No component can override another's decisions. Every recommendation is traceable from raw data to final output with no black-box steps.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px;">
+      <div class="arch-pipeline reveal reveal-delay-2">
+        <div class="arch-node">
+          <div class="arch-node-num">1</div>
+          <div class="arch-node-content">
+            <div class="arch-node-title">Market Data Ingestion</div>
+            <div class="arch-node-desc">Schema validation · Event streaming · Column integrity checks</div>
+          </div>
+        </div>
+        <div class="arch-arrow"></div>
+        <div class="arch-node">
+          <div class="arch-node-num">2</div>
+          <div class="arch-node-content">
+            <div class="arch-node-title">Trading Orchestration</div>
+            <div class="arch-node-desc">Pipeline lifecycle · Portfolio-level MW cap · Output persistence</div>
+          </div>
+        </div>
+        <div class="arch-arrow"></div>
+        <div class="arch-split">
+          <div class="arch-node">
+            <div class="arch-node-num">3</div>
+            <div class="arch-node-content">
+              <div class="arch-node-title">Probability Inference Engine</div>
+              <div class="arch-node-desc">Real-time distribution engine with proprietary market memory</div>
+            </div>
+          </div>
+          <div class="arch-node">
+            <div class="arch-node-num">4</div>
+            <div class="arch-node-content">
+              <div class="arch-node-title">Validation Engine</div>
+              <div class="arch-node-desc">Multi-layer risk filter · Dynamic position scaling</div>
+            </div>
+          </div>
+        </div>
+        <div class="arch-merge"></div>
+        <div class="arch-node">
+          <div class="arch-node-num">5</div>
+          <div class="arch-node-content">
+            <div class="arch-node-title">Execution Engine</div>
+            <div class="arch-node-desc">Position sizing · Adaptive stop-loss · Append-only journal</div>
+          </div>
+        </div>
+        <div class="arch-arrow"></div>
+        <div class="arch-node" style="border-color:var(--gold);opacity:0.9;">
+          <div class="arch-node-num" style="color:var(--gold);">✓</div>
+          <div class="arch-node-content">
+            <div class="arch-node-title" style="color:var(--gold);">Human Approval Gate</div>
+            <div class="arch-node-desc">Named trader reviews and confirms every bid before submission</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-features-wrap reveal reveal-delay-3">
+        <div class="arch-features" style="grid-template-columns:1fr 1fr;margin-top:0;">
+          <div class="arch-feature">
+            <div class="arch-feature-icon"><img src="icon_arrow.png" alt="Flow" class="feature-icon-img"></div>
+            <div class="arch-feature-title">Unidirectional Flow</div>
+            <div class="arch-feature-desc">Data moves in one direction only. No component overrides another's decisions — eliminates cascading failures at the architectural level.</div>
+          </div>
+          <div class="arch-feature">
+            <div class="arch-feature-icon"><img src="icon_audit.png" alt="Audit" class="feature-icon-img"></div>
+            <div class="arch-feature-title">Full Audit Trail</div>
+            <div class="arch-feature-desc">Every bid is reconstructable from raw input to final quantity. Append-only trade journal — records are never modified, every run is uniquely identified.</div>
+          </div>
+          <div class="arch-feature">
+            <div class="arch-feature-icon"><img src="icon_human.png" alt="Human" class="feature-icon-img"></div>
+            <div class="arch-feature-title">Human in the Loop</div>
+            <div class="arch-feature-desc">The system cannot submit bids without explicit human confirmation. No autonomous execution pathway. A named trader approves every schedule.</div>
+          </div>
+          <div class="arch-feature">
+            <div class="arch-feature-icon"><img src="icon_zeroext.png" alt="Local" class="feature-icon-img"></div>
+            <div class="arch-feature-title">Zero External Calls</div>
+            <div class="arch-feature-desc">Runs entirely on your infrastructure. No cloud dependencies, no third-party feeds, no data leaves your environment at any point.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DEMO CAROUSEL ──────────────────────────────────────────────────── -->
+<section class="demo-section reveal">
+  <div class="demo-container">
+    <div class="demo-header">
+      <h2 class="demo-title">Interface Preview</h2>
+      <p class="demo-subtitle">A walkthrough of the bid optimisation dashboard — from inference to execution</p>
+    </div>
+    
+    <div class="carousel-wrapper">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <img src="Dashboard_screen1_cropped.png" alt="Dashboard Overview">
+        </div>
+        <div class="carousel-slide">
+          <img src="Dashboard_screen (panel 1).png" alt="Bayesian Posterior Distribution">
+          <span class="carousel-label">Price Distribution</span>
+        </div>
+        <div class="carousel-slide">
+          <img src="Dashboard_screen (panel 3).png" alt="PnL Performance Curve">
+          <span class="carousel-label">Performance Curve</span>
+        </div>
+        <div class="carousel-slide">
+          <img src="Dashboard_screen (panel 4).png" alt="Exit Reason Breakdown">
+          <span class="carousel-label">Exit Analysis</span>
+        </div>
+        <div class="carousel-slide">
+          <img src="Dashboard_screen (panel 6).png" alt="Volatility vs PnL Analysis">
+          <span class="carousel-label">Risk Attribution</span>
+        </div>
+      </div>
+      
+      <button class="carousel-nav carousel-prev" aria-label="Previous slide">‹</button>
+      <button class="carousel-nav carousel-next" aria-label="Next slide">›</button>
+    </div>
+    
+    <div class="carousel-dots">
+      <span class="carousel-dot active"></span>
+      <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SIX CHECKS ──────────────────────────────────────────────────────── -->
+<section id="risk">
+  <div class="label reveal">Risk Management</div>
+  <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;line-height:1.2;max-width:100%;margin-left:auto;margin-right:auto;text-align:center;white-space:nowrap;">
+    Multiple layers between a signal and your <em>capital</em>
+  </h2>
+  <p class="reveal reveal-delay-2" style="color:var(--gray2);max-width:700px;margin-top:16px;font-weight:300;margin-left:auto;margin-right:auto;text-align:center;">
+    Every proposed trade passes multiple independent checks before reaching your approval queue.<br>A failing check scales back the position — the system never executes blindly.
+  </p>
+  <div class="checks-grid">
+    <div class="check-card reveal reveal-delay-1">
+      <div class="check-num">01</div>
+      <div class="check-title">Edge Detection</div>
+      <div class="check-q">Is the expected profit sufficient for the risk taken?</div>
+      <div class="check-desc">Only genuine, statistically meaningful signals pass. Noise trades are suppressed before they reach sizing.</div>
+    </div>
+    <div class="check-card reveal reveal-delay-2">
+      <div class="check-num">02</div>
+      <div class="check-title">Volatility Alignment</div>
+      <div class="check-q">Does position size match current market uncertainty?</div>
+      <div class="check-desc">Exposure scales automatically with signal quality. Higher uncertainty means a smaller position — not the same position.</div>
+    </div>
+    <div class="check-card reveal reveal-delay-3">
+      <div class="check-num">03</div>
+      <div class="check-title">Temporal Consistency</div>
+      <div class="check-q">Does this bid fit historical patterns for this hour?</div>
+      <div class="check-desc">Guards against recommendations that are correct on average but wrong for a specific time-of-day regime.</div>
+    </div>
+    <div class="check-card reveal reveal-delay-1">
+      <div class="check-num">04</div>
+      <div class="check-title">Capital Exposure Limit</div>
+      <div class="check-q">Will this trade breach predefined risk thresholds?</div>
+      <div class="check-desc">Configurable ceiling on single-period concentration. No position can exceed the agreed capital fraction.</div>
+    </div>
+    <div class="check-card reveal reveal-delay-2">
+      <div class="check-num">05</div>
+      <div class="check-title">Market Regime Filter</div>
+      <div class="check-q">Is this the right trade type for this trading session?</div>
+      <div class="check-desc">Systematic suppression of position types with historically poor performance in specific market windows.</div>
+    </div>
+    <div class="check-card reveal reveal-delay-3">
+      <div class="check-num">06</div>
+      <div class="check-title">Confidence Calibration Guard</div>
+      <div class="check-q">Is the system's certainty appropriately calibrated?</div>
+      <div class="check-desc">Detects and scales back trades when the probability engine is near-uniform — when it genuinely does not know. Overconfidence is treated as a risk factor.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DATA SOVEREIGNTY ─────────────────────────────────────────────────── -->
+<section id="sovereignty" style="padding-top: 60px;">
+  <div class="label reveal">Data Control</div>
+  <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;line-height:1.2;max-width:100%;margin-left:auto;margin-right:auto;text-align:center;white-space:nowrap;">
+    This is not SaaS. Your data <em>never</em> leaves.
+  </h2>
+  <p class="reveal reveal-delay-2" style="color:var(--gray2);max-width:700px;margin-top:16px;font-weight:300;margin-left:auto;margin-right:auto;text-align:center;">
+    A complete system design that deploys and operates entirely within your own secure environment. No subscription, no vendor lock-in, no shared infrastructure.
+  </p>
+  <div class="sovereignty-grid reveal reveal-delay-2">
+    <div class="sov-col">
+      <div class="sov-col-label stays">✓ What stays with you</div>
+      <div class="sov-item stays"><span class="mark">✓</span><span class="text">Your price history and trading positions</span></div>
+      <div class="sov-item stays"><span class="mark">✓</span><span class="text">Your calibration parameters and model state</span></div>
+      <div class="sov-item stays"><span class="mark">✓</span><span class="text">Your complete audit logs and trade journal</span></div>
+      <div class="sov-item stays"><span class="mark">✓</span><span class="text">Your competitive strategy and signal intelligence</span></div>
+    </div>
+    <div class="sov-col">
+      <div class="sov-col-label never">✗ What you won't need</div>
+      <div class="sov-item never"><span class="mark">✗</span><span class="text">Cloud hosting for this model if it's not intended for external network</span></div>
+      <div class="sov-item never"><span class="mark">✗</span><span class="text">Third-party model parameters or shared model weights</span></div>
+      <div class="sov-item never"><span class="mark">✗</span><span class="text">SaaS subscription or per-trade licensing fees</span></div>
+      <div class="sov-item never"><span class="mark">✗</span><span class="text">Vendor lock-in or unexplained proprietary formats</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ─────────────────────────────────────────────────────────────── -->
+<div class="cta-section" id="contact" style="padding-top: 40px;">
+  <div class="cta-inner">
+    <div class="cta-content">
+      <div class="reveal">
+        <div class="label">Start the Conversation</div>
+        <h2>The April 2026 deadline is <em>fixed.</em></h2>
+        <p style="color:var(--gray2);font-weight:300;max-width:480px;">
+          The question is whether your organisation arrives at it with a validated, proprietary system on your own infrastructure — or with a dependency on external platforms whose incentives may not align with yours.
+        </p>
+        <div class="cta-actions">
+          <a href="mailto:cheryl@thearc.cloud?subject=JEPX%20AI%20Bid%20Optimiser%20-%20Enquiry" class="btn-primary">Contact to Find Out More →</a>
+        </div>
+      </div>
+      <div class="what-available reveal reveal-delay-2">
+        <h3>Available for Collaborative Development</h3>
+        <div class="avail-item">Technical architecture documentation and system design guide</div>
+        <div class="avail-item">Annotated source code with implementation notes</div>
+        <div class="avail-item">Validation methodology and backtesting results package</div>
+        <div class="avail-item">Integration roadmap for your existing trading infrastructure</div>
+        <div class="avail-item">On-site or remote technical walk-through for your teams</div>
+        <div class="avail-note">
+          All results are from simulation on real JEPX historical data. Live trading requires JEPX and OCCTO API connectivity and your organisation's own execution infrastructure. No SaaS subscription or neural network software required.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── GLOSSARY ─────────────────────────────────────────────────────────── -->
+<section id="glossary">
+  <div class="label reveal">Reference</div>
+  <h2 class="reveal reveal-delay-1" style="font-size:clamp(1.8rem,2.8vw,2.5rem);font-weight:300;line-height:1.3;">
+    Glossary of Terms
+  </h2>
+  <div class="glossary-grid">
+    <div class="gloss-item reveal reveal-delay-1">
+      <div class="gloss-term">JEPX</div>
+      <div class="gloss-def">Japan Electric Power Exchange — Japan's only wholesale electricity marketplace, where power is bought and sold across 48 half-hourly delivery slots each day.</div>
+    </div>
+    <div class="gloss-item reveal reveal-delay-2">
+      <div class="gloss-term">AR(1) — AutoRegressive Order 1</div>
+      <div class="gloss-def">A time series technique where today's value is informed by yesterday's equivalent value. The 10:00 price distribution is anchored to the previous day's 10:00 distribution — midday prices correlate with previous midday prices, not with today's 09:30 prices.</div>
+    </div>
+    <div class="gloss-item reveal reveal-delay-1">
+      <div class="gloss-term">Bid Curve</div>
+      <div class="gloss-def">A structured schedule of price-quantity pairs submitted to JEPX before the auction closes — specifying how much electricity your organisation will buy or sell at each possible clearing price.</div>
+    </div>
+    <div class="gloss-item reveal reveal-delay-2">
+      <div class="gloss-term">Hit Rate</div>
+      <div class="gloss-def">The percentage of executed trades where the system correctly predicted the direction of price movement. A coin flip produces 50%; 57–74% represents a commercially meaningful and exploitable edge.</div>
+    </div>
+    <div class="gloss-item reveal reveal-delay-1">
+      <div class="gloss-term">Out-of-Sample (OOS) Testing</div>
+      <div class="gloss-def">The system was trained on historical data from one period and tested on a later period it had never seen. This is the standard test for whether a model captures real market structure or merely memorises history.</div>
+    </div>
+    <div class="gloss-item reveal reveal-delay-2">
+      <div class="gloss-term">Probability Distribution</div>
+      <div class="gloss-def">Instead of a single price prediction, the system maintains a complete probability curve over all possible prices for each delivery period — updated in real time as each new market observation arrives. Bid quantities are sized proportionally to this curve, concentrating exposure where confidence is highest.</div>
+    </div>
+    <div class="gloss-item reveal reveal-delay-1">
+      <div class="gloss-term">Sharpe Ratio</div>
+      <div class="gloss-def">Return per unit of risk. Higher is better. Above 0.2 is considered acceptable for a real-market trading system; above 0.4 is strong. Positive throughout all tested windows.</div>
+    </div>
+    <div class="gloss-item reveal reveal-delay-2">
+      <div class="gloss-term">Human-in-the-Loop</div>
+      <div class="gloss-def">The requirement that a named human reviews and approves every bid recommendation before it is submitted to the exchange. The system is architecturally incapable of executing without this confirmation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+<footer style="text-align: center; padding: 40px 20px; background: var(--navy2); border-top: 1px solid var(--border);">
+  <div style="color: #fff; font-size: 0.9rem; margin-bottom: 8px;">
+    © 2026 The Arc | Treasury Transformation • AI Innovation
+  </div>
+  <div style="color: #888; font-size: 0.8rem;">
+    Architecting next-generation solutions where finance meets innovation
+  </div>
+</footer>
+
+<!-- ── JS: scroll reveal + nav ─────────────────────────────────────────── -->
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Intersection observer for reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+<script>
+// Active Navigation Highlighting
+(function() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  function updateActiveNav() {
+    let current = '';
+    const scrollPos = window.scrollY + 200;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('load', updateActiveNav);
+})();
+</script>
+
+
+<script>
+// Demo Carousel
+(function() {
+  const track = document.querySelector('.carousel-track');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const prevBtn = document.querySelector('.carousel-prev');
+  const nextBtn = document.querySelector('.carousel-next');
+  
+  if (!track || slides.length === 0) return;
+  
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+  
+  function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    currentSlide = index;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+  
+  if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+  
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => goToSlide(i));
+  });
+  
+  // Auto-advance every 6 seconds
+  setInterval(() => goToSlide(currentSlide + 1), 6000);
+  
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  track.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goToSlide(currentSlide + 1);
+      else goToSlide(currentSlide - 1);
+    }
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>
