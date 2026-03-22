@@ -268,6 +268,13 @@
             gap: 12px;
         }
         
+        /* Guides Container - stacks guide sections vertically */
+        .guides-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
         @media (max-width: 1100px) {
             .bottom-grid {
                 grid-template-columns: 1fr;
@@ -381,7 +388,7 @@
     <div class="container">
         <header>
             <h1>COMMODITIES DASHBOARD</h1>
-            <div class="last-updated">LAST UPDATE: 2026-03-22 11:46:44</div>
+            <div class="last-updated">LAST UPDATE: 2026-03-22 11:55:47</div>
         </header>
         
         <div class="dashboard-grid">
@@ -750,14 +757,27 @@
 
         </div>
             
-            <!-- Educational Guide Section -->
-            <div class="guide-section">
-                <a href="commodity-trading-guide.html" target="_blank" class="guide-link">
-                    <div class="guide-text">Free Educational Guide</div>
-                    <div class="guide-icon-container">
-                        <img src="Guide_Logo.png" alt="Educational Guide" class="guide-icon">
-                    </div>
-                </a>
+            <!-- Guides Container -->
+            <div class="guides-container">
+                <!-- Educational Guide Section -->
+                <div class="guide-section">
+                    <a href="commodity-trading-guide.html" target="_blank" class="guide-link">
+                        <div class="guide-text">Free Educational Guide</div>
+                        <div class="guide-icon-container">
+                            <img src="Guide_Logo.png" alt="Educational Guide" class="guide-icon">
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- AI-Powered Resources Section -->
+                <div class="guide-section">
+                    <a href="AIresources.html" target="_blank" class="guide-link">
+                        <div class="guide-text">AI-POWERED RESOURCES</div>
+                        <div class="guide-icon-container">
+                            <img src="AI_book_cover.jpg" alt="AI Resources" class="guide-icon">
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
