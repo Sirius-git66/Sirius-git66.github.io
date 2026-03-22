@@ -1,108 +1,24 @@
 {
-  "last_updated": "2026-03-21 09:11",
+  "last_updated": "2026-03-22 09:44",
   "items": [
     {
-      "title": "Spot Prices Wrap: Natural Gas Cash Weakens as Demand Hits 10-Day Low",
-      "link": "https://naturalgasintel.com/news/spot-prices-wrap-natural-gas-cash-weakens-as-demand-hits-10-day-low/",
-      "summary": "Physical natural gas prices for Saturday through Monday delivery fell at most locations on Friday amid faltering demand as temperatures warmed.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Futures Settle: Natural Gas Slips as Weak Fundamentals Outweigh Middle East Chaos",
-      "link": "https://naturalgasintel.com/news/futures-settle-natural-gas-slips-as-weak-fundamentals-outweigh-middle-east-chaos/",
-      "summary": "U.S. natural gas futures softened on Friday, steered lower by bearish demand and supply signals despite mounting anxiety over the destruction of vital gas infrastructure in the Middle East.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "MidDay Snapshot: Cash Natural Gas Weakens on Broad Demand Erosion",
-      "link": "https://naturalgasintel.com/news/midday-snapshot-cash-natural-gas-weakens-on-broad-demand-erosion/",
-      "summary": "Cash natural gas prices trended mostly lower in the week’s final session as Saturday–Monday trading reflected softer demand. Milder weather and weekend business closures pressured residential, commercial and industrial consumption.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "North Field Expansion Project Delays Likely as Qatari LNG Output Crippled by Iranian Attacks",
-      "link": "https://naturalgasintel.com/news/north-field-expansion-project-delays-likely-as-qatari-lng-output-crippled-by-iranian-attacks/",
-      "summary": "QatarEnergy expects the Iranian missile attacks on its Ras Laffan Industrial City earlier this week to cost it roughly $20 billion in annual revenue until the damage is repaired.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Middle East War Jolted Global Natural Gas Prices, Could Henry Hub Spike Too?",
-      "link": "https://naturalgasintel.com/news/middle-east-war-jolted-global-natural-gas-prices-could-henry-hub-spike-too/",
-      "summary": "The war in the Middle East has caused global shockwaves in the energy world, but the impact on U.S. natural gas prices has been somewhat muted so far due to record domestic production and a healthy supply/demand balance.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Natural Gas Forward Prices Slide as Strong Supply, Spring Eclipse Mideast Risk",
-      "link": "https://naturalgasintel.com/news/natural-gas-forward-prices-slide-as-strong-supply-spring-eclipse-mideast-risk/",
-      "summary": "Strong production, healthy storage inventories and the fast approaching shoulder season have outweighed the uncertainties of an escalating conflict in the Middle East and dragged down U.S. natural gas forward prices.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Midmorning Markets: Outsized South Central Natural Gas Storage Injection Pressures Permian Prices",
-      "link": "https://naturalgasintel.com/news/midmorning-markets-outsized-south-central-natural-gas-storage-injection-pressures-permian-prices/",
-      "summary": "Operators in the South Central region got an early — and significant — start to the natural gas storage injection season, the latest government inventory data showed. A deficit of supply compared with historical norms narrowed by 30% and laid another",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "What Does a 60-Day Suspension of the Jones Act Mean for U.S. LNG?",
-      "link": "https://naturalgasintel.com/news/what-does-a-60-day-suspension-of-the-jones-act-mean-for-us-lng/",
-      "summary": "As energy markets shift to adapt to extended supply disruptions in the Middle East, industry and economic experts are tempering expectations for a policy fix for rising fuel prices.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "US Drillers Add Oil Rigs For Second Week In A Row As Prices Soar",
-      "link": "https://oilprice.com/Energy/Crude-Oil/US-Drillers-Add-Oil-Rigs-For-Second-Week-In-A-Row-As-Prices-Soar.html",
-      "summary": "The total number of active drilling rigs for oil and gas in the United States fell this week, according to new data that Baker Hughes published on Friday, bringing the total rig count in the US to 552 this week, down 41 from this same time last year.",
+      "title": "Nuclear in the Spotlight amid Oil, Gas Crunch",
+      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/Nuclear-in-the-Spotlight-amid-Oil-Gas-Crunch.html",
+      "summary": "Nuclear energy has been making a comeback recently as one of the low-carbon baseload generation options. This comeback is set to accelerate amid the Middle Eastern crisis and the oil and gas squeeze it is causing. The only problem is that nuclear cap",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Oil Prices Ease As US Pulls Out All Stops To Secure Supply",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Ease-As-US-Pulls-Out-All-Stops-To-Secure-Supply.html",
-      "summary": "Oil prices pulled back Friday, but not because the market suddenly feels safe. This is more of a tactical breather than a trend change. Brent slipped back toward the $109 level, while WTI hovered in the high-$90s, easing from the week’s Thursday spik",
+      "title": "Big Oil Flocks to Alaska in Record-Setting Petroleum Lease Sale",
+      "link": "https://oilprice.com/Energy/Energy-General/Big-Oil-Flocks-to-Alaska-in-Record-Setting-Petroleum-Lease-Sale.html",
+      "summary": "The first lease sale in the National Petroleum Reserve-Alaska in seven years became the most successful auction in the area ever, as oil majors bid on hundreds of tracts, signaling they haven’t given up on Alaska’s petroleum resources despite develop",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "U.S. Bets on Natural Gas to Power 10 GW AI Buildout in Ohio",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/US-Bets-on-Natural-Gas-to-Power-10-GW-AI-Buildout-in-Ohio.html",
-      "summary": "Amid the Iranian war and oil price crisis, the Department of Energy, alongside the Department of Commerce, has unveiled a public-private partnership with SoftBank and AEP Ohio that centers on one thing the AI boom desperately needs but rarely talks a",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Why the Global Oil System Cannot Replace Hormuz Flows",
-      "link": "https://oilprice.com/Energy/Energy-General/Why-the-Global-Oil-System-Cannot-Replace-Hormuz-Flows.html",
-      "summary": "As the world braces for a potential “Battle of Hormuz” to reopen the world’s most important energy chokepoint, governments and energy markets are scrambling to answer a daunting question: What happens if the Strait of Hormuz stays closed for weeks or",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Asian Refiners Pay Record Premiums for Non-Middle East Crude",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Asian-Refiners-Pay-Record-Premiums-for-Non-Middle-East-Crude.html",
-      "summary": "Refiners in Asia are paying huge premiums for crude that could replace some of the supply stuck in the Middle East, with the most suitable grades from Norway and the U.S. being bid at record-high double-digit premiums over Dated Brent.  Many refineri",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Oil Extends Rally as Hormuz Stays Closed",
-      "link": "https://oilprice.com/Energy/Energy-General/Oil-Extends-Rally-as-Hormuz-Stays-Closed.html",
-      "summary": "Oil is heading for a fifth straight weekly gain, with Brent near $109, as the Strait of Hormuz remains shut for a third week, keeping supply tight despite policy efforts to ease the market. Friday, March 20, 2026 Oil markets are set to post their fif",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "European Gas Price Set for 20% Weekly Jump on Qatar’s LNG Outage",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/European-Gas-Price-Set-for-20-Weekly-Jump-on-Qatars-LNG-Outage.html",
-      "summary": "Europe’s benchmark natural gas prices soared this week after Qatar’s key LNG hub sustained extensive damage in Iranian missile attacks, with European gas prices on track for a 20% weekly jump early on Friday as the market braces itself for years of d",
+      "title": "Ras Laffan Attack Shatters Illusion of Global Gas Abundance",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Ras-Laffan-Attack-Shatters-Illusion-of-Global-Gas-Abundance.html",
+      "summary": "The dominant narrative over the last two years in global gas markets has been one of impending abundance; everyone was warning of an upcoming LNG tsunami. Market analysts kept pointing to a wave of new LNG supply, mainly driven by expansions in Qatar",
       "source": "OilPrice.com",
       "published": "Recent"
     }
