@@ -485,7 +485,7 @@
 
   // Desktop click
   if (!isTouch) {
-    card1.addEventListener('click', () => fireCard(card1, 'course.html'));
+    card1.addEventListener('click', () => fireCard(card1, 'powercourse.html'));
     card2.addEventListener('click', () => fireCard(card2, 'JEPXprototype.html'));
   }
 
@@ -508,7 +508,7 @@
     }
   }
 
-  card1.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card1, 'course.html'); },    { passive: false });
+  card1.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card1, 'powercourse.html'); },    { passive: false });
   card2.addEventListener('touchstart', e => { e.preventDefault(); handleTap(card2, 'JEPXprototype.html'); }, { passive: false });
 
   // ── DESKTOP HOVER ────────────────────────────────────────────────────────
