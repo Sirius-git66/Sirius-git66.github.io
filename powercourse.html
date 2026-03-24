@@ -1110,7 +1110,7 @@
   <!-- TIER 1: VIDEO INTRO (hidden by default, shown after landing page) -->
   <div id="intro-screen" style="display: none;">
     <video id="intro-video" class="intro-video" autoplay muted playsinline>
-      <source src="Videos/Intro_video.mp4" type="video/mp4">
+      <source src="Videos/intro_video.mp4" type="video/mp4">
     </video>
     
     <button class="skip-intro" onclick="skipToLanding()">
@@ -1477,20 +1477,20 @@
     const courseSequence = {
       0:  { type: 'slide',                   file:  'Slides/Slide_0_Cover.png',                       waitForUser: true, hoverPrompt: true, title: 'Cover' },
       1:  { type: 'video',                   file:  'Videos/course_intro.mp4',                         autoAdvance: false, title: 'Narrator' },
-      2:  { type: 'video',                   file:  'Videos/Slide_1_Intro_video.mp4',                   autoAdvance: false, title: 'Course Introduction' },
-      3:  { type: 'slide+audio',             slide: 'Slides/Slide_2_Audience.png',      audio: 'Videos/Slide_2_audio.mp3',                         title: 'Audience' },
-      4:  { type: 'video',                   file:  'Videos/Slide_3_intro.mp4',                         autoAdvance: true,  title: 'Overview Intro' },
-      5:  { type: 'slide+audio-chain',       slide: 'Slides/Slide_3_Overview.png',      audioFiles: ['Videos/Slide_3_main.mp3', 'Videos/Slide_3_audio.mp3'], title: 'Overview' },
-      6:  { type: 'slide+audio',             slide: 'Slides/Slide_4_Market_Focus.png',  audio: 'Videos/Slide_4_audio.mp3',                         title: 'Market Focus' },
-      7:  { type: 'slide+audio+timed-video', slide: 'Slides/Slide_5_History.png',       audio: 'Videos/Slide_5_audio.mp3',
-            videoTrigger: { at: 37, video: 'Videos/Slide_6_video.mp4', thenSlide: 'Slides/Slide_6_Freq_Divide.png' }, title: 'History' },
+      2:  { type: 'video',                   file:  'Videos/Slide_1_intro_video.mp4',                   autoAdvance: false, title: 'Course Introduction' },
+      3:  { type: 'slide+audio',             slide: 'Slides/Slide_2_Audience.png',      audio: 'Videos/slide_2_audio.mp3',                         title: 'Audience' },
+      4:  { type: 'video',                   file:  'Videos/slide_3_intro.mp4',                         autoAdvance: true,  title: 'Overview Intro' },
+      5:  { type: 'slide+audio-chain',       slide: 'Slides/Slide_3_Overview.png',      audioFiles: ['Videos/slide_3_main.mp3', 'Videos/slide_3_audio.mp3'], title: 'Overview' },
+      6:  { type: 'slide+audio',             slide: 'Slides/Slide_4_Market_Focus.png',  audio: 'Videos/slide_4_audio.mp3',                         title: 'Market Focus' },
+      7:  { type: 'slide+audio+timed-video', slide: 'Slides/Slide_5_History.png',       audio: 'Videos/slide_5_audio.mp3',
+            videoTrigger: { at: 37, video: 'Videos/slide_6_video.mp4', thenSlide: 'Slides/Slide_6_Freq_Divide.png' }, title: 'History' },
       8:  { type: 'slide',                   file:  'Slides/Slide_6_Freq_Divide.png',                  waitForUser: true,  title: 'Frequency Divide' },
-      9:  { type: 'video',                   file:  'Videos/Slide_7_video.mp4',                         autoAdvance: true,  title: 'Energy Landscape' },
-      10: { type: 'slide+audio',             slide: 'Slides/Slide_8_Fuel_Mix.png',      audio: 'Videos/Slide_8_audio.mp3',                         title: 'Fuel Mix' },
-      11: { type: 'slide+audio',             slide: 'Slides/Slide_9_Key_Players.png',   audio: 'Videos/Slide_9_audio.mp3',                         title: 'Key Players' },
-      12: { type: 'slide+audio',             slide: 'Slides/Slide_10_LNG_Hedging_Example.png', audio: 'Videos/Slide_10_audio.mp3',               title: 'LNG Hedging' },
-      13: { type: 'video',                   file:  'Videos/Slide_11_video.mp4',                        autoAdvance: false,  title: 'Course Tools' },
-      14: { type: 'video',                   file:  'Videos/Slide_12_video.mp4',                        autoAdvance: false,  title: 'Next Steps' }
+      9:  { type: 'video',                   file:  'Videos/slide_7_video.mp4',                         autoAdvance: true,  title: 'Energy Landscape' },
+      10: { type: 'slide+audio',             slide: 'Slides/Slide_8_Fuel_Mix.png',      audio: 'Videos/slide_8_audio.mp3',                         title: 'Fuel Mix' },
+      11: { type: 'slide+audio',             slide: 'Slides/Slide_9_Key_Players.png',   audio: 'Videos/slide_9_audio.mp3',                         title: 'Key Players' },
+      12: { type: 'slide+audio',             slide: 'Slides/Slide_10_LNG_Hedging_Example.png', audio: 'Videos/slide_10_audio.mp3',               title: 'LNG Hedging' },
+      13: { type: 'video',                   file:  'Videos/slide_11_video.mp4',                        autoAdvance: false,  title: 'Course Tools' },
+      14: { type: 'video',                   file:  'Videos/slide_12_video.mp4',                        autoAdvance: false,  title: 'Next Steps' }
     };
     
     const totalSequences = 14; // Progress caps at 100% when 14/14 viewed (15th is conclusion)
@@ -2070,7 +2070,7 @@
     function startIntroVideo() {
       document.getElementById('intro-screen').style.display = 'flex';
       // Play the iconic intro tune
-      playAudio('Videos/intro_tune.mp3');
+      playAudio('Videos/Intro_tune.mp3');
       // The intro video will auto-play, and when it ends, it triggers skipToLanding()
       // which then starts the main course
     }
