@@ -2203,6 +2203,7 @@
     }
 
     function handleDownloadClick(e) {
+      console.log('handleDownloadClick called');
       e.preventDefault();
       const isComplete = [...viewedSequences].length >= totalSequences;
       if (!isComplete) {
