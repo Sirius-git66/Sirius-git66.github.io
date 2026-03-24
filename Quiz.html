@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 1 Quiz | Japan's Power Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-deep:    #0a1628;
+      --bg-card:    #111d35;
+      --bg-raised:  #162040;
+      --border:     rgba(96,165,250,0.15);
+      --blue-core:  #3b82f6;
+      --blue-light: #60a5fa;
+      --blue-glow:  rgba(59,130,246,0.18);
+      --green:      #10b981;
+      --green-bg:   rgba(16,185,129,0.12);
+      --red:        #f43f5e;
+      --red-bg:     rgba(244,63,94,0.12);
+      --text-1:     #f1f5f9;
+      --text-2:     #94a3b8;
+      --text-3:     #475569;
+      --gold:       #f59e0b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-1);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ambient glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(30,58,138,0.25) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .quiz-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    /* ── Header ── */
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .quiz-series-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      border: 1px solid rgba(96,165,250,0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+
+    .quiz-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--text-1);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .quiz-subtitle {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      font-weight: 400;
+    }
+
+    /* ── Progress strip ── */
+    .progress-strip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .progress-strip-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
+      border-radius: 99px;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 0 12px rgba(59,130,246,0.5);
+      width: 0%;
+    }
+
+    .progress-count {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--blue-light);
+      white-space: nowrap;
+    }
+
+    /* ── Question Card ── */
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.3s ease;
+      animation: fadeUp 0.5s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue-core), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .question-card.answered::before { opacity: 1; }
+    .question-card.correct { border-color: rgba(16,185,129,0.4); }
+    .question-card.incorrect { border-color: rgba(244,63,94,0.3); }
+
+    .question-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .question-number::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .question-text {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-1);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .scenario-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Options ── */
+    .options-grid {
+      display: grid;
+      gap: 0.625rem;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      background: var(--bg-raised);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      color: var(--text-2);
+      font-size: 0.9375rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--blue-glow), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled)::before { opacity: 1; }
+    .option-btn:hover:not(:disabled) {
+      border-color: rgba(96,165,250,0.4);
+      color: var(--text-1);
+      transform: translateX(3px);
+    }
+
+    .option-letter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-2);
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .option-text {
+      position: relative;
+      z-index: 1;
+      line-height: 1.5;
+    }
+
+    /* ── Selected / Correct / Incorrect states ── */
+    .option-btn.selected {
+      border-color: var(--blue-core);
+      background: rgba(59,130,246,0.1);
+      color: var(--text-1);
+    }
+    .option-btn.selected .option-letter {
+      background: var(--blue-core);
+      border-color: var(--blue-core);
+      color: white;
+    }
+
+    .option-btn.correct-answer {
+      border-color: var(--green) !important;
+      background: var(--green-bg) !important;
+      color: var(--text-1) !important;
+    }
+    .option-btn.correct-answer .option-letter {
+      background: var(--green) !important;
+      border-color: var(--green) !important;
+      color: white !important;
+    }
+
+    .option-btn.wrong-answer {
+      border-color: var(--red) !important;
+      background: var(--red-bg) !important;
+      color: var(--text-2) !important;
+      opacity: 0.75;
+    }
+    .option-btn.wrong-answer .option-letter {
+      background: var(--red) !important;
+      border-color: var(--red) !important;
+      color: white !important;
+    }
+
+    .option-btn:disabled { cursor: default; transform: none !important; }
+    .option-btn:disabled::before { opacity: 0 !important; }
+
+    /* ── Feedback panel ── */
+    .feedback-panel {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      animation: slideDown 0.3s ease;
+    }
+
+    .feedback-panel.correct {
+      background: var(--green-bg);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #6ee7b7;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .feedback-panel.incorrect {
+      background: var(--red-bg);
+      border: 1px solid rgba(244,63,94,0.3);
+      color: #fda4af;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .feedback-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .feedback-text strong {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: inherit;
+    }
+
+    /* ── Submit button ── */
+    .submit-row {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      animation: fadeUp 0.5s 0.3s ease both;
+    }
+
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.9rem 2.75rem;
+      background: transparent;
+      border: 1px solid rgba(96,165,250,0.5);
+      color: var(--blue-light);
+      font-size: 0.9375rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: rgba(96,165,250,0.1);
+      border-color: var(--blue-light);
+      box-shadow: 0 0 24px rgba(59,130,246,0.25);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ── Results screen ── */
+    #results-screen {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      animation: fadeUp 0.6s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #results-screen::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(30,58,138,0.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .result-score-ring {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 2rem;
+    }
+
+    .result-score-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .result-score-ring .score-bg {
+      fill: none;
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 8;
+    }
+
+    .result-score-ring .score-fill {
+      fill: none;
+      stroke: url(#scoreGrad);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 339.29;
+      stroke-dashoffset: 339.29;
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .score-center-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      color: var(--text-1);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 0.75rem;
+      color: var(--text-2);
+      font-weight: 500;
+    }
+
+    .result-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.875rem;
+      color: var(--text-1);
+      margin-bottom: 0.5rem;
+    }
+
+    .result-message {
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .result-breakdown {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .breakdown-item {
+      text-align: center;
+    }
+
+    .breakdown-num {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .breakdown-num.green { color: var(--green); }
+    .breakdown-num.red   { color: var(--red); }
+
+    .breakdown-label {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .action-btn-primary {
+      padding: 0.8rem 2rem;
+      background: var(--blue-core);
+      border: none;
+      color: white;
+      font-size: 0.9375rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn-primary:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(59,130,246,0.35);
+    }
+
+    .action-btn-ghost {
+      padding: 0.8rem 2rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-2);
+      font-size: 0.9375rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn-ghost:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: var(--text-1);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* stagger cards */
+    .question-card:nth-child(1)  { animation-delay: 0.05s; }
+    .question-card:nth-child(2)  { animation-delay: 0.10s; }
+    .question-card:nth-child(3)  { animation-delay: 0.15s; }
+    .question-card:nth-child(4)  { animation-delay: 0.20s; }
+    .question-card:nth-child(5)  { animation-delay: 0.25s; }
+    .question-card:nth-child(6)  { animation-delay: 0.30s; }
+    .question-card:nth-child(7)  { animation-delay: 0.35s; }
+    .question-card:nth-child(8)  { animation-delay: 0.40s; }
+    .question-card:nth-child(9)  { animation-delay: 0.45s; }
+    .question-card:nth-child(10) { animation-delay: 0.50s; }
+  </style>
+</head>
+<body>
+
+<div class="quiz-wrapper">
+
+  <!-- Header -->
+  <div class="quiz-header">
+    <div class="quiz-series-label">Module 1 Assessment</div>
+    <h1 class="quiz-title">Japan's Power Market Quiz</h1>
+    <p class="quiz-subtitle">10 questions · Select one answer per question · Submit when ready</p>
+  </div>
+
+  <!-- Progress strip -->
+  <div class="progress-strip">
+    <span class="progress-strip-label">Answered</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <span class="progress-count" id="progress-count">0 / 10</span>
+  </div>
+
+  <!-- Question cards -->
+  <div id="quiz-form">
+
+    <!-- Q1 -->
+    <div class="question-card" id="card-1">
+      <div class="question-number">Question 01</div>
+      <p class="question-text">What is the METI Seventh Strategic Energy Plan's target range for renewables in the 2040 power mix?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(1,'A')"><span class="option-letter">A</span><span class="option-text">20–30%</span></button>
+        <button class="option-btn" onclick="selectOption(1,'B')"><span class="option-letter">B</span><span class="option-text">40–50%</span></button>
+        <button class="option-btn" onclick="selectOption(1,'C')"><span class="option-letter">C</span><span class="option-text">60–70%</span></button>
+        <button class="option-btn" onclick="selectOption(1,'D')"><span class="option-letter">D</span><span class="option-text">100%</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" id="card-2">
+      <div class="question-number">Question 02</div>
+      <p class="question-text">As of April 2026, how must traders interact with the JEPX Spot Market?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(2,'A')"><span class="option-letter">A</span><span class="option-text">Through a web-based GUI</span></button>
+        <button class="option-btn" onclick="selectOption(2,'B')"><span class="option-letter">B</span><span class="option-text">Via phone-based brokerage</span></button>
+        <button class="option-btn" onclick="selectOption(2,'C')"><span class="option-letter">C</span><span class="option-text">Using server-to-server API bidding</span></button>
+        <button class="option-btn" onclick="selectOption(2,'D')"><span class="option-letter">D</span><span class="option-text">Through physical floor trading</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" id="card-3">
+      <div class="question-number">Question 03</div>
+      <p class="question-text">Which index is the primary benchmark for USD-denominated spot LNG imports into Japan?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(3,'A')"><span class="option-letter">A</span><span class="option-text">API2</span></button>
+        <button class="option-btn" onclick="selectOption(3,'B')"><span class="option-letter">B</span><span class="option-text">TTF</span></button>
+        <button class="option-btn" onclick="selectOption(3,'C')"><span class="option-letter">C</span><span class="option-text">JKM</span></button>
+        <button class="option-btn" onclick="selectOption(3,'D')"><span class="option-letter">D</span><span class="option-text">Henry Hub</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" id="card-4">
+      <div class="question-number">Question 04</div>
+      <p class="question-text">The 50 Hz / 60 Hz frequency divide is roughly demarcated by which boundary?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(4,'A')"><span class="option-letter">A</span><span class="option-text">Tokyo / Osaka city limits</span></button>
+        <button class="option-btn" onclick="selectOption(4,'B')"><span class="option-letter">B</span><span class="option-text">Fujigawa and Itoigawa rivers</span></button>
+        <button class="option-btn" onclick="selectOption(4,'C')"><span class="option-letter">C</span><span class="option-text">Hokkaido / Honshu crossing</span></button>
+        <button class="option-btn" onclick="selectOption(4,'D')"><span class="option-letter">D</span><span class="option-text">Kyushu / Shikoku border</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" id="card-5">
+      <div class="question-number">Question 05</div>
+      <p class="question-text">Why did the EEX launch Chubu electricity futures in December 2025, ahead of TOCOM's Spring 2026 launch?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(5,'A')"><span class="option-letter">A</span><span class="option-text">To comply with METI regulations</span></button>
+        <button class="option-btn" onclick="selectOption(5,'B')"><span class="option-letter">B</span><span class="option-text">To capture early liquidity and offer options products before the domestic exchange</span></button>
+        <button class="option-btn" onclick="selectOption(5,'C')"><span class="option-letter">C</span><span class="option-text">Because TOCOM was closed for restructuring</span></button>
+        <button class="option-btn" onclick="selectOption(5,'D')"><span class="option-letter">D</span><span class="option-text">To focus exclusively on retail investors</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" id="card-6">
+      <div class="question-number">Question 06</div>
+      <div class="scenario-tag">⚡ Scenario — Kyushu Solar Surplus</div>
+      <p class="question-text">Why might a massive solar surplus in Kyushu (60 Hz) fail to lower prices in Tokyo (50 Hz)?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(6,'A')"><span class="option-letter">A</span><span class="option-text">Tokyo does not allow solar energy</span></button>
+        <button class="option-btn" onclick="selectOption(6,'B')"><span class="option-letter">B</span><span class="option-text">HVDC converter capacity bottlenecks prevent flow across the frequency divide</span></button>
+        <button class="option-btn" onclick="selectOption(6,'C')"><span class="option-letter">C</span><span class="option-text">JEPX does not trade Kyushu power</span></button>
+        <button class="option-btn" onclick="selectOption(6,'D')"><span class="option-letter">D</span><span class="option-text">60 Hz power is incompatible with 50 Hz appliances</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" id="card-7">
+      <div class="question-number">Question 07</div>
+      <p class="question-text">Which organization coordinates transmission and manages interregional converter capacity?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(7,'A')"><span class="option-letter">A</span><span class="option-text">JERA</span></button>
+        <button class="option-btn" onclick="selectOption(7,'B')"><span class="option-letter">B</span><span class="option-text">OCCTO</span></button>
+        <button class="option-btn" onclick="selectOption(7,'C')"><span class="option-letter">C</span><span class="option-text">JEPX</span></button>
+        <button class="option-btn" onclick="selectOption(7,'D')"><span class="option-letter">D</span><span class="option-text">TOCOM</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" id="card-8">
+      <div class="question-number">Question 08</div>
+      <p class="question-text">What is the primary risk when hedging a 50 Hz load using a 60 Hz-linked futures contract?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(8,'A')"><span class="option-letter">A</span><span class="option-text">Currency risk</span></button>
+        <button class="option-btn" onclick="selectOption(8,'B')"><span class="option-letter">B</span><span class="option-text">Regulatory risk</span></button>
+        <button class="option-btn" onclick="selectOption(8,'C')"><span class="option-letter">C</span><span class="option-text">Cross-frequency basis risk</span></button>
+        <button class="option-btn" onclick="selectOption(8,'D')"><span class="option-letter">D</span><span class="option-text">Counterparty risk</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" id="card-9">
+      <div class="question-number">Question 09</div>
+      <p class="question-text">In 2026, JKM volatility is trending lower compared to 2025. What is the forecast average range?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(9,'A')"><span class="option-letter">A</span><span class="option-text">$5–7 / MMBtu</span></button>
+        <button class="option-btn" onclick="selectOption(9,'B')"><span class="option-letter">B</span><span class="option-text">$9–11 / MMBtu</span></button>
+        <button class="option-btn" onclick="selectOption(9,'C')"><span class="option-letter">C</span><span class="option-text">$15–20 / MMBtu</span></button>
+        <button class="option-btn" onclick="selectOption(9,'D')"><span class="option-letter">D</span><span class="option-text">$25+ / MMBtu</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" id="card-10">
+      <div class="question-number">Question 10</div>
+      <p class="question-text">The Shin-Sakuma VSC HVDC upgrade is intended to boost interconnectivity by approximately how much by March 2028?</p>
+      <div class="options-grid">
+        <button class="option-btn" onclick="selectOption(10,'A')"><span class="option-letter">A</span><span class="option-text">100 MW</span></button>
+        <button class="option-btn" onclick="selectOption(10,'B')"><span class="option-letter">B</span><span class="option-text">~300 MW</span></button>
+        <button class="option-btn" onclick="selectOption(10,'C')"><span class="option-letter">C</span><span class="option-text">1.2 GW</span></button>
+        <button class="option-btn" onclick="selectOption(10,'D')"><span class="option-letter">D</span><span class="option-text">5 GW</span></button>
+      </div>
+      <div class="feedback-panel" id="feedback-10"></div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-row">
+      <button class="submit-btn" id="submit-btn" onclick="submitQuiz()" disabled>
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Submit Answers
+      </button>
+    </div>
+  </div>
+
+  <!-- Results Screen -->
+  <div id="results-screen">
+    <div style="position:relative;width:140px;height:140px;margin:0 auto 2rem;">
+      <svg width="140" height="140" style="display:block;">
+        <defs>
+          <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1e40af"/>
+            <stop offset="50%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#60a5fa"/>
+          </linearGradient>
+        </defs>
+        <circle class="score-bg" cx="70" cy="70" r="54"/>
+        <circle class="score-fill" id="score-ring-fill" cx="70" cy="70" r="54"/>
+      </svg>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;">
+        <span class="score-number" id="result-score-num">—</span>
+        <span class="score-label">/ 10</span>
+      </div>
+    </div>
+    <h2 class="result-title" id="result-title">Well done</h2>
+    <p class="result-message" id="result-message"></p>
+    <div class="result-breakdown">
+      <div class="breakdown-item">
+        <div class="breakdown-num green" id="result-correct">—</div>
+        <div class="breakdown-label">Correct</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-num red" id="result-incorrect">—</div>
+        <div class="breakdown-label">Incorrect</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-num" style="color:var(--blue-light)" id="result-pct">—</div>
+        <div class="breakdown-label">Score</div>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button class="action-btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+      <button class="action-btn-ghost" onclick="reviewAnswers()">Review Answers</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const ANSWERS = {
+    1:'B', 2:'C', 3:'C', 4:'B',
+    5:'B', 6:'B', 7:'B', 8:'C',
+    9:'B', 10:'B'
+  };
+
+  const EXPLANATIONS = {
+    1: 'Renewables are targeted as the major source in the 2040 mix, roughly doubling from FY2023 levels.',
+    2: 'The GUI was phased out in April 2026; API-only server-to-server access is now mandatory for spot trading.',
+    3: 'JKM (Japan Korea Marker) is the reference benchmark for spot LNG cargoes into Japan and South Korea.',
+    4: 'The Fujigawa (central Honshu) and Itoigawa rivers mark the historic and geographic split between 50 Hz and 60 Hz grids.',
+    5: 'EEX moved early to provide Chubu futures and options, capturing international hedging flows before the domestic TOCOM launch.',
+    6: 'Limited HVDC converter capacity restricts transfers between frequency zones, preventing the price impact of local surpluses from crossing the divide.',
+    7: 'OCCTO (Organization for Cross-regional Coordination of Transmission Operators) coordinates interregional transmission and converter capacity nationally.',
+    8: 'Prices in the 50 Hz and 60 Hz zones can diverge significantly when converters are constrained, making a 60 Hz-linked hedge imperfect for a 50 Hz load.',
+    9: 'JKM is forecast to average $9–11/MMBtu in 2026 — lower than 2025 peaks, but still subject to weather and disruption volatility.',
+    10: 'The Shin-Sakuma VSC upgrade adds approximately 300 MW, contributing toward the 12.5 GW interregional capacity target for 2030/31.'
+  };
+
+  const userAnswers = {};
+  let submitted = false;
+
+  function selectOption(q, letter) {
+    if (submitted) return;
+    userAnswers[q] = letter;
+
+    // Update button styles for this question
+    const card = document.getElementById(`card-${q}`);
+    card.querySelectorAll('.option-btn').forEach((btn, i) => {
+      const l = ['A','B','C','D'][i];
+      btn.classList.toggle('selected', l === letter);
+    });
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const answered = Object.keys(userAnswers).length;
+    const pct = (answered / 10) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-count').textContent = `${answered} / 10`;
+    document.getElementById('submit-btn').disabled = answered < 10;
+  }
+
+  function submitQuiz() {
+    submitted = true;
+    let correct = 0;
+
+    for (let q = 1; q <= 10; q++) {
+      const userAns = userAnswers[q];
+      const rightAns = ANSWERS[q];
+      const isCorrect = userAns === rightAns;
+      if (isCorrect) correct++;
+
+      const card = document.getElementById(`card-${q}`);
+      card.classList.add('answered');
+      card.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+      // Disable all buttons, colour them
+      card.querySelectorAll('.option-btn').forEach((btn, i) => {
+        const l = ['A','B','C','D'][i];
+        btn.disabled = true;
+        if (l === rightAns) btn.classList.add('correct-answer');
+        else if (l === userAns && !isCorrect) btn.classList.add('wrong-answer');
+      });
+
+      // Show feedback
+      const fb = document.getElementById(`feedback-${q}`);
+      fb.className = `feedback-panel ${isCorrect ? 'correct' : 'incorrect'}`;
+      fb.innerHTML = `
+        <span class="feedback-icon">${isCorrect ? '✓' : '✗'}</span>
+        <div class="feedback-text">
+          <strong>${isCorrect ? 'Correct' : `Incorrect — Answer: ${rightAns}`}</strong>
+          ${EXPLANATIONS[q]}
+        </div>`;
+      fb.style.display = 'flex';
+    }
+
+    // Disable submit
+    document.getElementById('submit-btn').disabled = true;
+
+    // Scroll to results
+    setTimeout(() => showResults(correct), 800);
+  }
+
+  function showResults(correct) {
+    const incorrect = 10 - correct;
+    const pct = Math.round((correct / 10) * 100);
+
+    document.getElementById('result-score-num').textContent = correct;
+    document.getElementById('result-correct').textContent = correct;
+    document.getElementById('result-incorrect').textContent = incorrect;
+    document.getElementById('result-pct').textContent = pct + '%';
+
+    // Title & message
+    let title, message;
+    if (pct === 100) {
+      title = 'Perfect Score';
+      message = 'Outstanding. You have a thorough command of Japan\'s power market fundamentals. You\'re ready for Module 2.';
+    } else if (pct >= 80) {
+      title = 'Strong Result';
+      message = 'You\'ve demonstrated solid understanding of the material. Review the questions you missed and you\'ll be fully prepared for the next module.';
+    } else if (pct >= 60) {
+      title = 'Good Effort';
+      message = 'A reasonable foundation — revisit the sections on market structure and frequency dynamics before moving on.';
+    } else {
+      title = 'Keep Going';
+      message = 'Japan\'s power market has many moving parts. We recommend revisiting the slides and retaking the quiz before proceeding.';
+    }
+
+    document.getElementById('result-title').textContent = title;
+    document.getElementById('result-message').textContent = message;
+
+    // Animate ring
+    const circumference = 339.29;
+    const offset = circumference - (pct / 100) * circumference;
+    setTimeout(() => {
+      document.getElementById('score-ring-fill').style.strokeDashoffset = offset;
+    }, 200);
+
+    // Show results panel
+    const rs = document.getElementById('results-screen');
+    rs.style.display = 'block';
+    rs.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function retakeQuiz() {
+    submitted = false;
+    Object.keys(userAnswers).forEach(k => delete userAnswers[k]);
+
+    for (let q = 1; q <= 10; q++) {
+      const card = document.getElementById(`card-${q}`);
+      card.className = 'question-card';
+      card.querySelectorAll('.option-btn').forEach(btn => {
+        btn.disabled = false;
+        btn.className = 'option-btn';
+        // Reassign onclick
+        const letter = btn.querySelector('.option-letter').textContent;
+        btn.onclick = () => selectOption(q, letter);
+      });
+      const fb = document.getElementById(`feedback-${q}`);
+      fb.style.display = 'none';
+      fb.className = 'feedback-panel';
+    }
+
+    document.getElementById('results-screen').style.display = 'none';
+    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('progress-fill').style.width = '0%';
+    document.getElementById('progress-count').textContent = '0 / 10';
+    document.getElementById('score-ring-fill').style.strokeDashoffset = 339.29;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function reviewAnswers() {
+    document.getElementById('results-screen').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
