@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Japan's Power Market Masterclass | Arc.Intel [PROTOTYPE]</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Executive-grade design system */
+    * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    /* Tier 1: Video Intro */
+    #intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 9999;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .intro-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .skip-intro {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: white;
+      font-size: 14px;
+      opacity: 0.7;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 20;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    
+    .skip-intro:hover {
+      opacity: 1;
+      background: rgba(255,255,255,0.1);
+    }
+    
+    /* Tier 2: Landing Page */
+    #landing-page {
+      display: none;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .landing-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%);
+    }
+    
+    .landing-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    }
+    
+    .landing-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      padding: 0 2rem;
+      text-align: center;
+      color: white;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Professional Landing Page Styles */
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    
+    .brand-logo {
+      width: 72px;
+      height: 72px;
+      opacity: 0.95;
+    }
+    
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      letter-spacing: -0.02em;
+    }
+    
+    .series-label {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #60a5fa;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(96, 165, 250, 0.3);
+    }
+    
+    .course-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .course-subtitle {
+      font-size: 2rem;
+      font-weight: 400;
+      color: #60a5fa;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.01em;
+    }
+    
+    .course-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      color: #94a3b8;
+      font-size: 0.9375rem;
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .meta-icon {
+      width: 18px;
+      height: 18px;
+      color: #60a5fa;
+    }
+    
+    .meta-divider {
+      width: 4px;
+      height: 4px;
+      background: #475569;
+      border-radius: 50%;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 3rem;
+      background: transparent;
+      border: 1px solid rgba(96, 165, 250, 0.5);
+      color: #60a5fa;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+    
+    .prototype-note {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 2rem;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .course-title {
+        font-size: 2.5rem;
+      }
+      
+      .course-subtitle {
+        font-size: 1.5rem;
+      }
+      
+      .course-meta {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      .meta-divider {
+        display: none;
+      }
+    }
+    
+    /* Refined Audio Player */
+    .audio-player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      background: rgba(248, 250, 252, 0.8);
+      border: 1px solid rgba(203, 213, 225, 0.5);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+    }
+    
+    .audio-play-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      border-radius: 50%;
+      color: #3b82f6;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    
+    .audio-play-btn:hover {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #3b82f6;
+    }
+    
+    .audio-icon {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .audio-icon-small {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .audio-progress-container {
+      flex: 1;
+      height: 3px;
+      background: rgba(203, 213, 225, 0.5);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    .audio-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      border-radius: 2px;
+      transition: width 0.1s linear;
+    }
+    
+    .audio-stop-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      flex-shrink: 0;
+    }
+    
+    .audio-stop-btn:hover {
+      color: #64748b;
+    }
+    
+    .landing-logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+    }
+    
+    /* Tier 3: Main Platform - Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 280px;
+      background: #ffffff;
+      border-right: 1px solid #e5e7eb;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+    
+    .sidebar-item {
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sidebar-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, rgba(30, 64, 175, 0.08) 0%, rgba(59, 130, 246, 0.04) 100%);
+      transition: width 0.3s ease;
+    }
+    
+    .sidebar-item:hover::before {
+      width: 100%;
+    }
+    
+    .sidebar-item:hover {
+      background-color: #f0f9ff;
+      border-left-color: #3b82f6;
+    }
+    
+    .sidebar-item.active {
+      background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+      border-left-color: #1e3a8a;
+      color: white;
+      font-weight: 600;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(59, 130, 246, 0.25);
+      animation: slideInGradient 0.4s ease;
+    }
+    
+    @keyframes slideInGradient {
+      from {
+        background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+        transform: translateX(-4px);
+      }
+      to {
+        background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+        transform: translateX(0);
+      }
+    }
+    
+    .sidebar-item.active .completion-check,
+    .sidebar-item.active span,
+    .sidebar-item.active svg,
+    .sidebar-item.active .time-estimate {
+      color: white !important;
+      stroke: white;
+    }
+    
+    .time-estimate {
+      font-size: 11px;
+      color: #9ca3af;
+      font-weight: 500;
+    }
+    
+    .main-content {
+      margin-left: 280px;
+      min-height: 100vh;
+    }
+    
+    /* Progress bar */
+    .progress-bar {
+      transition: width 0.5s ease;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+    }
+    
+    /* Slide viewer */
+    .slide-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .slide-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .slide-image:hover {
+      transform: scale(1.005);
+    }
+    
+    .slide-nav-btn {
+      transition: all 0.2s ease;
+    }
+    
+    .slide-nav-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .slide-nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    
+    /* Rotate to landscape prompt */
+    .rotate-prompt {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .rotate-prompt.hidden {
+      display: none;
+    }
+    
+    .rotate-prompt-content {
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+    
+    .rotate-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.5rem;
+      animation: rotate-device 2s ease-in-out infinite;
+    }
+    
+    @keyframes rotate-device {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(90deg); }
+    }
+    
+    .rotate-text {
+      font-size: 1.25rem;
+      font-weight: 500;
+      max-width: 300px;
+      line-height: 1.5;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      
+      .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .avatar-video {
+        width: 140px !important;
+        height: 105px !important;
+        bottom: 60px !important;
+        right: 10px !important;
+      }
+    }
+    
+    /* Show rotate prompt only in portrait mode on mobile */
+    @media (max-width: 768px) and (orientation: portrait) {
+      .rotate-prompt:not(.hidden) {
+        display: flex;
+      }
+    }
+    
+    /* Hide rotate prompt in landscape mode */
+    @media (orientation: landscape) {
+      .rotate-prompt {
+        display: none !important;
+      }
+    }
+    
+    /* Smooth transitions */
+    .fade-in {
+      animation: fadeIn 0.4s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Hide scrollbar but keep functionality */
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .sidebar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    
+    /* Logo Typography Polish (Memory a35b0881) */
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+    }
+    .brand-logo svg {
+      height: 29px; /* Memory requirement */
+      transform: translateY(0.1rem); /* Fine-tuned for alignment */
+      margin-right: 6px;
+    }
+    .brand-text {
+      font-size: 24px;
+      line-height: 29px;
+    }
+    
+
+
+
+    
+    /* Full-Screen Video Modal (for popup videos like Slide 6) */
+    .video-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .video-modal.hidden {
+      display: none;
+    }
+    
+    .video-modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+    }
+    
+    .video-modal-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      width: 90%;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.4s ease;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    .video-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .video-modal-close {
+      color: white;
+      opacity: 0.7;
+      transition: all 0.2s ease;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .video-modal-close:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.1);
+      transform: rotate(90deg);
+    }
+    
+    .video-modal-player {
+      background: #000;
+      position: relative;
+    }
+    
+    .video-modal-player video {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      display: block;
+    }
+    
+    .video-modal-footer {
+      padding: 2rem 2.5rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Avatar Video (Bottom-Right Corner) */
+    .avatar-video {
+      position: fixed;
+      bottom: 80px;
+      right: 30px;
+      width: 280px;
+      height: 210px;
+      z-index: 5000;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(59, 130, 246, 0.3);
+      overflow: hidden;
+      animation: slideInAvatar 0.5s ease-out;
+    }
+    
+    .avatar-video.hidden {
+      display: none;
+    }
+    
+    .avatar-video.minimized {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      animation: minimizeAvatar 0.3s ease;
+    }
+    
+    .avatar-video.minimized video {
+      object-fit: cover;
+    }
+    
+    .avatar-video.minimized .avatar-controls {
+      display: none;
+    }
+    
+    @keyframes slideInAvatar {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes minimizeAvatar {
+      from {
+        width: 280px;
+        height: 210px;
+        border-radius: 12px;
+      }
+      to {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
+    }
+    
+    .avatar-video video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    
+    .avatar-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .avatar-video:hover .avatar-controls {
+      opacity: 1;
+    }
+    
+    .avatar-btn {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 12px;
+      border: none;
+    }
+    
+    .avatar-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .avatar-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(59, 130, 246, 0.9);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Hover prompt animation for forward button */
+    @keyframes pulse-prompt {
+      0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); 
+      }
+      50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); 
+      }
+    }
+    
+    .hover-prompt {
+      animation: pulse-prompt 2s infinite;
+    }
+    
+    /* Full-screen video player for auto-advance sequences */
+    .fullscreen-video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 9998;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .fullscreen-video-container.hidden {
+      display: none;
+    }
+    
+    .fullscreen-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    /* ── Course Complete Overlay ── */
+    #course-complete-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #0f1f2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+
+    #course-complete-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .complete-ring-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 2rem;
+    }
+
+    .complete-ring-wrapper svg {
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 6;
+    }
+
+    .ring-fill {
+      fill: none;
+      stroke: url(#completeGrad);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 339.29;
+      stroke-dashoffset: 339.29;
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .complete-ring-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .complete-tick {
+      font-size: 2.5rem;
+      color: #4ade80; /* Lighter green for better visibility */
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.8s;
+    }
+
+    .complete-ring-wrapper.animate .ring-fill {
+      stroke-dashoffset: 0;
+    }
+
+    .complete-ring-wrapper.animate .complete-tick {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .complete-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.6s ease 1s;
+    }
+
+    .complete-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.6s ease 1.15s;
+    }
+
+    .complete-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      color: #94a3b8;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.6s ease 1.3s;
+    }
+
+    .complete-cta {
+      padding: 0.875rem 2.5rem;
+      background: transparent;
+      border: 1px solid rgba(96,165,250,0.5);
+      color: #60a5fa;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border-radius: 6px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.6s ease 1.5s, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .complete-cta:hover {
+      background: rgba(96,165,250,0.1);
+      border-color: #60a5fa;
+      box-shadow: 0 0 24px rgba(59,130,246,0.2);
+    }
+
+    #course-complete-overlay.animate .complete-label,
+    #course-complete-overlay.animate .complete-title,
+    #course-complete-overlay.animate .complete-subtitle,
+    #course-complete-overlay.animate .complete-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
+  /* ── Download button states ── */
+  #study-guide-download {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  #study-guide-download.locked {
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: all;
+  }
+  #study-guide-download.unlocked {
+    color: #1d4ed8;
+    cursor: pointer;
+    opacity: 1;
+  }
+  #study-guide-download.unlocked:hover {
+    color: #1e3a8a;
+    transform: translateX(3px);
+  }
+  @keyframes wiggle {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-5px); }
+    40%      { transform: translateX(5px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+  }
+  .wiggling { animation: wiggle 0.45s ease; }
+  
+  /* ── Email gate overlay ── */
+  #email-gate-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  #email-gate-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .email-gate-card {
+    background: #111d35;
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 440px;
+    margin: 1rem;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    animation: gateSlideUp 0.4s cubic-bezier(0.34,1.2,0.64,1);
+    position: relative;
+  }
+  @keyframes gateSlideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .gate-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: rgba(255,255,255,0.05);
+    border: none; color: #94a3b8;
+    width: 30px; height: 30px;
+    border-radius: 6px; cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+  }
+  .gate-close:hover { background: rgba(255,255,255,0.1); color: white; }
+  .gate-badge {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #60a5fa;
+    border: 1px solid rgba(96,165,250,0.3);
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px; margin-bottom: 1.25rem;
+  }
+  .gate-title {
+    font-size: 1.375rem; font-weight: 700;
+    color: #f1f5f9; margin-bottom: 0.5rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .gate-subtitle {
+    font-size: 0.875rem; color: #64748b;
+    margin-bottom: 1.75rem; line-height: 1.6;
+  }
+  .gate-field { margin-bottom: 1rem; }
+  .gate-field label {
+    display: block; font-size: 0.75rem; font-weight: 600;
+    color: #94a3b8; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .gate-field input {
+    width: 100%; padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; color: #f1f5f9;
+    font-size: 0.9375rem; font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease; box-sizing: border-box;
+  }
+  .gate-field input:focus {
+    outline: none;
+    border-color: rgba(96,165,250,0.5);
+    background: rgba(255,255,255,0.07);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  }
+  .gate-field input::placeholder { color: #475569; }
+  .gate-submit {
+    width: 100%; padding: 0.875rem;
+    background: transparent;
+    border: 1px solid rgba(96,165,250,0.5);
+    color: #60a5fa; font-size: 0.9375rem; font-weight: 600;
+    font-family: 'Inter', sans-serif; letter-spacing: 0.03em;
+    border-radius: 8px; cursor: pointer;
+    transition: all 0.3s ease; margin-top: 0.5rem;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .gate-submit:hover:not(:disabled) {
+    background: rgba(96,165,250,0.1);
+    border-color: #60a5fa;
+    box-shadow: 0 0 20px rgba(59,130,246,0.2);
+  }
+  .gate-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .gate-submit .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(96,165,250,0.3);
+    border-top-color: #60a5fa;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  .gate-submit.loading .spinner { display: block; }
+  .gate-submit.loading .btn-text { display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .gate-privacy {
+    font-size: 0.75rem; color: #334155;
+    text-align: center; margin-top: 1rem; line-height: 1.5;
+  }
+  .gate-error {
+    font-size: 0.8125rem; color: #f87171;
+    margin-top: 0.5rem; display: none; text-align: center;
+  }
+  .gate-success { text-align: center; padding: 1rem 0; display: none; }
+  .gate-success-icon {
+    font-size: 2.5rem; margin-bottom: 1rem;
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .gate-success h3 { font-size: 1.25rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+  .gate-success p { font-size: 0.875rem; color: #64748b; }
+  
+  </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+
+  <!-- TIER 1: VIDEO INTRO (hidden by default, shown after landing page) -->
+  <div id="intro-screen" style="display: none;">
+    <video id="intro-video" class="intro-video" autoplay muted playsinline>
+      <source src="Videos/Intro_video.mp4" type="video/mp4">
+    </video>
+    
+    <button class="skip-intro" onclick="skipToLanding()">
+      Skip intro →
+    </button>
+  </div>
+  
+  <!-- FULL-SCREEN VIDEO CONTAINER (for auto-advance video sequences) -->
+  <div id="fullscreen-video-container" class="fullscreen-video-container hidden">
+    <!-- Video element will be dynamically created fresh for each sequence -->
+    <!-- Skip Video button - shows during playback -->
+    <button id="skip-video-btn" class="skip-intro" onclick="skipCurrentVideo()">
+      Skip video →
+    </button>
+    <!-- Next button - shows after video ends (for non-auto-advance) -->
+    <button id="video-next-btn" class="skip-intro hidden" style="right: 160px; background: #3b82f6;" onclick="goToNextAfterVideo()">
+      Next →
+    </button>
+    <!-- Loading/error message -->
+    <div id="video-status-msg" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center hidden">
+      <p class="text-lg mb-2">Loading video...</p>
+      <button onclick="retryCurrentVideo()" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">Retry</button>
+    </div>
+  </div>
+  
+  <!-- ROTATE TO LANDSCAPE PROMPT (mobile only) -->
+  <div id="rotate-prompt" class="rotate-prompt hidden">
+    <div class="rotate-prompt-content">
+      <svg class="rotate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16v16H4z"/>
+        <path d="M4 12h16M12 4v16"/>
+        <path d="M20 4l-4 4M4 20l4-4" stroke-linecap="round"/>
+      </svg>
+      <p class="rotate-text">Please rotate your device to landscape mode for the best viewing experience</p>
+      <button onclick="continueAnyway()" class="mt-4 px-4 py-2 text-sm text-gray-400 hover:text-white underline">
+        Continue anyway →
+      </button>
+    </div>
+  </div>
+
+  <!-- TIER 2: PROFESSIONAL LANDING PAGE (shown by default) -->
+  <div id="landing-page" style="display: block;">
+    <div class="landing-hero">
+      <div class="landing-content">
+        
+        <!-- Brand Header -->
+        <div class="brand-header">
+          <img src="Transparent_Logo.png" alt="TheArc.Cloud" class="brand-logo">
+          <span class="brand-name">TheArc.Cloud</span>
+        </div>
+        
+        <!-- Series Label -->
+        <div class="series-label">Executive Education Series</div>
+        
+        <!-- Main Title -->
+        <h1 class="course-title">
+          Japan's Power Market
+        </h1>
+        <h2 class="course-subtitle">
+          A Strategic Overview
+        </h2>
+        
+        <!-- Course Meta -->
+        <div class="course-meta">
+          <div class="meta-item">
+            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>30 minutes</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span>14 Slides</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+            <span>Instructor Videos</span>
+          </div>
+        </div>
+        
+        <!-- CTA Button -->
+        <button onclick="startCourse()" class="cta-button">
+          Begin Course
+        </button>
+        
+        <!-- Footer Note -->
+        <p class="prototype-note">Prototype version</p>
+        
+        <!-- Reset Progress -->
+        <button onclick="resetProgress()" class="text-xs text-gray-500 hover:text-gray-700 mt-2 underline">
+          Reset Progress
+        </button>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL-SCREEN VIDEO MODAL (for diagram pop-ups) -->
+  <div id="video-modal" class="video-modal hidden">
+    <div class="video-modal-backdrop" onclick="closeVideoModal()"></div>
+    <div class="video-modal-content">
+      <div class="video-modal-header">
+        <div>
+          <h3 id="video-modal-title" class="text-2xl font-bold text-white mb-2">Video</h3>
+          <p id="video-modal-description" class="text-gray-300 text-sm"></p>
+        </div>
+        <button onclick="closeVideoModal()" class="video-modal-close">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="video-modal-player">
+        <video id="video-player" controls controlsList="nodownload">
+          <source id="video-source" src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video-modal-footer">
+        <button onclick="closeVideoModal()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">
+          Continue to Diagram →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AVATAR VIDEO (Bottom-Right Corner Instructor) -->
+  <div id="avatar-video" class="avatar-video hidden">
+    <div class="avatar-badge">Instructor</div>
+    <video id="avatar-player" autoplay muted>
+      <source id="avatar-source" src="" type="video/mp4">
+    </video>
+    <div class="avatar-controls">
+      <button class="avatar-btn" onclick="toggleAvatarMute()">
+        <span id="mute-icon">🔊</span>
+      </button>
+      <button class="avatar-btn" onclick="minimizeAvatar()">Minimize</button>
+      <button class="avatar-btn" onclick="closeAvatar()">✕</button>
+    </div>
+  </div>
+
+  <!-- TIER 3: MAIN LEARNING PLATFORM -->
+  <div id="main-platform" style="display: none;">
+    
+    <!-- Mobile Menu Button -->
+    <button onclick="toggleSidebar()" class="md:hidden fixed top-4 left-4 z-50 p-3 bg-white rounded-lg shadow-lg border border-gray-200">
+      <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="sidebar">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center space-x-3">
+          <img src="Transparent_Logo.png" alt="TheArc.Cloud" class="w-16 h-16" style="opacity: 0.95; transform: translateY(0.1rem);">
+          <div class="brand-text font-extrabold tracking-tight text-slate-900">TheArc<span class="text-blue-600">.Cloud</span></div>
+        </div>
+      </div>
+      
+
+      
+      <!-- Progress indicator -->
+      <div class="px-6 py-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-semibold text-gray-700 uppercase tracking-wide">Progress</span>
+          <span id="progress-text" class="text-xs font-bold text-blue-700">0%</span>
+        </div>
+        <div class="w-full h-2 bg-white rounded-full overflow-hidden shadow-inner">
+          <div id="progress-bar" class="progress-bar h-full bg-gradient-to-r from-blue-600 to-blue-400" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <!-- Navigation chapters -->
+      <nav class="py-4">
+        <div class="px-4">
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide px-3 mb-3">Contents</p>
+
+          <a href="#seq-2" onclick="goToSequence(2)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="2">
+            <div class="flex items-center justify-between"><span>Course Introduction</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-3" onclick="goToSequence(3)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="3">
+            <div class="flex items-center justify-between"><span>Audience</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-4" onclick="goToSequence(4)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="4">
+            <div class="flex items-center justify-between"><span>Overview</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-5" onclick="goToSequence(5)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="5">
+            <div class="flex items-center justify-between"><span>Course Structure</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-6" onclick="goToSequence(6)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="6">
+            <div class="flex items-center justify-between"><span>Market Focus</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-7" onclick="goToSequence(7)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="7">
+            <div class="flex items-center justify-between"><span>History</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-8" onclick="goToSequence(8)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="8">
+            <div class="flex items-center justify-between"><span>Frequency Divide</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-9" onclick="goToSequence(9)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="9">
+            <div class="flex items-center justify-between"><span>Energy Landscape</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-10" onclick="goToSequence(10)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="10">
+            <div class="flex items-center justify-between"><span>Fuel Mix</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-11" onclick="goToSequence(11)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="11">
+            <div class="flex items-center justify-between"><span>Key Players</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-12" onclick="goToSequence(12)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="12">
+            <div class="flex items-center justify-between"><span>LNG Hedging</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-13" onclick="goToSequence(13)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="13">
+            <div class="flex items-center justify-between"><span>Course Tools</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+          <a href="#seq-14" onclick="goToSequence(14)" class="sidebar-item block px-3 py-2.5 text-sm text-gray-700 rounded-md mb-1" data-sequence="14">
+            <div class="flex items-center justify-between"><span>Next Steps</span><span class="completion-check text-gray-400">○</span></div>
+          </a>
+        </div>
+      </nav>
+      
+      <!-- Download section -->
+      <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200 bg-white">
+        <div class="mb-3 text-center">
+          <span class="text-xs text-gray-500">🎬 Prototype Version</span>
+        </div>
+        <a id="study-guide-download"
+           href="#"
+           onclick="handleDownloadClick(event)"
+           class="locked flex items-center text-sm font-medium transition-all"
+           title="Complete the course to unlock">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Download Study Guide
+          <span id="download-lock-icon" class="ml-1 text-xs">🔒</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      
+      <!-- Slide Viewer Section -->
+      <div id="slide-viewer" class="min-h-screen py-8">
+        <div class="slide-container">
+          
+          <!-- Slide header -->
+          <div class="mb-6 flex items-center justify-between">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-1">
+                <span id="current-chapter">Cover</span>
+              </h2>
+              <p class="text-sm text-gray-600">
+                Slide <span id="current-sequence-num">0</span> of 14
+              </p>
+            </div>
+            
+            <!-- View controls -->
+            <div class="flex items-center space-x-2">
+              <button onclick="toggleFullscreen()" class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Slide display -->
+          <div class="bg-white rounded-lg shadow-xl p-3 mb-6">
+            <img id="current-slide" 
+                 src="Slides/Slide_0_Cover.png" 
+                 alt="Slide 0" 
+                 class="slide-image fade-in"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1200\' height=\'675\'%3E%3Crect fill=\'%23f8fafc\' width=\'1200\' height=\'675\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%2364748b\' font-size=\'24\' font-family=\'Inter, sans-serif\'%3ESlide Image Not Available%3C/text%3E%3C/svg%3E'">
+          </div>
+          
+          <!-- Video completed message (shown after video ends) -->
+          <div id="video-complete-msg" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6 text-center">
+            <p class="text-blue-800 font-medium mb-2">Video completed</p>
+            <p class="text-blue-600 text-sm">Click Next to continue</p>
+          </div>
+          
+          <!-- Audio controls (shown when audio is playing) -->
+          <div id="audio-controls" class="hidden audio-player">
+            <button id="audio-play-pause" onclick="toggleAudioPlayback()" class="audio-play-btn">
+              <svg id="audio-pause-icon" class="audio-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+              </svg>
+              <svg id="audio-play-icon" class="audio-icon hidden" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+            <div class="audio-progress-container">
+              <div id="audio-progress" class="audio-progress-bar" style="width: 0%"></div>
+            </div>
+            <button onclick="stopAllAudio()" class="audio-stop-btn">
+              <svg class="audio-icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Navigation controls -->
+          <div class="flex items-center justify-between mb-8">
+            <button id="prev-btn" 
+                    onclick="previousSequence()" 
+                    class="slide-nav-btn flex items-center px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-lg shadow-sm hover:bg-gray-50 hover:border-blue-500 disabled:opacity-40 disabled:cursor-not-allowed">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+              Previous
+            </button>
+            
+            <!-- Sequence dots (14 sequences) -->
+            <div id="sequence-dots" class="flex items-center space-x-1.5">
+              <button onclick="goToSequence(0)" class="w-2 h-2 rounded-full bg-blue-600 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(1)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(2)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(3)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(4)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(5)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(6)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(7)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(8)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(9)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(10)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(11)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(12)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(13)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+              <button onclick="goToSequence(14)" class="w-2 h-2 rounded-full bg-gray-300 transition-all hover:scale-125"></button>
+            </div>
+            
+            <button id="next-btn" 
+                    onclick="nextSequence()" 
+                    class="slide-nav-btn flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-sm hover:bg-blue-700">
+              Next
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Keyboard shortcuts hint -->
+          <div class="text-center text-sm text-gray-500">
+            <p>Use ← → arrow keys to navigate • Press F for fullscreen</p>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // COURSE SEQUENCE CONFIGURATION (15 sequences)
+    // ============================================================
+    const courseSequence = {
+      0:  { type: 'slide',                   file:  'Slides/Slide_0_Cover.png',                       waitForUser: true, hoverPrompt: true, title: 'Cover' },
+      1:  { type: 'video',                   file:  'Videos/course_intro.mp4',                         autoAdvance: false, title: 'Narrator' },
+      2:  { type: 'video',                   file:  'Videos/Slide_1_Intro_video.mp4',                   autoAdvance: false, title: 'Course Introduction' },
+      3:  { type: 'slide+audio',             slide: 'Slides/Slide_2_Audience.png',      audio: 'Videos/Slide_2_audio.mp3',                         title: 'Audience' },
+      4:  { type: 'video',                   file:  'Videos/Slide_3_intro.mp4',                         autoAdvance: true,  title: 'Overview Intro' },
+      5:  { type: 'slide+audio-chain',       slide: 'Slides/Slide_3_Overview.png',      audioFiles: ['Videos/Slide_3_main.mp3', 'Videos/Slide_3_audio.mp3'], title: 'Overview' },
+      6:  { type: 'slide+audio',             slide: 'Slides/Slide_4_Market_Focus.png',  audio: 'Videos/Slide_4_audio.mp3',                         title: 'Market Focus' },
+      7:  { type: 'slide+audio+timed-video', slide: 'Slides/Slide_5_History.png',       audio: 'Videos/Slide_5_audio.mp3',
+            videoTrigger: { at: 37, video: 'Videos/Slide_6_video.mp4', thenSlide: 'Slides/Slide_6_Freq_Divide.png' }, title: 'History' },
+      8:  { type: 'slide',                   file:  'Slides/Slide_6_Freq_Divide.png',                  waitForUser: true,  title: 'Frequency Divide' },
+      9:  { type: 'video',                   file:  'Videos/Slide_7_video.mp4',                         autoAdvance: true,  title: 'Energy Landscape' },
+      10: { type: 'slide+audio',             slide: 'Slides/Slide_8_Fuel_Mix.png',      audio: 'Videos/Slide_8_audio.mp3',                         title: 'Fuel Mix' },
+      11: { type: 'slide+audio',             slide: 'Slides/Slide_9_Key_Players.png',   audio: 'Videos/Slide_9_audio.mp3',                         title: 'Key Players' },
+      12: { type: 'slide+audio',             slide: 'Slides/Slide_10_LNG_Hedging_Example.png', audio: 'Videos/Slide_10_audio.mp3',               title: 'LNG Hedging' },
+      13: { type: 'video',                   file:  'Videos/Slide_11_video.mp4',                        autoAdvance: false,  title: 'Course Tools' },
+      14: { type: 'video',                   file:  'Videos/Slide_12_video.mp4',                        autoAdvance: false,  title: 'Next Steps' }
+    };
+    
+    const totalSequences = 14; // Progress caps at 100% when 14/14 viewed (15th is conclusion)
+    let currentSequence = 0;
+    const viewedSequences = new Set();
+    let preserveAudioOnNextTransition = false; // Flag for audio continuity through transitions
+    
+    // ============================================================
+    // AUDIO MANAGER MODULE
+    // ============================================================
+    let currentAudio = null;
+    let audioChainIndex = 0;
+    let audioChainFiles = [];
+    let isAudioChaining = false;
+    
+    function playAudio(src, onEndedCallback) {
+      stopAllAudio();
+      currentAudio = new Audio(src);
+      
+      currentAudio.addEventListener('ended', () => {
+        hideAudioControls();
+        if (onEndedCallback) onEndedCallback();
+      });
+      
+      currentAudio.addEventListener('error', (e) => {
+        console.log('Audio error:', e);
+        hideAudioControls();
+        if (onEndedCallback) onEndedCallback();
+      });
+      
+      currentAudio.play().then(() => {
+        showAudioControls();
+        updateAudioProgress();
+      }).catch(err => console.log('Audio play failed:', err));
+    }
+    
+    function playAudioChain(audioFiles) {
+      audioChainFiles = audioFiles;
+      audioChainIndex = 0;
+      isAudioChaining = true;
+      playNextInChain();
+    }
+    
+    function playNextInChain() {
+      if (audioChainIndex < audioChainFiles.length) {
+        playAudio(audioChainFiles[audioChainIndex], () => {
+          audioChainIndex++;
+          if (isAudioChaining && audioChainIndex < audioChainFiles.length) {
+            playNextInChain();
+          }
+        });
+      }
+    }
+    
+    function stopAllAudio() {
+      isAudioChaining = false;
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+      }
+      hideAudioControls();
+    }
+    
+    function toggleAudioPlayback() {
+      if (!currentAudio) return;
+      
+      if (currentAudio.paused) {
+        currentAudio.play();
+        document.getElementById('audio-play-icon').classList.add('hidden');
+        document.getElementById('audio-pause-icon').classList.remove('hidden');
+        updateAudioProgress();
+      } else {
+        currentAudio.pause();
+        document.getElementById('audio-play-icon').classList.remove('hidden');
+        document.getElementById('audio-pause-icon').classList.add('hidden');
+      }
+    }
+    
+    function showAudioControls() {
+      document.getElementById('audio-controls').classList.remove('hidden');
+      document.getElementById('audio-play-icon').classList.add('hidden');
+      document.getElementById('audio-pause-icon').classList.remove('hidden');
+    }
+    
+    function hideAudioControls() {
+      document.getElementById('audio-controls').classList.add('hidden');
+    }
+    
+    function updateAudioProgress() {
+      if (currentAudio && !currentAudio.paused) {
+        const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+        document.getElementById('audio-progress').style.width = `${progress}%`;
+        requestAnimationFrame(updateAudioProgress);
+      }
+    }
+    
+    // ============================================================
+    // TIMED VIDEO TRIGGER (for Sequence 7 - Slide 5/6 transition)
+    // ============================================================
+    let timedVideoTriggered = false;
+    let timeUpdateHandler = null;
+    
+    function setupTimedVideoTrigger(audioElement, triggerTime, videoFile, nextSeqNum) {
+      timedVideoTriggered = false;
+      
+      timeUpdateHandler = () => {
+        if (!timedVideoTriggered && audioElement.currentTime >= triggerTime) {
+          timedVideoTriggered = true;
+          audioElement.removeEventListener('timeupdate', timeUpdateHandler);
+          
+          // NOTE: We do NOT pause audio - video has no sound, audio continues uninterrupted
+          
+          // Show full-screen video (muted since it has no audio)
+          // Pass true for isAutoAdvance to trigger delay fix
+          showFullscreenVideoMuted(videoFile, () => {
+            // Audio intentionally NOT stopped — it continues over Freq Divide slide
+            preserveAudioOnNextTransition = true;
+            viewedSequences.add(currentSequence); // History
+            viewedSequences.add(nextSeqNum);       // ← FIX: pre-mark Freq Divide as viewed
+            updateProgress();
+            updateSidebarChecks(nextSeqNum + 1);   // now ticks Freq Divide too
+            goToSequence(nextSeqNum);
+          }, true);
+        }
+      };
+      
+      audioElement.addEventListener('timeupdate', timeUpdateHandler);
+    }
+    
+    // ============================================================
+    // FULL-SCREEN VIDEO PLAYER (for auto-advance sequences)
+    // ============================================================
+    let fullscreenVideoCallback = null;
+    
+    // FRESH VIDEO ELEMENT APPROACH - Creates new <video> each time for reliability
+    function showFullscreenVideo(videoFile, onEndedCallback, muted = false, isAutoAdvance = false) {
+      const container = document.getElementById('fullscreen-video-container');
+      
+      // Store callback globally for skip button
+      fullscreenVideoCallback = onEndedCallback;
+      
+      // DEBUG LOGGING (per IT team request)
+      console.log('[showFSV] START file:', videoFile, 'autoAdvance:', isAutoAdvance);
+      console.log('[showFSV] Old video count:', container.querySelectorAll('video').length);
+      
+      // Step 1: Clear old video element completely
+      const oldVideo = container.querySelector('video');
+      if (oldVideo) {
+        oldVideo.pause();
+        oldVideo.remove();
+        console.log('[showFSV] Old video removed');
+      }
+      
+      // CRITICAL FIX: Add delay for auto-advance to let DOM stabilize (IT team recommendation)
+      // Skip setTimeout entirely for manual navigation (no delay needed)
+      const createAndPlayVideo = () => {
+        // Step 2: Create fresh video element
+        const video = document.createElement('video');
+        video.className = 'fullscreen-video';
+        video.autoplay = true;
+        video.playsInline = true;
+        video.controls = true;
+        video.muted = muted;
+        
+        // Step 3: Create source
+        const source = document.createElement('source');
+        source.src = videoFile;
+        source.type = 'video/mp4';
+        video.appendChild(source);
+        
+        // Step 4: Add to container BEFORE showing
+        container.insertBefore(video, container.firstChild);
+        console.log('[showFSV] New video inserted, children:', container.children.length);
+        
+        // Step 5: Set up event listeners on fresh element
+        video.addEventListener('ended', () => {
+          console.log('[showFSV] Video ended:', videoFile);
+          // Remove video element but keep container for Next button (if manual)
+          video.remove();
+          if (fullscreenVideoCallback) {
+            fullscreenVideoCallback();
+            fullscreenVideoCallback = null;
+          }
+        }, { once: true });
+        
+        video.addEventListener('error', (e) => {
+          console.error('[showFSV] Video error:', videoFile, e.target.error);
+          hideFullscreenVideo();
+          if (fullscreenVideoCallback) {
+            fullscreenVideoCallback();
+            fullscreenVideoCallback = null;
+          }
+        }, { once: true });
+        
+        video.addEventListener('loadedmetadata', () => {
+          console.log('[showFSV] Metadata loaded:', videoFile, 'duration:', video.duration, 'readyState:', video.readyState);
+        }, { once: true });
+        
+        video.addEventListener('canplay', () => {
+          console.log('[showFSV] Can play:', videoFile, 'readyState:', video.readyState);
+        }, { once: true });
+        
+        // Step 6: Show container
+        container.classList.remove('hidden');
+        container.style.display = 'flex';
+        console.log('[showFSV] Container visible, display:', container.style.display);
+        
+        // Hide loading message when video can play
+        video.addEventListener('canplay', () => {
+          document.getElementById('video-status-msg').classList.add('hidden');
+        }, { once: true });
+        
+        // Step 7: Play with logging
+        console.log('[showFSV] Attempting play, readyState:', video.readyState);
+        video.play().then(() => {
+          console.log('[showFSV] Play SUCCESS:', videoFile);
+          
+          // SAFETY WATCHDOG: Check if video actually playing after 3 seconds (IT team recommendation)
+          setTimeout(() => {
+            if (video.paused && video.currentTime === 0) {
+              console.warn('[showFSV] WATCHDOG: Video paused at 0, forcing replay');
+              video.play().catch(e => console.error('[showFSV] Watchdog replay failed:', e));
+            }
+          }, 3000);
+          
+        }).catch(err => {
+          console.error('[showFSV] Play FAILED:', videoFile, err.message);
+          // Keep loading message visible on error (already showing)
+        });
+      };
+      
+      // Execute immediately for manual navigation, or with delay for auto-advance
+      if (isAutoAdvance) {
+        setTimeout(createAndPlayVideo, 400);
+      } else {
+        createAndPlayVideo();
+      }
+    }
+    
+    // Wrapper for muted videos (timed triggers where audio continues)
+    function showFullscreenVideoMuted(videoFile, onEndedCallback, isAutoAdvance = false) {
+      showFullscreenVideo(videoFile, onEndedCallback, true, isAutoAdvance);
+    }
+    
+    function hideFullscreenVideo() {
+      const container = document.getElementById('fullscreen-video-container');
+      const video = container.querySelector('video');
+      
+      if (video) {
+        video.pause();
+        video.remove();
+      }
+      
+      container.classList.add('hidden');
+      container.style.display = '';
+    }
+    
+    function skipCurrentVideo() {
+      hideFullscreenVideo();
+      if (fullscreenVideoCallback) {
+        fullscreenVideoCallback();
+        fullscreenVideoCallback = null;
+      }
+    }
+    
+    function goToNextAfterVideo() {
+      // Hide video container and advance to next sequence
+      hideFullscreenVideo();
+      document.getElementById('video-next-btn').classList.add('hidden');
+      document.getElementById('skip-video-btn').classList.remove('hidden');
+      if (currentSequence < totalSequences - 1) {
+        goToSequence(currentSequence + 1);
+      }
+    }
+    
+    function retryCurrentVideo() {
+      document.getElementById('video-status-msg').classList.add('hidden');
+      // Reload current sequence
+      goToSequence(currentSequence);
+    }
+    
+    // ============================================================
+    // SLIDE DISPLAY FUNCTIONS
+    // ============================================================
+    function displaySlideImage(filePath) {
+      const slideImg = document.getElementById('current-slide');
+      slideImg.src = filePath;
+      slideImg.classList.remove('fade-in');
+      setTimeout(() => slideImg.classList.add('fade-in'), 10);
+    }
+    
+    function updateHoverPrompt(sequenceNum) {
+      const nextBtn = document.getElementById('next-btn');
+      const config = courseSequence[sequenceNum];
+      if (config && config.hoverPrompt) {
+        nextBtn.classList.add('hover-prompt');
+      } else {
+        nextBtn.classList.remove('hover-prompt');
+      }
+    }
+    
+    // ============================================================
+    // MAIN NAVIGATION FUNCTIONS
+    // ============================================================
+    function goToSequence(seqNum) {
+      if (seqNum < 0 || seqNum > 14) return;
+      
+      // Cleanup current state
+      // Only stop audio if we're not on the Cover page (allow intro tune to finish)
+      // AND if preserveAudioOnNextTransition flag is not set
+      if (currentSequence !== 0 && !preserveAudioOnNextTransition) {
+        stopAllAudio();
+      }
+      preserveAudioOnNextTransition = false; // reset after every transition
+      hideFullscreenVideo();
+      closeVideoModal();
+      closeAvatar();
+      
+      currentSequence = seqNum;
+      viewedSequences.add(seqNum);
+      
+      const config = courseSequence[seqNum];
+      
+      // Update UI
+      document.getElementById('current-sequence-num').textContent = seqNum;
+      document.getElementById('current-chapter').textContent = config.title;
+      document.getElementById('prev-btn').disabled = (seqNum === 0);
+      document.getElementById('next-btn').disabled = false;
+      document.getElementById('next-btn').textContent = seqNum === 14 ? 'Complete' : 'Next';
+      
+      // Reset video complete message and show slide image
+      document.getElementById('video-complete-msg').classList.add('hidden');
+      document.getElementById('current-slide').parentElement.classList.remove('hidden');
+      
+      // Update dots
+      document.querySelectorAll('#sequence-dots button').forEach((dot, idx) => {
+        dot.classList.toggle('bg-blue-600', idx === seqNum);
+        dot.classList.toggle('bg-gray-300', idx !== seqNum);
+      });
+      
+      // Update progress
+      updateProgress();
+      
+      // Update sidebar active state
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.classList.remove('active');
+        const check = item.querySelector('.completion-check');
+        if (check && check.textContent === '✓') {
+          check.classList.remove('text-white');
+          check.classList.add('text-emerald-500');
+        }
+      });
+      const activeItem = document.querySelector(`[data-sequence="${seqNum}"]`);
+      if (activeItem) {
+        activeItem.classList.add('active');
+        const activeCheck = activeItem.querySelector('.completion-check');
+        if (activeCheck && activeCheck.textContent === '✓') {
+          activeCheck.classList.remove('text-emerald-500');
+          activeCheck.classList.add('text-white');
+        }
+      }
+      
+      // Update completion checks in sidebar
+      updateSidebarChecks(seqNum);
+      
+      // Handle different sequence types
+      switch(config.type) {
+        case 'slide':
+          document.getElementById('slide-viewer').style.display = 'block';
+          hideAudioControls();
+          displaySlideImage(config.file);
+          updateHoverPrompt(seqNum);
+          break;
+          
+        case 'video':
+          document.getElementById('slide-viewer').style.display = 'none';
+          hideAudioControls();
+          // Reset button states
+          document.getElementById('skip-video-btn').classList.remove('hidden');
+          document.getElementById('video-next-btn').classList.add('hidden');
+          // Show loading message initially
+          document.getElementById('video-status-msg').classList.remove('hidden');
+          // Always provide ended callback to mark sequence as viewed
+          showFullscreenVideo(config.file, () => {
+            // Mark current sequence as viewed when video ends
+            viewedSequences.add(seqNum);
+            updateProgress();
+            updateSidebarChecks(seqNum + 1);
+            if (!config.autoAdvance) {
+              // Hide the fullscreen player and return to the normal slide view
+              hideFullscreenVideo();
+              document.getElementById('slide-viewer').style.display = 'block';
+              document.getElementById('video-complete-msg').classList.remove('hidden');
+              // Special cases: show specific image after video ends
+              if (seqNum === 1) {
+                document.getElementById('current-slide').src = 'Slides/The_Narrator.png';
+              } else if (seqNum === 2) {
+                document.getElementById('current-slide').src = 'Slides/Slide_1_Intro.png';
+              } else if (seqNum === 13) {
+                document.getElementById('current-slide').src = 'Slides/Slide_11_Course_Tools.png';
+              } else if (seqNum === 14) {
+                document.getElementById('current-slide').src = 'Slides/Slide_12_Next_Steps.png';
+              }
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              // Auto-advance: hide container and go to next
+              hideFullscreenVideo();
+              goToSequence(seqNum + 1);
+            }
+          }, false, config.autoAdvance);
+          break;
+          
+        case 'slide+audio':
+          document.getElementById('slide-viewer').style.display = 'block';
+          displaySlideImage(config.slide);
+          playAudio(config.audio);
+          updateHoverPrompt(seqNum);
+          break;
+          
+        case 'slide+audio-chain':
+          document.getElementById('slide-viewer').style.display = 'block';
+          displaySlideImage(config.slide);
+          playAudioChain(config.audioFiles);
+          updateHoverPrompt(seqNum);
+          break;
+          
+        case 'slide+audio+timed-video':
+          document.getElementById('slide-viewer').style.display = 'block';
+          displaySlideImage(config.slide);
+          playAudio(config.audio, null);
+          if (currentAudio) {
+            // Pass next sequence number for auto-advance after video
+            setupTimedVideoTrigger(currentAudio, config.videoTrigger.at, config.videoTrigger.video, seqNum + 1);
+          }
+          updateHoverPrompt(seqNum);
+          break;
+      }
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function nextSequence() {
+      if (currentSequence < 14) {
+        goToSequence(currentSequence + 1);
+      } else {
+        triggerCourseCompleteTransition();
+      }
+    }
+    
+    function triggerCourseCompleteTransition() {
+      stopAllAudio();
+      hideFullscreenVideo();
+
+      const overlay = document.getElementById('course-complete-overlay');
+      const ring    = document.getElementById('complete-ring');
+
+      // Step 1 — fade overlay in
+      overlay.classList.add('visible');
+
+      // Step 2 — trigger ring + text animations
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          ring.classList.add('animate');
+          overlay.classList.add('animate');
+        }, 200);
+      });
+    }
+
+    function navigateToQuiz() {
+      const overlay = document.getElementById('course-complete-overlay');
+
+      // Fade out then navigate
+      overlay.style.transition = 'opacity 0.6s ease';
+      overlay.style.opacity = '0';
+
+      setTimeout(() => {
+        window.location.href = 'quiz.html';
+      }, 650);
+    }
+    
+    function previousSequence() {
+      if (currentSequence > 0) {
+        goToSequence(currentSequence - 1);
+      }
+    }
+    
+    // ============================================================
+    // PROGRESS TRACKING
+    // ============================================================
+    function resetProgress() {
+      if (confirm('Reset all progress? This will clear your viewed sequences.')) {
+        localStorage.removeItem('viewedSequences');
+        viewedSequences.clear();
+        currentSequence = 0;
+        updateProgress();
+        alert('Progress reset. Refresh the page to start from the beginning.');
+      }
+    }
+    
+    function updateSidebarChecks(currentSeq) {
+      // Update completion checks in sidebar - only for COMPLETED sequences (before current)
+      viewedSequences.forEach(vSeq => {
+        // Only show checkmark if this sequence is BEFORE the current one (completed)
+        if (vSeq < currentSeq) {
+          const item = document.querySelector(`[data-sequence="${vSeq}"]`);
+          if (item) {
+            const check = item.querySelector('.completion-check');
+            if (check && check.textContent !== '✓') {
+              check.textContent = '✓';
+              check.classList.remove('text-gray-400');
+              check.classList.add('text-emerald-500');
+            }
+          }
+        }
+      });
+    }
+    
+    function updateProgress() {
+      // Progress should be 0% when on Cover page (sequence 0)
+      // Count viewed sequences EXCLUDING sequence 0 (Cover page)
+      const completedSequences = [...viewedSequences].filter(num => num > 0 && num < totalSequences).length;
+      const totalProgress = Math.min((completedSequences / (totalSequences - 1)) * 100, 100);
+      
+      document.getElementById('progress-bar').style.width = `${totalProgress}%`;
+      document.getElementById('progress-text').textContent = `${Math.round(totalProgress)}%`;
+      
+      localStorage.setItem('viewedSequences', JSON.stringify([...viewedSequences]));
+      checkDownloadUnlock();
+    }
+    
+    // ============================================================
+    // INTRO & LANDING PAGE
+    // ============================================================
+    function skipToLanding() {
+      // NOTE: We do NOT stop the audio here - let the intro tune continue (spillover)
+      document.getElementById('intro-screen').style.display = 'none';
+      document.getElementById('main-platform').style.display = 'block';
+      goToSequence(0); // Start course sequences - tune continues playing
+    }
+    
+    function startCourse() {
+      document.getElementById('landing-page').style.display = 'none';
+      
+      // Check if mobile device (touch + small screen) and in portrait mode
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+      const isMobileScreen = window.innerWidth <= 768;
+      const isPortrait = window.innerHeight > window.innerWidth;
+      
+      if (isTouchDevice && isMobileScreen && isPortrait) {
+        document.getElementById('rotate-prompt').classList.remove('hidden');
+        // Wait for orientation change to landscape
+        window.addEventListener('orientationchange', handleOrientationChange);
+      } else {
+        // Desktop or already in landscape - start normally
+        startIntroVideo();
+      }
+    }
+    
+    function handleOrientationChange() {
+      setTimeout(() => {
+        if (window.innerWidth > window.innerHeight) {
+          // Now in landscape
+          document.getElementById('rotate-prompt').classList.add('hidden');
+          window.removeEventListener('orientationchange', handleOrientationChange);
+          startIntroVideo();
+        }
+      }, 300);
+    }
+    
+    function continueAnyway() {
+      document.getElementById('rotate-prompt').classList.add('hidden');
+      window.removeEventListener('orientationchange', handleOrientationChange);
+      startIntroVideo();
+    }
+    
+    function startIntroVideo() {
+      document.getElementById('intro-screen').style.display = 'flex';
+      // Play the iconic intro tune
+      playAudio('Videos/intro_tune.mp3');
+      // The intro video will auto-play, and when it ends, it triggers skipToLanding()
+      // which then starts the main course
+    }
+    
+    // ============================================================
+    // VIDEO MODAL (legacy support)
+    // ============================================================
+    function showVideoModal(slideNum) {
+      // Legacy function - not used in new sequence system
+    }
+    
+    function closeVideoModal() {
+      const modal = document.getElementById('video-modal');
+      const player = document.getElementById('video-player');
+      player.pause();
+      player.currentTime = 0;
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    // ============================================================
+    // AVATAR VIDEO (legacy support)
+    // ============================================================
+    let isAvatarMinimized = false;
+    
+    function showAvatarVideo(slideNum) {
+      // Legacy function - not used in new sequence system
+    }
+    
+    function closeAvatar() {
+      const container = document.getElementById('avatar-video');
+      const player = document.getElementById('avatar-player');
+      player.pause();
+      player.currentTime = 0;
+      container.classList.add('hidden');
+      isAvatarMinimized = false;
+    }
+    
+    function minimizeAvatar() {
+      const container = document.getElementById('avatar-video');
+      isAvatarMinimized = !isAvatarMinimized;
+      container.classList.toggle('minimized', isAvatarMinimized);
+    }
+    
+    function toggleAvatarMute() {
+      const player = document.getElementById('avatar-player');
+      const icon = document.getElementById('mute-icon');
+      player.muted = !player.muted;
+      icon.textContent = player.muted ? '🔇' : '🔊';
+    }
+    
+    // ============================================================
+    // UTILITY FUNCTIONS
+    // ============================================================
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('mobile-open');
+    }
+    
+    // ============================================================
+    // INITIALIZATION
+    // ============================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      // Setup intro video
+      const introVideo = document.getElementById('intro-video');
+      if (introVideo) {
+        introVideo.addEventListener('ended', skipToLanding);
+        setTimeout(() => {
+          if (document.getElementById('intro-screen').style.display !== 'none') {
+            skipToLanding();
+          }
+        }, 10000);
+      }
+      
+      // Setup fullscreen video ended handler
+      const fullscreenPlayer = document.getElementById('fullscreen-video-player');
+      if (fullscreenPlayer) {
+        fullscreenPlayer.addEventListener('ended', () => {
+          hideFullscreenVideo();
+          if (fullscreenVideoCallback) {
+            fullscreenVideoCallback();
+            fullscreenVideoCallback = null;
+          }
+        });
+      }
+      
+      // Load saved progress
+      const saved = localStorage.getItem('viewedSequences');
+      if (saved) {
+        JSON.parse(saved).forEach(num => viewedSequences.add(num));
+      }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSequence();
+      if (e.key === 'ArrowLeft') previousSequence();
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      if (e.key === 'Escape') {
+        hideFullscreenVideo();
+        closeVideoModal();
+      }
+    });
+
+    // ── Download lock/unlock (Email Gate) ────────────────────────────
+    function checkDownloadUnlock() {
+      const link = document.getElementById('study-guide-download');
+      if (!link) return;
+      const isComplete = [...viewedSequences].length >= totalSequences;
+      const lockIcon   = document.getElementById('download-lock-icon');
+      if (isComplete) {
+        link.classList.remove('locked');
+        link.classList.add('unlocked');
+        if (lockIcon) lockIcon.textContent = '🔓';
+        link.title = 'Download your free study guide';
+      } else {
+        link.classList.remove('unlocked');
+        link.classList.add('locked');
+        if (lockIcon) lockIcon.textContent = '🔒';
+        const remaining = totalSequences - [...viewedSequences].length;
+        link.title = `Complete ${remaining} more section${remaining > 1 ? 's' : ''} to unlock`;
+      }
+    }
+
+    function handleDownloadClick(e) {
+      e.preventDefault();
+      const isComplete = [...viewedSequences].length >= totalSequences;
+      if (!isComplete) {
+        const link = document.getElementById('study-guide-download');
+        link.classList.remove('wiggling');
+        void link.offsetWidth;
+        link.classList.add('wiggling');
+        setTimeout(() => link.classList.remove('wiggling'), 500);
+        return;
+      }
+      showEmailGate();
+    }
+
+  </script>
+
+  <!-- Course Complete Overlay -->
+  <div id="course-complete-overlay">
+    <div class="complete-ring-wrapper" id="complete-ring">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="completeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#1e40af"/>
+            <stop offset="50%"  stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#60a5fa"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-bg"   cx="60" cy="60" r="54"/>
+        <circle class="ring-fill" cx="60" cy="60" r="54"/>
+      </svg>
+      <div class="complete-ring-inner">
+        <span class="complete-tick">✓</span>
+      </div>
+    </div>
+    <div class="complete-label">Module 1 Complete</div>
+    <h2 class="complete-title">Well done.</h2>
+    <p class="complete-subtitle">Ready to test your knowledge?</p>
+    <button class="complete-cta" onclick="navigateToQuiz()">
+      Take the Quiz →
+    </button>
+  </div>
+
+  <!-- Email Gate Overlay -->
+  <div id="email-gate-overlay">
+    <div class="email-gate-card">
+      <button class="gate-close" onclick="closeEmailGate()">✕</button>
+      <div id="gate-form-view">
+        <div class="gate-badge">Almost there</div>
+        <h2 class="gate-title">Get Your Free Study Guide</h2>
+        <p class="gate-subtitle">
+          Enter email to receive your study guide.
+        </p>
+        <div class="gate-field">
+          <label for="gate-name">Your Name</label>
+          <input type="text" id="gate-name" placeholder="e.g. Sarah Lee" autocomplete="name"/>
+        </div>
+        <div class="gate-field">
+          <label for="gate-email">Work Email</label>
+          <input type="email" id="gate-email" placeholder="e.g. sarah@company.com" autocomplete="email"/>
+        </div>
+        <div id="gate-error" class="gate-error">Something went wrong. Please try again.</div>
+        <button class="gate-submit" id="gate-submit-btn" onclick="submitEmailGate()">
+          <div class="spinner"></div>
+          <span class="btn-text">Download Study Guide →</span>
+        </button>
+        <p class="gate-privacy">🔒 &nbsp;Your details are stored privately for course analytics only.</p>
+      </div>
+      <div id="gate-success-view" class="gate-success">
+        <div class="gate-success-icon">✅</div>
+        <h3>Download starting…</h3>
+        <p>Thank you! Your study guide is downloading now.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ── Config ──────────────────────────────────────────────────────
+  const WORKER_URL    = 'https://notion-proxy.cheryl-ffd.workers.dev/';
+  const STUDY_GUIDE_URL = 'TheArc_Module1_StudyGuide.pdf';
+
+  // ── Email Gate ───────────────────────────────────────────────────
+  function showEmailGate() {
+    document.getElementById('gate-form-view').style.display  = 'block';
+    document.getElementById('gate-success-view').style.display = 'none';
+    document.getElementById('gate-error').style.display     = 'none';
+    document.getElementById('gate-name').value  = '';
+    document.getElementById('gate-email').value = '';
+    document.getElementById('email-gate-overlay').classList.add('visible');
+    setTimeout(() => document.getElementById('gate-name').focus(), 300);
+  }
+
+  function closeEmailGate() {
+    document.getElementById('email-gate-overlay').classList.remove('visible');
+  }
+
+  document.getElementById('email-gate-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeEmailGate();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeEmailGate();
+    if (e.key === 'Enter' &&
+        document.getElementById('email-gate-overlay').classList.contains('visible')) {
+      submitEmailGate();
+    }
+  });
+
+  async function submitEmailGate() {
+    const nameEl  = document.getElementById('gate-name');
+    const emailEl = document.getElementById('gate-email');
+    const btn     = document.getElementById('gate-submit-btn');
+    const errEl   = document.getElementById('gate-error');
+    const name    = nameEl.value.trim();
+    const email   = emailEl.value.trim();
+
+    if (!name)  { nameEl.focus();  return; }
+    if (!email || !email.includes('@')) { emailEl.focus(); return; }
+
+    btn.disabled = true;
+    btn.classList.add('loading');
+    errEl.style.display = 'none';
+
+    try {
+      const response = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email })
+      });
+
+      if (!response.ok) throw new Error('Worker error');
+
+      // Success
+      document.getElementById('gate-form-view').style.display    = 'none';
+      document.getElementById('gate-success-view').style.display = 'block';
+
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = STUDY_GUIDE_URL;
+        a.download = 'TheArc_Module1_StudyGuide.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, 800);
+
+      setTimeout(() => closeEmailGate(), 3000);
+
+    } catch (err) {
+      btn.disabled = false;
+      btn.classList.remove('loading');
+      errEl.textContent   = 'Something went wrong. Please try again.';
+      errEl.style.display = 'block';
+    }
+  }
+  </script>
+
+</body>
+</html>
