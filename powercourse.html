@@ -1493,7 +1493,7 @@
       14: { type: 'video',                   file:  'Videos/slide_12_video.mp4',                        autoAdvance: false,  title: 'Next Steps' }
     };
     
-    const totalSequences = 14; // Progress caps at 100% when 14/14 viewed (15th is conclusion)
+    const totalSequences = 14; // 14 content sequences (1–14). Sequence 0 = cover, after 14 → course-complete overlay
     let currentSequence = 0;
     const viewedSequences = new Set();
     let preserveAudioOnNextTransition = false; // Flag for audio continuity through transitions
@@ -2012,8 +2012,8 @@
     function updateProgress() {
       // Progress should be 0% when on Cover page (sequence 0)
       // Count viewed sequences EXCLUDING sequence 0 (Cover page)
-      const completedSequences = [...viewedSequences].filter(num => num > 0 && num < totalSequences).length;
-      const totalProgress = Math.min((completedSequences / (totalSequences - 1)) * 100, 100);
+      const completedSequences = [...viewedSequences].filter(num => num > 0 && num <= totalSequences).length;
+      const totalProgress = Math.min((completedSequences / totalSequences) * 100, 100);
       
       document.getElementById('progress-bar').style.width = `${totalProgress}%`;
       document.getElementById('progress-text').textContent = `${Math.round(totalProgress)}%`;
@@ -2187,7 +2187,7 @@
     function checkDownloadUnlock() {
       const link = document.getElementById('study-guide-download');
       if (!link) return;
-      const isComplete = [...viewedSequences].filter(num => num > 0 && num < totalSequences).length >= (totalSequences - 1);
+      const isComplete = [...viewedSequences].filter(num => num > 0 && num <= totalSequences).length >= totalSequences;
       const lockIcon   = document.getElementById('download-lock-icon');
       if (isComplete) {
         link.classList.remove('locked');
@@ -2205,7 +2205,7 @@
 
     function handleDownloadClick(e) {
       e.preventDefault();
-      const isComplete = [...viewedSequences].filter(num => num > 0 && num < totalSequences).length >= (totalSequences - 1);
+      const isComplete = [...viewedSequences].filter(num => num > 0 && num <= totalSequences).length >= totalSequences;
       if (!isComplete) {
         const link = document.getElementById('study-guide-download');
         link.classList.remove('wiggling');
