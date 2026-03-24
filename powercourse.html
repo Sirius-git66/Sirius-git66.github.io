@@ -2168,6 +2168,7 @@
       const saved = localStorage.getItem('viewedSequences');
       if (saved) {
         JSON.parse(saved).forEach(num => viewedSequences.add(num));
+        updateProgress(); // Update UI and check download unlock
       }
     });
     
