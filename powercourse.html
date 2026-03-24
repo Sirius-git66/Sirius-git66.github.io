@@ -2186,7 +2186,7 @@
     function checkDownloadUnlock() {
       const link = document.getElementById('study-guide-download');
       if (!link) return;
-      const isComplete = [...viewedSequences].length >= totalSequences;
+      const isComplete = [...viewedSequences].filter(num => num > 0 && num < totalSequences).length >= (totalSequences - 1);
       const lockIcon   = document.getElementById('download-lock-icon');
       if (isComplete) {
         link.classList.remove('locked');
@@ -2203,9 +2203,8 @@
     }
 
     function handleDownloadClick(e) {
-      console.log('handleDownloadClick called');
       e.preventDefault();
-      const isComplete = [...viewedSequences].length >= totalSequences;
+      const isComplete = [...viewedSequences].filter(num => num > 0 && num < totalSequences).length >= (totalSequences - 1);
       if (!isComplete) {
         const link = document.getElementById('study-guide-download');
         link.classList.remove('wiggling');
