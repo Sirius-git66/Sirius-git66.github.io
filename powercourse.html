@@ -2332,7 +2332,12 @@
         body: JSON.stringify({ name, email })
       });
 
-      if (!response.ok) throw new Error('Worker error');
+      if (!response.ok) {
+        console.error('Worker response:', response.status, response.statusText);
+        const errorText = await response.text().catch(() => 'Unknown error');
+        console.error('Worker error body:', errorText);
+        throw new Error(`Worker error: ${response.status} ${response.statusText}`);
+      }
 
       // Success
       document.getElementById('gate-form-view').style.display    = 'none';
@@ -2350,6 +2355,7 @@
       setTimeout(() => closeEmailGate(), 3000);
 
     } catch (err) {
+      console.error('Email gate error:', err);
       btn.disabled = false;
       btn.classList.remove('loading');
       errEl.textContent   = 'Something went wrong. Please try again.';
