@@ -296,6 +296,12 @@
   .results-grid > *:empty {
     background: var(--navy2);
   }
+  .results-grid::before,
+  .results-grid::after,
+  .results-grid > :empty,
+  .results-grid > *:blank {
+    background: var(--navy2) !important;
+  }
   .result-cell:hover { background: rgba(26,140,158,0.08); }
   .result-window {
     font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
