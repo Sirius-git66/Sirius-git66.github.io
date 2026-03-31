@@ -1,31 +1,94 @@
 {
-  "last_updated": "2026-03-30 10:07",
+  "last_updated": "2026-03-31 10:49",
   "items": [
     {
-      "title": "Surge in West Texas Oil Theft Raises National Security Alarms",
-      "link": "https://oilprice.com/Energy/Energy-General/Surge-in-West-Texas-Oil-Theft-Raises-National-Security-Alarms.html",
-      "summary": "Criminals are exploiting weak points across the West Texas oil production region, which accounts for 15% of the world's energy resources. This emerging wave of oil theft is burning a multi-billion-dollar hole in the budgets of oil and gas operators a",
+      "title": "Spot Prices Wrap: Seasonal Weakness Dominates Despite Expanding LNG Export Capacity",
+      "link": "https://naturalgasintel.com/news/spot-prices-wrap-seasonal-weakness-dominates-despite-expanding-lng-export-capacity/",
+      "summary": "Physical natural gas prices fell Monday as weak demand expectations and a sharp drop in May futures, in their first session as the front-month, weighed on markets nationwide.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Futures Settle: Spring Fundamentals Undercut Iran Risk Premium as May Natural Gas Rolls Into Lead",
+      "link": "https://naturalgasintel.com/news/futures-settle-spring-fundamentals-undercut-iran-risk-premium-as-may-natural-gas-rolls-into-lead/",
+      "summary": "May Nymex natural gas futures rolled into the front-month position Monday with a whimper, settling down 13.8 cents at $2.887/MMBtu as soft shoulder season fundamentals outweighed lingering support from Iran war-driven energy market volatility.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Cyclone Cuts Australian LNG Production, Tightening Supply Outlook and Pushing Prices Higher",
+      "link": "https://naturalgasintel.com/news/cyclone-cuts-australian-lng-production-tightening-supply-outlook-and-pushing-prices-higher/",
+      "summary": "Global natural gas prices swung higher on Monday after another day of mixed signals over the Middle East war and a cyclone disrupted operations at several export terminals in Western Australia.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Snapshot: U.S. Natural Gas Spot Prices Retreat on Mild Weather, Ample Storage",
+      "link": "https://naturalgasintel.com/news/midday-snapshot-us-natural-gas-spot-prices-retreat-on-mild-weather-ample-storage/",
+      "summary": "Natural gas spot prices fell across the United States through midday on Monday as robust supply and mild weather sent bulls packing.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Mild Weather, Tepid Demand Likely to Lift Lower 48 Natural Gas Storage Cushion",
+      "link": "https://naturalgasintel.com/news/mild-weather-tepid-demand-likely-to-lift-lower-48-natural-gas-storage-cushion/",
+      "summary": "NGI is projecting the latest U.S. Energy Information Administration (EIA) Weekly Natural Gas Storage Report for the week ended March 27 shows an injection of 38 Bcf.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Weekly Natural Gas Spot Prices Slide as Mother Nature Takes Spring Break",
+      "link": "https://naturalgasintel.com/news/weekly-natural-gas-spot-prices-slide-as-mother-nature-takes-spring-break/",
+      "summary": "Weekly natural gas cash prices gave up ground amid mild temperatures and light heating demand across much of the Lower 48.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "MidDay Futures: Natural Gas Slumps as Robust Supply, Mild Forecasts Offset Geopolitical Risk",
+      "link": "https://naturalgasintel.com/news/midday-futures-natural-gas-slumps-as-robust-supply-mild-forecasts-offset-geopolitical-risk/",
+      "summary": "U.S natural gas futures fell in early trading Monday as record-level production and warm weather outlooks outweighed tensions in the Middle East and the rising cost of crude oil.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Golden Pass LNG Hits First Production, Adding Demand to Gulf Coast Natural Gas Price Hubs",
+      "link": "https://naturalgasintel.com/news/golden-pass-lng-hits-first-production-adding-demand-to-gulf-coast-natural-gas-price-hubs/",
+      "summary": "Golden Pass LNG has achieved first LNG at the Texas export terminal, setting the stage for more Gulf Coast feed gas demand and additional LNG supply in the coming weeks.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Midmorning Markets: Technical Barriers Contain Natural Gas Futures — For Now",
+      "link": "https://naturalgasintel.com/news/midmorning-markets-technical-barriers-contain-natural-gas-futures-for-now/",
+      "summary": "Natural gas futures kicked off the week trading in a range dictated in part by technical resistance, though war in the Middle East threatened to inject volatility at any point — as it has for the past month.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Golden Triangle Natural Gas Storage Gets Green Light to Expand to 60 Bcf-Plus",
+      "link": "https://naturalgasintel.com/news/golden-triangle-natural-gas-storage-gets-green-light-to-expand-to-60-bcf-plus/",
+      "summary": "FERC has cleared the way for what could become the Gulf Coast’s largest natural gas storage hub, granting a certificate for Golden Triangle Storage LLC to add 30 Bcf of capacity at its salt dome complex in Beaumont, TX.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Nigeria Pays 65% More for Gasoline as Dangote Battles Crude Import Costs",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Nigeria-Pays-65-More-for-Gasoline-as-Dangote-Battles-Crude-Import-Costs.html",
+      "summary": "Despite the fact that Nigeria is now home to the biggest oil refinery in Africa, Nigeria’s gasoline prices have soared to a record high amid the war in the Middle East. Dangote, the biggest refinery in Africa which began operations in 2024, has alrea",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Drillers See Triple-Digit Crude and Hit the Brakes",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Drillers-See-Triple-Digit-Crude-and-Hit-the-Brakes.html",
-      "summary": "Brent crude is trading over $100 per barrel, WTI has topped $90, but oil drillers in the world’s largest producer are cautious about their future plans. In fact, they are rather unhappy with the war in the Middle East, because it has made it harder t",
+      "title": "Oil Spike Collides With Fragile Global Growth",
+      "link": "https://oilprice.com/Energy/Energy-General/Oil-Spike-Collides-With-Fragile-Global-Growth.html",
+      "summary": "The worst energy crisis in history is sending ripples across global markets, and optimism is in short supply. IEA’s chief said the current crisis is worse than all previous ones put together. JP Morgan analysts warned Asia is going to be hit the hard",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Washington Plans $1 Billion Deal to Kill Wind Power as Energy Prices Rise",
-      "link": "https://oilprice.com/Energy/Energy-General/Washington-Plans-1-Billion-Deal-to-Kill-Wind-Power-as-Energy-Prices-Rise.html",
-      "summary": "United States President Donald Trump will not stop in his efforts to quash offshore wind energy development, as he offers France’s TotalEnergies almost $1 billion to permanently halt its wind projects. The move follows more than a year of Trump badmo",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Argentina’s State Oil Firm Dodges $16B Payout",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Argentinas-State-Oil-Firm-Dodges-16B-Payout.html",
-      "summary": "Argentina no longer faces a $16.1 billion court-ordered payment tied to the 2012 nationalization of state-owned oil company YPF. A U.S. appeals court overturned the 2023 judgment that had awarded damages to minority shareholders, Barrons said on Frid",
+      "title": "QatarEnergy Brings U.S. LNG Online Amid Ras Laffan Fallout",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/QatarEnergy-Brings-US-LNG-Online-Amid-Ras-Laffan-Fallout.html",
+      "summary": "Golden Pass LNG, a joint venture between QatarEnergy and ExxonMobil (NYSE:XOM), has achieved first production of liquefied natural gas (LNG) at its first liquefaction train, marking the transition of the facility from a receiving terminal into a majo",
       "source": "OilPrice.com",
       "published": "Recent"
     }
