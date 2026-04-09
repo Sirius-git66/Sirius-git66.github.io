@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Treasurer's View on Wartime Markets — Cheryl Cheong</title>
+<meta name="description" content="How the Strait of Hormuz Crisis of 2026 travelled from geopolitics to credit lines to consumer prices. A field guide by Cheryl Cheong, treasury professional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@1,400;1,600&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --paper-dark: #e8e0d0;
+    --amber: #c8870a;
+    --amber-bright: #e8a020;
+    --amber-dim: #8a5c06;
+    --red-signal: #b83030;
+    --mono-bg: #1a1714;
+    --mono-text: #d4c9a8;
+    --rule: rgba(15,14,12,0.15);
+    --rule-amber: rgba(200,135,10,0.3);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .masthead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(200,135,10,0.04) 40px,
+        rgba(200,135,10,0.04) 41px
+      );
+    pointer-events: none;
+  }
+
+  .masthead-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 40px 72px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .edition-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border: 1px solid var(--amber-dim);
+    display: inline-block;
+    padding: 5px 12px;
+    margin-bottom: 40px;
+  }
+
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin-bottom: 24px;
+  }
+
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--amber-bright);
+  }
+
+  .masthead-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(245,240,232,0.6);
+    max-width: 580px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+  }
+
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(200,135,10,0.25);
+  }
+
+  .byline-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+
+  .byline-role {
+    font-size: 12px;
+    color: rgba(245,240,232,0.45);
+    font-weight: 300;
+  }
+
+  .byline-sep {
+    width: 1px;
+    height: 28px;
+    background: rgba(200,135,10,0.3);
+  }
+
+  /* ── TENSION TICKER ── */
+  .ticker {
+    background: var(--amber);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-flex;
+    gap: 60px;
+    animation: ticker 28s linear infinite;
+  }
+
+  .ticker-item::before {
+    content: '▲ ';
+    color: var(--red-signal);
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── NAV ── */
+  .nav {
+    background: var(--paper-dark);
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner a:last-child {
+    padding-right: 48px;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(15,14,12,0.5);
+    text-decoration: none;
+    padding: 14px 12px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .nav a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--amber);
+  }
+
+  /* ── FOREWORD ── */
+  .foreword {
+    background: var(--mono-bg);
+    color: var(--mono-text);
+    padding: 64px 40px;
+  }
+
+  .foreword-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .foreword-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 28px;
+  }
+
+  .foreword p {
+    font-size: 18px;
+    line-height: 1.85;
+    font-style: italic;
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    color: var(--mono-text);
+    opacity: 0.9;
+    text-wrap: pretty;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── CHAPTER ── */
+  .chapter {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .chapter:last-of-type { border-bottom: none; }
+
+  .chapter-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 32px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  .chapter-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 72px;
+    line-height: 0.85;
+    color: var(--paper-dark);
+    letter-spacing: -0.03em;
+    text-align: right;
+    padding-top: 4px;
+  }
+
+  .chapter-meta {}
+
+  .chapter-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .chapter-subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(15,14,12,0.45);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── BODY TEXT ── */
+  .chapter p {
+    max-width: 660px;
+    margin-bottom: 20px;
+    color: rgba(15,14,12,0.85);
+    text-wrap: pretty;
+  }
+
+  .chapter p strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .chapter p.opening {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 32px;
+    padding-left: 24px;
+    border-left: 3px solid var(--amber);
+    text-wrap: pretty;
+  }
+
+  .chapter p.closing {
+    font-size: 15px;
+    font-style: italic;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    color: rgba(15,14,12,0.6);
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+    margin-top: 40px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 40px;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .callout::before {
+    content: '//';
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    position: absolute;
+    top: 16px;
+    left: 40px;
+    letter-spacing: 0.1em;
+  }
+
+  .callout p {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--paper);
+    opacity: 0.9;
+    max-width: 100%;
+    margin: 0;
+    padding-top: 20px;
+    text-wrap: pretty;
+  }
+
+  /* ── STAT GRID ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 40px 0;
+  }
+
+  .stat-cell {
+    background: var(--paper);
+    padding: 28px 24px;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(15,14,12,0.4);
+    margin-bottom: 10px;
+  }
+
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--amber);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-note {
+    font-size: 13px;
+    color: rgba(15,14,12,0.5);
+    margin-top: 6px;
+    font-weight: 300;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .stat-value.alert { color: var(--red-signal); }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    margin: 40px 0;
+    border-left: 2px solid var(--rule-amber);
+    padding-left: 32px;
+  }
+
+  .timeline-event {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .timeline-event::before {
+    content: '';
+    position: absolute;
+    left: -38px;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    background: var(--amber);
+    border-radius: 50%;
+  }
+
+  .timeline-event.critical::before {
+    background: var(--red-signal);
+    width: 10px;
+    height: 10px;
+    left: -39px;
+    top: 6px;
+  }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+
+  .timeline-event.critical .timeline-date { color: var(--red-signal); }
+
+  .timeline-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(15,14,12,0.8);
+    text-wrap: pretty;
+  }
+
+  .timeline-text strong { color: var(--ink); font-weight: 500; }
+
+  /* ── COMMODITY CARDS ── */
+  .commodity-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 40px 0;
+  }
+
+  .commodity-card {
+    border: 1px solid var(--rule);
+    padding: 24px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .commodity-card:hover { border-color: var(--amber); }
+
+  .commodity-icon {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .commodity-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(15,14,12,0.5);
+    margin-bottom: 6px;
+  }
+
+  .commodity-spike {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--red-signal);
+    letter-spacing: -0.02em;
+  }
+
+  .commodity-detail {
+    font-size: 14px;
+    color: rgba(15,14,12,0.6);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── QUESTIONS BOX ── */
+  .questions {
+    background: var(--ink);
+    padding: 56px 40px;
+    margin: 64px 0;
+  }
+
+  .questions-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 32px;
+  }
+
+  .question-item {
+    border-top: 1px solid rgba(200,135,10,0.2);
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 24px;
+  }
+
+  .question-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: var(--amber);
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .question-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.75);
+    font-weight: 300;
+    align-self: center;
+    text-wrap: pretty;
+  }
+
+  .question-text strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* ── APPENDIX TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 14px;
+  }
+
+  .data-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(15,14,12,0.4);
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper-dark);
+  }
+
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule);
+    color: rgba(15,14,12,0.75);
+    vertical-align: top;
+  }
+
+  .data-table td:last-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--amber);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--mono-text);
+    padding: 56px 40px;
+    margin-top: 80px;
+  }
+
+  .footer-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+  }
+
+  .footer-bio {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.5);
+    max-width: 480px;
+  }
+
+  .footer-bio strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--paper);
+    margin-bottom: 10px;
+  }
+
+  .footer-pdf {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-decoration: none;
+    border: 1px solid var(--amber-dim);
+    padding: 12px 20px;
+    display: inline-block;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .footer-pdf:hover {
+    background: var(--amber);
+    color: var(--ink);
+  }
+
+  .footer-copy {
+    border-top: 1px solid rgba(200,135,10,0.15);
+    margin-top: 40px;
+    padding-top: 24px;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,240,232,0.25);
+    letter-spacing: 0.1em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 4px 0 24px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .divider-mark {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.2em;
+  }
+
+  /* ── EXPERT NOTE ── */
+  .expert-note {
+    background: rgba(200,135,10,0.06);
+    border-left: 3px solid var(--amber);
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+
+  .expert-note-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+
+  .expert-note p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(15,14,12,0.7);
+    margin: 0 !important;
+    text-wrap: pretty;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .masthead-inner, main, footer, .foreword-inner { padding-left: 24px; padding-right: 24px; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .chapter-header { grid-template-columns: 48px 1fr; gap: 0 16px; }
+    .chapter-num { font-size: 52px; }
+    .questions { padding: 40px 24px; }
+    .callout { padding: 28px 24px; }
+    .nav-inner { padding: 0 24px; }
+    footer { padding: 40px 24px; }
+  }
+
+  /* ── SCROLL FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="edition-tag">Journal · April 2026 · thearc.cloud</div>
+    <h1>A Treasurer's View on<br><em>Wartime Markets</em></h1>
+    <p class="masthead-sub">How the Strait of Hormuz crisis travelled from geopolitics to credit lines to consumer prices — and what every commodity treasury professional needs to ask before the next shock arrives.</p>
+    <div class="byline">
+      <div>
+        <div class="byline-name">Cheryl Cheong</div>
+        <div class="byline-role">Treasury &amp; Energy</div>
+      </div>
+      <div class="byline-sep"></div>
+      <div>
+        <div class="byline-name">Freedom In Thoughts</div>
+        <div class="byline-role">thearc.cloud</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">BRENT PEAK: $119/bbl</span>
+    <span class="ticker-item">QATAR LNG: −17% for 3–5 years</span>
+    <span class="ticker-item">STRAIT TRANSITS: −95% in days</span>
+    <span class="ticker-item">UREA PRICES: +50% since Feb 28</span>
+    <span class="ticker-item">EMERGENCY CREDIT LINES: $7B+</span>
+    <span class="ticker-item">IEA RESERVE RELEASE: 400M barrels</span>
+    <span class="ticker-item">WAR-RISK INSURANCE: +4–6×</span>
+    <span class="ticker-item">BRENT-WTI SPREAD: +$12/bbl</span>
+    <span class="ticker-item">BRENT PEAK: $119/bbl</span>
+    <span class="ticker-item">QATAR LNG: −17% for 3–5 years</span>
+    <span class="ticker-item">STRAIT TRANSITS: −95% in days</span>
+    <span class="ticker-item">UREA PRICES: +50% since Feb 28</span>
+    <span class="ticker-item">EMERGENCY CREDIT LINES: $7B+</span>
+    <span class="ticker-item">IEA RESERVE RELEASE: 400M barrels</span>
+    <span class="ticker-item">WAR-RISK INSURANCE: +4–6×</span>
+    <span class="ticker-item">BRENT-WTI SPREAD: +$12/bbl</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Guide sections">
+  <div class="nav-inner">
+    <a href="#foreword">Foreword</a>
+    <a href="#ch1">01 · Setup</a>
+    <a href="#ch2">02 · Cliff Edge</a>
+    <a href="#ch3">03 · Cascade</a>
+    <a href="#ch4">04 · Credit Crisis</a>
+    <a href="#ch5">05 · Consumer</a>
+    <a href="#ch6">06 · Ceasefire</a>
+  </div>
+</nav>
+
+<!-- FOREWORD -->
+<section class="foreword" id="foreword">
+  <div class="foreword-inner">
+    <div class="foreword-label">Foreword</div>
+    <p>"I am not a commodities trader. I am a treasury person who has spent almost two decades financing the gaps that traders create — the working capital, the credit lines, the margin calls. When the Strait of Hormuz closed, even if a commodity treasurer didn't catch it on Bloomberg, he or she would have felt it in the funding lines three days later. This journal is not a chronology. It is a field map of how a geopolitical shock travels through physical markets, then through industrial supply chains, and finally lands in a treasurer's inbox as a problem that has no textbook answer."</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- CHAPTER 1 -->
+  <section class="chapter fade-in" id="ch1">
+    <div class="chapter-header">
+      <div class="chapter-num">01</div>
+      <div class="chapter-meta">
+        <div class="chapter-tag">The Setup · Nov 2025 – Feb 2026</div>
+        <div class="chapter-title">The Consensus That Cracked</div>
+        <div class="chapter-subtitle">A market priced for a glut, not a crisis</div>
+      </div>
+    </div>
+
+    <p class="opening">"In late 2025, the World Bank projected commodity prices would fall another 7% in 2026. Fourth straight year of moderation. Brent was trading at $68–70 a barrel heading into year-end. Markets were pricing a glut, not a crisis. We thought so too."</p>
+
+    <p>The consensus entering 2026 was orderly decline. The World Bank's November Commodity Markets Outlook pointed to weak global activity, trade tensions, policy uncertainty, and ample oil supply as the dampening forces. Brent at ~$70 was not a floor — it felt like a ceiling, with OPEC+ aggressively hiking output since April 2025 to win back market share from non-cartel producers.</p>
+
+    <p>Natural gas told a more nuanced story. US Henry Hub had surged an estimated 60% year-on-year in 2025, driven by record LNG exports under Trump's expedited licensing programme. By December 2025, US LNG facilities were running at near-peak capacity. That detail would matter enormously six weeks later.</p>
+
+    <div class="timeline">
+      <div class="timeline-event">
+        <div class="timeline-date">June 2025</div>
+        <div class="timeline-text"><strong>The 12-Day War.</strong> US and Israeli strikes on Iran. Market spiked, then faded. Critically: Iran did not close the Strait of Hormuz despite reportedly taking preparatory mine-laying actions US officials noted with concern.</div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-date">Late 2025</div>
+        <div class="timeline-text"><strong>Nuclear negotiations in Geneva collapse.</strong> Regional tensions reach a breaking point. Banks and traders are modelling a supply-glut base case with minimal geopolitical premium.</div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-date">Feb 15–20, 2026</div>
+        <div class="timeline-text"><strong>Iran pre-positions.</strong> Iran increases oil exports to three times normal rate and draws down storage — a clear preparation for disruption. War-risk insurance premiums begin moving. The market sees this. It does not price it.</div>
+      </div>
+    </div>
+
+    <div class="expert-note">
+      <div class="expert-note-label">Observation</div>
+      <p>This is a classic case of anchoring bias at systemic scale. The June 2025 non-closure had set a false floor on geopolitical risk pricing. By Q4 2025, banks, trading houses, and treasury departments were modelling curves that reflected a supply-glut base case — overlaid with minimal geopolitical premium. That opinion flowed into hedging books and credit lines alike.</p>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">◆</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 2 -->
+  <section class="chapter fade-in" id="ch2">
+    <div class="chapter-header">
+      <div class="chapter-num">02</div>
+      <div class="chapter-meta">
+        <div class="chapter-tag">The Shock · Feb 28 – Mar 8, 2026</div>
+        <div class="chapter-title">The Cliff Edge</div>
+        <div class="chapter-subtitle">Operation Epic Fury and the first 72 hours</div>
+      </div>
+    </div>
+
+    <p class="opening">"On February 28, the United States and Israel launched coordinated strikes on Iran. Iran's Supreme Leader was killed. Within days, ship transits through the Strait of Hormuz collapsed from over a hundred per day to a handful. A 95% drop. Not a rerouting. A full closure. When does the Treasurer's worry escalate into panic mode?"</p>
+
+    <p>The Strait carries roughly 20 million barrels of oil and products per day — approximately 20% of global seaborne oil. The onshore pipeline alternatives across Saudi Arabia and the UAE handle at maximum 3 million barrels per day. There was no bypass at scale. When Iran's IRGC declared the Strait closed on March 2, the market had nowhere to go.</p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Strait Transits</div>
+        <div class="stat-value alert">−95%</div>
+        <div class="stat-note">130/day → 6/day within weeks</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Crude Production Cut</div>
+        <div class="stat-value alert">8M bpd</div>
+        <div class="stat-note">Plus 2M bpd of condensates &amp; NGLs also shut in</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Brent Spike</div>
+        <div class="stat-value">$70→$119</div>
+        <div class="stat-note">Peak recorded; fastest surge in recent history</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Brent-WTI Spread</div>
+        <div class="stat-value">$12/bbl</div>
+        <div class="stat-note">From ~$2 pre-conflict. Hedging basis blew out.</div>
+      </div>
+    </div>
+
+    <p><strong>The Brent-WTI spread blowout deserves more attention than it received.</strong> A $12/barrel differential is not a footnote — it is a direct signal that every hedging programme built on WTI was now materially mis-hedged against Brent-priced physical cargoes. Basis risk exploded overnight. Risk managers who had been comfortable at a $2 spread were suddenly nursing a $10 gap in their hedging P&amp;L.</p>
+
+    <p>The insurance market confirmed the severity before most financial models did. By March 9, war-risk insurance rates on tankers had increased four to six times over the previous week. The US government invoked the Terrorism Risk Insurance Act to backstop insurers. When the state has to step in to make insurance viable, that is not a "geopolitical premium" — that is market failure at a systemic level.</p>
+
+    <div class="callout">
+      <p>"When insurance markets seize, trade finance is implicated. A cargo with no viable insurance cannot secure a letter of credit. The banking system will notice this within days. Not weeks. That is how a physical supply shock slowly evolves into a credit event."</p>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">◆</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 3 -->
+  <section class="chapter fade-in" id="ch3">
+    <div class="chapter-header">
+      <div class="chapter-num">03</div>
+      <div class="chapter-meta">
+        <div class="chapter-tag">The Cascade · March 2026</div>
+        <div class="chapter-title">The Shock No One Modelled</div>
+        <div class="chapter-subtitle">When an energy crisis becomes an everything crisis</div>
+      </div>
+    </div>
+
+    <p class="opening">"The Strait of Hormuz is not just an oil chokepoint. It is the jugular vein of global industrial chemistry. And no one had built a risk framework for that.<br>I certainly hadn't. Not sure about the banks. And as it turns out, probably not the IEA."</p>
+
+    <p>Every commodity risk model I had ever seen was built around energy. What broke in March 2026 was not just energy — it was the entire petrochemical and agricultural input chain that depends on Gulf gas and LNG as a feedstock, not just a fuel.</p>
+
+    <p style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(15,14,12,0.4);margin:40px 0 -24px;font-weight:500;">Price spike vs. pre-conflict levels</p>
+    <div class="commodity-row">
+      <div class="commodity-card">
+        <div class="commodity-icon">🌾</div>
+        <div class="commodity-name">Fertilizer / Urea</div>
+        <div class="commodity-spike">+50%</div>
+        <div class="commodity-detail">30% of global seaborne trade blocked. Spring planting season. No strategic reserves anywhere.</div>
+      </div>
+      <div class="commodity-card">
+        <div class="commodity-icon">🔵</div>
+        <div class="commodity-name">LNG (Qatar)</div>
+        <div class="commodity-spike">+63%</div>
+        <div class="commodity-detail">17% of global LNG supply offline. Ras Laffan Trains 4 & 6 damaged. 3–5 year recovery.</div>
+      </div>
+      <div class="commodity-card">
+        <div class="commodity-icon">⚙️</div>
+        <div class="commodity-name">Aluminum</div>
+        <div class="commodity-spike">4-yr high</div>
+        <div class="commodity-detail">Gulf = 20% of global raw aluminum. Smelter strikes compounded shipping disruption.</div>
+      </div>
+      <div class="commodity-card">
+        <div class="commodity-icon">🫧</div>
+        <div class="commodity-name">Helium</div>
+        <div class="commodity-spike">Rationed</div>
+        <div class="commodity-detail">Qatar = 30% of world supply. Semiconductor cooling disrupted. AI supply chain hit.</div>
+      </div>
+      <div class="commodity-card">
+        <div class="commodity-icon">⚗️</div>
+        <div class="commodity-name">Methanol</div>
+        <div class="commodity-spike">~33%</div>
+        <div class="commodity-detail">⅓ of global seaborne methanol trade blocked. Plastics, paints, synthetic fibres affected.</div>
+      </div>
+      <div class="commodity-card">
+        <div class="commodity-icon">🛡️</div>
+        <div class="commodity-name">Sulfur</div>
+        <div class="commodity-spike">Critical</div>
+        <div class="commodity-detail">US defense industry: "near-total" disruption to sulfur supply for ammunition production.</div>
+      </div>
+    </div>
+
+    <p>The fertilizer dimension is where the second-order effects become food security within weeks, not months. The Gulf region produces nearly half of the world's urea and 30% of its ammonia. Unlike oil, the fertilizer sector has no internationally coordinated strategic reserves. There is no IEA equivalent for nitrogen and ammonia — no coordinated emergency release, no government stockpile protocol.</p>
+
+    <p><strong>The AI connection bears naming directly,</strong> because it will resonate with any audience in 2026: helium is critical for semiconductor manufacturing cooling processes. A Middle East energy conflict disrupted the chip supply chain. The energy crisis was simultaneously a food shock, a manufacturing shock, a defence industrial shock, and an AI infrastructure shock.</p>
+
+    <div class="callout">
+      <p>"The energy shock was simultaneously a food shock, a manufacturing shock, a defence shock, and an AI infrastructure shock. No single risk framework anticipated that. And that is the problem we now have to solve."</p>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">◆</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 4 -->
+  <section class="chapter fade-in" id="ch4">
+    <div class="chapter-header">
+      <div class="chapter-num">04</div>
+      <div class="chapter-meta">
+        <div class="chapter-tag">The Treasury Chapter · March–April 2026</div>
+        <div class="chapter-title">The Margin Call Math</div>
+        <div class="chapter-subtitle">Where volatility becomes a credit crisis</div>
+      </div>
+    </div>
+
+    <p class="opening">"I am not a trader. I have never been a trader. But I have spent almost two decades financing their cargoes, managing their credit lines, and watching their margin calls land in my inbox. When oil goes from $70 to $120, the math is brutal. One cargo that cost $70 million to finance now requires $130 million. Same physical volume. Nearly double the funding."</p>
+
+    <p>The close-to-$50 move from pre-crisis Brent to peak Brent was not a price signal. It was a capital event. Imagine if a single $1 move in oil triggers approximately $40 million in margin calls — a $50 move then translates to roughly $2 billion in margin pressure on a single major trader alone, before accounting for positions across other product markets where the moves were sharper still.</p>
+
+    <p>The market's response confirmed the scale of the problem. Within weeks of the crisis breaking, Trafigura had secured a $3 billion contingent revolving credit facility — described explicitly as a liquidity buffer for margin calls. Vitol was reportedly in talks for $3 billion more. Gunvor was seeking $1 billion. That is over $7 billion in emergency credit lines sought simultaneously by just three trading houses.</p>
+
+    <div class="expert-note">
+      <div class="expert-note-label">The signal most commentators missed</div>
+      <p>Banks offered Trafigura $8 billion. Trafigura took $3 billion. Banks understand the value of funding relationships with systemically important counterparties under stress. The flight to quality in commodity finance was not just about risk aversion — it was about which relationships would define the next decade of commodity banking.</p>
+    </div>
+
+    <p><strong>The insurance-to-trade-finance link was the hidden transmission mechanism.</strong> War-risk insurance collapse did not just strand ships — it froze the documentation chain entirely: no insurance, no letter of credit, no disbursement. Banks could not release funds against cargoes that had no insurable value. The credit system froze at the cargo level, not just the company level.</p>
+
+    <p>For developing country importers — already spending more on debt servicing than on health — the convergence of higher energy costs, weaker currencies, and frozen trade credit was existential. UNCTAD flagged the systemic risk transmission explicitly. The energy shock was an emerging-market sovereign debt event in slow motion.</p>
+
+    <p class="closing">"The $7 billion in emergency credit lines was not for new business. It was to keep existing business funded while prices doubled. That is how a supply shock becomes a credit event — and that is what every treasurer needs to understand before the next shock arrives."</p>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">◆</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 5 -->
+  <section class="chapter fade-in" id="ch5">
+    <div class="chapter-header">
+      <div class="chapter-num">05</div>
+      <div class="chapter-meta">
+        <div class="chapter-tag">The Human Cost · March–April 2026</div>
+        <div class="chapter-title">From Spreadsheets to Petrol Stations</div>
+        <div class="chapter-subtitle">The same shock, different pockets</div>
+      </div>
+    </div>
+
+    <p class="opening">"A $12 Brent-WTI spread is a technical detail. A $1.30 per gallon petrol spike is a household budget crisis. By April 2026, the US national average hit $4.50 a gallon. If you fill your SUV twice a week, you would have noticed your monthly fuel receipts exceeding $500 in total. Just petrol alone will remove another $150 from your discretionary spending. Not because of a tax. Because of a chokepoint 7,000 miles away."</p>
+
+    <p>The pass-through from commodity shock to consumer price is not immediate — hedging programmes, fuel surcharge structures, and base fare mechanisms create a lag of four to eight weeks. But by late March, the lag had run out. Diesel, which powers trucks and farm equipment, hit $5.52 per gallon in the US on April 3 — within 30 cents of its all-time record.</p>
+
+    <p>Air travel illustrated the pass-through vividly. Jet fuel peaked at approximately $197 per barrel during the crisis — a level that pressures airline operating economics at the margin. For a family of four flying London to Bangkok in economy, the fuel surcharge uplift added £700–1,000 to the round-trip cost. That is the same shock that broke credit lines, expressed in a holiday budget.</p>
+
+    <p>The food price transmission was slower but potentially more durable. With fertilizer prices up 50% and farmers in the Northern Hemisphere reducing application during the spring planting window, the impact on corn, wheat, and rice yields — and therefore on food prices into 2027 — was baked in before any ceasefire.</p>
+
+    <p class="closing">"That family doesn't care about Brent-WTI spreads. But they should — because their summer holiday just became £1,000 more expensive. The same supply shock that broke credit lines also broke household budgets. That is why commodity finance matters. Not because markets move, but because people pay."</p>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">◆</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 6 -->
+  <section class="chapter fade-in" id="ch6">
+    <div class="chapter-header">
+      <div class="chapter-num">06</div>
+      <div class="chapter-meta">
+        <div class="chapter-tag">The Ceasefire · April 8, 2026</div>
+        <div class="chapter-title">Relief, Not Resolution</div>
+        <div class="chapter-subtitle">What "normal" looks like now</div>
+      </div>
+    </div>
+
+    <p class="opening">"On April 8, oil plunged below $100 a barrel. The Dow surged 1,300 points. Headlines called it a ceasefire relief rally. But oil at sub-$100 is still $30 above pre-war levels. The war premium has been compressed, not eliminated. The ceasefire is a pause, not a resolution."</p>
+
+    <p>The two-week ceasefire brokered through Pakistan — contingent on Iran's complete and immediate opening of the Strait — triggered a 13% intraday drop in Brent and WTI. Markets reacted to the removal of the extreme tail risk. They did not price a resolution, because there is no resolution yet to price.</p>
+
+    <p>Iran's 10-point proposal includes lifting all sanctions and accepting its uranium enrichment programme. These are not conditions resolved in two weeks. The deep trust deficit on both sides — US concerns about Iran's nuclear programme, Iran's scepticism about US intentions given prior agreement withdrawals — makes a permanent settlement structurally difficult.</p>
+
+    <div class="timeline">
+      <div class="timeline-event critical">
+        <div class="timeline-date">Feb 28, 2026</div>
+        <div class="timeline-text"><strong>Operation Epic Fury launches.</strong> US and Israeli strikes on Iran. Supreme Leader killed.</div>
+      </div>
+      <div class="timeline-event critical">
+        <div class="timeline-date">Mar 2–8</div>
+        <div class="timeline-text"><strong>Strait closure confirmed.</strong> Brent crosses $100. IEA activates emergency reserves. Insurance markets seize.</div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-date">Mar 19</div>
+        <div class="timeline-text"><strong>US military campaign to open Strait begins.</strong> Iran has made 21 confirmed attacks on merchant ships. Brent peaks near $119–126.</div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-date">Mar 26–Apr 7</div>
+        <div class="timeline-text"><strong>Partial openings.</strong> Iran allows vessels from China, Russia, India, Pakistan to transit. Asian nations negotiate bilateral passage deals.</div>
+      </div>
+      <div class="timeline-event critical">
+        <div class="timeline-date">Apr 7–8, 2026</div>
+        <div class="timeline-text"><strong>Two-week ceasefire announced.</strong> Oil drops below $100. Relief rally. Negotiations to continue in Islamabad.</div>
+      </div>
+    </div>
+
+    <p><strong>What the ceasefire does not fix:</strong></p>
+    <p>More than 3 million barrels per day of Gulf refining capacity remained offline due to attacks and the lack of viable export outlets. Qatar's LNG export capacity was down 17% for an estimated 3–5 year recovery horizon — this is the timeline from official reports, not an analyst estimate. Fertilizer supply restarts take weeks, and the Northern Hemisphere planting window does not extend to accommodate diplomatic timelines.</p>
+
+    <p>The underlying question — what is the correct long-run risk premium for the world's most critical energy chokepoint, now that it has been weaponised — remains entirely open. The geopolitical risk premium that was priced at near-zero for a decade is being permanently reset. No one has built the framework for the new level yet. That is the work ahead.</p>
+
+    <p class="closing">"The underlying question — what is the correct long-run risk premium for the world's most critical energy chokepoint, now that it has been weaponised — remains entirely open. No one has built that framework yet. That is the work ahead."</p>
+  </section>
+
+</main>
+
+<!-- THREE QUESTIONS -->
+<section class="questions fade-in" id="questions">
+  <div class="questions-label">Conclusion — For Your Next Risk Committee Meeting</div>
+  <div style="max-width:860px;margin:0 auto;">
+    <p style="font-size:17px;color:rgba(245,240,232,0.6);font-weight:300;margin-bottom:32px;line-height:1.7;">Your hedging framework was sized for a world where Hormuz closure was a tail risk. That world no longer exists. Here are three questions to take to your next risk committee meeting. Ask them before the next shock arrives — because it will.</p>
+    <div class="question-item">
+      <div class="question-num">1</div>
+      <div class="question-text">If Brent spiked to <strong>$120 again tomorrow</strong>, how much of your credit line would be consumed by margin calls? Have you modelled a <strong>$50 move</strong>, not a $10 move?</div>
+    </div>
+    <div class="question-item">
+      <div class="question-num">2</div>
+      <div class="question-text">Do your insurance policies <strong>explicitly cover war risk</strong> in the Strait of Hormuz? And if they do, what is the trigger — closure, or just damage?</div>
+    </div>
+    <div class="question-item">
+      <div class="question-num">3</div>
+      <div class="question-text">Have you modelled a scenario where <strong>Qatar LNG is offline for five years</strong>? Not two weeks. Five years. Because that is the timeline QatarEnergy itself has announced.</div>
+    </div>
+    <p style="font-size:14px;color:rgba(245,240,232,0.35);font-style:italic;border-top:1px solid rgba(200,135,10,0.15);margin-top:32px;padding-top:24px;font-family:'Lora',serif;font-weight:400;">"I wrote this journal not as a trader, but as a treasurer. Because when the next shock comes — and it will come — the traders will know what to do. The question is whether treasury will be ready to fund them. Now you have the questions. Go and have a proper conversation with your Treasurer."</p>
+  </div>
+</section>
+
+<!-- APPENDIX -->
+<section id="appendix" style="max-width:860px;margin:0 auto;padding:32px 40px 64px;">
+  <div class="chapter-tag" style="margin-bottom:24px;">Appendix — Key Numbers Quick Reference</div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Pre-crisis Brent crude</td><td>~$70/bbl</td></tr>
+      <tr><td>Brent at crisis peak</td><td>~$119–126/bbl</td></tr>
+      <tr><td>Brent-WTI spread (peak)</td><td>~$12/bbl</td></tr>
+      <tr><td>Post-ceasefire Brent</td><td>sub-$100/bbl (still $30 above pre-war)</td></tr>
+      <tr><td>Peak US gasoline</td><td>$4.50/gal</td></tr>
+      <tr><td>Peak diesel (national avg)</td><td>$5.52/gal (Apr 3)</td></tr>
+      <tr><td>Peak jet fuel</td><td>~$197/bbl</td></tr>
+      <tr><td>Strait transits (Feb)</td><td>~130/day</td></tr>
+      <tr><td>Strait transits (Mar)</td><td>~6/day (−95%)</td></tr>
+      <tr><td>Crude production curtailed</td><td>8M bpd + 2M bpd condensates/NGLs</td></tr>
+      <tr><td>Gulf refining offline</td><td>~3M bpd</td></tr>
+      <tr><td>Qatar LNG capacity lost</td><td>17% for 3–5 years (Ras Laffan Trains 4 &amp; 6)</td></tr>
+      <tr><td>Urea price increase</td><td>+50% since Feb 28, 2026</td></tr>
+      <tr><td>War-risk insurance increase</td><td>4–6× in days</td></tr>
+      <tr><td>IEA emergency reserve release</td><td>400M barrels (coordinated, all members)</td></tr>
+
+      <tr><td>OECD US inflation forecast 2026</td><td>4.2% (vs 2.68% average in 2025)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner" style="grid-template-columns:1fr;">
+    <div></div>
+  </div>
+  <div class="footer-copy" style="padding-left:0;">
+    <span>© 2026 Cheryl Cheong · thearc.cloud</span>
+    <span>A Treasurer's View on Wartime Markets</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

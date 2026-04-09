@@ -61,7 +61,7 @@
             font-size: 0.6rem;
             font-weight: 400;
             letter-spacing: 0.2em;
-            color: #94a3b8;
+            color: #6b7280;
             margin-right: 0.5rem;
             opacity: 0.7;
         }
@@ -94,13 +94,36 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #0096c7 0%, #023e8a 100%);
             position: relative;
             overflow: hidden;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid rgba(255,255,255,0.6);
+            border-bottom: 2px solid rgba(255,255,255,0.6);
+            transform: rotate(45deg);
+            animation: scrollBounce 2s infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+            40% { transform: translateY(10px) rotate(45deg); }
+            60% { transform: translateY(5px) rotate(45deg); }
         }
 
         /* Canvas for particle network */
@@ -434,7 +457,7 @@
         }
 
         .dashboard-subtitle {
-            color: #94a3b8;
+            color: #6b7280;
             font-size: 0.9rem;
             font-family: 'Courier New', monospace;
         }
@@ -487,7 +510,7 @@
         }
 
         .feature-content p {
-            color: #94a3b8;
+            color: #6b7280;
             font-size: 0.9rem;
             line-height: 1.6;
         }
@@ -515,7 +538,7 @@
         }
 
         .dashboard-cta p {
-            color: #94a3b8;
+            color: #6b7280;
             margin-bottom: 1.5rem;
             font-style: italic;
         }
@@ -918,6 +941,9 @@
             <h1>THE ARC</h1>
             <p>Treasury Transformation • AI Innovation</p>
             <a href="#projects" class="cta-button">Explore Solutions</a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
