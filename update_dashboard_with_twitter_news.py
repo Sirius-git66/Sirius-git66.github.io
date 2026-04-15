@@ -45,8 +45,9 @@ def update_dashboard_news():
         return False
     
     # Find the news section in the HTML
-    # Pattern to match the news section
-    pattern = r'(<div class="news-section">.*?class="card-title">Market News</div>).*?(</div>\s*</div>\s*</div>)'
+    # Pattern to match only the news section (not guides container)
+    # News section ends with </div> for news-section, but guides container follows
+    pattern = r'(<div class="news-section">\s*<div class="card-title">Market News</div>)(.*?)(</div>)(\s*<!-- Guides Container -->)'
     
     match = re.search(pattern, dashboard_content, re.DOTALL)
     if not match:
@@ -54,8 +55,8 @@ def update_dashboard_news():
         return False
     
     # Extract parts of the HTML
-    before_news = dashboard_content[:match.start(1)]
-    after_news = dashboard_content[match.end(2):]
+    before_news = dashboard_content[:match.start(1)] + match.group(1)
+    after_news = match.group(3) + match.group(4) + dashboard_content[match.end(4):]
     
     # Generate new news items HTML
     news_items_html = ""
