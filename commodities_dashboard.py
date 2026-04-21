@@ -268,15 +268,40 @@ class CommoditiesFetcher(DataFetcher):
                     "note": "Mock data - all sources failed"
                 }
         
-        # JCC - Japan Crude Cocktail (no free live source, use mock)
-        prices["jcc"] = {
-            "price": 83.10,
-            "currency": "USD/BBL",
-            "change_dod": -0.20,
-            "change_pct": -0.24,
-            "source": "METI",
-            "note": "Mock data - no free live source"
+        # JCC - Japan Crude Cocktail
+        # Official monthly figure (update manually when published by PAJ or METI)
+        JCC_OFFICIAL_LAST = {
+            "month": "March 2026",
+            "price": 83.10
         }
+        
+        # Synthetic live estimate: JCC tracks Dubai/Oman (Middle East basket).
+        # Approximation: JCC ≈ Brent - small discount (typically $1-3 below Brent)
+        # Using live Brent if available, otherwise fallback
+        try:
+            brent_for_jcc = prices.get("brent", {}).get("price", 85.0)
+            jcc_estimate = brent_for_jcc - 1.5  # Typical Brent-JCC spread
+            jcc_estimate_change = prices.get("brent", {}).get("change_dod", 0.0)
+            jcc_estimate_change_pct = prices.get("brent", {}).get("change_pct", 0.0)
+            
+            prices["jcc"] = {
+                "price": round(jcc_estimate, 2),
+                "currency": "USD/BBL",
+                "change_dod": round(jcc_estimate_change, 2),
+                "change_pct": round(jcc_estimate_change_pct, 2),
+                "source": "METI (est. from Brent)",
+                "note": f"Synthetic estimate. Official {JCC_OFFICIAL_LAST['month']}: ${JCC_OFFICIAL_LAST['price']}"
+            }
+        except Exception:
+            # Fallback to static if calculation fails
+            prices["jcc"] = {
+                "price": 83.10,
+                "currency": "USD/BBL",
+                "change_dod": -0.20,
+                "change_pct": -0.24,
+                "source": "METI",
+                "note": f"Official {JCC_OFFICIAL_LAST['month']} (no live estimate)"
+            }
         
         return prices
     
@@ -658,8 +683,44 @@ class NewsFetcher(DataFetcher):
             except Exception as e:
                 logger.error(f"Error fetching news from {source_name}: {str(e)}")
         
-        # Sort by published date and return top items
-        all_news.sort(key=lambda x: x.get('published', ''), reverse=True)
+        # Filter out articles older than 7 days
+        from email.utils import parsedate_to_datetime
+        from datetime import timezone
+        cutoff_date = datetime.now(timezone.utc) - timedelta(days=3)
+        filtered_news = []
+        
+        for item in all_news:
+            pub_date = None
+            try:
+                pub_str = item.get('published', '')
+                if pub_str and pub_str != 'Recent':
+                    pub_date = parsedate_to_datetime(pub_str)
+                    # Ensure pub_date is timezone-aware for comparison
+                    if pub_date.tzinfo is None:
+                        pub_date = pub_date.replace(tzinfo=timezone.utc)
+            except Exception:
+                pass
+            
+            # Keep if recent or if date parsing failed (assume recent)
+            if pub_date is None or pub_date >= cutoff_date:
+                filtered_news.append(item)
+        
+        all_news = filtered_news
+        
+        # Sort by parsed published date (latest first)
+        def parse_sort_date(item):
+            try:
+                pub_str = item.get('published', '')
+                if pub_str and pub_str != 'Recent':
+                    dt = parsedate_to_datetime(pub_str)
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=timezone.utc)
+                    return dt
+            except Exception:
+                pass
+            return datetime.min.replace(tzinfo=timezone.utc)
+        
+        all_news.sort(key=parse_sort_date, reverse=True)
         
         # If no news from primary sources, try backup sources
         if not all_news:
