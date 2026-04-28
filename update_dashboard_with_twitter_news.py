@@ -36,6 +36,11 @@ def update_dashboard_news():
         print(f"Error loading news JSON: {e}")
         return False
     
+    # Skip update if no news items fetched (preserve existing RSS news)
+    if not news_data.get("items", []):
+        print("No news items in JSON. Keeping existing dashboard news section.")
+        return True
+    
     # Read the dashboard HTML
     try:
         with open(dashboard_file, 'r', encoding='utf-8') as f:
