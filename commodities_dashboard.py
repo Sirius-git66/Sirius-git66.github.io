@@ -815,6 +815,13 @@ class ForwardCurvesFetcher(DataFetcher):
                     live_prices[key] = value
                     sources_used.append(f'LNGIndex-{key.upper()}')
 
+        # Brent: separate live source (FRED), since EIA/LNGIndex don't cover oil
+        if 'brent' not in live_prices:
+            brent = await self._fetch_fred_brent()
+            if brent is not None:
+                live_prices['brent'] = brent
+                sources_used.append('FRED-Brent')
+
         # Build forward curves — anchored to live spot when available
         periods = self._get_smart_periods()
         ttf_data = self._build_curve_data(periods, live_prices, 'ttf')
@@ -848,7 +855,9 @@ class ForwardCurvesFetcher(DataFetcher):
                 "name": "Brent",
                 "unit": "USD/BBL",
                 "data": brent_data,
-                "note": "Static reference (no live source wired)"
+                "note": (f"Live: FRED-Brent | spot: {live_prices['brent']:.2f} USD/BBL"
+                         if live_prices.get('brent') is not None
+                         else "Static reference (FRED unavailable)")
             }
         }
 
@@ -901,7 +910,51 @@ class ForwardCurvesFetcher(DataFetcher):
             logger.warning(f"Could not fetch LNG Price Index: {e}")
 
         return prices
-    
+
+    async def _fetch_fred_brent(self) -> Optional[float]:
+        """Fetch latest Brent spot price from FRED (St. Louis Fed Economic Data).
+
+        Uses the public CSV graph endpoint for series DCOILBRENTEU
+        (Crude Oil Prices: Brent - Europe, daily, USD/BBL). No API key required.
+        Returns the most recent numeric observation, or None on failure.
+        """
+        try:
+            url = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                              'AppleWebKit/537.36 (KHTML, like Gecko) '
+                              'Chrome/120.0.0.0 Safari/537.36'
+            }
+            async with self.session.get(url, headers=headers, timeout=20) as response:
+                if response.status == 200:
+                    text = await response.text()
+                    # CSV format: "DATE,DCOILBRENTEU\n2026-02-10,116.73\n..."
+                    # Walk lines from the bottom to find the most recent numeric row.
+                    for line in reversed(text.strip().splitlines()):
+                        parts = line.split(',')
+                        if len(parts) != 2:
+                            continue
+                        date_str, value_str = parts[0].strip(), parts[1].strip()
+                        # FRED uses '.' to denote a missing observation
+                        if not value_str or value_str == '.':
+                            continue
+                        try:
+                            value = float(value_str)
+                        except ValueError:
+                            continue
+                        if 30 <= value <= 200:
+                            logger.info(f"FRED Brent: ${value}/bbl ({date_str})")
+                            return value
+                        else:
+                            logger.warning(f"FRED Brent ${value}/bbl outside sanity range")
+                            return None
+                    logger.warning("FRED Brent: no numeric rows found in CSV")
+                else:
+                    logger.warning(f"FRED returned HTTP {response.status}")
+        except Exception as e:
+            logger.warning(f"Could not fetch FRED Brent: {e}")
+        return None
+
     def _build_curve_from_prices(self, prices: List[float]) -> List[Dict]:
         """Build curve data from a list of prices"""
         periods = self._get_smart_periods()
@@ -1077,11 +1130,11 @@ class ForwardCurvesFetcher(DataFetcher):
 
         # Static reference forward curves (used as shape; level shifts with live spot)
         # Reference fronts calibrated to current market (May 2026): TTF ≈47 EUR/MWh,
-        # JKM ≈17 USD/MMBtu, Brent ≈85 USD/BBL. Curve shape (spreads) preserved.
+        # JKM ≈17 USD/MMBtu, Brent ≈115 USD/BBL. Curve shape (spreads) preserved.
         forward_curves = {
             'ttf': [47.0, 50.5, 54.0, 52.0, 48.0, 50.5, 45.0, 47.5, 42.0],   # EUR/MWh
             'jkm': [17.0, 16.5, 16.3, 16.7, 16.0, 16.4, 15.7, 16.1, 15.5],   # USD/MMBtu
-            'brent': [85.0, 83.5, 82.0, 84.0, 80.0, 82.5, 78.0, 80.5, 76.0]  # USD/BBL
+            'brent': [115.0, 113.5, 112.0, 114.0, 110.0, 112.5, 108.0, 110.5, 106.0]  # USD/BBL
         }
 
         # Compute live-anchored shift if base spot is available and within sanity bounds
