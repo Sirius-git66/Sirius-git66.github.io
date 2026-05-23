@@ -795,24 +795,42 @@ class ForwardCurvesFetcher(DataFetcher):
     """Fetch forward curves for energy commodities with smart period adjustment"""
     
     async def fetch_curves(self) -> Dict[str, Any]:
-        """Fetch forward curves for TTF, JKM, Brent with weekly updates from EIA"""
-        
-        # Fetch weekly price updates from EIA (primary source)
-        eia_prices = await self._fetch_eia_weekly_prices()
-        
-        # Get static realistic forward curves
+        """Fetch forward curves for TTF, JKM, Brent with weekly updates from EIA
+        and a daily fallback to LNG Price Index when EIA is unavailable.
+        """
+
+        # Primary: EIA weekly (TTF + JKM front-month)
+        live_prices = await self._fetch_eia_weekly_prices()
+        sources_used = []
+        if live_prices.get('ttf') is not None:
+            sources_used.append('EIA-TTF')
+        if live_prices.get('jkm') is not None:
+            sources_used.append('EIA-JKM')
+
+        # Secondary fallback: LNG Price Index (only fill gaps EIA didn't provide)
+        if 'ttf' not in live_prices or 'jkm' not in live_prices:
+            lng_prices = await self._fetch_lng_price_index()
+            for key, value in lng_prices.items():
+                if key not in live_prices:
+                    live_prices[key] = value
+                    sources_used.append(f'LNGIndex-{key.upper()}')
+
+        # Build forward curves — anchored to live spot when available
         periods = self._get_smart_periods()
-        ttf_data = self._build_curve_data(periods, {}, 'ttf')
-        jkm_data = self._build_curve_data(periods, {}, 'jkm')
-        brent_data = self._build_curve_data(periods, {}, 'brent')
-        
-        # Build source note with EIA data if available
-        source_parts = ["Weekly updated"]
-        if eia_prices.get('ttf'):
-            source_parts.append(f"EIA TTF: {eia_prices['ttf']:.1f} EUR/MWh")
-        if eia_prices.get('jkm'):
-            source_parts.append(f"EIA JKM: {eia_prices['jkm']:.2f} USD/MMBtu")
-        
+        ttf_data = self._build_curve_data(periods, live_prices, 'ttf')
+        jkm_data = self._build_curve_data(periods, live_prices, 'jkm')
+        brent_data = self._build_curve_data(periods, live_prices, 'brent')
+
+        # Build source note reflecting actual data lineage
+        if sources_used:
+            source_parts = [f"Live: {', '.join(sources_used)}"]
+        else:
+            source_parts = ["Static fallback (no live source available)"]
+        if live_prices.get('ttf') is not None:
+            source_parts.append(f"TTF spot: {live_prices['ttf']:.1f} EUR/MWh")
+        if live_prices.get('jkm') is not None:
+            source_parts.append(f"JKM spot: {live_prices['jkm']:.2f} USD/MMBtu")
+
         curves = {
             "ttf": {
                 "name": "TTF",
@@ -830,14 +848,59 @@ class ForwardCurvesFetcher(DataFetcher):
                 "name": "Brent",
                 "unit": "USD/BBL",
                 "data": brent_data,
-                "note": "Weekly updated"
+                "note": "Static reference (no live source wired)"
             }
         }
-        
+
         return {
             "timestamp": datetime.now().isoformat(),
             "curves": curves
         }
+
+    async def _fetch_lng_price_index(self) -> Dict[str, float]:
+        """Fetch live LNG spot prices from lngpriceindex.com.
+
+        Used as a daily fallback when EIA Weekly is unavailable. Extracts
+        JKM and TTF from the ticker banner. TTF is published in $/MMBtu and
+        converted to EUR/MWh for consistency with the static reference curve.
+        """
+        prices = {}
+        try:
+            url = "https://lngpriceindex.com/"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                              'AppleWebKit/537.36 (KHTML, like Gecko) '
+                              'Chrome/120.0.0.0 Safari/537.36'
+            }
+            async with self.session.get(url, headers=headers, timeout=20) as response:
+                if response.status == 200:
+                    html = await response.text()
+
+                    # JKM ticker: "JKM $17.15" — already in USD/MMBtu, no conversion
+                    jkm_match = re.search(r'JKM\s*\$([\d.]+)', html)
+                    if jkm_match:
+                        jkm = float(jkm_match.group(1))
+                        if 5 <= jkm <= 30:
+                            prices['jkm'] = jkm
+                            logger.info(f"LNG Price Index - JKM: ${jkm}/MMBtu")
+                        else:
+                            logger.warning(f"LNG Price Index JKM ${jkm}/MMBtu outside sanity range")
+
+                    # TTF ticker: "TTF $15.28" — in USD/MMBtu, convert to EUR/MWh
+                    ttf_match = re.search(r'TTF\s*\$([\d.]+)', html)
+                    if ttf_match:
+                        ttf_usd = float(ttf_match.group(1))
+                        if 5 <= ttf_usd <= 30:
+                            prices['ttf'] = ttf_usd / 0.293 / 1.1
+                            logger.info(f"LNG Price Index - TTF: ${ttf_usd}/MMBtu = {prices['ttf']:.2f} EUR/MWh")
+                        else:
+                            logger.warning(f"LNG Price Index TTF ${ttf_usd}/MMBtu outside sanity range")
+                else:
+                    logger.warning(f"LNG Price Index returned HTTP {response.status}")
+        except Exception as e:
+            logger.warning(f"Could not fetch LNG Price Index: {e}")
+
+        return prices
     
     def _build_curve_from_prices(self, prices: List[float]) -> List[Dict]:
         """Build curve data from a list of prices"""
@@ -914,8 +977,9 @@ class ForwardCurvesFetcher(DataFetcher):
                         ttf_usd_mmbtu = float(ttf_match.group(1))
                         # Validate: TTF should be $5-30/MMBtu (realistic range)
                         if 5 <= ttf_usd_mmbtu <= 30:
-                            # Convert USD/MMBtu to EUR/MWh (1 MMBtu = 0.293 MWh, ~1.1 EUR/USD)
-                            prices['ttf'] = ttf_usd_mmbtu * 0.293 * 1.1
+                            # Convert USD/MMBtu to EUR/MWh: divide by 0.293 (MWh per MMBtu) and by 1.1 (USD per EUR)
+                            # Example: $10.50/MMBtu ÷ 0.293 ÷ 1.1 ≈ 32.6 EUR/MWh
+                            prices['ttf'] = ttf_usd_mmbtu / 0.293 / 1.1
                             logger.info(f"EIA Weekly - TTF front-month: ${ttf_usd_mmbtu}/MMBtu = {prices['ttf']:.2f} EUR/MWh")
                         else:
                             logger.warning(f"EIA TTF price ${ttf_usd_mmbtu}/MMBtu outside realistic range, skipping")
@@ -981,7 +1045,7 @@ class ForwardCurvesFetcher(DataFetcher):
                     ttf_match = re.search(r'TTF \(EU LNG\) prompt settled \$([\d.]+)/MMbtu', html)
                     if ttf_match:
                         ttf_usd_mmbtu = float(ttf_match.group(1))
-                        prices['ttf'] = ttf_usd_mmbtu * 0.293 * 1.1  # Convert to EUR/MWh
+                        prices['ttf'] = ttf_usd_mmbtu / 0.293 / 1.1  # Convert USD/MMBtu to EUR/MWh
                     
                     # Extract JKM price
                     jkm_match = re.search(r'JKM \(Asia LNG\) prompt settled at \$([\d.]+)/MMbtu', html)
@@ -995,29 +1059,52 @@ class ForwardCurvesFetcher(DataFetcher):
         return prices
     
     def _build_curve_data(self, periods: List[str], base_prices: Dict[str, float], commodity: str) -> List[Dict]:
-        """Build curve data with smart periods and realistic forward curve prices"""
-        
+        """Build curve data with smart periods and realistic forward curve prices.
+
+        When a live spot price is provided in base_prices, the entire static
+        curve is parallel-shifted by (live_spot - reference_front) so the
+        front-of-curve tracks reality while the structural shape (contango/
+        backwardation) stays stable. Falls back to static curve if the live
+        spot is missing or fails sanity bounds (±50% of reference).
+        """
+
         # Base DoD changes
         dod_changes = {
             'ttf': [-0.27, -0.20, -0.19, -0.18, -0.13, -0.12, -0.12, -0.12, -0.10],
             'jkm': [0.15, 0.10, 0.08, 0.12, 0.05, 0.07, 0.03, 0.04, 0.02],
             'brent': [-0.45, -0.38, -0.35, -0.40, -0.30, -0.32, -0.28, -0.30, -0.25]
         }
-        
-        # Use realistic forward curve prices
-        # TTF in EUR/MWh (30-60 range), JKM in USD/MMBtu (10-15 range), Brent in USD/BBL
+
+        # Static reference forward curves (used as shape; level shifts with live spot)
+        # Reference fronts calibrated to current market (May 2026): TTF ≈47 EUR/MWh,
+        # JKM ≈17 USD/MMBtu, Brent ≈85 USD/BBL. Curve shape (spreads) preserved.
         forward_curves = {
-            'ttf': [35.0, 38.5, 42.0, 40.0, 36.0, 38.5, 33.0, 35.5, 30.0],  # EUR/MWh
-            'jkm': [11.5, 11.0, 10.8, 11.2, 10.5, 10.9, 10.2, 10.6, 10.0],   # USD/MMBtu
+            'ttf': [47.0, 50.5, 54.0, 52.0, 48.0, 50.5, 45.0, 47.5, 42.0],   # EUR/MWh
+            'jkm': [17.0, 16.5, 16.3, 16.7, 16.0, 16.4, 15.7, 16.1, 15.5],   # USD/MMBtu
             'brent': [85.0, 83.5, 82.0, 84.0, 80.0, 82.5, 78.0, 80.5, 76.0]  # USD/BBL
         }
-        
+
+        # Compute live-anchored shift if base spot is available and within sanity bounds
+        static_curve = forward_curves[commodity]
+        reference_front = static_curve[0]
+        live_spot = base_prices.get(commodity) if base_prices else None
+        shift = 0.0
+        if live_spot is not None:
+            lo, hi = reference_front * 0.5, reference_front * 1.5
+            if lo <= live_spot <= hi:
+                shift = live_spot - reference_front
+                logger.info(f"Forward curve {commodity.upper()} anchored to live spot "
+                            f"{live_spot:.2f} (shift {shift:+.2f} from reference {reference_front})")
+            else:
+                logger.warning(f"Live spot {live_spot:.2f} for {commodity.upper()} outside "
+                               f"sanity bounds [{lo:.2f}, {hi:.2f}] — using static curve")
+
         data = []
         for i, period in enumerate(periods):
-            price = forward_curves[commodity][i]
+            price = round(static_curve[i] + shift, 2)
             dod = dod_changes[commodity][i]
             data.append({"period": period, "price": price, "dod": dod})
-        
+
         return data
     
     async def _fetch_ttf_curve(self, spot_price: Optional[float] = None) -> Dict[str, Any]:
