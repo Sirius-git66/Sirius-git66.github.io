@@ -13,6 +13,9 @@
     <meta property="og:title" content="The Arc | Treasury Transformation • AI Innovation">
     <meta property="og:description" content="Architecting next-generation treasury solutions where finance meets innovation.">
     <meta property="og:url" content="https://thearc.cloud">
+    <meta property="og:image" content="https://thearc.cloud/Guide_Logo.png">
+    <meta property="og:image:alt" content="The Arc — Treasury & AI Innovation">
+    <link rel="canonical" href="https://thearc.cloud/">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -1810,6 +1813,18 @@
             grid-column: span 3;
         }
 
+        /* Mobile breakpoint — collapse to 3-up uniform grid */
+        @media (max-width: 768px) {
+            .companies-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                max-width: 95%;
+            }
+            .company-logo:nth-child(n) {
+                grid-column: span 1;
+            }
+        }
+
         .company-logo {
             display: flex;
             align-items: center;
@@ -2619,6 +2634,7 @@
 
       let t0 = performance.now();
       function drawOrb(now) {
+        if (document.hidden) { requestAnimationFrame(drawOrb); return; }
         const t = (now - t0) / 1000;
         const phase = t * 0.18 * TWEAKS.orbSpeed;        // very slow breathing
         const breath = 0.5 + 0.5 * Math.sin(phase * 2 * Math.PI);
@@ -2676,7 +2692,8 @@
 
         requestAnimationFrame(drawOrb);
       }
-      requestAnimationFrame(drawOrb);
+      // Defer first paint so LCP/hero content renders first
+      setTimeout(() => requestAnimationFrame(drawOrb), 0);
 
       // ===== Sparse constellation =====
       const pc = document.getElementById('particles-canvas');
@@ -2709,6 +2726,7 @@
       window.addEventListener('resize', sizePart);
 
       function drawParticles() {
+        if (document.hidden) { requestAnimationFrame(drawParticles); return; }
         pctx.clearRect(0, 0, pW, pH);
         if (!TWEAKS.showConstellation) { requestAnimationFrame(drawParticles); return; }
         for (const p of particles) {
@@ -2748,7 +2766,7 @@
         }
         requestAnimationFrame(drawParticles);
       }
-      requestAnimationFrame(drawParticles);
+      setTimeout(() => requestAnimationFrame(drawParticles), 0);
 
       // Re-init particles when density tweak changes
       window.__arcReinitParticles = initParticles;
@@ -2791,6 +2809,7 @@
       window.addEventListener('resize', size);
 
       function frame() {
+        if (document.hidden) { requestAnimationFrame(frame); return; }
         ctx.clearRect(0, 0, W, H);
         for (const d of dust) {
           d.x += d.vx; d.y += d.vy; d.tw += d.speed;
@@ -2812,7 +2831,7 @@
         }
         requestAnimationFrame(frame);
       }
-      requestAnimationFrame(frame);
+      setTimeout(() => requestAnimationFrame(frame), 0);
     })();
     </script>
 
