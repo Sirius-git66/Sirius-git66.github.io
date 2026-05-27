@@ -64,14 +64,57 @@ class DataFetcher:
 class ForexFetcher(DataFetcher):
     """Fetch FX rates from free sources"""
     
+    def __init__(self, session: aiohttp.ClientSession):
+        super().__init__(session)
+        self.rates_file = Path(__file__).parent / "fx_rates_history.json"
+    
+    def _load_previous_rates(self) -> Dict[str, float]:
+        """Load yesterday's rates for % change calculation"""
+        if self.rates_file.exists():
+            try:
+                with open(self.rates_file, 'r') as f:
+                    data = json.load(f)
+                    return data.get('rates', {})
+            except Exception as e:
+                logger.warning(f"Failed to load previous FX rates: {e}")
+        return {}
+    
+    def _save_current_rates(self, rates: Dict[str, Dict]):
+        """Save current rates as snapshot for next run"""
+        try:
+            snapshot = {
+                'timestamp': datetime.now().isoformat(),
+                'rates': {pair: details['rate'] for pair, details in rates.items()}
+            }
+            with open(self.rates_file, 'w') as f:
+                json.dump(snapshot, f, indent=2)
+            logger.info("FX rates snapshot saved for next day's % change calculation")
+        except Exception as e:
+            logger.warning(f"Failed to save FX rates snapshot: {e}")
+    
+    def _calculate_change_pct(self, pair: str, current_rate: float, previous_rates: Dict[str, float]) -> float:
+        """Calculate real daily % change vs previous snapshot"""
+        prev_rate = previous_rates.get(pair)
+        if prev_rate and prev_rate > 0:
+            change_pct = ((current_rate - prev_rate) / prev_rate) * 100
+            return round(change_pct, 2)
+        return 0.0  # No previous data = 0% change
+    
     async def fetch_rates(self, base_currencies: List[str]) -> Dict[str, Any]:
         """Fetch current FX rates - USD-based pairs only"""
         rates = {}
         
+        # Load previous rates for % change calculation
+        previous_rates = self._load_previous_rates()
+        
         # Fetch USD-based rates from ExchangeRate API
-        api_data = await self._fetch_exchangerate_api()
+        api_data = await self._fetch_exchangerate_api(previous_rates)
         if api_data:
             rates.update(api_data)
+        
+        # Save current snapshot for next run
+        if rates:
+            self._save_current_rates(rates)
         
         return {
             "timestamp": datetime.now().isoformat(),
@@ -79,7 +122,7 @@ class ForexFetcher(DataFetcher):
             "base": "USD"
         }
     
-    async def _fetch_exchangerate_api(self) -> Optional[Dict]:
+    async def _fetch_exchangerate_api(self, previous_rates: Dict[str, float]) -> Optional[Dict]:
         """Fetch from free ExchangeRate API with backup source"""
         
         # Try primary API first
@@ -90,13 +133,15 @@ class ForexFetcher(DataFetcher):
             try:
                 data = json.loads(content)
                 rates = {}
-                mock_changes = {'EUR': 0.12, 'JPY': -0.45, 'SGD': 0.08, 'CNY': -0.15}
                 
                 for currency in ['EUR', 'JPY', 'SGD', 'CNY']:
                     if currency in data['rates']:
-                        rates[f"USD{currency}"] = {
-                            "rate": data['rates'][currency],
-                            "change_pct": mock_changes.get(currency, 0),
+                        pair = f"USD{currency}"
+                        current_rate = data['rates'][currency]
+                        change_pct = self._calculate_change_pct(pair, current_rate, previous_rates)
+                        rates[pair] = {
+                            "rate": current_rate,
+                            "change_pct": change_pct,
                             "source": "ExchangeRate-API"
                         }
                 
@@ -113,13 +158,15 @@ class ForexFetcher(DataFetcher):
             try:
                 data = json.loads(backup_content)
                 rates = {}
-                mock_changes = {'EUR': 0.12, 'JPY': -0.45, 'SGD': 0.08, 'CNY': -0.15}
                 
                 for currency in ['EUR', 'JPY', 'SGD', 'CNY']:
                     if currency in data.get('rates', {}):
-                        rates[f"USD{currency}"] = {
-                            "rate": data['rates'][currency],
-                            "change_pct": mock_changes.get(currency, 0),
+                        pair = f"USD{currency}"
+                        current_rate = data['rates'][currency]
+                        change_pct = self._calculate_change_pct(pair, current_rate, previous_rates)
+                        rates[pair] = {
+                            "rate": current_rate,
+                            "change_pct": change_pct,
                             "source": "ExchangeRate-Backup"
                         }
                 
@@ -129,13 +176,13 @@ class ForexFetcher(DataFetcher):
             except Exception as e:
                 logger.warning(f"Backup FX API failed: {str(e)}")
         
-        # Final fallback: hardcoded approximate rates
+        # Final fallback: hardcoded approximate rates (with 0% change)
         logger.warning("All FX APIs failed - using hardcoded fallback rates")
         return {
-            'USDCNY': {'rate': 7.25, 'change_pct': -0.15, 'source': 'Fallback'},
-            'USDEUR': {'rate': 0.92, 'change_pct': 0.12, 'source': 'Fallback'},
-            'USDJPY': {'rate': 149.50, 'change_pct': -0.45, 'source': 'Fallback'},
-            'USDSGD': {'rate': 1.35, 'change_pct': 0.08, 'source': 'Fallback'}
+            'USDCNY': {'rate': 7.25, 'change_pct': 0.0, 'source': 'Fallback'},
+            'USDEUR': {'rate': 0.92, 'change_pct': 0.0, 'source': 'Fallback'},
+            'USDJPY': {'rate': 149.50, 'change_pct': 0.0, 'source': 'Fallback'},
+            'USDSGD': {'rate': 1.35, 'change_pct': 0.0, 'source': 'Fallback'}
         }
 
 
