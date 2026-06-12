@@ -1844,6 +1844,16 @@ class DashboardGenerator:
                         </div>
                     </a>
                 </div>
+                
+                <!-- AI Agentic Projects Section -->
+                <div class="guide-section">
+                    <a href="tfa_project.html" target="_blank" class="guide-link">
+                        <div class="guide-text">AI Agentic Projects</div>
+                        <div class="guide-icon-container">
+                            <img src="ai_agentic_projects.png" alt="AI Agentic Projects" class="guide-icon">
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

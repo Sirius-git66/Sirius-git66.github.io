@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFA — Trade Finance Agent | thearc.cloud</title>
+<meta name="description" content="TFA is a multi-agent AI system for trade finance operations. It runs the overnight groundwork — reading, vetting, briefing — so the desk opens to one page and a decision. A working prototype by The Arc.">
+<meta name="theme-color" content="#101218">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TFA — Trade Finance Agent">
+<meta property="og:description" content="Your desk worked all night. One overnight run. Six moves. One morning brief. Every decision human.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#101218;
+  --desk:#1b1916;
+  --warm:#221b13;
+  --ink:#f0eadd;
+  --ink-2:#b9b0a1;
+  --ink-3:#9c9384;
+  --line:rgba(240,234,221,.12);
+  --line-soft:rgba(240,234,221,.06);
+  --amber:#e8a33d;
+  --amber-soft:rgba(232,163,61,.12);
+  --green:#63bd8d;
+  --green-soft:rgba(99,189,141,.12);
+  --red:#e06c5c;
+  --red-soft:rgba(224,108,92,.12);
+  --blue:#7faed6;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1140px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  /* the night → dawn arc */
+  background:linear-gradient(180deg,
+    var(--night) 0%,
+    #14141a 14%,
+    var(--desk) 34%,
+    var(--desk) 58%,
+    var(--warm) 74%,
+    #2a1f12 86%,
+    var(--desk) 100%);
+}
+::selection{background:var(--amber);color:#1b1916}
+a{color:inherit}
+/* keyboard accessibility: visible focus ring (was missing) */
+a:focus-visible,.btn:focus-visible,.nav-cta:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(24px,4vw,56px)}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;
+  background:linear-gradient(180deg,rgba(16,18,24,.85),rgba(16,18,24,0));
+  pointer-events:none;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;pointer-events:auto}
+.brand{font-family:var(--mono);font-weight:600;font-size:.95rem;letter-spacing:.06em;text-decoration:none}
+.brand span{color:var(--amber)}
+.nav-cta{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-decoration:none;
+  border:1px solid rgba(232,163,61,.5);color:var(--amber);
+  padding:.5rem 1rem;border-radius:99px;background:rgba(16,18,24,.5);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--amber-soft)}
+
+/* ---------- hero (night) ---------- */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;padding:7rem 0 5rem;
+}
+.stars{position:absolute;inset:0;pointer-events:none}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(240,234,221,.7);
+  animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.75}}
+@media (prefers-reduced-motion: reduce){.stars i{animation:none;opacity:.35}}
+.hero-clock{
+  font-family:var(--mono);font-weight:600;letter-spacing:.02em;
+  font-size:clamp(4.5rem,14vw,9.5rem);line-height:1;
+  color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.hero-clock .colon{color:var(--amber);animation:blink 2s steps(1) infinite}
+@keyframes blink{50%{opacity:.25}}
+@media (prefers-reduced-motion: reduce){.hero-clock .colon{animation:none}}
+.hero-kicker{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:1.6rem;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,4.6vw,3.2rem);
+  line-height:1.18;letter-spacing:-.012em;max-width:21ch;margin-top:2.2rem;
+}
+.hero h1 em{font-style:italic;color:var(--amber)}
+.hero-sub{color:var(--ink-2);max-width:52ch;margin-top:1.4rem;font-size:1.04rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
+.btn{
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.05em;
+  text-decoration:none;padding:.9rem 1.6rem;border-radius:99px;
+  transition:transform .2s,background .2s,border-color .2s;display:inline-block;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--amber);color:#16130d;font-weight:600}
+.btn-primary:hover{background:#f2b259}
+.btn-ghost{border:1px solid var(--line);color:var(--ink-2)}
+.btn-ghost:hover{border-color:var(--ink-3);color:var(--ink)}
+.scroll-hint{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;flex-direction:column;align-items:center;gap:.95rem;
+}
+.scroll-hint .sh-rail{position:relative;width:1px;height:44px;background:linear-gradient(var(--line),transparent);overflow:hidden}
+.scroll-hint .sh-rail::after{content:"";position:absolute;left:0;top:0;width:1px;height:14px;background:linear-gradient(var(--amber),transparent);animation:shfall 2.6s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes shfall{0%{transform:translateY(-14px);opacity:0}25%{opacity:1}100%{transform:translateY(44px);opacity:0}}
+@media (prefers-reduced-motion: reduce){.scroll-hint .sh-rail::after{animation:none;opacity:.4}}
+
+/* ---------- overnight pipeline (calm status strip, no crawl) ---------- */
+.pipeline{
+  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+  padding:1.05rem 0;
+}
+.pipeline-inner{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:.65rem 1.5rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);
+}
+.pl-step{display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap}
+.pl-step b{color:var(--green);font-weight:500;font-size:.8rem;line-height:1}
+.pl-step.gate{color:var(--amber)}
+.pl-step.gate b{color:var(--amber)}
+/* container shows immediately; steps settle in left→right to imply the run completing */
+.pipeline.reveal{opacity:1;transform:none}
+.pl-step{opacity:0;transform:translateY(6px);transition:opacity .5s ease,transform .5s ease}
+.pipeline.in .pl-step{opacity:1;transform:none}
+.pipeline.in .pl-step:nth-child(1){transition-delay:.04s}
+.pipeline.in .pl-step:nth-child(2){transition-delay:.12s}
+.pipeline.in .pl-step:nth-child(3){transition-delay:.20s}
+.pipeline.in .pl-step:nth-child(4){transition-delay:.28s}
+.pipeline.in .pl-step:nth-child(5){transition-delay:.36s}
+.pipeline.in .pl-step:nth-child(6){transition-delay:.44s}
+.pipeline.in .pl-step:nth-child(7){transition-delay:.56s}
+@media (prefers-reduced-motion: reduce){.pl-step{opacity:1;transform:none;transition:none}}
+
+/* ---------- statement ---------- */
+.statement{padding:8rem 0}
+.statement .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:2.6rem 5rem;align-items:end}
+.statement p{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.6rem,3.6vw,2.7rem);line-height:1.3;letter-spacing:-.01em;
+  max-width:none;
+}
+.statement p em{font-style:italic;color:var(--amber)}
+.statement .after{font-family:var(--sans);font-size:1.06rem;color:var(--ink-2);max-width:none;margin-top:0;line-height:1.75}
+@media(max-width:820px){
+  .statement{padding:5.5rem 0}
+  .statement .wrap{grid-template-columns:1fr;gap:1.6rem;align-items:start}
+}
+
+/* ---------- how it works ---------- */
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:1.2rem;
+}
+h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2rem,5vw,3.3rem);
+  line-height:1.1;letter-spacing:-.014em;max-width:20ch;
+}
+h2 em{font-style:italic;color:var(--amber)}
+.lede{color:var(--ink-2);max-width:56ch;margin-top:1.3rem;font-size:1.02rem}
+
+.how{padding:5rem 0 7rem}
+.moves{position:relative;margin-top:4.5rem}
+.rail{
+  position:absolute;left:27px;top:0;bottom:0;width:1px;background:var(--line-soft);
+}
+.rail-fill{
+  position:absolute;left:0;top:0;width:1px;height:0;
+  background:linear-gradient(var(--amber),rgba(232,163,61,.25));
+}
+.move{
+  position:relative;display:grid;grid-template-columns:56px 110px 1fr;gap:1.6rem;
+  padding:2.4rem 0;align-items:start;
+}
+@media(max-width:700px){.move{grid-template-columns:56px 1fr}.move .mtime{display:none}}
+.mnode{
+  width:56px;display:flex;justify-content:center;
+}
+.mnode i{
+  width:13px;height:13px;border-radius:50%;
+  background:var(--desk);border:1px solid var(--ink-3);
+  margin-top:.5rem;transition:background .5s,border-color .5s,box-shadow .5s;
+  position:relative;z-index:1;
+}
+.move.lit .mnode i{background:var(--amber);border-color:var(--amber);box-shadow:0 0 16px rgba(232,163,61,.55)}
+.move.lit.human .mnode i{background:var(--green);border-color:var(--green);box-shadow:0 0 16px rgba(99,189,141,.55)}
+.mtime{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);padding-top:.55rem;letter-spacing:.04em}
+.mbody h3{
+  font-family:var(--serif);font-weight:500;font-size:1.45rem;letter-spacing:-.01em;line-height:1.25;
+  display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+}
+.mbody h3 .n{font-family:var(--mono);font-weight:500;font-size:.74rem;color:var(--ink-3)}
+.tag{
+  font-family:var(--mono);font-weight:500;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber);background:var(--amber-soft);border:1px solid rgba(232,163,61,.3);
+  border-radius:99px;padding:.22rem .65rem;white-space:nowrap;
+}
+.tag.human{color:var(--green);background:var(--green-soft);border-color:rgba(99,189,141,.3)}
+.mbody p{color:var(--ink-2);font-size:.96rem;margin-top:.65rem;max-width:58ch}
+
+/* four checks */
+.checks-intro{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-3);margin:4rem 0 1.2rem;display:flex;align-items:center;gap:.8rem;
+}
+.checks-intro::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);
+  border:1px solid var(--line-soft);border-radius:8px;overflow:hidden}
+@media(max-width:820px){.checks{grid-template-columns:repeat(2,1fr)}}
+.check{background:rgba(16,15,13,.45);padding:1.5rem 1.4rem;transition:background .3s}
+.check:hover{background:rgba(232,163,61,.05)}
+.check .ttl{font-family:var(--mono);font-size:.84rem;font-weight:600;letter-spacing:.03em;display:flex;align-items:center;gap:.55rem}
+.check .tick{color:var(--green)}
+.check .desc{font-size:.85rem;color:var(--ink-2);margin-top:.6rem;line-height:1.55}
+
+/* ---------- dawn / morning brief ---------- */
+.dawn{padding:8rem 0 7rem;position:relative;overflow:hidden}
+.sunrise{
+  position:absolute;left:50%;bottom:-360px;transform:translateX(-50%);
+  width:920px;height:920px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(232,163,61,.22) 0%,rgba(232,163,61,.07) 42%,transparent 68%);
+}
+.dawn .eyebrow{color:var(--amber)}
+.demo-note{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:3rem 0 1rem;display:flex;align-items:center;gap:.7rem;
+}
+.demo-note::before{content:"";width:26px;height:1px;background:var(--ink-3)}
+.brief{
+  position:relative;background:#201d18;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.75),0 0 80px -30px rgba(232,163,61,.25);
+}
+.brief-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.8rem 1.4rem;border-bottom:1px solid var(--line-soft);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+}
+.brief-bar b{color:var(--amber);font-weight:500}
+.brief-head{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line-soft)}
+.brief-stat{padding:1.3rem 1.4rem;border-right:1px solid var(--line-soft)}
+.brief-stat:last-child{border-right:none}
+.brief-stat b{display:block;font-family:var(--mono);font-size:1.55rem;font-weight:600}
+.brief-stat span{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.brief-stat.amber b{color:var(--amber)}
+.brief-stat.blue b{color:var(--blue)}
+.brief-stat.green b{color:var(--green)}
+.brief-row{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:1.1rem 1.4rem;border-bottom:1px solid var(--line-soft);
+  font-family:var(--mono);font-size:.86rem;flex-wrap:wrap;
+}
+.brief-row:last-child{border-bottom:none}
+.brief-row .m{color:var(--ink-3)}
+.pill{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;padding:.32rem .75rem;border-radius:99px;white-space:nowrap}
+.pill.ok{color:var(--green);background:var(--green-soft);border:1px solid rgba(99,189,141,.3)}
+.pill.issue{color:var(--amber);background:var(--amber-soft);border:1px solid rgba(232,163,61,.3)}
+.pill.due{color:var(--red);background:var(--red-soft);border:1px solid rgba(224,108,92,.3)}
+@media(max-width:680px){.brief-head{grid-template-columns:repeat(2,1fr)}.brief-stat{border-bottom:1px solid var(--line-soft)}}
+
+/* ---------- principles ---------- */
+.principles{padding:6rem 0}
+.prin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:3rem}
+@media(max-width:760px){.prin-grid{grid-template-columns:1fr;gap:2rem}}
+.prin{border-top:1px solid var(--line);padding-top:1.3rem}
+.prin h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;letter-spacing:-.01em}
+.prin h3 em{font-style:italic;color:var(--amber)}
+.prin p{font-size:.92rem;color:var(--ink-2);margin-top:.6rem;max-width:36ch}
+
+/* ---------- status line ---------- */
+.statusline{
+  padding:0 0 6rem;
+}
+.statusline .inner{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;color:var(--ink-2);
+  border:1px solid var(--line-soft);border-radius:99px;padding:.9rem 1.5rem;
+  background:rgba(16,15,13,.35);width:fit-content;
+}
+.statusline .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2.4s ease-in-out infinite;flex:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media (prefers-reduced-motion: reduce){.statusline .dot{animation:none}}
+.statusline .sep{color:var(--ink-3)}
+
+/* ---------- dusk / end-of-day bookend ---------- */
+.dusk{position:relative;overflow:hidden;padding:8rem 0 7rem;text-align:center}
+.duskglow{
+  position:absolute;left:50%;bottom:-440px;transform:translateX(-50%);
+  width:1120px;height:1120px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(224,108,92,.15) 0%,rgba(232,163,61,.10) 38%,transparent 66%);
+}
+.dusk-inner{position:relative;display:flex;flex-direction:column;align-items:center}
+.dusk .hero-kicker{color:var(--amber);margin-bottom:1.4rem}
+.dusk-clock{font-size:clamp(3.4rem,10.5vw,7.4rem);margin-bottom:.4rem}
+.dusk h2{margin-top:1.4rem;max-width:18ch}
+.dusk .hero-sub{margin:1.4rem auto 0;max-width:54ch}
+.eod-status{
+  display:inline-flex;align-items:center;gap:.7rem;margin-top:2.4rem;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:var(--ink-2);
+  border:1px solid var(--line);border-radius:99px;padding:.55rem 1.1rem;
+  background:rgba(16,15,13,.35);
+}
+.eod-status .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2.4s ease-in-out infinite;flex:none}
+
+/* ---------- CTA ---------- */
+.cta{padding:4rem 0 8rem;text-align:center}
+.cta h2{margin:0 auto;max-width:18ch}
+.cta .lede{margin:1.4rem auto 2.4rem;max-width:46ch}
+.cta .hero-actions{justify-content:center}
+
+/* ---------- footer ---------- */
+footer{padding:0 0 3.5rem;color:var(--ink-3);font-size:.78rem}
+footer .foot-inner{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;border-top:1px solid var(--line-soft);padding-top:2rem}
+footer a{color:var(--ink-2);text-decoration:none}
+footer a:hover{color:var(--ink)}
+.built-by{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--ink-2);display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;transition:color .2s}
+.built-by .lk{color:var(--ink-3);transition:color .2s}
+.built-by:hover{color:var(--ink)}
+.built-by:hover .lk{color:var(--amber)}
+.fineprint{margin-top:1.2rem;font-size:.72rem;line-height:1.7;max-width:none;color:var(--ink-3)}
+
+/* ---------- typography polish: balance headings, prevent orphans ---------- */
+h1,h2,h3,.statement p,.cta h2,.dusk h2{text-wrap:balance}
+.hero-sub,.lede,.mbody p,.prin p,.check .desc,.statement .after,.fineprint{text-wrap:pretty}
+
+/* ---------- editorial section header (heading left, lede right) ---------- */
+.section-head{display:grid;grid-template-columns:1.05fr .95fr;gap:1.4rem 5rem;align-items:end;margin-bottom:.5rem}
+.section-head .sh-left{min-width:0}
+.section-head h2{margin:0}
+.section-head .lede{margin-top:0;max-width:none}
+@media(max-width:820px){.section-head{grid-template-columns:1fr;gap:.9rem;align-items:start}}
+
+/* one-line headline + full-width lede (morning brief) */
+.h2-oneline{max-width:none;font-size:clamp(1.6rem,3.7vw,2.7rem)}
+@media(min-width:680px){.h2-oneline{white-space:nowrap}}
+.lede.wide{max-width:none;font-size:1.08rem;line-height:1.7;margin-top:1.5rem}
+
+/* ---------- responsive: vertical rhythm on small screens ---------- */
+@media(max-width:700px){
+  .hero{padding:6rem 0 4rem}
+  .how{padding:3.5rem 0 5rem}
+  .dawn{padding:5rem 0 4.5rem}
+  .principles{padding:4rem 0}
+  .cta{padding:3rem 0 5rem}
+}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="https://thearc.cloud">The Arc<span> · Project TFA</span></a>
+    <a class="nav-cta" href="https://thearc.cloud/#contact">Get in touch</a>
+  </div>
+</nav>
+
+<!-- NIGHT -->
+<header class="hero">
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-kicker">The Arc AI Lab · Trade Finance, Agentic</div>
+    <div class="hero-clock" aria-label="08:00">08<span class="colon">:</span>00</div>
+    <h1>Before anyone arrives, the desk has <em>already run.</em></h1>
+    <p class="hero-sub">TFA is a multi-agent AI system for trade finance operations. It does the overnight groundwork — reading, vetting, briefing — so your morning opens to one page and a decision. <b style="color:var(--ink);font-weight:500">The groundwork is machine. The judgement is yours.</b></p>
+  </div>
+  <div class="scroll-hint"><span>While you slept</span><span class="sh-rail"></span></div>
+</header>
+
+<div class="pipeline reveal" aria-label="Overnight pipeline — steps completed before the desk opens">
+  <div class="wrap pipeline-inner">
+    <span class="pl-step"><b>✓</b> Overnight intake</span>
+    <span class="pl-step"><b>✓</b> Pricing</span>
+    <span class="pl-step"><b>✓</b> Screening</span>
+    <span class="pl-step"><b>✓</b> Document prep</span>
+    <span class="pl-step"><b>✓</b> Line check</span>
+    <span class="pl-step"><b>✓</b> Morning brief</span>
+    <span class="pl-step gate"><b>—</b> Approval pending</span>
+  </div>
+</div>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap">
+    <p class="reveal">The judgement is the easy part. Everything <em>around it</em> isn't.</p>
+    <p class="after reveal">Most of a trade finance day disappears into assembly — pricing, screening, document checks, line tracking — by hand, across separate systems, against the clock. TFA takes the assembly. Your team maintains the oversight and decisions.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="sh-left">
+        <div class="eyebrow reveal">How It Works</div>
+        <h2 class="reveal">One overnight run. <em>Six</em> moves.</h2>
+      </div>
+      <p class="lede reveal">At 08:00 each weekday, before anyone is in, TFA begins on its own — no one needs to start it.</p>
+    </div>
+
+    <div class="moves" id="moves">
+      <div class="rail"><div class="rail-fill" id="railFill"></div></div>
+
+      <div class="move">
+        <div class="mnode"><i></i></div>
+        <div class="mtime">08:00</div>
+        <div class="mbody">
+          <h3><span class="n">01</span>Reads the inbox <span class="tag">Autonomous</span></h3>
+          <p>TFA picks up the deals that arrived overnight and structures them for processing — no manual data entry, no re-keying between systems.</p>
+        </div>
+      </div>
+
+      <div class="move">
+        <div class="mnode"><i></i></div>
+        <div class="mtime">08:02</div>
+        <div class="mbody">
+          <h3><span class="n">02</span>Vets every deal, four ways <span class="tag">Autonomous</span></h3>
+          <p>Before a deal reaches a human, it is priced, screened, document-checked and matched to a facility. Consistent, and never skipped.</p>
+        </div>
+      </div>
+
+      <div class="move">
+        <div class="mnode"><i></i></div>
+        <div class="mtime">08:11</div>
+        <div class="mbody">
+          <h3><span class="n">03</span>Writes one morning brief <span class="tag">Autonomous</span></h3>
+          <p>The desk arrives to a single page: the new deals, what to approve, what to issue, the margin so far, and anything urgent today.</p>
+        </div>
+      </div>
+
+      <div class="move human">
+        <div class="mnode"><i></i></div>
+        <div class="mtime">You walk in</div>
+        <div class="mbody">
+          <h3><span class="n">04</span>A person signs off <span class="tag human">Human Gate</span></h3>
+          <p>TFA prepares and recommends — it does not approve. Each deal is confirmed by a named person in one action, recorded with a full audit trail.</p>
+        </div>
+      </div>
+
+      <div class="move">
+        <div class="mnode"><i></i></div>
+        <div class="mtime">Through the day</div>
+        <div class="mbody">
+          <h3><span class="n">05</span>Finances the buy, tracks the sale <span class="tag">Autonomous</span></h3>
+          <p>New and ongoing buy and sell legs are monitored. TFA tracks the matched trades, and margins stay visible in real time with price feeds.</p>
+        </div>
+      </div>
+
+      <div class="move">
+        <div class="mnode"><i></i></div>
+        <div class="mtime">On settlement</div>
+        <div class="mbody">
+          <h3><span class="n">06</span>Settles, and frees the line <span class="tag">Autonomous</span></h3>
+          <p>Upon settlement, the buy-side credit instrument closes, the sale payment lands, and credit-line headroom returns automatically — ready for the next cargo, no manual reconciliation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="checks-intro reveal">Four checks · every deal · every time</div>
+    <div class="checks reveal">
+      <div class="check"><div class="ttl"><span class="tick">✓</span>Pricing</div><div class="desc">Values the deal against the right market reference.</div></div>
+      <div class="check"><div class="ttl"><span class="tick">✓</span>Screening</div><div class="desc">Counterparty checked against sanctions &amp; dual-use lists.</div></div>
+      <div class="check"><div class="ttl"><span class="tick">✓</span>Documents</div><div class="desc">Credit and shipping documents verified. Applications get prepped.</div></div>
+      <div class="check"><div class="ttl"><span class="tick">✓</span>Line fit</div><div class="desc">Confirms a bank line has the headroom.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAWN / MORNING BRIEF -->
+<section class="dawn" id="brief">
+  <div class="sunrise" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal">The Morning Brief</div>
+    <h2 class="reveal h2-oneline">The morning starts with <em>1 page,</em> not 8 systems.</h2>
+    <p class="lede reveal wide">New deals, approvals pending, LCs to issue, running margin, and same-day alerts — consolidated into a single view the moment the desk opens.</p>
+
+    <div class="demo-note reveal">Prototype output — illustrative demo data</div>
+    <div class="brief reveal">
+      <div class="brief-bar"><span><b>TFA</b> · Morning Brief</span><span>Weekday · 08:14</span></div>
+      <div class="brief-head">
+        <div class="brief-stat amber"><b>3</b><span>Deals</span></div>
+        <div class="brief-stat blue"><b>1</b><span>To issue</span></div>
+        <div class="brief-stat green"><b>+$1.4M</b><span>TF margin</span></div>
+        <div class="brief-stat"><b>1</b><span>Alert</span></div>
+      </div>
+      <div class="brief-row"><span>Crude · $78M <span class="m">· Bank A</span></span><span class="pill ok">Matched · +$1.4M</span></div>
+      <div class="brief-row"><span>Gasoil · $84M <span class="m">· Bank B</span></span><span class="pill issue">44% sold · 50,000 MT open</span></div>
+      <div class="brief-row"><span>Gasoline · $46M <span class="m">· Bank C</span></span><span class="pill due">Negative margin flagged</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="principles">
+  <div class="wrap">
+    <div class="prin-grid">
+      <div class="prin reveal">
+        <h3>AI recommends. <em>You decide.</em></h3>
+        <p>A mandatory human approval gate on every deal. Designed with system and internal controls in place.</p>
+      </div>
+      <div class="prin reveal">
+        <h3>Everything <em>on record.</em></h3>
+        <p>Every recommendation, approval and state change logged. Each deal reconstructable, end to end.</p>
+      </div>
+      <div class="prin reveal">
+        <h3>Inside <em>your walls.</em></h3>
+        <p>Designed to run privately on your own infrastructure — your data stays inside your environment, with nothing shared out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUSK / END-OF-DAY BOOKEND -->
+<section class="dusk" id="eod">
+  <div class="duskglow" aria-hidden="true"></div>
+  <div class="wrap dusk-inner">
+    <div class="hero-kicker reveal">End of Day · 19:00</div>
+    <div class="hero-clock dusk-clock reveal" aria-label="19:00">19<span class="colon">:</span>00</div>
+    <h2 class="reveal">After everyone leaves, the desk <em>reports back.</em></h2>
+    <p class="hero-sub reveal">At close, the day is compiled into a single end-of-day report — positions, running margin, exceptions and tomorrow's watch-list — on the CFO's desk before the lights go off.</p>
+    <div class="eod-status reveal"><span class="dot"></span><span>End-of-day reporting — in refinement &amp; testing</span></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2 class="reveal">An agentic project, built <em>in the open.</em></h2>
+    <p class="lede reveal">TFA explores how multi-agent AI can take on the overnight groundwork of a trade-finance desk — reading, vetting and briefing — while every decision stays with a person. It's built at The Arc, the lab behind the JEPX Bid Optimisation System. If it speaks to your desk, I'd be glad to walk you through it.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-ghost" href="https://thearc.cloud/jepx-ai-bid.html">See the JEPX system →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>© 2026 The Arc | Treasury Transformation • AI Innovation</div>
+      <a class="built-by" href="https://www.linkedin.com/in/cheong-cheryl" target="_blank" rel="noopener">Built by Cheryl C. <span class="lk">· LinkedIn ↗</span></a>
+    </div>
+    <p class="fineprint">TFA is a working prototype in active development. All deal values, margins, bank names and figures shown are illustrative demonstration data — not live transactions, real counterparties or actual trading results. Designed for deployment within a client's own infrastructure, with mandatory human approval at every decision gateway.</p>
+  </div>
+</footer>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// stars (hero only)
+(function(){
+  const c = document.getElementById('stars');
+  for(let s=0;s<70;s++){
+    const i = document.createElement('i');
+    i.style.left = Math.random()*100+'%';
+    i.style.top = Math.random()*70+'%';
+    i.style.animationDelay = (Math.random()*4)+'s';
+    i.style.opacity = .1 + Math.random()*.5;
+    const sz = Math.random()<.85 ? 2 : 3;
+    i.style.width = i.style.height = sz+'px';
+    c.appendChild(i);
+  }
+})();
+
+// scroll reveal
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>{
+  if(reduce){ el.classList.add('in'); } else { io.observe(el); }
+});
+
+// timeline: rail draws + nodes light up as you scroll
+(function(){
+  const moves = [...document.querySelectorAll('.move')];
+  const railFill = document.getElementById('railFill');
+  const wrapEl = document.getElementById('moves');
+  if(reduce){
+    moves.forEach(m=>m.classList.add('lit'));
+    railFill.style.height = '100%';
+    return;
+  }
+  function onScroll(){
+    const r = wrapEl.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const progress = Math.min(1, Math.max(0, (vh*0.72 - r.top) / r.height));
+    railFill.style.height = (progress*100)+'%';
+    moves.forEach(m=>{
+      const mr = m.getBoundingClientRect();
+      if(mr.top < vh*0.72) m.classList.add('lit');
+    });
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
