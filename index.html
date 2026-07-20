@@ -120,11 +120,11 @@
 
         /* Hero Section — cinematic obsidian + cobalt orb */
         .hero {
-            min-height: 92vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #05060a;
+            background: transparent; /* shares the cosmic-band globe background */
             position: relative;
             overflow: hidden;
             isolation: isolate;
@@ -153,7 +153,9 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center, transparent 35%, rgba(5, 6, 10, 0.55) 75%, rgba(5, 6, 10, 0.92) 100%);
+            /* Edge vignette removed — it was framing the bright globe as a dark rectangle.
+               The cosmic-band-overlay handles top/bottom grading now. */
+            background: radial-gradient(ellipse at center, transparent 78%, rgba(5, 6, 10, 0.12) 100%);
             z-index: 2;
             pointer-events: none;
         }
@@ -181,6 +183,7 @@
         }
 
         .scroll-indicator {
+            display: none; /* removed — redundant with the single shared background */
             position: absolute;
             bottom: 36px;
             left: 50%;
@@ -685,9 +688,39 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        /* Track Record cards adopt the sample's "display plate" motion:
+           a staggered scroll-reveal (fade + slide-up) plus a gentle hover pop.
+           Scoped to .projects-grid so the global .fade-in behaviour is untouched. */
+        .projects-grid .project-card {
+            opacity: 0;
+            transform: translateY(48px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+                        transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+                        box-shadow 0.4s ease;
+        }
+        .projects-grid .project-card:nth-child(1) { transition-delay: 0s; }
+        .projects-grid .project-card:nth-child(2) { transition-delay: 0.12s; }
+        .projects-grid .project-card:nth-child(3) { transition-delay: 0.24s; }
+
+        .projects-grid .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .projects-grid .project-card:hover {
+            transform: translateY(-8px) scale(1.012);
+            box-shadow: 0 26px 55px -22px rgba(80, 140, 230, 0.22),
+                        0 16px 44px rgba(0, 0, 0, 0.12);
+            transition: transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.45s ease;
+            transition-delay: 0s;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .projects-grid .project-card {
+                transition: none;
+                opacity: 1;
+                transform: none;
+            }
         }
 
         .project-image {
@@ -1728,8 +1761,8 @@
         /* Companies Section — obsidian continuum (Path B, lifted) */
         .companies-section {
             position: relative;
-            background: #0a1228;
-            padding: 5rem 5% 5.5rem;
+            background: transparent; /* shares the cosmic-band globe background above */
+            padding: 2.25rem 5% 5.5rem;
             overflow: hidden;
             isolation: isolate;
         }
@@ -1757,7 +1790,42 @@
         /* Cosmic ray killed in CSS — replaced by in-DOM SVG + dust canvas for dynamism */
         .companies-section::after { display: none; }
 
+        /* One shared globe motion background across the hero + Global Treasury sections */
+        .cosmic-band {
+            position: relative;
+            background: #05060a; /* fallback until the video paints */
+        }
+
+        .cosmic-band-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 42%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.95;
+        }
+
+        /* Continuous grade: dark near-black in the hero, easing to the cobalt navy under Global Treasury */
+        .cosmic-band-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 85% 45% at 50% 74%, rgba(30, 107, 255, 0.12) 0%, transparent 62%),
+                linear-gradient(180deg,
+                    rgba(5, 6, 10, 0.70) 0%,
+                    rgba(5, 6, 10, 0.44) 28%,
+                    rgba(9, 15, 36, 0.46) 52%,
+                    rgba(10, 18, 40, 0.60) 74%,
+                    rgba(10, 18, 40, 0.92) 100%);
+        }
+
         .cosmic-ray-host {
+            display: none; /* glowing horizon line removed for the single shared background */
             position: absolute;
             bottom: -70px;
             left: 0;
@@ -1790,58 +1858,82 @@
         .companies-grid {
             position: relative;
             z-index: 2;
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.25rem 2rem;
-            max-width: 1200px;
-            margin: 2.25rem auto 0;
-            align-items: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 2.75rem auto 0;
         }
 
-        /* First row - 3 logos, each taking 4 columns */
-        .company-logo:nth-child(1),
-        .company-logo:nth-child(2),
-        .company-logo:nth-child(3) {
-            grid-column: span 4;
-        }
-
-        /* Second row - 4 logos, each taking 3 columns */
-        .company-logo:nth-child(4),
-        .company-logo:nth-child(5),
-        .company-logo:nth-child(6),
-        .company-logo:nth-child(7) {
-            grid-column: span 3;
+        /* Two explicit rows: top 3, bottom 4 — cards stay a uniform size */
+        .logo-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
         }
 
         /* Mobile breakpoint — collapse to 3-up uniform grid */
         @media (max-width: 768px) {
             .companies-grid {
-                grid-template-columns: repeat(3, 1fr);
                 gap: 1rem;
-                max-width: 95%;
+                max-width: 100%;
             }
-            .company-logo:nth-child(n) {
-                grid-column: span 1;
+            .logo-row {
+                gap: 1rem;
+            }
+            .company-logo {
+                flex: 0 0 calc(50% - 0.5rem);
+                height: 130px;
             }
         }
 
         .company-logo {
+            flex: 0 0 210px;
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem;
+            padding: 1.5rem;
             position: relative;
-            transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
-            min-height: 120px;
+            transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s ease;
+            /* Glassmorphic pop-up card — uniform size across all 7 (adapted from sample hero liquid-glass) */
+            background: rgba(255, 255, 255, 0.06);
+            -webkit-backdrop-filter: blur(12px) saturate(120%);
+            backdrop-filter: blur(12px) saturate(120%);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.15);
         }
 
-        /* Soft radial glow on hover — no hard card edge */
+        /* Liquid-glass gradient rim */
+        .company-logo::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: inherit;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.40) 0%,
+                rgba(255, 255, 255, 0.15) 30%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.15) 70%,
+                rgba(255, 255, 255, 0.40) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Soft radial glow behind card on hover */
         .company-logo::before {
             content: "";
             position: absolute;
             inset: 0;
-            border-radius: 20px;
-            background: radial-gradient(circle at center, rgba(120, 170, 255, 0.12) 0%, transparent 70%);
+            border-radius: inherit;
+            background: radial-gradient(circle at center, rgba(120, 170, 255, 0.18) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
             pointer-events: none;
@@ -1852,7 +1944,9 @@
         }
 
         .company-logo:hover {
-            transform: translateY(-2px);
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 40px 70px -20px rgba(120, 170, 255, 0.35),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.22);
         }
 
         .company-logo img {
@@ -1871,55 +1965,17 @@
             opacity: 1;
         }
 
-        /* Adjust specific logos for better sizing */
-        .company-logo:nth-child(1) img {
-            /* Daimler */
-            height: 90px;
-            max-height: 90px;
-        }
+        /* Per-logo sizing — class-based so row/order changes don't break it */
+        .company-logo .logo-daimler   { height: 74px; max-height: 74px; }
+        .company-logo .logo-lvmh      { height: 88px; max-height: 88px; }
+        .company-logo .logo-nissan    { height: 70px; max-height: 70px; }
+        .company-logo .logo-trafigura { height: 101px; max-height: 101px; }
+        .company-logo .logo-gunvor    { height: 74px; max-height: 74px; }
+        .company-logo .logo-vitol     { height: 56px; max-height: 56px; }
+        .company-logo .logo-jera      { height: 52px; max-height: 52px; }
 
-        .company-logo:nth-child(2) img {
-            /* LVMH logo - make it larger */
-            height: 121px;
-            max-height: 121px;
-        }
-
-        .company-logo:nth-child(3) img {
-            /* Nissan logo - make it larger */
-            height: 90px;
-            max-height: 90px;
-        }
-
-        .company-logo:nth-child(4) img {
-            /* Trafigura — 170% of default for legibility */
-            height: 136px;
-            max-height: 136px;
-        }
-
-        .company-logo:nth-child(5) img {
-            /* Gunvor — 120% of default */
-            height: 96px;
-            max-height: 96px;
-        }
-
-        .company-logo:nth-child(6) img {
-            /* Vitol — logical height matches row; crop whitespace + scale to enlarge visually without breaking row shape */
-            height: 136px;
-            max-height: 136px;
-            clip-path: inset(18% 12%);
-            transform: scale(1.6875);
-            transform-origin: center;
-        }
-
-        .company-logo:nth-child(7) img {
-            /* JERA — 81% of default (another -10% from 72px) */
-            height: 65px;
-            max-height: 65px;
-        }
-
-        /* Vitol & JERA are already light-colored — skip the invert */
-        .company-logo:nth-child(6) img,
-        .company-logo:nth-child(7) img {
+        /* JERA is already light-coloured — skip the invert */
+        .company-logo .logo-jera {
             filter: grayscale(100%) brightness(1.15) contrast(1.1);
         }
 
@@ -2007,6 +2063,13 @@
         </ul>
     </nav>
 
+    <!-- Cosmic band: ONE shared globe motion background across the hero + Global Treasury -->
+    <div class="cosmic-band">
+    <video class="cosmic-band-video" autoplay loop muted playsinline preload="auto" aria-hidden="true">
+        <source src="globe.mp4" type="video/mp4">
+    </video>
+    <div class="cosmic-band-overlay"></div>
+
     <!-- Hero Section -->
     <section id="home" class="hero" data-screen-label="01 Hero">
         <canvas id="orb-canvas"></canvas>
@@ -2063,33 +2126,49 @@
         </div>
     </section>
 
-    <!-- Companies Section -->
+    <!-- Companies Section (shares the cosmic-band globe background above) -->
     <section class="companies-section">
         <h2 class="section-title fade-in">Global Treasury Background</h2>
         <div class="companies-grid">
-            <div class="company-logo fade-in">
-                <img src="images/daimler_new.png" alt="Daimler">
+            <div class="logo-row">
+                <div class="company-logo fade-in">
+                    <img class="logo-daimler" src="images/daimler_new.png" alt="Daimler">
+                </div>
+                <div class="company-logo fade-in">
+                    <img class="logo-lvmh" src="images/LVMH-logo" alt="Moët Hennessy">
+                </div>
+                <div class="company-logo fade-in">
+                    <img class="logo-nissan" src="images/Nissan logo.png" alt="Nissan Motor">
+                </div>
             </div>
-            <div class="company-logo fade-in">
-                <img src="images/LVMH-logo" alt="Moët Hennessy">
-            </div>
-            <div class="company-logo fade-in">
-                <img src="images/Nissan logo.png" alt="Nissan Motor">
-            </div>
-            <div class="company-logo fade-in">
-                <img src="images/trafi_new.png" alt="Trafigura">
-            </div>
-            <div class="company-logo fade-in">
-                <img src="images/gunvor_new.png" alt="Gunvor Group">
-            </div>
-            <div class="company-logo fade-in">
-                <img src="images/vitol_name.png" alt="Vitol">
-            </div>
-            <div class="company-logo fade-in">
-                <img src="images/jera_new.png" alt="JERA Global Markets">
+            <div class="logo-row">
+                <div class="company-logo fade-in">
+                    <img class="logo-trafigura" src="images/trafi_new.png" alt="Trafigura">
+                </div>
+                <div class="company-logo fade-in">
+                    <img class="logo-gunvor" src="images/gunvor_new.png" alt="Gunvor Group">
+                </div>
+                <div class="company-logo fade-in">
+                    <img class="logo-vitol" src="Vitol_logo2.png" alt="Vitol">
+                </div>
+                <div class="company-logo fade-in">
+                    <img class="logo-jera" src="images/jera_new.png" alt="JERA Global Markets">
+                </div>
             </div>
         </div>
     </section>
+    </div><!-- /.cosmic-band -->
+    <script>
+        /* Slow the shared globe motion background to a calm, cinematic pace */
+        (function () {
+            var v = document.querySelector('.cosmic-band-video');
+            if (!v) return;
+            var setRate = function () { v.playbackRate = 0.3; };
+            setRate();
+            v.addEventListener('loadedmetadata', setRate);
+            v.addEventListener('play', setRate);
+        })();
+    </script>
 
     <!-- About Section -->
     <section id="about">
@@ -2642,9 +2721,8 @@
 
         octx.clearRect(0, 0, W, H);
 
-        // Deep field
-        octx.fillStyle = '#05060a';
-        octx.fillRect(0, 0, W, H);
+        // Deep field removed — the shared cosmic-band globe now shows through the hero
+        // (the orb glow below composites over the video via the transparent canvas)
 
         const cx = W * (0.5 + (drift - 0.5) * 0.04);
         const cy = H * (0.5 + (Math.sin(phase * 2 * Math.PI * 0.51) - 0.5) * 0.04);
