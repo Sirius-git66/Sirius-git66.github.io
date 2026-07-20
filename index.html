@@ -153,14 +153,17 @@
             content: '';
             position: absolute;
             inset: 0;
-            /* Edge vignette removed — it was framing the bright globe as a dark rectangle.
-               The cosmic-band-overlay handles top/bottom grading now. */
-            background: radial-gradient(ellipse at center, transparent 78%, rgba(5, 6, 10, 0.12) 100%);
+            /* No hero-only tint: any rectangular fill here shows as a seam over the
+               shared cosmic-band video. The cosmic-band-overlay handles all grading. */
+            background: none;
             z-index: 2;
             pointer-events: none;
         }
 
         .hero-grain {
+            /* Disabled: the white noise was clipped to the hero rectangle (overflow:hidden),
+               reading as a faint white veil that stopped at the companies section — a visible seam. */
+            display: none;
             position: absolute;
             inset: -50%;
             z-index: 3;
