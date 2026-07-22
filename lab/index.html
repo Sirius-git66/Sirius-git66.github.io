@@ -543,10 +543,10 @@
       }));
     }
 
-    // Perf: skip the heavy hero video on small screens / data-saver — keep the poster frame
+    // Perf: skip the heavy hero video only when the user has Data Saver on — keep the poster frame
     const heroVideo = document.querySelector('.hero__video');
     const saveData = navigator.connection && navigator.connection.saveData;
-    if (heroVideo && (matchMedia('(max-width:720px)').matches || saveData)) {
+    if (heroVideo && saveData) {
       heroVideo.removeAttribute('autoplay');
       heroVideo.preload = 'none';
       heroVideo.querySelectorAll('source').forEach(s => s.remove());
@@ -602,7 +602,7 @@
       setStage('boot');
       bootText.innerHTML = 'Waking agents for ' + d.name.split('—')[0].trim() + '<span class="blink">_</span>';
       clearTimeout(bootTimer);
-      bootTimer = setTimeout(() => { setStage('reveal'); try { video.currentTime = 0; video.muted = false; video.volume = 1; const p = video.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {} }, 1200);
+      bootTimer = setTimeout(() => { setStage('reveal'); try { video.currentTime = 0; video.muted = true; const p = video.play(); if (p && p.then) { p.then(() => { if (!matchMedia('(max-width:720px)').matches) { video.muted = false; video.volume = 1; } }).catch(() => {}); } } catch (e) {} }, 1200);
     }
 
     function closeModal(){
