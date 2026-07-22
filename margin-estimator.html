@@ -5,6 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Margin Estimator | Plan Your Margin Funding Days Ahead</title>
     <meta name="description" content="Margin Estimator is a system of eight specialised quantitative agents that turn your live commodity positions into a forward-looking, scenario-based view of margin, collateral, and funding — with every figure traceable to its source.">
+    <link rel="canonical" href="https://thearc.cloud/margin-estimator">
+    <link rel="icon" href="/Guide_Logo.png">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Arc">
+    <meta property="og:title" content="Margin Estimator | Plan Your Margin Funding Days Ahead">
+    <meta property="og:description" content="Eight specialised quantitative agents turn your live commodity positions into a forward-looking, scenario-based view of margin, collateral and funding — every figure traceable to its source.">
+    <meta property="og:url" content="https://thearc.cloud/margin-estimator">
+    <meta property="og:image" content="https://thearc.cloud/Guide_Logo.png">
+    <meta property="og:image:alt" content="Margin Estimator — forward-looking margin & collateral intelligence">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Margin Estimator | Plan Your Margin Funding Days Ahead">
+    <meta name="twitter:description" content="Forward-looking, scenario-based margin, collateral and funding projection built on live CME SPAN 2 and ICE IRM 2 rates.">
+    <meta name="twitter:image" content="https://thearc.cloud/Guide_Logo.png">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Margin Estimator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "url": "https://thearc.cloud/margin-estimator",
+      "description": "A system of eight specialised quantitative agents that turn live commodity positions into a forward-looking, scenario-based view of margin, collateral, and funding — with every figure traceable to its source data and configuration.",
+      "provider": {
+        "@type": "Organization",
+        "name": "The Arc",
+        "url": "https://thearc.cloud"
+      }
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;family=Source+Serif+4:ital@0;1&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -242,7 +277,18 @@
                     <i class="fa-solid fa-arrow-right"></i>
                     <span>Book a Chat</span>
                 </button>
+                <button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu"
+                        class="md:hidden w-10 h-10 flex items-center justify-center rounded-2xl liquid-glass-strong">
+                    <i id="menu-icon" class="fa-solid fa-bars"></i>
+                </button>
             </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 px-8 py-4 space-y-3 text-sm font-medium bg-zinc-950/90">
+            <a href="#value" class="block hover:text-cyan-300 transition-colors mobile-link">Value</a>
+            <a href="#how" class="block hover:text-cyan-300 transition-colors mobile-link">How it Works</a>
+            <a href="#architecture" class="block hover:text-cyan-300 transition-colors mobile-link">Architecture</a>
+            <a href="#onboarding" class="block hover:text-cyan-300 transition-colors mobile-link">Getting Started</a>
         </div>
     </nav>
 
@@ -661,6 +707,30 @@
             }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 
             targets.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
+    <script>
+        (function () {
+            var toggle = document.getElementById('menu-toggle');
+            var menu = document.getElementById('mobile-menu');
+            var icon = document.getElementById('menu-icon');
+            if (!toggle || !menu) return;
+            function closeMenu() {
+                menu.classList.add('hidden');
+                toggle.setAttribute('aria-expanded', 'false');
+                if (icon) { icon.classList.remove('fa-xmark'); icon.classList.add('fa-bars'); }
+            }
+            toggle.addEventListener('click', function () {
+                var isOpen = menu.classList.toggle('hidden') === false;
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                if (icon) {
+                    icon.classList.toggle('fa-bars', !isOpen);
+                    icon.classList.toggle('fa-xmark', isOpen);
+                }
+            });
+            menu.querySelectorAll('.mobile-link').forEach(function (a) {
+                a.addEventListener('click', closeMenu);
+            });
         })();
     </script>
 </body>
