@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Arc Lab — AI Agent Prototypes for Energy &amp; Trade Finance</title>
+<meta name="description" content="The Arc Lab is a workshop of live AI-agent prototypes — a Japan power-trading course, a JEPX day-ahead bid optimiser, a trade-finance document agent, and more. Open a door and step inside each build.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="The Arc">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://thearc.cloud/lab/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88' fill='%2314B8A6'>✦</text></svg>">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Arc">
+<meta property="og:url" content="https://thearc.cloud/lab/">
+<meta property="og:title" content="The Arc Lab — AI Agent Prototypes for Energy & Trade Finance">
+<meta property="og:description" content="A workshop of live AI-agent prototypes. Open a door and step inside each build — Japan power trading, JEPX bidding, trade finance, and more.">
+<meta property="og:image" content="https://thearc.cloud/lab/assets/lab_hero_poster.jpg">
+<meta property="og:image:alt" content="The Arc Lab — glowing glass architecture">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Arc Lab — AI Agent Prototypes">
+<meta name="twitter:description" content="A workshop of live AI-agent prototypes. Open a door and step inside each build.">
+<meta name="twitter:image" content="https://thearc.cloud/lab/assets/lab_hero_poster.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/lab_hero_poster.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", "@id": "https://thearc.cloud/#website", "url": "https://thearc.cloud/", "name": "The Arc", "publisher": { "@id": "https://thearc.cloud/#org" } },
+    { "@type": "Organization", "@id": "https://thearc.cloud/#org", "name": "The Arc", "url": "https://thearc.cloud/", "logo": "https://thearc.cloud/lab/assets/lab_hero_poster.jpg" },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://thearc.cloud/lab/#webpage",
+      "url": "https://thearc.cloud/lab/",
+      "name": "The Arc Lab — AI Agent Prototypes",
+      "isPartOf": { "@id": "https://thearc.cloud/#website" },
+      "description": "A workshop of live AI-agent prototypes and experiments for energy trading and trade finance.",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "Japan Power Trading Course — Unit 1", "applicationCategory": "EducationalApplication", "operatingSystem": "Web", "description": "An interactive primer on how Japan's wholesale power market actually works.", "url": "https://thearc.cloud/powercourse.html" } },
+          { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "JEPX Bid Optimiser", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "An agent that shapes day-ahead bids for the Japan Electric Power Exchange.", "url": "https://thearc.cloud/jepx-ai-bid.html" } },
+          { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "Trade Finance Agent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Reads, checks, and routes trade-finance documents on its own.", "url": "https://thearc.cloud/tfa_project.html" } },
+          { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "Margin Estimator", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Real-time margin and collateral estimates for energy trades.", "url": "https://thearc.cloud/margin-estimator" } }
+        ]
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    /* Locked theme — The Arc Lab */
+    --bg:#0A0A0A;
+    --surface:#121417;
+    --text:#E4E4E7;
+    --text-muted:#8A9099;
+    --teal:#14B8A6;
+    --gold:#F59E0B;
+
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'DM Sans', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+
+    /* Motion */
+    --ease-arc:cubic-bezier(0.23, 1, 0.32, 1);
+    --dur-reveal:820ms;
+
+    --container:1240px;
+    --gutter:clamp(20px, 5vw, 64px);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:30;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px var(--gutter);
+    transition:background .4s var(--ease-arc), backdrop-filter .4s var(--ease-arc), border-color .4s var(--ease-arc);
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:rgba(10,10,10,.62);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .wordmark{
+    font-family:var(--font-display);font-weight:600;font-size:15px;
+    letter-spacing:.14em;display:flex;align-items:center;gap:9px;
+  }
+  .wordmark .mark{color:var(--teal);font-size:13px}
+  .wordmark .lab{color:var(--text-muted);font-weight:500}
+  .nav-links{display:flex;gap:28px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--text-muted)}
+  .nav-links a{position:relative;padding:4px 0;transition:color .25s var(--ease-arc)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--teal);transition:width .3s var(--ease-arc)}
+  .nav-links a:hover{color:var(--text)}
+  .nav-links a:hover::after{width:100%}
+  .nav__toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;border:1px solid rgba(255,255,255,.16);border-radius:8px;background:rgba(10,10,10,.4);cursor:pointer;padding:0 10px}
+  .nav__toggle span{display:block;height:2px;width:100%;background:var(--text);border-radius:2px;transition:transform .3s var(--ease-arc), opacity .3s var(--ease-arc)}
+  .nav.open .nav__toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav.open .nav__toggle span:nth-child(2){opacity:0}
+  .nav.open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  @media (max-width:720px){
+    .nav__toggle{display:flex}
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;gap:0;
+      background:rgba(10,10,10,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:6px var(--gutter) 14px;
+      transform:translateY(-8px);opacity:0;pointer-events:none;
+      transition:opacity .3s var(--ease-arc), transform .3s var(--ease-arc);
+      font-size:14px;
+    }
+    .nav.open .nav-links{opacity:1;transform:none;pointer-events:auto}
+    .nav-links a{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .nav-links a::after{display:none}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;min-height:100vh;display:flex;align-items:center;isolation:isolate;overflow:clip}
+  .hero__video,.hero__poster{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+    /* tame the overly-bright footage — tweak brightness to taste (lower = darker) */
+    filter:brightness(.66) contrast(1.06) saturate(1.05);
+  }
+  .hero__poster{z-index:-2}
+  .hero__video{z-index:-1}
+  /* scrims: left gradient for text legibility + top fade for nav */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      linear-gradient(90deg, rgba(10,10,10,.92) 0%, rgba(10,10,10,.62) 34%, rgba(10,10,10,.12) 62%, rgba(10,10,10,0) 100%),
+      linear-gradient(180deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,0) 22%, rgba(10,10,10,0) 68%, rgba(10,10,10,.6) 100%);
+  }
+  /* cinematic focal vignette — two translucent concentric shadow layers (fisheye/lens feel).
+     Layer 1 = outer ring darkening edges + corners. Layer 2 = inner focal pool, nudged
+     left (34% 46%) so the darkest area sits behind the copy for legibility. */
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(125% 125% at 50% 48%,
+        rgba(10,10,10,0) 40%,
+        rgba(10,10,10,.34) 70%,
+        rgba(10,10,10,.78) 100%),
+      radial-gradient(85% 95% at 34% 46%,
+        rgba(10,10,10,.5) 0%,
+        rgba(10,10,10,.24) 38%,
+        rgba(10,10,10,0) 66%);
+  }
+
+  .hero__inner{
+    width:100%;max-width:var(--container);margin:0 auto;padding:0 var(--gutter);
+    display:flex;flex-direction:column;align-items:flex-start;gap:22px;
+  }
+
+  .eyebrow{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.28em;
+    color:var(--teal);text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--teal);opacity:.7}
+
+  .headline{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(2.9rem, 8vw, 6.6rem);line-height:.98;letter-spacing:-.02em;
+    max-width:14ch;
+  }
+  .headline .accent{color:var(--teal)}
+
+  .subline{
+    font-size:clamp(1rem, 1.5vw, 1.18rem);color:var(--text-muted);
+    max-width:46ch;line-height:1.6;
+  }
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+  .btn{
+    font-family:var(--font-body);font-weight:500;font-size:15px;
+    min-height:50px;padding:0 26px;border-radius:4px;
+    display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:1px solid transparent;
+    transition:transform .3s var(--ease-arc), background .3s var(--ease-arc), border-color .3s var(--ease-arc), color .3s var(--ease-arc);
+  }
+  .btn--primary{background:var(--gold);color:#1A1206}
+  .btn--primary:hover{transform:translateY(-2px);background:#ffb52e}
+  .btn--ghost{background:transparent;border-color:rgba(228,228,231,.34);color:var(--text)}
+  .btn--ghost:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+  .btn .arrow{transition:transform .3s var(--ease-arc)}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* metadata strip */
+  .meta{
+    position:absolute;left:0;right:0;bottom:0;z-index:1;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    max-width:var(--container);margin:0 auto;padding:0 var(--gutter) 26px;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:var(--text-muted);
+  }
+  .meta .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;margin-right:8px;box-shadow:0 0 10px var(--teal);animation:pulse 2.6s var(--ease-arc) infinite}
+  .meta-group{display:flex;gap:26px;flex-wrap:wrap}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  @media (max-width:720px){.meta{justify-content:flex-start}}
+
+  .scroll-cue{display:flex;align-items:center;gap:10px}
+  .scroll-cue .line{width:1px;height:28px;background:linear-gradient(var(--teal),transparent);position:relative;overflow:hidden}
+  .scroll-cue .line::after{content:"";position:absolute;top:-28px;left:0;width:100%;height:28px;background:var(--teal);animation:drop 2s var(--ease-arc) infinite}
+  @keyframes drop{0%{transform:translateY(0)}60%,100%{transform:translateY(56px)}}
+
+  /* ---------- ENTRANCE CHOREOGRAPHY ---------- */
+  .reveal{opacity:0;transform:translateY(22px);animation:reveal var(--dur-reveal) var(--ease-arc) forwards;animation-delay:var(--d,0ms)}
+  @keyframes reveal{to{opacity:1;transform:none}}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .hero__video{display:none}
+    .reveal{animation:none;opacity:1;transform:none}
+    .meta .dot,.scroll-cue .line::after{animation:none}
+  }
+  /* ===================== ABOUT ===================== */
+  .about{position:relative;padding:clamp(76px,11vh,130px) 0 clamp(44px,6vh,72px);background:var(--bg);border-top:1px solid rgba(255,255,255,.06);overflow:hidden}
+  .about::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 70% at 82% 0%, rgba(20,184,166,.07), transparent 60%)}
+  .about-inner{position:relative;max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+  .about .eyebrow{margin-bottom:30px}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+  @media (max-width:820px){.about-grid{grid-template-columns:1fr;gap:24px}}
+  .about-title{font-family:var(--font-display);font-weight:700;font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.1;letter-spacing:-.02em}
+  .about-title .accent{color:var(--teal)}
+  .about-body p{color:var(--text-muted);line-height:1.72;max-width:54ch}
+  .about-body p + p{margin-top:15px}
+  .about-body strong{color:var(--text);font-weight:600}
+  .about-body a{color:var(--teal);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;transition:opacity .25s var(--ease-arc)}
+  .about-body a:hover{opacity:.75}
+  .about-body .rw{color:var(--text);opacity:.22;will-change:opacity}
+
+  /* ===================== PROTOTYPES ===================== */
+  .prototypes{position:relative;padding:clamp(52px,7vh,84px) 0 clamp(90px,12vh,150px);background:var(--bg)}
+  .proto-head{max-width:var(--container);margin:0 auto clamp(40px,6vh,72px);padding:0 var(--gutter)}
+  .proto-head .eyebrow{margin-bottom:18px}
+  .proto-title{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.02em}
+  .proto-title .accent{color:var(--teal)}
+  .proto-sub{color:var(--text-muted);max-width:54ch;margin-top:16px;line-height:1.6}
+
+  .doors{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,26px)}
+  @media (max-width:900px){.doors{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.doors{grid-template-columns:1fr;max-width:360px}}
+
+  .door{
+    position:relative;display:block;width:100%;aspect-ratio:1150/2048;
+    border:none;background:transparent;padding:0;cursor:pointer;color:inherit;font:inherit;
+    overflow:visible;-webkit-tap-highlight-color:transparent;
+    transition:transform .6s var(--ease-arc), filter .6s var(--ease-arc);
+  }
+  /* feather all four edges into the page background so the rectangular crop dissolves */
+  .door__img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:brightness(.9) saturate(1.05);
+    transition:transform .8s var(--ease-arc), filter .6s var(--ease-arc);
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 5%, #000 90%, transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 5%, #000 90%, transparent 100%);
+    mask-composite:intersect;
+  }
+  .door__glow{
+    position:absolute;inset:8% 12%;z-index:1;border-radius:50%;
+    background:radial-gradient(60% 55% at 50% 45%, rgba(20,184,166,.4), transparent 72%);
+    opacity:0;filter:blur(26px);mix-blend-mode:screen;transition:opacity .6s var(--ease-arc);
+  }
+  /* label — sits low on the door so the words read as rising from the bottom seam */
+  .door__label{
+    position:absolute;left:50%;bottom:6%;transform:translateX(-50%);z-index:3;
+    width:84%;text-align:center;pointer-events:none;
+  }
+  .door__idx{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.28em;color:var(--teal);text-shadow:0 1px 6px rgba(0,0,0,.65)}
+  .door__name{display:block;margin-top:6px;font-family:var(--font-display);font-weight:600;font-size:clamp(.76rem,.9vw,.92rem);line-height:1.18;letter-spacing:.05em;color:#F2FBFA;text-shadow:0 1px 3px rgba(0,0,0,.6), 0 3px 16px rgba(0,0,0,.5)}
+  .door__status{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--font-mono);font-size:9px;letter-spacing:.18em;color:var(--text-muted);text-shadow:0 1px 6px rgba(0,0,0,.65)}
+  .door__status .s-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal)}
+  .door__status.soon{color:var(--gold)}
+  .door__status.soon .s-dot{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+  .door__status.refining{color:var(--gold)}
+  .door__status.refining .s-dot{background:var(--gold);box-shadow:0 0 8px var(--gold);animation:pulse 2s var(--ease-arc) infinite}
+  .door__cue{
+    position:absolute;left:50%;top:40%;transform:translate(-50%,calc(-50% + 8px));z-index:3;
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;color:#eafffb;
+    background:rgba(9,18,20,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    border:1px solid rgba(126,232,216,.4);padding:6px 12px;border-radius:100px;
+    opacity:0;transition:opacity .4s var(--ease-arc), transform .4s var(--ease-arc);
+  }
+  .door:hover,.door:focus-visible{transform:translateY(-10px);outline:none}
+  .door:hover .door__img,.door:focus-visible .door__img{transform:scale(1.03);filter:brightness(1.08) saturate(1.16)}
+  .door:hover .door__glow,.door:focus-visible .door__glow{opacity:1}
+  .door:hover .door__cue,.door:focus-visible .door__cue{opacity:1;transform:translate(-50%,-50%)}
+
+  /* scroll reveal (IntersectionObserver adds .in) */
+  .reveal-io,.door-cell{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease-arc) var(--rd,0ms), transform .7s var(--ease-arc) var(--rd,0ms)}
+  .reveal-io.in,.door-cell.in{opacity:1;transform:none}
+
+  /* ---------- MOBILE REFINEMENTS ---------- */
+  @media (max-width:640px){
+    .hero__inner{gap:18px}
+    .cta-row{width:100%}
+    .cta-row .btn{flex:1 1 auto;justify-content:center}
+    .meta{gap:10px;padding-bottom:20px;font-size:10px}
+    .meta-group{gap:16px}
+    .scroll-cue{display:none}
+    .proto-sub br{display:none}
+    .door__name{font-size:1rem;letter-spacing:.03em}
+    .door__idx{font-size:11px}
+    .door__status{font-size:10px}
+    .door__cue{display:none}
+  }
+  @media (max-width:720px){
+    .rmodal{padding:12px}
+    .rmodal__stage{aspect-ratio:auto;min-height:58vh;max-height:88vh}
+    .rstage-done{padding:26px 20px;overflow-y:auto}
+    .rdone-name{font-size:clamp(1.4rem,6vw,2rem)}
+    .rclose{width:40px;height:40px}
+  }
+
+  /* ===================== REVEAL MODAL ===================== */
+  .rmodal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:24px}
+  .rmodal.open{display:flex}
+  .rmodal__backdrop{position:absolute;inset:0;background:rgba(4,6,7,.82);backdrop-filter:blur(10px);opacity:0;transition:opacity .4s var(--ease-arc)}
+  .rmodal.open .rmodal__backdrop{opacity:1}
+  .rmodal__stage{position:relative;z-index:1;width:min(980px,100%);aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#050607;border:1px solid rgba(255,255,255,.10);box-shadow:0 40px 120px -30px rgba(0,0,0,.85);transform:scale(.94);opacity:0;transition:transform .5s var(--ease-arc), opacity .5s var(--ease-arc)}
+  .rmodal.open .rmodal__stage{transform:none;opacity:1}
+  .rstage-boot,.rstage-reveal,.rstage-done{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .45s var(--ease-arc)}
+  .rstage-boot.active,.rstage-reveal.active,.rstage-done.active{opacity:1;pointer-events:auto}
+  .rstage-boot{flex-direction:column;gap:22px;background:radial-gradient(90% 90% at 50% 40%, rgba(20,184,166,.10), transparent 60%)}
+  .rboot-robot{width:130px;height:auto;filter:drop-shadow(0 0 26px rgba(20,184,166,.5));animation:bootFloat 2.4s var(--ease-arc) infinite}
+  @keyframes bootFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .rboot-text{font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;color:var(--teal);text-transform:uppercase}
+  .blink{animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .rvideo{width:100%;height:100%;object-fit:contain;background:#050607}
+  .rskip{position:absolute;bottom:16px;right:16px;z-index:3;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--text);background:rgba(10,10,10,.5);border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(6px);transition:border-color .3s var(--ease-arc), color .3s var(--ease-arc)}
+  .rskip:hover{border-color:var(--teal);color:var(--teal)}
+  .rstage-done{flex-direction:column;text-align:center;padding:40px;gap:16px;background:radial-gradient(90% 90% at 50% 30%, rgba(20,184,166,.12), transparent 60%),#070a0c}
+  .rdone-idx{font-family:var(--font-mono);font-size:11px;letter-spacing:.24em;color:var(--teal)}
+  .rdone-name{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.05;max-width:20ch}
+  .rdone-tag{color:var(--text-muted);max-width:48ch;line-height:1.6}
+  .rdone-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+  .rclose{position:absolute;top:14px;right:14px;z-index:4;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,.5);border:1px solid rgba(255,255,255,.16);color:var(--text);cursor:pointer;font-size:17px;line-height:1;backdrop-filter:blur(6px);transition:border-color .3s var(--ease-arc), color .3s var(--ease-arc), transform .3s var(--ease-arc)}
+  .rclose:hover{border-color:var(--teal);color:var(--teal);transform:rotate(90deg)}
+  .btn--disabled{opacity:.5;pointer-events:none}
+  @media (prefers-reduced-motion: reduce){
+    .reveal-io,.door-cell{transition:none;opacity:1;transform:none}
+    .rmodal__stage,.rstage-boot,.rstage-reveal,.rstage-done,.rmodal__backdrop{transition:none}
+    .rboot-robot{animation:none}
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a href="#" class="wordmark"><span class="mark">✦</span> THE ARC <span class="lab">/ LAB</span></a>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#prototypes">PROTOTYPES</a>
+      <a href="#about">ABOUT</a>
+      <a href="https://thearc.cloud">← THE ARC</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <img class="hero__poster" src="assets/lab_hero_poster.jpg" alt="">
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/lab_hero_poster.jpg">
+      <source src="assets/hero_lab_hd.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero__inner">
+      <p class="eyebrow reveal" style="--d:120ms">The Arc · Prototypes &amp; Experiments</p>
+      <h1 class="headline reveal" style="--d:260ms">Where ideas<br>get <span class="accent">built.</span></h1>
+      <p class="subline reveal" style="--d:440ms">
+        The Lab is my workshop — tools, prototypes, and experiments
+        in&nbsp;progress. Each one earns its place.
+      </p>
+      <div class="cta-row reveal" style="--d:600ms">
+        <a href="#prototypes" class="btn btn--primary">Explore prototypes <span class="arrow">→</span></a>
+        <a href="#about" class="btn btn--ghost">What is this?</a>
+      </div>
+    </div>
+
+    <div class="meta reveal" style="--d:820ms">
+      <div class="meta-group">
+        <span><span class="dot"></span>STATUS: LIVE</span>
+        <span>EST_2026</span>
+        <span>ACTIVE_BUILDS / 04</span>
+      </div>
+      <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
+    </div>
+  </header>
+
+  <section class="about" id="about">
+    <div class="about-inner">
+      <p class="eyebrow reveal-io" style="--rd:0ms">About · What is this?</p>
+      <div class="about-grid">
+        <div class="reveal-io" style="--rd:90ms">
+          <h2 class="about-title">Multi-agent ideas,<br>made <span class="accent">real.</span></h2>
+        </div>
+        <div class="about-body reveal-io" style="--rd:170ms">
+          <p>Every tool behind these doors began as a real workflow — off a trading floor, a treasury desk, a market I actually work in. AI let me redesign and automate it. Not another spreadsheet, not a pitch deck — working prototypes that deliver.</p>
+          <p>I build in the open. Some are live and ready to use, some are still under scaffolding. You're looking at domain knowledge translated by AI, not a highlight reel.</p>
+          <p><a href="https://thearc.cloud/#contact">Let's build.</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="prototypes" id="prototypes">
+    <div class="proto-head">
+      <p class="eyebrow reveal-io" style="--rd:0ms">04 Builds · Behind each door</p>
+      <h2 class="proto-title reveal-io" style="--rd:90ms">Open a <span class="accent">door.</span></h2>
+      <p class="proto-sub reveal-io" style="--rd:170ms">Behind each door, a working build.<br>See what agentic architecture can actually do.</p>
+    </div>
+
+    <div class="doors">
+      <div class="door-cell" style="--rd:0ms">
+        <button class="door" aria-label="Open Japan Power Trading Course, Unit 1"
+          data-idx="01" data-name="Japan Power Trading Course — Unit 1"
+          data-tag="An interactive primer on how Japan's wholesale power market actually works."
+          data-url="https://thearc.cloud/powercourse.html" data-status="live">
+          <img class="door__img" src="assets/door.png" alt="" loading="lazy" decoding="async">
+          <span class="door__glow"></span>
+          <span class="door__cue">ENTER →</span>
+          <span class="door__label">
+            <span class="door__idx">01</span>
+            <span class="door__name">Japan Power Trading<br>Course — Unit 1</span>
+            <span class="door__status"><span class="s-dot"></span>LIVE</span>
+          </span>
+        </button>
+      </div>
+      <div class="door-cell" style="--rd:110ms">
+        <button class="door" aria-label="Open JEPX Bid Optimiser"
+          data-idx="02" data-name="JEPX Bid Optimiser"
+          data-tag="An agent that shapes day-ahead bids for the Japan Electric Power Exchange."
+          data-url="https://thearc.cloud/jepx-ai-bid.html" data-status="live">
+          <img class="door__img" src="assets/door.png" alt="" loading="lazy" decoding="async">
+          <span class="door__glow"></span>
+          <span class="door__cue">ENTER →</span>
+          <span class="door__label">
+            <span class="door__idx">02</span>
+            <span class="door__name">JEPX Bid<br>Optimiser</span>
+            <span class="door__status"><span class="s-dot"></span>LIVE</span>
+          </span>
+        </button>
+      </div>
+      <div class="door-cell" style="--rd:220ms">
+        <button class="door" aria-label="Open Trade Finance Agent"
+          data-idx="03" data-name="Trade Finance Agent"
+          data-tag="Reads, checks, and routes trade-finance documents on its own."
+          data-url="https://thearc.cloud/tfa_project.html" data-status="refining">
+          <img class="door__img" src="assets/door.png" alt="" loading="lazy" decoding="async">
+          <span class="door__glow"></span>
+          <span class="door__cue">ENTER →</span>
+          <span class="door__label">
+            <span class="door__idx">03</span>
+            <span class="door__name">Trade Finance<br>Agent</span>
+            <span class="door__status refining"><span class="s-dot"></span>REFINING</span>
+          </span>
+        </button>
+      </div>
+      <div class="door-cell" style="--rd:330ms">
+        <button class="door" aria-label="Open Margin Estimator"
+          data-idx="04" data-name="Margin Estimator"
+          data-tag="Real-time margin and collateral estimates for energy trades."
+          data-url="https://thearc.cloud/margin-estimator" data-status="refining">
+          <img class="door__img" src="assets/door.png" alt="" loading="lazy" decoding="async">
+          <span class="door__glow"></span>
+          <span class="door__cue">ENTER →</span>
+          <span class="door__label">
+            <span class="door__idx">04</span>
+            <span class="door__name">Margin<br>Estimator</span>
+            <span class="door__status refining"><span class="s-dot"></span>REFINING</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="rmodal" id="rmodal" role="dialog" aria-modal="true" aria-label="Project reveal">
+    <div class="rmodal__backdrop" data-close></div>
+    <div class="rmodal__stage">
+      <button class="rclose" data-close aria-label="Close">✕</button>
+      <div class="rstage-boot">
+        <img class="rboot-robot" src="assets/robot.png" alt="">
+        <div class="rboot-text" id="rbootText">Waking agents<span class="blink">_</span></div>
+      </div>
+      <div class="rstage-reveal">
+        <video class="rvideo" id="rvideo" playsinline preload="metadata" src="assets/reveal.mp4"></video>
+        <button class="rskip" id="rskip">SKIP →</button>
+      </div>
+      <div class="rstage-done">
+        <span class="rdone-idx" id="rdoneIdx">01</span>
+        <h3 class="rdone-name" id="rdoneName"></h3>
+        <p class="rdone-tag" id="rdoneTag"></p>
+        <div class="rdone-actions" id="rdoneActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sticky-blur nav on scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Mobile nav toggle (hamburger)
+    const navToggle = document.getElementById('navToggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }));
+    }
+
+    // Perf: skip the heavy hero video on small screens / data-saver — keep the poster frame
+    const heroVideo = document.querySelector('.hero__video');
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (heroVideo && (matchMedia('(max-width:720px)').matches || saveData)) {
+      heroVideo.removeAttribute('autoplay');
+      heroVideo.preload = 'none';
+      heroVideo.querySelectorAll('source').forEach(s => s.remove());
+      heroVideo.style.display = 'none';
+      try { heroVideo.load(); } catch (e) {}
+    }
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.18 });
+    document.querySelectorAll('.reveal-io, .door-cell').forEach(el => io.observe(el));
+
+    // Reveal modal — 3-stage state machine: boot -> reveal -> done
+    const modal = document.getElementById('rmodal');
+    const stages = {
+      boot: modal.querySelector('.rstage-boot'),
+      reveal: modal.querySelector('.rstage-reveal'),
+      done: modal.querySelector('.rstage-done')
+    };
+    const video = document.getElementById('rvideo');
+    const bootText = document.getElementById('rbootText');
+    let bootTimer = null, lastFocus = null;
+
+    const setStage = (name) => {
+      Object.values(stages).forEach(s => s.classList.remove('active'));
+      stages[name].classList.add('active');
+    };
+    const toDone = () => { try { video.pause(); } catch (e) {} setStage('done'); };
+
+    function fillDone(d){
+      const stMap = { soon: 'IN PROGRESS', refining: 'REFINING', live: 'LIVE' };
+      document.getElementById('rdoneIdx').textContent = d.idx + ' / ' + (stMap[d.status] || 'LIVE');
+      document.getElementById('rdoneName').textContent = d.name;
+      document.getElementById('rdoneTag').textContent = d.tag;
+      const actions = document.getElementById('rdoneActions');
+      const back = '<button class="btn btn--ghost" data-close>Back to doors</button>';
+      actions.innerHTML = d.url
+        ? '<a class="btn btn--primary" href="' + d.url + '" target="_blank" rel="noopener">Enter build <span class="arrow">→</span></a>' + back
+        : '<span class="btn btn--primary btn--disabled">Link coming soon</span>' + back;
+    }
+
+    function openDoor(btn){
+      const d = { idx: btn.dataset.idx, name: btn.dataset.name, tag: btn.dataset.tag, url: btn.dataset.url, status: btn.dataset.status };
+      lastFocus = btn;
+      fillDone(d);
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('.rclose').focus();
+      if (reduce) { setStage('done'); return; }
+      setStage('boot');
+      bootText.innerHTML = 'Waking agents for ' + d.name.split('—')[0].trim() + '<span class="blink">_</span>';
+      clearTimeout(bootTimer);
+      bootTimer = setTimeout(() => { setStage('reveal'); try { video.currentTime = 0; video.muted = false; video.volume = 1; const p = video.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {} }, 1200);
+    }
+
+    function closeModal(){
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      clearTimeout(bootTimer);
+      try { video.pause(); } catch (e) {}
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('.door').forEach(btn => btn.addEventListener('click', () => openDoor(btn)));
+    video.addEventListener('ended', () => setStage('done'));
+    document.getElementById('rskip').addEventListener('click', toDone);
+    modal.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+    // Scroll-linked word reveal on the About narration (faint -> lit as each word crosses the read line)
+    if (!reduce) {
+      const aboutBody = document.querySelector('.about-body');
+      if (aboutBody) {
+        const paras = [...aboutBody.querySelectorAll('p')].filter(p => !p.querySelector('a'));
+        const words = [];
+        paras.forEach(p => {
+          const tokens = p.textContent.split(/(\s+)/);
+          p.textContent = '';
+          tokens.forEach(t => {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { p.appendChild(document.createTextNode(t)); return; }
+            const s = document.createElement('span');
+            s.className = 'rw';
+            s.textContent = t;
+            p.appendChild(s);
+            words.push(s);
+          });
+        });
+        if (words.length) {
+          let ticking = false;
+          const paint = () => {
+            ticking = false;
+            const vh = window.innerHeight;
+            const line = vh * 0.66, feather = vh * 0.18;
+            const centers = words.map(s => { const r = s.getBoundingClientRect(); return r.top + r.height / 2; });
+            for (let i = 0; i < words.length; i++) {
+              let lit = (line + feather - centers[i]) / feather;
+              lit = lit < 0 ? 0 : lit > 1 ? 1 : lit;
+              words[i].style.opacity = (0.22 + 0.78 * lit).toFixed(3);
+            }
+          };
+          const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } };
+          window.addEventListener('scroll', req, { passive: true });
+          window.addEventListener('resize', req);
+          paint();
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
