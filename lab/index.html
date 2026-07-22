@@ -543,7 +543,7 @@
       }));
     }
 
-    // Perf: skip the heavy hero video only when the user has Data Saver on — keep the poster frame
+    // Hero video: Data Saver → poster only; mobile / non-HEVC browsers → lighter H.264 file
     const heroVideo = document.querySelector('.hero__video');
     const saveData = navigator.connection && navigator.connection.saveData;
     if (heroVideo && saveData) {
@@ -552,6 +552,14 @@
       heroVideo.querySelectorAll('source').forEach(s => s.remove());
       heroVideo.style.display = 'none';
       try { heroVideo.load(); } catch (e) {}
+    } else if (heroVideo) {
+      const heroSrc = heroVideo.querySelector('source');
+      const canHevc = heroVideo.canPlayType('video/mp4; codecs="hvc1"') !== '';
+      if (heroSrc && (matchMedia('(max-width:720px)').matches || !canHevc)) {
+        heroSrc.src = 'assets/hero_lab_mobile.mp4';
+        heroSrc.type = 'video/mp4';
+        try { heroVideo.load(); const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {}
+      }
     }
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -570,6 +578,8 @@
       done: modal.querySelector('.rstage-done')
     };
     const video = document.getElementById('rvideo');
+    // Reveal video: mobile / non-HEVC browsers → H.264 file (HEVC won't decode on Android)
+    if (video) { const canHevcR = video.canPlayType('video/mp4; codecs="hvc1"') !== ''; if (matchMedia('(max-width:720px)').matches || !canHevcR) { video.setAttribute('src', 'assets/reveal_mobile.mp4'); } }
     const bootText = document.getElementById('rbootText');
     let bootTimer = null, lastFocus = null;
 
