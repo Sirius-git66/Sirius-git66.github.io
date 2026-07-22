@@ -556,7 +556,7 @@
       const heroSrc = heroVideo.querySelector('source');
       const canHevc = heroVideo.canPlayType('video/mp4; codecs="hvc1"') !== '';
       if (heroSrc && (matchMedia('(max-width:720px)').matches || !canHevc)) {
-        heroSrc.src = 'assets/hero_lab_mobile.mp4';
+        heroSrc.src = 'assets/hero_lab_mobile_r.mp4';
         heroSrc.type = 'video/mp4';
         try { heroVideo.load(); const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {}
       }
