@@ -389,7 +389,8 @@
   <header class="hero">
     <img class="hero__poster" src="assets/lab_hero_poster.jpg" alt="">
     <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/lab_hero_poster.jpg">
-      <source src="assets/hero_lab_hd.mp4" type="video/mp4">
+      <source src="assets/hero_lab_hd.mp4" type='video/mp4; codecs="hvc1"'>
+      <source src="assets/hero_lab_mobile_r.mp4" type='video/mp4; codecs="avc1.640028"'>
     </video>
 
     <div class="hero__inner">
@@ -511,7 +512,10 @@
         <div class="rboot-text" id="rbootText">Waking agents<span class="blink">_</span></div>
       </div>
       <div class="rstage-reveal">
-        <video class="rvideo" id="rvideo" playsinline preload="metadata" src="assets/reveal.mp4"></video>
+        <video class="rvideo" id="rvideo" playsinline preload="metadata">
+          <source src="assets/reveal.mp4" type='video/mp4; codecs="hvc1"'>
+          <source src="assets/reveal_mobile.mp4" type='video/mp4; codecs="avc1.64001F"'>
+        </video>
         <button class="rskip" id="rskip">SKIP →</button>
       </div>
       <div class="rstage-done">
@@ -547,7 +551,9 @@
     // Chrome/Edge play HEVC via hardware but report '', so we key off the device, not codec probing.
     const isMobile = matchMedia('(max-width: 820px)').matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    // Hero video: Data Saver → poster only; mobile → lighter H.264 file; desktop → HD (HEVC)
+    // Hero video: browser picks the source natively (HEVC, else H.264) and autoplays it — same
+    // mechanism as the homepage globe. No JS source-swapping (that interrupted mobile autoplay).
+    // Data Saver → poster only.
     const heroVideo = document.querySelector('.hero__video');
     const saveData = navigator.connection && navigator.connection.saveData;
     if (heroVideo && saveData) {
@@ -556,13 +562,6 @@
       heroVideo.querySelectorAll('source').forEach(s => s.remove());
       heroVideo.style.display = 'none';
       try { heroVideo.load(); } catch (e) {}
-    } else if (heroVideo && isMobile) {
-      const heroSrc = heroVideo.querySelector('source');
-      if (heroSrc) {
-        heroSrc.src = 'assets/hero_lab_mobile_r.mp4';
-        heroSrc.type = 'video/mp4';
-        try { heroVideo.load(); const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {}
-      }
     }
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -581,8 +580,8 @@
       done: modal.querySelector('.rstage-done')
     };
     const video = document.getElementById('rvideo');
-    // Reveal video: mobile → muted H.264; desktop → HEVC (has audio). Keyed off device, not codec probing.
-    if (video && isMobile) { video.setAttribute('src', 'assets/reveal_mobile.mp4'); }
+    // Reveal video: browser picks the source natively (HEVC w/ audio, else H.264). Plays muted on
+    // tap; desktop unmutes when the reveal stage becomes visible (see below).
     const bootText = document.getElementById('rbootText');
     let bootTimer = null, lastFocus = null;
 
@@ -617,7 +616,7 @@
       // Start playback INSIDE the tap gesture (muted) so mobile autoplay policy allows it.
       try { video.muted = true; const pg = video.play(); if (pg && pg.catch) pg.catch(() => {}); } catch (e) {}
       clearTimeout(bootTimer);
-      bootTimer = setTimeout(() => { setStage('reveal'); try { video.currentTime = 0; if (!isMobile) { video.muted = false; video.volume = 1; } } catch (e) {} }, 1200);
+      bootTimer = setTimeout(() => { setStage('reveal'); try { video.currentTime = 0; if (!isMobile) { video.muted = false; video.volume = 1; } const pr = video.play(); if (pr && pr.catch) pr.catch(() => {}); } catch (e) {} }, 1200);
     }
 
     function closeModal(){
