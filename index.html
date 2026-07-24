@@ -45,6 +45,7 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
@@ -1496,7 +1497,7 @@
             .nav-toggle { display: flex; }
             nav ul {
                 position: fixed;
-                top: 100%;
+                top: var(--nav-h, 72px);
                 left: 0;
                 right: 0;
                 flex-direction: column;
@@ -1511,7 +1512,7 @@
                 transition: max-height 280ms ease;
             }
             nav[data-mobile-open="true"] ul {
-                max-height: calc(100vh - 100%);
+                max-height: calc(100vh - var(--nav-h, 72px));
             }
             nav ul li {
                 width: 100%;
@@ -3627,6 +3628,13 @@ CRAWL THE PAGE AND EXTRACT EVERY NUMBER, DATE, DOLLAR, BANK, CARGO, RATE, CEO QU
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.getElementById('nav-menu');
         if (navEl && navToggle && navMenu) {
+            // Expose the real header height so the mobile dropdown anchors just below it.
+            // (Avoids relying on top:100%, which resolves against the viewport on iOS Safari
+            // and pushes the menu off-screen.)
+            const setNavH = () => navEl.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
+            setNavH();
+            window.addEventListener('resize', setNavH, { passive: true });
+            window.addEventListener('orientationchange', setNavH);
             const setOpen = (open) => {
                 navEl.setAttribute('data-mobile-open', open ? 'true' : 'false');
                 navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
