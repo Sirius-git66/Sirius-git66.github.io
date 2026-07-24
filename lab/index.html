@@ -389,8 +389,9 @@
   <header class="hero">
     <img class="hero__poster" src="assets/lab_hero_poster.jpg" alt="">
     <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/lab_hero_poster.jpg">
-      <source src="assets/hero_lab_hd.mp4" type='video/mp4; codecs="hvc1"'>
-      <source src="assets/hero_lab_mobile_r.mp4" type='video/mp4; codecs="avc1.640028"'>
+      <!-- Single universal H.264 (faststart, 1080p) source with plain type — mirrors the homepage globe.
+           HEVC-typed sources made HEVC-capable phones pick the heavy non-faststart HD file and stall. -->
+      <source src="assets/hero_lab_mobile_r.mp4" type="video/mp4">
     </video>
 
     <div class="hero__inner">
@@ -513,8 +514,8 @@
       </div>
       <div class="rstage-reveal">
         <video class="rvideo" id="rvideo" playsinline preload="metadata">
-          <source src="assets/reveal.mp4" type='video/mp4; codecs="hvc1"'>
-          <source src="assets/reveal_mobile.mp4" type='video/mp4; codecs="avc1.64001F"'>
+          <!-- Single universal H.264 (faststart, has audio) source with plain type. Unmutes on reveal (all devices). -->
+          <source src="assets/reveal_mobile.mp4" type="video/mp4">
         </video>
         <button class="rskip" id="rskip">SKIP →</button>
       </div>
@@ -580,8 +581,9 @@
       done: modal.querySelector('.rstage-done')
     };
     const video = document.getElementById('rvideo');
-    // Reveal video: browser picks the source natively (HEVC w/ audio, else H.264). Plays muted on
-    // tap; desktop unmutes when the reveal stage becomes visible (see below).
+    // Reveal video: single H.264 source (has audio). Plays muted on the door tap (autoplay policy),
+    // then unmutes when the reveal stage becomes visible — on ALL devices, because the reveal follows
+    // a user gesture (the tap). If a browser still blocks unmuted playback, we fall back to muted.
     const bootText = document.getElementById('rbootText');
     let bootTimer = null, lastFocus = null;
 
@@ -616,7 +618,7 @@
       // Start playback INSIDE the tap gesture (muted) so mobile autoplay policy allows it.
       try { video.muted = true; const pg = video.play(); if (pg && pg.catch) pg.catch(() => {}); } catch (e) {}
       clearTimeout(bootTimer);
-      bootTimer = setTimeout(() => { setStage('reveal'); try { video.currentTime = 0; if (!isMobile) { video.muted = false; video.volume = 1; } const pr = video.play(); if (pr && pr.catch) pr.catch(() => {}); } catch (e) {} }, 1200);
+      bootTimer = setTimeout(() => { setStage('reveal'); try { video.currentTime = 0; video.muted = false; video.volume = 1; const pr = video.play(); if (pr && pr.catch) pr.catch(() => { video.muted = true; const p2 = video.play(); if (p2 && p2.catch) p2.catch(() => {}); }); } catch (e) {} }, 1200);
     }
 
     function closeModal(){
