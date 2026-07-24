@@ -1,4 +1,110 @@
 {
-  "last_updated": "2026-07-24 09:09",
-  "items": []
+  "last_updated": "2026-07-24 09:23",
+  "items": [
+    {
+      "title": "Canadian Natural Gas Prices Soar as LNG Excitement Builds",
+      "link": "https://naturalgasintel.com/news/canadian-natural-gas-prices-soar-as-lng-excitement-builds/",
+      "summary": "Day-ahead physical natural gas pricing fell modestly across most areas of North America on Thursday, with the notable exception of Western Canada.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas Winter Strip Strengthens on Tightening Balances",
+      "link": "https://naturalgasintel.com/news/natural-gas-winter-strip-strengthens-on-tightening-balances/",
+      "summary": "August natural gas futures finished near even on Thursday while winter contracts gained ground amid substantial heat in the forecast, downwardly trending production and a supportive government storage print.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Bertha Pressures Gulf Coast Shipping Without Derailing LNG Feedgas",
+      "link": "https://naturalgasintel.com/news/bertha-pressures-gulf-coast-shipping-without-derailing-lng-feedgas/",
+      "summary": "Tropical Storm Bertha disrupted vessel traffic across parts of the Gulf Coast Wednesday evening into Thursday, but LNG feedgas nominations from Louisiana to Texas showed little evidence of storm-related curtailments.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Western Markets Supercharge Natural Gas Forward Curve Amid Dangerous Heat",
+      "link": "https://naturalgasintel.com/news/western-markets-supercharge-natural-gas-forward-curve-amid-dangerous-heat/",
+      "summary": "Resilient summer heat is finally lifting the forward curve, with trading volume ticking higher in some parts of the country amid record power burn and forecasts calling for more hot weather.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Kinder Morgan Eyes Next Permian Natural Gas Egress After GCX Fills at Startup",
+      "link": "https://naturalgasintel.com/news/kinder-morgan-eyes-next-permian-natural-gas-egress-after-gcx-fills-at-startup/",
+      "summary": "Kinder Morgan’s (KMI) expanded Gulf Coast Express (GCX) pipeline was full soon after it entered service, executives said Wednesday, easing a Permian Basin natural gas glut and strengthening the case for the company’s next wave of takeaway projects.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Heat, LNG Demand Support Natural Gas Futures Despite Ample Supplies",
+      "link": "https://naturalgasintel.com/news/heat-lng-demand-support-natural-gas-futures-despite-ample-supplies/",
+      "summary": "August natural gas futures on the New York Mercantile Exchange edged higher through midday Thursday after the US Energy Information Administration (EIA) reported a storage injection that matched expectations, leaving the market focused on ample natur",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Northwest Sumas Premium Soars as Pipeline Constraints Redirect Canadian Natural Gas",
+      "link": "https://naturalgasintel.com/news/northwest-sumas-premium-soars-as-pipeline-constraints-redirect-canadian-natural-gas/",
+      "summary": "For the past three weeks, NGI’s daily Northwest Sumas price has rocketed from 93.0 cents/MMBtu on July 1 to $2.635 on July 21, while NGI’s daily Emerson price has drifted downward to $1.335 from $1.790 over the same time period. The spread has comple",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Nearly In-Line Storage Build Leaves Natural Gas Futures Treading Water",
+      "link": "https://naturalgasintel.com/news/nearly-in-line-storage-build-leaves-natural-gas-futures-treading-water/",
+      "summary": "Operators injected 32 Bcf of natural gas into storage for the week ended July 17, the US Energy Information Administration (EIA) reported on Thursday. The result modestly exceeded historical norms and fell within the range of expectations produced by",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Trump Administration Eyes Offshore Nuclear to Power AI Boom",
+      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/Trump-Administration-Eyes-Offshore-Nuclear-to-Power-AI-Boom.html",
+      "summary": "The Trump administration is studying the deployment of offshore nuclear power generation, with the Marine Minerals Administration and the Nuclear Regulatory Commission agreeing this week to coordinate on any future developments. The announcement come",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "OPEC+ Set to Raise Output Again—Even as Members Can't Pump It",
+      "link": "https://oilprice.com/Energy/Crude-Oil/OPEC-Set-to-Raise-Output-AgainEven-as-Members-Cant-Pump-It.html",
+      "summary": "OPEC+ is expected to approve another production target increase when eight key producers meet on August 2, extending a months-long campaign to unwind voluntary supply cuts that have existed largely on paper since the Iran war upended Gulf exports. Re",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Insurers Flock to Oil Projects Outside the Middle East",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Insurers-Flock-to-Oil-Projects-Outside-the-Middle-East.html",
+      "summary": "Global insurers had just shaken off the ESG push from earlier this decade when the Middle East conflict upended oil and gas upstream project coverage. The world’s lowest-cost oil and gas producing region became a war zone at the end of February, with",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Ukraine’s Drone War Is Choking Kazakhstan’s Oil Exports",
+      "link": "https://oilprice.com/Energy/Energy-General/Ukraines-Drone-War-Is-Choking-Kazakhstans-Oil-Exports.html",
+      "summary": "Kazakhstan should, in theory, be one of the major beneficiaries of Russia’s growing isolation from global energy markets. Its crude is unsanctioned and European refiners need alternatives to Russian barrels. Yet instead of gaining a clear geopolitica",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Hybrid Hydropower Could Unlock Europe’s Next Renewable Energy Boom",
+      "link": "https://oilprice.com/Alternative-Energy/Hydroelectric/Hybrid-Hydropower-Could-Unlock-Europes-Next-Renewable-Energy-Boom.html",
+      "summary": "There is major potential to develop hybrid renewable energy projects on existing hydropower sites, according to a new report by the think tank Ember Energy. We often think of renewable energy projects as standalone operations rather than resources th",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Brent Tops $100 as Houthi Attacks Push Oil Rally Into Triple Digits",
+      "link": "https://oilprice.com/Energy/Oil-Prices/Brent-Tops-100-as-Houthi-Attacks-Push-Oil-Rally-Into-Triple-Digits.html",
+      "summary": "Brent crude has broken back above $100 a barrel for the first time in nearly two months as escalating attacks on commercial shipping in the Red Sea deepen concerns that the Middle East supply crisis is spreading beyond the Strait of Hormuz. As of mid",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "India’s Fuel Exports Set to Soar in July as Refining Margins Jump",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Indias-Fuel-Exports-Set-to-Soar-in-July-as-Refining-Margins-Jump.html",
+      "summary": "India is on track to export the highest volume of refined petroleum products in months as refining margins have jumped with the re-escalation of the Middle East conflict. India is estimated to ship as many as 1.55 million barrels per day (bpd) of lig",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    }
+  ]
 }
