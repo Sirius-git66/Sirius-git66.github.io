@@ -1,108 +1,17 @@
 {
-  "last_updated": "2026-08-22 09:09",
+  "last_updated": "2026-08-23 09:09",
   "items": [
     {
-      "title": "Cash Prices Fizzle as Eastern Natural Gas Hubs Retreat",
-      "link": "https://naturalgasintel.com/news/cash-prices-fizzle-as-eastern-natural-gas-hubs-retreat/",
-      "summary": "Spot prices for natural gas delivered over the weekend and Monday varied by region but gave up ground overall as signs of milder weather in the northern Midwest and East pushed buyers to the sidelines.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Natural Gas Futures Find Way Forward as Punishing Heat Melts Texas, West",
-      "link": "https://naturalgasintel.com/news/natural-gas-futures-find-way-forward-as-punishing-heat-melts-texas-west/",
-      "summary": "Natural gas futures bounced back on Friday as intense heat across a majority of the country outshined the weight of plump supply that had bogged down the market the previous session.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Solitude FID Sparks Jump in Long-Dated Waha Natural Gas Forward Curve",
-      "link": "https://naturalgasintel.com/news/solitude-fid-sparks-jump-in-long-dated-waha-natural-gas-forward-curve/",
-      "summary": "Waha natural gas forward prices for 2029–2032 posted their largest day/day basis gain this year after WhiteWater and its partners sanctioned the 4.5 Bcf/d Solitude Pipeline System, as traders bet the Permian Basin could end up with more takeaway capa",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Global Natural Gas Prices Rally to Highest Level in Years",
-      "link": "https://naturalgasintel.com/news/global-natural-gas-prices-rally-to-highest-level-in-years/",
-      "summary": "European and Asian natural gas prices continued their rally on Friday, settling at the highest levels since January 2023 as threats to global supplies continue to grow.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Weather Models Ratchet Up CDDs, Boosting Natural Gas Ahead of Weekend",
-      "link": "https://naturalgasintel.com/news/weather-models-ratchet-up-cdds-boosting-natural-gas-ahead-of-weekend/",
-      "summary": "Sharply hotter forecast runs helped September natural gas futures edge higher through midday Friday, teasing the prospect of a second straight week of modest gains for the prompt month.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Near-Record ERCOT Load Tests Texas Natural Gas Demand",
-      "link": "https://naturalgasintel.com/news/near-record-ercot-load-tests-texas-natural-gas-demand/",
-      "summary": "Near-record Texas electricity demand is producing a sharp evening ramp in natural gas-fired generation, but East Texas physical gas prices weakened even as the grid approached its all-time load record.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "US LNG Export Capacity Poised to Enter Next Wave of Growth",
-      "link": "https://naturalgasintel.com/news/us-lng-export-capacity-poised-to-enter-next-wave-of-growth/",
-      "summary": "Another wave of US LNG export projects is close to coming online as the last continues ramping up, with new facilities on track to add nearly 8 Bcf/d between 2027 and the first half of 2028.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Mexico Imports of US Natural Gas Surge on Summer Heat",
-      "link": "https://naturalgasintel.com/news/mexico-imports-of-us-natural-gas-surge-on-summer-heat/",
-      "summary": "US natural gas is pouring across the southern border this August at levels above 8 Bcf/d as hot weather bolsters cooling demand in Mexico and attractive pricing predominates.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "China's New Five-Year Plan Preps the Nation for Peak Oil",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Chinas-New-Five-Year-Plan-Preps-the-Nation-for-Peak-Oil.html",
-      "summary": "China's energy strategy has largely shielded it from the fallout of the war in Iran and the resultant closure of the Strait of Hormuz, a vital artery for global oil and gas trade. However, the country's newest five-year plan for its oil and gas secto",
+      "title": "The Gas Turbine Shortage Just Became AI’s Biggest Constraint",
+      "link": "https://oilprice.com/Energy/Energy-General/The-Gas-Turbine-Shortage-Just-Became-AIs-Biggest-Constraint.html",
+      "summary": "Order a heavy-duty gas turbine from GE Vernova today and it won’t arrive until 2031. That’s the company’s actual production schedule, confirmed on its July 22 earnings call, and it’s the fact sitting underneath every AI data center power plan announc",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Iraq Wants to Double Oil Output—and Needs OPEC to Get Out of the Way",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Iraq-Wants-to-Double-Oil-Outputand-Needs-OPEC-to-Get-Out-of-the-Way.html",
-      "summary": "Iraq wants to more than double its oil production within six years. First, it needs OPEC to let it. Baghdad is targeting output of between 8 million and 10 million barrels per day, up from roughly 4 million bpd before the Iran war, Prime Minister Ali",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Tankers Wait a Month as Venezuela Hits an Oil Export Ceiling",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Tankers-Wait-a-Month-as-Venezuela-Hits-an-Oil-Export-Ceiling.html",
-      "summary": "Venezuela has plenty of oil buyers again. What it does not have is enough functioning port infrastructure to get them their crude. Tankers are waiting as long as 30 days to load Venezuelan oil as aging terminals, power outages and crude-quality probl",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "US Oil Drillers See Pullback as Oil Prices Rise",
-      "link": "https://oilprice.com/Energy/Crude-Oil/US-Oil-Drillers-See-Pullback-as-Oil-Prices-Rise.html",
-      "summary": "The total number of active drilling rigs for oil and gas in the United States fell this week, according to new data that Baker Hughes published on Friday, with the total rig count in the US falling to 588, up 50 from this same time last year. The num",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "India Boosts Battery Investment to Cut Solar Power Waste",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/India-Boosts-Battery-Investment-to-Cut-Solar-Power-Waste.html",
-      "summary": "Solar power developers in India have started to add battery storage to photovoltaic projects to attract buyers and reduce the large share of curtailments for power supply that the grids are unable to absorb, Santosh Sarangi, Secretary of India’s Mini",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "China’s Teapots Look Beyond Iranian Oil amid U.S. Blockade",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Chinas-Teapots-Look-Beyond-Iranian-Oil-amid-US-Blockade.html",
-      "summary": "China’s refiners have imported lower volumes of Iranian crude in August compared to July as the U.S. blockade reinstated in mid-July is squeezing crude supply to Iran’s top oil customer.    So far this month, China is estimated to have imported about",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Oil Nears $100 as Trump’s ‘Economic D-Day’ Raises the Stakes",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Oil-Nears-100-as-Trumps-Economic-D-Day-Raises-the-Stakes.html",
-      "summary": "Hormuz traffic remains near a standstill as Trump’s ‘Economic D-Day’ campaign pushes Brent closer to $100. Friday, August 21, 2026 Transits through the Strait of Hormuz have been in single digits the entire week, with Trump’s announcement of an ‘Econ",
+      "title": "Ukrainian Drone Attack Hits Lukoil Refinery Deep in Russia",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Ukrainian-Drone-Attack-Hits-Lukoil-Refinery-Deep-in-Russia.html",
+      "summary": "Ukraine overnight hit with drones an oil refinery in the Perm region, deep into Russian territory, as the Ukrainian military has been targeting Russia’s oil processing and exporting facilities on a nearly daily basis in the past few weeks. Ukrainian ",
       "source": "OilPrice.com",
       "published": "Recent"
     }
