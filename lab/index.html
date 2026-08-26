@@ -50,7 +50,8 @@
           { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "Japan Power Trading Course — Unit 1", "applicationCategory": "EducationalApplication", "operatingSystem": "Web", "description": "An interactive primer on how Japan's wholesale power market actually works.", "url": "https://thearc.cloud/powercourse.html" } },
           { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "JEPX Bid Optimiser", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "An agent that shapes day-ahead bids for the Japan Electric Power Exchange.", "url": "https://thearc.cloud/jepx-ai-bid.html" } },
           { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "Trade Finance Agent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Reads, checks, and routes trade-finance documents on its own.", "url": "https://thearc.cloud/tfa_project.html" } },
-          { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "Margin Estimator", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Real-time margin and collateral estimates for energy trades.", "url": "https://thearc.cloud/margin-estimator" } }
+          { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "Margin Estimator", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Real-time margin and collateral estimates for energy trades.", "url": "https://thearc.cloud/margin-estimator" } },
+          { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "AI Investment ROI", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "A threshold-driven evaluation instrument for AI and enterprise development investments.", "url": "https://thearc.cloud/lab/ai-investment-roi/" } }
         ]
       }
     }
@@ -263,6 +264,10 @@
   @media (max-width:900px){.doors{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:520px){.doors{grid-template-columns:1fr;max-width:360px}}
 
+  .doors--solo{max-width:var(--container);margin:clamp(24px,3.2vh,40px) auto 0;padding:0 var(--gutter);display:flex;justify-content:center}
+  .doors--solo .door-cell{width:100%;max-width:300px}
+  @media (max-width:520px){.doors--solo .door-cell{max-width:360px}}
+
   .door{
     position:relative;display:block;width:100%;aspect-ratio:1150/2048;
     border:none;background:transparent;padding:0;cursor:pointer;color:inherit;font:inherit;
@@ -421,7 +426,7 @@
       <div class="meta-group">
         <span><span class="dot"></span>STATUS: LIVE</span>
         <span>EST_2026</span>
-        <span>ACTIVE_BUILDS / 04</span>
+        <span>ACTIVE_BUILDS / 05</span>
       </div>
       <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
     </div>
@@ -445,7 +450,7 @@
 
   <section class="prototypes" id="prototypes">
     <div class="proto-head">
-      <p class="eyebrow reveal-io" style="--rd:0ms">04 Builds · Behind each door</p>
+      <p class="eyebrow reveal-io" style="--rd:0ms">05 Builds · Behind each door</p>
       <h2 class="proto-title reveal-io" style="--rd:90ms">Open a <span class="accent">door.</span></h2>
       <p class="proto-sub reveal-io" style="--rd:170ms">Behind each door, a working build.<br>See what agentic architecture can actually do.</p>
     </div>
@@ -507,6 +512,24 @@
           <span class="door__label">
             <span class="door__idx">04</span>
             <span class="door__name">Margin<br>Estimator</span>
+            <span class="door__status"><span class="s-dot"></span>LIVE</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="doors--solo">
+      <div class="door-cell" style="--rd:440ms">
+        <button class="door" aria-label="Open ROI Calculator"
+          data-idx="05" data-name="ROI Calculator"
+          data-tag="A threshold-driven evaluation instrument for AI and enterprise development investments."
+          data-url="https://thearc.cloud/lab/ai-investment-roi/" data-status="live">
+          <img class="door__img" src="assets/door.png" alt="" loading="lazy" decoding="async">
+          <span class="door__glow"></span>
+          <span class="door__cue">ENTER →</span>
+          <span class="door__label">
+            <span class="door__idx">05</span>
+            <span class="door__name">ROI<br>Calculator</span>
             <span class="door__status"><span class="s-dot"></span>LIVE</span>
           </span>
         </button>
