@@ -1,17 +1,108 @@
 {
-  "last_updated": "2026-09-28 09:09",
+  "last_updated": "2026-09-29 09:09",
   "items": [
     {
-      "title": "Venezuela’s Oil Comeback Could Cost More Than $100 Billion",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Venezuelas-Oil-Comeback-Could-Cost-More-Than-100-Billion.html",
-      "summary": "The Trump Administration is touting the new oil order in Venezuela as a tremendous opportunity for reviving the industry in the world’s biggest crude oil resource holder. The U.S.-led restructuring of the sector kicked out Russian and Chinese compani",
+      "title": "Renewables, Record Natural Gas Output Kept Summer Henry Hub Prices Below $3",
+      "link": "https://naturalgasintel.com/news/renewables-record-natural-gas-output-kept-summer-henry-hub-prices-below-3/",
+      "summary": "Increased renewable generation and robust domestic production kept US summer natural gas prices muted despite record heat, but recent supply dips and strong power burns have begun putting upward pressure on spot markets heading into fall.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "October Natural Gas Futures Roll Off Board at $3 as Mountaineer XPress Flows Return",
+      "link": "https://naturalgasintel.com/news/october-natural-gas-futures-roll-off-board-at-3-as-mountaineer-xpress-flows-return/",
+      "summary": "October natural gas futures eased Monday as restored Appalachian supply and fading shoulder season demand weighed on the front of the curve.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "US Natural Gas Storage Deficit Poised to Shrink as Autumn Weather Arrives",
+      "link": "https://naturalgasintel.com/news/us-natural-gas-storage-deficit-poised-to-shrink-as-autumn-weather-arrives/",
+      "summary": "Last week marked not only the start of autumn, but also a return to more autumn-like weather in the Lower 48.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Global Natural Gas Prices Surge as Diplomacy Fails, LNG Supplies Stay Tight",
+      "link": "https://naturalgasintel.com/news/global-natural-gas-prices-surge-as-diplomacy-fails-lng-supplies-stay-tight/",
+      "summary": "Asian and European natural gas prices were climbing again on Monday as hopes for a quick reopening of the Strait of Hormuz faded.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Weak Weather Driving Settlement Day Slippage for Natural Gas Futures",
+      "link": "https://naturalgasintel.com/news/weak-weather-driving-settlement-day-slippage-for-natural-gas-futures/",
+      "summary": "A bearish weather outlook offset downwardly trending production as natural gas traders squared their positions ahead of the futures contract rollover at today’s close.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Weekly Natural Gas Spot Prices Slide as Gulf Coast, Eastern Markets Lose Ground",
+      "link": "https://naturalgasintel.com/news/weekly-natural-gas-spot-prices-slide-as-gulf-coast-eastern-markets-lose-ground/",
+      "summary": "Spot natural gas prices in the latest weekly period fell across much of the East, hampered in part by a major pipeline outage that stranded supply and pulled the national average lower.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Google Data Center Anchors 550,000 Dth/d NGPL Natural Gas Expansion in Texas",
+      "link": "https://naturalgasintel.com/news/google-data-center-anchors-550000-dthd-ngpl-natural-gas-expansion-in-texas/",
+      "summary": "Natural Gas Pipeline Company of America LLC (NGPL) is asking the Federal Energy Regulatory Commission (FERC) to approve a 550,000 Dth/d pipeline expansion in the Texas Panhandle that would ship natural gas to power a planned Google data center.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "October Expiry, Easing Demand and Supply Loom Large Over Natural Gas Futures",
+      "link": "https://naturalgasintel.com/news/october-expiry-easing-demand-and-supply-loom-large-over-natural-gas-futures/",
+      "summary": "Natural gas futures slumped early Monday as traders took stock of storm fallout, resolution of a major pipeline outage, evolving demand drivers and impending front month contract rollover.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Appalachia Natural Gas Cash Vaults Off Multi-Year Lows",
+      "link": "https://naturalgasintel.com/news/appalachia-natural-gas-cash-vaults-off-multi-year-lows/",
+      "summary": "Physical natural gas prices were mixed Monday as Appalachia and Northeast hubs snapped back from Friday’s plunge, while light demand dragged most of the country lower.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Why Blocking U.S. Diesel Exports Could Make Fuel More Expensive",
+      "link": "https://oilprice.com/Energy/Energy-General/Why-Blocking-US-Diesel-Exports-Could-Make-Fuel-More-Expensive.html",
+      "summary": "Talk of a possible ban on U.S. exports of diesel fuel to curb soaring prices at the pump could end up pushing all fuel prices higher, cutting refinery runs as storage fills up, analysts have warned. The move could result in a glut of the fuel in the ",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "EPA Power Plant Rollback To Add 123 Million More Tons of CO2",
-      "link": "https://oilprice.com/Energy/Energy-General/EPA-Power-Plant-Rollback-To-Add-123-Million-More-Tons-of-CO2.html",
-      "summary": "The U.S. Environmental Protection Agency (EPA) announced in September that it will relinquish its authority to regulate greenhouse gas emissions from power plants under the Clean Air Act, a tool previously used to tackle climate change. This effectiv",
+      "title": "Standard Chartered: Record CTA Long Bets Are Capping Oil's Upside",
+      "link": "https://oilprice.com/Energy/Oil-Prices/Standard-Chartered-Record-CTA-Long-Bets-Are-Capping-Oils-Upside.html",
+      "summary": "Oil prices rebounded from their recent slide on fears of U.S.-Iran escalation after attempts at diplomacy yielded mixed results, with speeches by leaders on both sides laced with threats and belligerence. Brent crude for November delivery was up 1.70",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Europe’s Gas Forecasts Are Not an Energy Strategy",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Europes-Gas-Forecasts-Are-Not-an-Energy-Strategy.html",
+      "summary": "Energy models have an unusual talent. However chaotic the present may be, the future almost always becomes remarkably calm. Wars end. Shipping lanes reopen. LNG terminals work as planned. Winters remain manageable. Producers deliver. Markets rebalanc",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Russia Tightens Secrecy On Energy Exports",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Russia-Tightens-Secrecy-On-Energy-Exports.html",
+      "summary": "Refinery production figures, export contracts and tanker routes are now off-limits to public reporting in Russia, under a decree Putin signed Monday, Reuters reported. The Kremlin points to unfriendly actions by Washington and its allies as the reaso",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Can Fracking Reverse Colombia’s Oil and Gas Decline?",
+      "link": "https://oilprice.com/Energy/Energy-General/Can-Fracking-Reverse-Colombias-Oil-and-Gas-Decline.html",
+      "summary": "Colombia’s economically vital petroleum industry is in a death spiral. Oil and natural gas production is falling despite efforts to boost output and grow efficiencies. New President Abelardo de la Espriella, a former criminal defense attorney, has pu",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "High Freight Costs Push More U.S. LNG Toward Europe",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/High-Freight-Costs-Push-More-US-LNG-Toward-Europe.html",
+      "summary": "Europe is currently benefiting from the closed arbitrage between the U.S. Gulf Coast and Asia and is taking more LNG supplies in possible relief from concerns about winter gas supply. The Atlantic-Pacific arbitrage is closed for the rest of this year",
       "source": "OilPrice.com",
       "published": "Recent"
     }
