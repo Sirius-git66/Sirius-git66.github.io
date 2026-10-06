@@ -1,24 +1,108 @@
 {
-  "last_updated": "2026-10-05 09:09",
+  "last_updated": "2026-10-06 09:09",
   "items": [
     {
-      "title": "Fuel Price Shock Pushes Global Gas Car Sales Below 50% for First Time",
-      "link": "https://oilprice.com/Energy/Energy-General/Fuel-Price-Shock-Pushes-Global-Gas-Car-Sales-Below-50-for-First-Time.html",
-      "summary": "The share of gasoline cars in global vehicle sales fell below 50% for the first time ever as the Hormuz shock and the resulting record-high fuel prices accelerated the previously sluggish shift toward EVs outside China. A few years ago, China blew pa",
+      "title": "Natural Gas Cash Prices Rise as First Fall Chill Meets Outages",
+      "link": "https://naturalgasintel.com/news/natural-gas-cash-prices-rise-as-first-fall-chill-meets-outages/",
+      "summary": "Physical natural gas prices rose broadly Monday as the season’s cool shot reached the Great Lakes and Northeast, while a pipeline outage trapped Appalachian supply in the basin and held the Marcellus Shale benchmark below $1.00/MMBtu.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas Futures Nudge Higher as Curtailments Support",
+      "link": "https://naturalgasintel.com/news/natural-gas-futures-nudge-higher-as-freeport-feedgas-rebounds/",
+      "summary": "Natural gas futures inched higher Monday as slipping production outweighed mild October forecasts and sagging cash prices in the East.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Appalachian Natural Gas Output Lags as $1 Cash Prices Signal Curtailments",
+      "link": "https://naturalgasintel.com/news/appalachian-natural-gas-output-lags-as-1-cash-prices-signal-curtailments/",
+      "summary": "US natural gas production remained unusually low Monday even after a major Appalachian pipeline constraint was removed, with weak regional prices pointing to continued producer curtailments.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Altamira LNG Outage Interrupts Mexico Exports, US Feedgas Demand",
+      "link": "https://naturalgasintel.com/news/altamira-lng-outage-interrupts-mexico-exports-us-feedgas-demand/",
+      "summary": "New Fortress Energy’s (NFE) Mexican LNG facility was knocked offline, interrupting production at the country’s first operating export terminal as the company works through a broader restructuring of its business.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Baker Hughes Signs Deals to Boost Venezuela’s Natural Gas, LNG Sector",
+      "link": "https://naturalgasintel.com/news/baker-hughes-signs-deals-to-boost-venezuelas-natural-gas-lng-sector/",
+      "summary": "US oilfield services giant Baker Hughes has entered into two strategic agreements aimed at revitalizing Venezuela’s natural gas infrastructure, bolstering supply and potentially paving the way for the nation’s first LNG exports.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "YPF Targets Late-November FID for 12 Mt/y Argentina LNG Project",
+      "link": "https://naturalgasintel.com/news/ypf-targets-late-november-fid-for-12-mty-argentina-lng-project/",
+      "summary": "Argentina’s state energy company YPF has narrowed the timeline for a final investment decision (FID) on its proposed Argentina LNG project to late November, as US financing and contractors deepen their exposure to the Vaca Muerta Shale.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas Futures Rebound Above $3 as Supply Drops",
+      "link": "https://naturalgasintel.com/news/natural-gas-futures-rebound-above-3-as-supply-drops/",
+      "summary": "November natural gas futures climbed Monday morning, rebounding from an early break below $3.00/MMBtu as a sharp decline in Lower 48 supply provided support despite a mild weather outlook.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Weekly Natural Gas Spot Prices Sputter as Mild East Weather Saps Demand",
+      "link": "https://naturalgasintel.com/news/weekly-natural-gas-spot-prices-sputter-as-mild-east-weather-saps-demand/",
+      "summary": "Weekly natural gas cash prices fell as weather tilted in bears’ favor and total supply, while moderating, remained sturdy by autumn standards.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "EIA Storage Likely to Be Flattish Year/Year as Speculators Become More Bearish",
+      "link": "https://naturalgasintel.com/news/eia-storage-likely-to-be-flattish-yearyear-as-speculators-become-more-bearish/",
+      "summary": "NGI is projecting the latest US Energy Information Administration (EIA) weekly natural gas storage report through the week ended Oct. 2 to show an injection of 79 Bcf, up 15 Bcf week/week.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Standard Chartered Says Hormuz Oil Flows Are Far From Normal",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Standard-Chartered-Says-Hormuz-Oil-Flows-Are-Far-From-Normal.html",
+      "summary": "Oil flows through the Middle East have staged an impressive rebound, with export volumes recovering to near pre-war levels even as traffic through the Strait of Hormuz remains well below normal. Standard Chartered estimates crude and condensate expor",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Pentagon Backs Ambitious Plan to Beam Solar Power From Space",
-      "link": "https://oilprice.com/Energy/Energy-General/Pentagon-Backs-Ambitious-Plan-to-Beam-Solar-Power-From-Space.html",
-      "summary": "Space-based solar power just got another powerful vote of confidence. The United States Department of Defense just inked a contract with solar energy company Overview Energy to “design, build, and test a homing beacon that will enable its space-based",
+      "title": "Singapore Eyes Nuclear Power as Iran War Exposes Its Import Problem",
+      "link": "https://oilprice.com/Alternative-Energy/Nuclear-Power/Singapore-Eyes-Nuclear-Power-as-Iran-War-Exposes-Its-Import-Problem.html",
+      "summary": "Singapore is in an energy pickle. The island nation is still reeling from high oil and gas prices driven by the war in Iran, and is scrambling to build up alternative and indigenous energy sources. The problem is that there’s almost nowhere to build ",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Floating Power Plants Are Opening a New Energy Frontier",
-      "link": "https://oilprice.com/Energy/Energy-General/Floating-Power-Plants-Are-Opening-a-New-Energy-Frontier.html",
-      "summary": "The renewable revolution is running out of space. Utility-scale solar and wind farms take up enormous tracts of land and are facing increasing legal pushback from many of the communities where their development is planned. However, an enormous expans",
+      "title": "Southeast Asia’s Oil and Gas M&A Market Is Heating Up",
+      "link": "https://oilprice.com/Energy/Energy-General/Southeast-Asias-Oil-and-Gas-MA-Market-Is-Heating-Up.html",
+      "summary": "Southeast Asia's upstream merger and acquisition (M&amp;A) conversation has moved from which international oil companies (IOCs) are leaving to who is buying their way in. Research from Rystad Energy shows a competitive cycle ahead, with $9.6 billion ",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Iran’s Oil Minister Resigns as U.S. Blockade Chokes Crude Exports",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Irans-Oil-Minister-Resigns-as-US-Blockade-Chokes-Crude-Exports.html",
+      "summary": "Iran’s oil minister has resigned as the U.S. blockade pushes the country’s crude exports and oil revenues toward zero, handing control of Iran’s most important industry to the head of the National Iranian Oil Company. President Masoud Pezeshkian acce",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Indian State Firm BPCL Readies $3-Billion Bond to Fund Brazil oil Project",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Indian-State-Firm-BPCL-Readies-3-Billion-Bond-to-Fund-Brazil-oil-Project.html",
+      "summary": "Indian state-owned refiner Bharat Petroleum Corporation Limited (BPCL) prepares to issue a $3-billion bond to finance its share of a major offshore oil development in Brazil, as Indian companies move to expand in international upstream to secure crud",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Aramco CEO Warns Oil Inventories Are ‘Scarily Thin’",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Aramco-CEO-Warns-Oil-Inventories-Are-Scarily-Thin.html",
+      "summary": "Saudi Aramco CEO Amin Nasser warned Monday that the world has lost nearly 3 billion barrels of gross oil supply since the Iran war began, equivalent to roughly half the crude and products that normally would have moved through the Strait of Hormuz ov",
       "source": "OilPrice.com",
       "published": "Recent"
     }
