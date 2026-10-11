@@ -1,108 +1,24 @@
 {
-  "last_updated": "2026-10-10 09:10",
+  "last_updated": "2026-10-11 09:09",
   "items": [
     {
-      "title": "Freeport LNG Outage Erases Nearly 5 Bcf of Natural Gas Demand in a Week",
-      "link": "https://naturalgasintel.com/news/freeport-lng-outage-erases-nearly-5-bcf-of-natural-gas-demand-in-a-week/",
-      "summary": "Freeport LNG has run one train short of its usual appetite for the past week, throttling back US LNG feedgas demand by roughly 0.7 Bcf/d in an outage masked by early-cycle nominations.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Europe Must Top Record LNG Imports This Winter to Protect Storage, GIE Warns",
-      "link": "https://naturalgasintel.com/news/gie-secretary-general-lucie-boost-said-drawing-storage-down-too-far-this-winter-would-make-it-harder-to-prepare-for-the-next-one-entsogs-modeling-showed-eu-storage-reaching-only-65-by-the-end-of-september-2027-under-tight-lng-supply-short-of-the-90-t/",
-      "summary": "European buyers are expected to raise competition for US LNG this winter, as Gas Infrastructure Europe (GIE) warned the latest winter supply outlook showed volumes would have to top last winter’s record imports to keep storage from running short.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Can Natural Gas Futures Comeback Hold Onto Gains?",
-      "link": "https://naturalgasintel.com/news/can-natural-gas-futures-comeback-hold-onto-gains/",
-      "summary": "US natural gas futures were recovering midday Friday from Thursday's storage-driven sell-off, with the November contract climbing above $3.200/MMBtu amid declining domestic production and strengthening LNG feedgas. Hurricane Isaias added uncertainty ",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "South Central Natural Gas Storage Injection Redirects Regional Supply Trajectory",
-      "link": "https://naturalgasintel.com/news/south-central-natural-gas-storage-injection-redirects-regional-supply-trajectory/",
-      "summary": "Natural gas stored in the South Central region grew at a healthy clip to start October, narrowing deficits relative to past years but hardly erasing concerns about supply adequacy for the coming winter.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "If El Niño Is So Strong, Why Are Northeast Natural Gas Winter Prices So High?",
-      "link": "https://naturalgasintel.com/news/if-el-ni%C3%B1o-is-so-strong-why-are-northeast-natural-gas-winter-prices-so-high/",
-      "summary": "The prospect of a historically strong El Niño is raising questions about US natural gas heating demand this winter, but expanding LNG exports, subdued production and the potential for regional supply constraints are complicating the market outlook.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Hyperscaler Backs BKV’s 1.2 GW Natural Gas Power Push Near Dallas",
-      "link": "https://naturalgasintel.com/news/hyperscaler-backs-bkvs-12-gw-natural-gas-power-push-near-dallas/",
-      "summary": "BKV has locked in about 1,200 MW of natural gas-fired generation equipment with financial backing from an unnamed investment-grade hyperscaler, advancing the Barnett Shale producer’s push to sell power into the fast-growing Dallas-Fort Worth (DFW) ma",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Pipeline Constraints Keep New England January Natural Gas Forwards Above $20",
-      "link": "https://naturalgasintel.com/news/pipeline-constraints-keep-new-england-january-natural-gas-forwards-above-20/",
-      "summary": "New England natural gas forwards are topping $20/MMBtu for January 2027 at several key hubs, even as Henry Hub trades below $4 and expectations for ample US supplies point to a relatively comfortable winter market.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "What Plunging Spot Prices Could Mean for Natural Gas Futures",
-      "link": "https://naturalgasintel.com/news/what-plunging-spot-prices-could-mean-for-natural-gas-futures/",
-      "summary": "A nearly nationwide collapse in natural gas spot prices on Friday reflected light shoulder season demand, and signalled that bullish sentiment underpinning the futures market could soon erode.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Natural Gas Futures Cruise to Weekly Gains as Gulf Coast Braces for Isaias",
-      "link": "https://naturalgasintel.com/news/natural-gas-futures-cruise-to-weekly-gains-as-gulf-coast-braces-for-isaias/",
-      "summary": "With a powerful hurricane poised to smack the northern Gulf Coast over Columbus Day weekend, natural gas futures pushed higher on Friday to accentuate a winning week.",
-      "source": "Natural Gas Intel",
-      "published": "Recent"
-    },
-    {
-      "title": "Why Record Crude Output Can’t Solve America’s Diesel Crisis",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Why-Record-Crude-Output-Cant-Solve-Americas-Diesel-Crisis.html",
-      "summary": "The United States is producing more crude oil than ever. According to the Energy Information Administration, U.S. crude production is on track to average a record 13.8 million barrels per day in 2026, surpassing the previous record set last year.  Ye",
+      "title": "Tanker Rates Soar to Record as Oil Crisis Becomes Shipping Crisis",
+      "link": "https://oilprice.com/Energy/Energy-General/Tanker-Rates-Soar-to-Record-as-Oil-Crisis-Becomes-Shipping-Crisis.html",
+      "summary": "The cost of shipping crude oil soared to record highs last month as the Iran war reshuffled trade routes and patterns and tied up more tankers in inefficient and lengthy voyages. Supertanker rates soared in September to above $1 million per day on th",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Hurricane Isaias Shuts In 71% of U.S. Gulf Oil Production",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Hurricane-Isaias-Shuts-In-71-of-US-Gulf-Oil-Production.html",
-      "summary": "Hurricane Isaias has now knocked nearly 1.46 million barrels per day of U.S. Gulf oil production offline, extending a rapid shutdown that began with just 185,120 bpd three days ago. The Marine Minerals Administration said Friday that operators had sh",
+      "title": "Emergency Oil Releases Risk Draining the World’s Last Supply Cushion",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Emergency-Oil-Releases-Risk-Draining-the-Worlds-Last-Supply-Cushion.html",
+      "summary": "Earlier this week, the International Energy Agency, after consulting with G7, said it would release another 100 million barrels of diesel, gasoline, and crude oil. The release is part of a plan announced in March to release 400 million barrels of oil",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "U.S. Oil Drilling Continues to Inch Upward",
-      "link": "https://oilprice.com/Energy/Crude-Oil/US-Oil-Drilling-Continues-to-Inch-Upward.html",
-      "summary": "The total number of active drilling rigs for oil and gas in the United States rose this week, according to new data that Baker Hughes published on Friday, with the total rig count in the US rising to 603, up 56 from this same time last year. The numb",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "States Bet on Virtual Power Plants to Cut Grid Costs",
-      "link": "https://oilprice.com/Energy/Energy-General/States-Bet-on-Virtual-Power-Plants-to-Cut-Grid-Costs.html",
-      "summary": "The United States has shown greater support for virtual power plants (VPPs) in recent years, as these systems are expanding across various states. A VPP is a collection of small-scale electricity generation resources that, together, can deliver elect",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Trump Puts Iran Strikes on Hold as Hurricane Threatens Oil Supply",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Trump-Puts-Iran-Strikes-on-Hold-as-Hurricane-Threatens-Oil-Supply.html",
-      "summary": "Oil retreats from $110 as Trump rules out Iran strikes before the midterms, but tanker attacks and a Gulf hurricane threaten fresh volatility. Friday, October 09, 2026 Donald Trump seems to be firefighting the Middle Eastern blaze, vowing not to atta",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Canada’s New Oil Pipeline Challenged by Cold Lake First Nations",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Canadas-New-Oil-Pipeline-Challenged-by-Cold-Lake-First-Nations.html",
-      "summary": "Cold Lake First Nations is challenging the Canadian federal government’s decision to designate Canada’s new oil pipeline project to the West Coast a project of national interest. Last week, the federal government designated the new oil pipeline to th",
+      "title": "Southeast Asia Needs More Power, But Its Weak Grid Could Be a Problem",
+      "link": "https://oilprice.com/Energy/Energy-General/Southeast-Asia-Needs-More-Power-But-Its-Weak-Grid-Could-Be-a-Problem.html",
+      "summary": "The war in Iran has exposed a critical vulnerability in Southeast Asia’s energy markets. The region is heavily dependent on fossil fuel imports, and demand is continuing its steep growth trajectory even as global crude oil prices remain punishingly h",
       "source": "OilPrice.com",
       "published": "Recent"
     }
