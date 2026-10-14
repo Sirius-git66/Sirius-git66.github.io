@@ -1,45 +1,108 @@
 {
-  "last_updated": "2026-10-13 09:09",
+  "last_updated": "2026-10-14 09:09",
   "items": [
     {
-      "title": "This Ultra-Rare Gas Could Become An Ace In Canada’s Hands",
-      "link": "https://oilprice.com/Energy/Energy-General/This-Ultra-Rare-Gas-Could-Become-An-Ace-In-Canadas-Hands.html",
-      "summary": "Back in July, the U.S. slapped an extra 50% duty on a wide range of Canadian exports, including items like dairy, alcohol and cement, with the Trump administration citing alleged Canadian trade discrimination against various U.S. goods. In response, ",
+      "title": "Natural Gas Spot Prices Soar as LNG Terminals, Furnaces Show Signs of Life",
+      "link": "https://naturalgasintel.com/news/natural-gas-spot-prices-soar-as-lng-terminals-furnaces-show-signs-of-life/",
+      "summary": "Physical natural gas prices posted impressive gains across the country on Tuesday amid supportive near-term demand signals from the LNG and residential/commercial sectors.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Iran War Escalation Threatens Global Market, Ups Demand for US LNG",
+      "link": "https://naturalgasintel.com/news/iran-war-escalation-threatens-global-market-ups-demand-for-us-lng/",
+      "summary": "Renewed attacks on US allies and commercial shipping around the Strait of Hormuz this week are threatening global energy supplies anew, with Europe facing rising natural gas prices and a difficult race to replenish storage before winter as shipments ",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Cove Point, Freeport Restarts Push US LNG Feedgas Demand to 6-Month High",
+      "link": "https://naturalgasintel.com/news/cove-point-freeport-restarts-push-us-lng-feedgas-demand-to-6-month-high/",
+      "summary": "US LNG feedgas demand climbed to a six-month high Tuesday as Cove Point LNG came back from annual maintenance, Freeport LNG returned to a three-train pace and Golden Pass LNG posted its best five-day run since commissioning began.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Coastal GasLink’s Next Chapter Brings First Nations Into the Fold",
+      "link": "https://naturalgasintel.com/news/coastal-gaslinks-next-chapter-brings-first-nations-into-the-fold/",
+      "summary": "Five British Columbia First Nations are gaining a financial interest tied to TC Energy’s Coastal GasLink pipeline, extending Indigenous economic participation in a major Canadian natural gas transportation system positioned for substantial growth alo",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas Reverses Higher on Resurgent LNG, Bullish Storage Forecasts",
+      "link": "https://naturalgasintel.com/news/natural-gas-reverses-higher-on-resurgent-lng-bullish-storage-forecasts/",
+      "summary": "Tight supply, recovering LNG feedgas and a brief northern cooldown in the forecast fueled natural gas futures gains on Tuesday.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "US Natural Gas Storage Seen Tightening as Producers Gear Up for Winter",
+      "link": "https://naturalgasintel.com/news/us-natural-gas-storage-seen-tightening-as-producers-gear-up-for-winter/",
+      "summary": "NGI is forecasting the latest US Energy Information Administration (EIA) Weekly Natural Gas Storage Report for the week ended Oct. 9 to show an injection of 74 Bcf, down 11 Bcf ...",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Is There More Fuel for Natural Gas Bulls?",
+      "link": "https://naturalgasintel.com/news/is-there-more-fuel-for-natural-gas-bulls/",
+      "summary": "US natural gas futures pushed higher Tuesday morning amid declining domestic production and strengthening LNG feedgas demand. Cash prices were mixed, with Appalachian gas rebounding sharply while Waha weakened further.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Weekly Natural Gas Cash Prices Vary Widely by Region",
+      "link": "https://naturalgasintel.com/news/weekly-natural-gas-cash-prices-vary-widely-by-region/",
+      "summary": "Strong demand in the South countered seasonal weakness on both the East and West coasts in the latest weekly natural gas period, leaving the average national price nearly flat.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Henry Hub Prices Lag Profitability Mark, but Natural Gas Output Still Strong",
+      "link": "https://naturalgasintel.com/news/henry-hub-prices-lag-profitability-mark-but-natural-gas-output-still-strong/",
+      "summary": "US natural gas prices remain below levels needed to make drilling profitable for many producers, according to the Federal Reserve Bank of Kansas City’s third quarter energy survey, even as overall drilling activity remains strong.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Canada’s Montney Natural Gas Well Productivity Surges",
+      "link": "https://naturalgasintel.com/news/canadas-montney-natural-gas-well-productivity-surges/",
+      "summary": "The Montney Shale is posting strong productivity gains as drilling technology advances, solidifying its dominance in Canada’s natural gas production, according to a report from the Canada Energy Regulator (CER).",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Stranded Middle East LNG Supply Upends Gas Markets",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Stranded-Middle-East-LNG-Supply-Upends-Gas-Markets.html",
+      "summary": "The LNG supply out of the Middle East has not recovered in any meaningful way seven and a half months after the Iran war choked oil and gas shipments through the Strait of Hormuz. Since March, some occasional LNG cargoes have managed to squeeze throu",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Global Coal Demand Rises as LNG Shortage Deepens",
-      "link": "https://oilprice.com/Energy/Natural-Gas/Global-Coal-Demand-Rises-as-LNG-Shortage-Deepens.html",
-      "summary": "Liquefied natural gas flows from the Persian Gulf are still over 75% lower than they were before February 28th. Yet heating demand is rising ahead of winter. In Europe, the November natural gas benchmark contract is trading at over 81 euros per MWh. ",
+      "title": "OPEC Sees Oil Demand Growth Surging to 2.6 Million Bpd in 2027",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/OPEC-Sees-Oil-Demand-Growth-Surging-to-26-Million-Bpd-in-2027.html",
+      "summary": "OPEC just put a very large number on next year’s oil market: global demand growth of 2.6 million barrels per day in 2027, after growth of just 200,000 bpd this year. That would push average world oil demand from 105.7 million bpd in 2026 to 108.3 mil",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "China's Auto Exports Explode as Domestic Demand Craters",
-      "link": "https://oilprice.com/Energy/Energy-General/Chinas-Auto-Exports-Explode-as-Domestic-Demand-Craters.html",
-      "summary": "New data released by the China Passenger Car Association earlier on Monday show that China's peak car-buying season hit the brakes, with September passenger-vehicle retail sales plunging 28% from a year earlier as manufacturers increasingly relied on",
+      "title": "Guyana Oil Exports Set to Surpass 1 Million Barrels per Day for First Time",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Guyana-Oil-Exports-Set-to-Surpass-1-Million-Barrels-per-Day-for-First-Time.html",
+      "summary": "Guyana, one of the world's newest oil exporters, is poised to surpass one million barrels per day in crude oil exports for the first time this December, marking another extraordinary milestone for the small South American country. According to Bloomb",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "Black Sea Oil Shipping Insurance Costs Surge to $2.5 Million",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Black-Sea-Oil-Shipping-Insurance-Costs-Surge-to-25-Million.html",
-      "summary": "Insurance costs for ships transporting oil across the Black Sea have surged from approximately $200,000 to $2.5 million per vessel in recent months, increasing crude transportation costs and putting additional pressure on fuel prices in Bulgaria, acc",
+      "title": "Argentina Takes Falklands Oil Fight to International Tribunal",
+      "link": "https://oilprice.com/Latest-Energy-News/World-News/Argentina-Takes-Falklands-Oil-Fight-to-International-Tribunal.html",
+      "summary": "Argentina has moved its fight over Falklands oil from threats to the courtroom, asking an international maritime tribunal to halt development of Sea Lion, the islands’ first commercial oil project. The government filed for provisional measures with t",
       "source": "OilPrice.com",
       "published": "Recent"
     },
     {
-      "title": "European Natural Gas Prices Headed for Multi-Year Highs",
-      "link": "https://oilprice.com/Energy/Natural-Gas/European-Natural-Gas-Prices-Headed-for-Multi-Year-Highs.html",
-      "summary": "Europe's main natural gas price benchmark is headed for multi-year highs despite the \"energy ceasefire\" reported between Russia and Ukraine over the weekend and improving Strait of Hormuz energy flows. Europe is heading into the Northern Hemisphere w",
-      "source": "OilPrice.com",
-      "published": "Recent"
-    },
-    {
-      "title": "Oil Prices Jump 2% on Saudi Attacks as OPEC Sees Demand Rebound",
-      "link": "https://oilprice.com/Latest-Energy-News/World-News/Oil-Prices-Jump-2-on-Saudi-Attacks-as-OPEC-Sees-Demand-Rebound.html",
-      "summary": "Oil prices climbed to their highest levels in nearly two weeks on Monday morning as fresh attacks on Saudi Arabia and oil tankers near the Strait of Hormuz put Middle East supply risks back at the center of the market, outweighing President Donald Tr",
+      "title": "China’s $3 Billion Qatar LNG Deal Raises an Awkward Question",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Chinas-3-Billion-Qatar-LNG-Deal-Raises-an-Awkward-Question.html",
+      "summary": "Qatar’s highly sensitive geographical positioning -- between a western land border with Saudi Arabia and a northeastern maritime border with Iran -- has necessitated it treading a delicate diplomatic path between regional superpowers and their global",
       "source": "OilPrice.com",
       "published": "Recent"
     }
