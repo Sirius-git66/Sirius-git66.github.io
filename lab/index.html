@@ -260,13 +260,14 @@
   .proto-title .accent{color:var(--teal)}
   .proto-sub{color:var(--text-muted);max-width:54ch;margin-top:16px;line-height:1.6}
 
-  .doors{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,26px)}
-  @media (max-width:900px){.doors{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:520px){.doors{grid-template-columns:1fr;max-width:360px}}
-
-  .doors--solo{max-width:var(--container);margin:clamp(24px,3.2vh,40px) auto 0;padding:0 var(--gutter);display:flex;justify-content:center}
-  .doors--solo .door-cell{width:100%;max-width:300px}
-  @media (max-width:520px){.doors--solo .door-cell{max-width:360px}}
+  .doors{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,26px)}
+  .door-cell:nth-child(1){grid-column:1;grid-row:1}
+  .door-cell:nth-child(2){grid-column:3;grid-row:1}
+  .door-cell:nth-child(3){grid-column:1;grid-row:2}
+  .door-cell:nth-child(4){grid-column:2;grid-row:2}
+  .door-cell:nth-child(5){grid-column:3;grid-row:2}
+  @media (max-width:900px){.doors{grid-template-columns:repeat(2,1fr)} .door-cell:nth-child(1){grid-column:1;grid-row:1} .door-cell:nth-child(2){grid-column:2;grid-row:1} .door-cell:nth-child(3){grid-column:1;grid-row:2} .door-cell:nth-child(4){grid-column:2;grid-row:2} .door-cell:nth-child(5){grid-column:1;grid-row:3}}
+  @media (max-width:520px){.doors{grid-template-columns:1fr;max-width:360px} .door-cell:nth-child(n){grid-column:1;grid-row:auto}}
 
   .door{
     position:relative;display:block;width:100%;aspect-ratio:1150/2048;
@@ -385,6 +386,47 @@
     .rmodal__stage,.rstage-boot,.rstage-reveal,.rstage-done,.rmodal__backdrop{transition:none}
     .rboot-robot{animation:none}
   }
+  /* ===================== BOOKSHELF ===================== */
+  .shelf{position:relative;padding:clamp(72px,10vh,120px) 0 clamp(90px,12vh,150px);background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);overflow:hidden}
+  .shelf::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 60% at 50% 70%, rgba(20,184,166,.08), transparent 70%)}
+  .shelf-head{position:relative;max-width:1240px;margin:0 auto clamp(40px,6vh,72px);padding:0 clamp(20px,5vw,64px)}
+  .shelf-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.28em;color:var(--teal);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .shelf-eyebrow::before{content:"";width:34px;height:1px;background:var(--teal);opacity:.7}
+  .shelf-title{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.02em}
+  .shelf-title span{color:var(--teal)}
+  .shelf-sub{color:var(--text-muted);max-width:54ch;margin-top:16px;line-height:1.6}
+  .shelf-wrap{position:relative;max-width:980px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+  .shelf-row{position:relative;z-index:2;display:flex;justify-content:center;align-items:flex-end;gap:clamp(18px,4.5vw,64px);padding-top:40px}
+  .shelf-book{
+    --w:clamp(84px,15vw,180px);--d:20px;--tilt:22deg;
+    position:relative;display:block;width:var(--w);height:calc(var(--w) * var(--ratio,1.6));
+    cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;color:inherit;text-decoration:none;
+    transform-style:preserve-3d;transform-origin:50% 100% calc(var(--d) / 2);
+    transform:perspective(1400px) translateY(-50px) rotateY(calc(var(--tilt) + 40deg));
+    transition:transform .9s var(--ease-arc) calc(var(--i,0) * 140ms);
+  }
+  .shelf.in .shelf-book{transform:perspective(1400px) rotateY(var(--tilt))}
+  .shelf.settled .shelf-book{transition-delay:0ms}
+  .shelf.in .shelf-book:hover,.shelf.in .shelf-book:focus-visible{transform:perspective(1400px) translateY(-26px) translateZ(40px) rotateY(0deg) scale(1.16)}
+  .shelf-spine{position:absolute;left:0;top:0;width:var(--d);height:100%;transform-origin:left center;transform:rotateY(-90deg);
+    background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.06) 55%,rgba(0,0,0,.25)),var(--spine);
+    border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px 0;overflow:hidden}
+  .shelf-spine i{display:block;width:100%;height:3px;background:var(--accent)}
+  .shelf-spine b{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-weight:600;font-size:9px;letter-spacing:.14em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
+  .shelf-pages{position:absolute;right:0;top:2px;width:calc(var(--d) - 2px);height:calc(100% - 4px);transform-origin:right center;transform:rotateY(90deg);background:repeating-linear-gradient(90deg,#c9ccd1 0 1px,#9aa0a8 1px 2px)}
+  .shelf-cover{position:absolute;inset:0;transform:translateZ(var(--d));border-radius:1px 3px 3px 1px;overflow:hidden;background:#121417;
+    box-shadow:0 30px 40px -24px rgba(0,0,0,.9);transition:box-shadow .6s var(--ease-arc)}
+  .shelf-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .shelf-cover::before{content:"";position:absolute;z-index:1;left:0;top:0;bottom:0;width:7%;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.08) 60%,transparent)}
+  .shelf-cover::after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 38%);opacity:.5;transition:opacity .6s var(--ease-arc)}
+  .shelf-book:hover .shelf-cover,.shelf-book:focus-visible .shelf-cover{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent),0 20px 60px -10px var(--tint),0 30px 50px -20px rgba(0,0,0,.9)}
+  .shelf-book:hover .shelf-cover::after,.shelf-book:focus-visible .shelf-cover::after{opacity:1}
+  .shelf-plank{position:relative;z-index:1;margin-top:-6px;height:16px;border-radius:2px;background:linear-gradient(180deg,rgba(126,232,216,.16),rgba(255,255,255,.03));border-top:1px solid rgba(126,232,216,.55);box-shadow:0 0 40px rgba(20,184,166,.25),0 24px 50px -10px rgba(0,0,0,.9)}
+  .shelf-reflect{height:70px;background:linear-gradient(180deg,rgba(20,184,166,.10),transparent);filter:blur(10px);margin:0 6%}
+  .shelf-hint{text-align:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:var(--text-muted);margin-top:-30px}
+  @media (prefers-reduced-motion: reduce){
+    .shelf-book,.shelf.in .shelf-book{transition:none;transform:perspective(1400px) rotateY(var(--tilt))}
+  }
 </style>
 </head>
 <body>
@@ -396,6 +438,7 @@
     </button>
     <div class="nav-links" id="navLinks">
       <a href="#prototypes">PROTOTYPES</a>
+      <a href="#publications">PUBLICATIONS</a>
       <a href="#about">ABOUT</a>
       <a href="https://thearc.cloud">← THE ARC</a>
     </div>
@@ -516,9 +559,6 @@
           </span>
         </button>
       </div>
-    </div>
-
-    <div class="doors--solo">
       <div class="door-cell" style="--rd:440ms">
         <button class="door" aria-label="Open ROI Calculator"
           data-idx="05" data-name="ROI Calculator"
@@ -534,6 +574,45 @@
           </span>
         </button>
       </div>
+    </div>
+  </section>
+
+  <section class="shelf" id="publications">
+    <div class="shelf-head">
+      <p class="shelf-eyebrow">04 Publications · On the shelf</p>
+      <h2 class="shelf-title">Pull a <span>book.</span></h2>
+      <p class="shelf-sub">Writings from the lab</p>
+    </div>
+    <div class="shelf-wrap">
+      <div class="shelf-row">
+        <a class="shelf-book" href="https://thearc.cloud/commodity-trading-guide.html" target="_blank" rel="noopener" aria-label="Read Pocket Guide (opens in new tab)"
+           style="--i:0;--ratio:1.596;--spine:#20214A;--ink:#FFFFFF;--accent:#E52B33;--tint:rgba(229,43,51,.35)">
+          <span class="shelf-spine"><i></i><b>Pocket Guide</b><i></i></span>
+          <span class="shelf-pages"></span>
+          <span class="shelf-cover"><img src="assets/cover-pocket-guide.png" alt="" loading="lazy" decoding="async"></span>
+        </a>
+        <a class="shelf-book" href="https://thearc.cloud/strait-hormuz-commodity-finance-2026.html" target="_blank" rel="noopener" aria-label="Read A Treasurer's View on Wartime Markets (opens in new tab)"
+           style="--i:1;--ratio:1.596;--spine:#2E3C40;--ink:#FFDD55;--accent:#FFDD55;--tint:rgba(255,221,85,.3)">
+          <span class="shelf-spine"><i></i><b>Wartime Markets</b><i></i></span>
+          <span class="shelf-pages"></span>
+          <span class="shelf-cover"><img src="assets/cover-wartime-markets.png" alt="" loading="lazy" decoding="async"></span>
+        </a>
+        <a class="shelf-book" href="https://thearc.cloud/ai-investment-roi-2026.html" target="_blank" rel="noopener" aria-label="Read Beyond the Headline ROI (opens in new tab)"
+           style="--i:2;--ratio:1.5;--spine:#EFEDE1;--ink:#2F3A46;--accent:#C9A24A;--tint:rgba(20,184,166,.35)">
+          <span class="shelf-spine"><i></i><b>Headline ROI</b><i></i></span>
+          <span class="shelf-pages"></span>
+          <span class="shelf-cover"><img src="assets/cover-headline-roi.png" alt="" loading="lazy" decoding="async"></span>
+        </a>
+        <a class="shelf-book" href="https://thearc.cloud/beyond-the-barrier" target="_blank" rel="noopener" aria-label="Read Beyond the Barrier (opens in new tab)"
+           style="--i:3;--ratio:1.472;--spine:#0E2E3A;--ink:#F1E6C8;--accent:#C9A24A;--tint:rgba(20,184,166,.35)">
+          <span class="shelf-spine"><i></i><b>Beyond the Barrier</b><i></i></span>
+          <span class="shelf-pages"></span>
+          <span class="shelf-cover"><img src="assets/cover-beyond-barrier.png" alt="" loading="lazy" decoding="async"></span>
+        </a>
+      </div>
+      <div class="shelf-plank"></div>
+      <div class="shelf-reflect"></div>
+      <p class="shelf-hint">HOVER TO PULL · CLICK TO READ</p>
     </div>
   </section>
 
@@ -707,6 +786,15 @@
         }
       }
     }
+    // Bookshelf scroll reveal
+    (function(){
+      var shelf = document.getElementById('publications');
+      if (!shelf) return;
+      var go = function(){ shelf.classList.add('in'); setTimeout(function(){ shelf.classList.add('settled'); }, 1400); };
+      if (!('IntersectionObserver' in window)) { go(); return; }
+      var sio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ go(); sio.disconnect(); } }); }, { threshold: 0.2 });
+      sio.observe(shelf);
+    })();
   </script>
 
 </body>
