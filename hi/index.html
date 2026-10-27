@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cheryl Cheong · The Arc</title>
+<meta name="description" content="Cheryl Cheong, Founder & Principal Consultant at The Arc. Treasury, energy trading and applied AI.">
+<meta property="og:title" content="Cheryl Cheong · The Arc">
+<meta property="og:description" content="Founder & Principal Consultant. Treasury · Energy Trading · Applied AI.">
+<meta property="og:image" content="https://thearc.cloud/og-thearc.png">
+<meta property="og:url" content="https://thearc.cloud/hi/">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1E1F22">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one centred phone column. The glowing ring from the brand frames the portrait; everything else stays quiet. */
+:root{
+  --bg:#1E1F22; --panel:#26282C; --panel-hi:#2D3035; --line:#35383E;
+  --fg:#EEF1F4; --muted:#9AA1AA; --blue:#3AA0DC; --peri:#8FA3D4;
+  --deep:#023E8A; --mid:#0077B6; --cyan:#22D3EE; --sky:#60A5FA;
+  --brand:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--brand);
+  padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);-webkit-font-smoothing:antialiased}
+main{max-width:440px;margin:0 auto;padding-block:24px 40px;display:flex;flex-direction:column;gap:30px}
+
+.top{display:flex;justify-content:space-between;align-items:center}
+.lockup{display:inline-flex;align-items:center;gap:2px;color:var(--fg);text-decoration:none}
+.lockup .the{font-weight:400;font-size:9px;letter-spacing:.2em;opacity:.7;margin-right:6px}
+.lockup svg{width:19px;height:19px;transform:translateY(1px)}
+.lockup .rc{font-weight:700;font-size:20px;letter-spacing:.12em}
+.event{font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 10px}
+
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center}
+.emblem{position:relative;width:168px;height:168px}
+.emblem svg.ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ring .stroke{animation:glow 1.6s .15s ease-out both}
+@keyframes glow{from{opacity:.15}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.ring .stroke{animation:none}}
+.mark{position:absolute;inset:0;display:grid;place-items:center}
+.mark svg{width:84px;height:84px;filter:drop-shadow(0 0 20px rgba(34,166,232,.4))}
+h1{font-weight:700;font-size:clamp(30px,8.6vw,38px);line-height:1.05;letter-spacing:-.015em;margin:22px 0 8px;text-wrap:balance}
+.role{margin:0;font-weight:500}
+.role span{color:var(--muted);font-weight:400}
+.lines{margin:10px 0 0;font:400 11.5px/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  background:linear-gradient(90deg,var(--cyan),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.save{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border-radius:14px;
+  background:linear-gradient(135deg,var(--mid) 0%,var(--deep) 100%);color:#FFFFFF;font:600 17px/1 var(--brand);text-decoration:none;
+  box-shadow:0 0 0 1px rgba(96,165,250,.35) inset,0 10px 30px -10px rgba(0,119,182,.7);transition:transform .2s}
+.save:hover{transform:translateY(-1px)}
+.save:active{transform:translateY(1px)}
+.save svg{width:20px;height:20px}
+.hint{margin:10px 0 0;text-align:center;font-size:13px;color:var(--muted)}
+
+.links{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.links a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;background:var(--panel);color:var(--fg);text-decoration:none}
+.links a:hover,.links a:focus-visible{background:var(--panel-hi)}
+.links b{display:block;font-weight:600}
+.links small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.links i{font-style:normal;color:var(--blue);font-size:18px}
+a:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+
+.direct{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font:400 14px/1.4 var(--mono);margin:0}
+.direct dt{color:var(--muted);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding-top:3px}
+.direct dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.direct a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+.creds{border-top:1px solid var(--line);padding-top:20px;margin:0;font-size:14px;color:var(--muted)}
+footer{font:400 10.5px/1.5 var(--mono);color:var(--muted);letter-spacing:.1em;text-transform:uppercase;text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a class="lockup" href="https://thearc.cloud/" aria-label="The Arc">
+      <span class="the">THE</span>
+      <svg viewBox="0 0 50 50" aria-hidden="true"><defs><linearGradient id="pk-top" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#60A5FA"/></linearGradient></defs><path d="M8 43L25 7L42 43" stroke="url(#pk-top)" stroke-width="7" fill="none" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+      <span class="rc">RC</span>
+    </a>
+    <span class="event">SWITCH 2026 · MBS</span>
+  </div>
+
+  <section class="hero">
+    <div class="emblem">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 50 50"><defs><linearGradient id="pk-hero" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#023E8A"/><stop offset="55%" stop-color="#0A7FC4"/><stop offset="100%" stop-color="#2AA8E8"/></linearGradient></defs><path d="M8 43L25 7L42 43" stroke="url(#pk-hero)" stroke-width="7" fill="none" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+      </div>
+      <svg class="ring" viewBox="0 0 168 168" aria-hidden="true">
+        <defs>
+          <linearGradient id="ring-g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3AA0DC"/><stop offset="55%" stop-color="#6FB2DE"/><stop offset="100%" stop-color="#8FA3D4"/></linearGradient>
+          <filter id="ring-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g class="stroke"><circle cx="84" cy="84" r="76" fill="none" stroke="#E6ECF2" stroke-opacity=".35" stroke-width="6" filter="url(#ring-glow)"/><circle cx="84" cy="84" r="76" fill="none" stroke="url(#ring-g)" stroke-width="3.5"/></g>
+      </svg>
+    </div>
+    <h1>Cheryl Cheong</h1>
+    <p class="role">Founder &amp; Principal Consultant <span>· The Arc</span></p>
+    <p class="lines">Treasury · Energy Trading · Applied AI</p>
+  </section>
+
+  <div>
+    <a class="save" href="cheryl-cheong.vcf" download="Cheryl-Cheong.vcf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M2.5 21a7.5 7.5 0 0 1 15 0"/><path d="M19 8v6M16 11h6"/></svg>
+      Save to Contacts
+    </a>
+    <p class="hint">Adds my number, email and LinkedIn to your phone.</p>
+  </div>
+
+  <nav class="links" aria-label="More about Cheryl">
+    <a href="https://thearc.cloud/"><span><b>The Arc</b><small>Treasury architecture for an AI-driven era</small></span><i>→</i></a>
+    <a href="https://thearc.cloud/lab/"><span><b>The Arc Lab</b><small>Working AI prototypes</small></span><i>→</i></a>
+    <a href="https://www.linkedin.com/in/cheong-cheryl"><span><b>LinkedIn</b><small>in/cheong-cheryl</small></span><i>→</i></a>
+    <a href="https://wa.me/6593661566"><span><b>WhatsApp</b><small>Message me directly</small></span><i>→</i></a>
+  </nav>
+
+  <dl class="direct">
+    <dt>Mobile</dt><dd><a href="tel:+6593661566">+65 9366 1566</a></dd>
+    <dt>Email</dt><dd><a href="mailto:cheryl@thearc.cloud">cheryl@thearc.cloud</a></dd>
+  </dl>
+
+  <p class="creds">20+ years in regional and global treasury across automotive, luxury, commodities and energy trading.</p>
+
+  <footer>Singapore · SGT (UTC+8)</footer>
+</main>
+</body>
+</html>
