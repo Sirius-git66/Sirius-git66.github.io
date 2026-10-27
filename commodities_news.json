@@ -1,10 +1,108 @@
 {
-  "last_updated": "2026-10-26 10:13",
+  "last_updated": "2026-10-27 10:10",
   "items": [
     {
-      "title": "Oil Prices Rise Despite Middle East Export Recovery",
-      "link": "https://oilprice.com/Energy/Crude-Oil/Oil-Prices-Rise-Despite-Middle-East-Export-Recovery.html",
-      "summary": "Reports about recovering oil flows in the Persian Gulf and the Red Sea have dominated headlines over the past couple of weeks. Yet oil prices have only moved higher, suggesting barrel numbers alone are not enough to convince the world everything’s ba",
+      "title": "Eastern Natural Gas Prices Roar Back, Claim Lion’s Share of Gains",
+      "link": "https://naturalgasintel.com/news/eastern-natural-gas-prices-roar-back-claim-lions-share-of-gains/",
+      "summary": "Natural gas spot prices surged across the Northeast and Appalachia on Monday, shaking off an exceptionally warm weather outlook as regional production declined. Western markets also strengthened amid a sharp reduction in Canadian pipeline flows.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Natural Gas Bulls Find a Pulse Beneath the Pressure",
+      "link": "https://naturalgasintel.com/news/natural-gas-bulls-find-a-pulse-beneath-the-pressure/",
+      "summary": "Natural gas futures clawed back much of their early losses Monday after November prices plunged to a six-month low, but most winter contracts still finished lower amid forecasts for unusually warm weather across major US heating markets. Strong LNG f",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "LNG Buying Steady in Asia, Europe Despite Soaring Prices",
+      "link": "https://naturalgasintel.com/news/lng-buying-steady-in-asia-europe-despite-soaring-prices/",
+      "summary": "Asian and European natural gas prices continued to rise Monday as LNG buying is steady in both regions ahead of winter and geopolitical tensions remain high in the Middle East.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Balmy Halloween Forecasts Scare Natural Gas Bulls as November Bidweek Opens",
+      "link": "https://naturalgasintel.com/news/balmy-halloween-forecasts-scare-natural-gas-bulls-as-november-bidweek-opens/",
+      "summary": "November bidweek natural gas trading opened Monday with the prompt month sliding toward $2.500/MMBtu, as forecasts for a mild start to the heating season pulled the rug out from under futures.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Canadian LNG Development Advances With Ksi Lisims SPA, Cedar Progress",
+      "link": "https://naturalgasintel.com/news/canadian-lng-development-advances-with-ksi-lisims-spa-cedar-progress/",
+      "summary": "Ksi Lisims LNG has finalized a 20-year supply agreement with Germany's SEFE, advancing commercialization of the proposed British Columbia export project as Canada’s next wave of LNG developments continues to take shape.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "Leidy Natural Gas Supply Swamps Transco Zones 5 and 6 as Takeaway Capacity Tightens",
+      "link": "https://naturalgasintel.com/news/leidy-natural-gas-supply-swamps-transco-zones-5-and-6-as-takeaway-capacity-tightens/",
+      "summary": "Transco market-zone basis appeared to be back under pressure on Friday (Oct. 23) following some recent tightening.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "As Weather Catalysts Dodge Lower 48, Natural Gas Price Pressure Festers",
+      "link": "https://naturalgasintel.com/news/as-weather-catalysts-dodge-lower-48-natural-gas-price-pressure-festers/",
+      "summary": "New York Mercantile Exchange natural gas futures stumbled through midday trading on Monday as mild fall weather and rising production overshadowed LNG demand strength. However, prices were up from intraday lows.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "EQT Positions for ‘Next Era’ with Deal to Create US Natural Gas Giant",
+      "link": "https://naturalgasintel.com/news/eqt-positions-for-next-era-with-deal-to-create-us-natural-gas-giant/",
+      "summary": "EQT continued its buying spree Monday, announcing that it would acquire Appalachian heavyweight Range Resources in an all-stock deal that would create the nation’s largest natural gas producer.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "US NatGas Storage Build Seen Below Average as LNG Hits New Highs",
+      "link": "https://naturalgasintel.com/news/us-natgas-storage-build-seen-below-average-as-lng-hits-new-highs/",
+      "summary": "NGI is forecasting the next US Energy Information Administration (EIA) Weekly Natural Gas Storage Report for the week ended Oct. 23 shows an injection of 68 Bcf, down 9 Bcf week/week.",
+      "source": "Natural Gas Intel",
+      "published": "Recent"
+    },
+    {
+      "title": "UK Weighs Scrapping Its Largest Untapped Oilfield With Oil Over $100",
+      "link": "https://oilprice.com/Energy/Crude-Oil/UK-Weighs-Scrapping-Its-Largest-Untapped-Oilfield-With-Oil-Over-100.html",
+      "summary": "Britain is deciding whether to drill its largest untapped oilfield in the middle of an oil shock, with Brent above 100 and more than 70% of its oil already coming from abroad. Rosebank, west of Shetland, is an £8.7 billion (~11.6 billion) development",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Beijing Pushes Domestic Oil Production as Iranian Supply Dries Up",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Beijing-Pushes-Domestic-Oil-Production-as-Iranian-Supply-Dries-Up.html",
+      "summary": "China needs its biggest oil and gas producers to drill more, explore more, and build strategic supply bases as the Iran war forces Beijing to confront an uncomfortable reality: even the world's largest crude stockpile cannot replace a dependable supp",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Alleged Russian Funding Prompts Executive Exodus at U.S. LNG Firm",
+      "link": "https://oilprice.com/Energy/Natural-Gas/Alleged-Russian-Funding-Prompts-Executive-Exodus-at-US-LNG-Firm.html",
+      "summary": "The top executives of U.S. energy startup Polar LNG have all resigned in recent weeks, just six months after the company was launched, amid a controversy over alleged funding and control of the venture’s strategy by Russia’s biggest LNG developer and",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Iran War Pushes Trump's Average Gasoline Prices Above Biden's",
+      "link": "https://oilprice.com/Energy/Crude-Oil/Iran-War-Pushes-Trumps-Average-Gasoline-Prices-Above-Bidens.html",
+      "summary": "The average price Americans have paid for gasoline during President Donald Trump's second term has now surpassed the average recorded during Joe Biden's presidency, marking a politically significant milestone just days before the November 3 midterm e",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "The Iran War Just Added $39 Billion to the World's LNG Bill",
+      "link": "https://oilprice.com/Energy/Natural-Gas/The-Iran-War-Just-Added-39-Billion-to-the-Worlds-LNG-Bill.html",
+      "summary": "The Middle East conflict has disrupted global energy flows, forcing countries to rethink supply routes and strengthen energy security. As more buyers turn to the spot market to replace disrupted volumes, Rystad Energy estimates that global LNG import",
+      "source": "OilPrice.com",
+      "published": "Recent"
+    },
+    {
+      "title": "Kazakhstan Faces $12 Billion Oil Setback as New Investment Plans Take Shape",
+      "link": "https://oilprice.com/Energy/Energy-General/Kazakhstan-Faces-12-Billion-Oil-Setback-as-New-Investment-Plans-Take-Shape.html",
+      "summary": "Kazakhstan had reason to cheer after receiving a commitment from the International Finance Corporation to help develop infrastructure projects worth $3 billion. But that happy foreign investment news was offset by an international arbitration court’s",
       "source": "OilPrice.com",
       "published": "Recent"
     }
